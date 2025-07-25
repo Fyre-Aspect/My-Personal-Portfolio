@@ -10,6 +10,38 @@
   <link rel="stylesheet" href="styles/animations.css" />
   <script src="scripts/main.js" defer></script>
 </head>
+<!-- === Modal for Temperature Sensor Project === -->
+<div id="tempModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeTemp">&times;</span>
+    <h2>Temperature Sensor</h2>
+    <img src="assets/images/tempsensor.png" alt="Temperature Sensor Project" />
+    <div class="modal-description">
+    <p>
+  This is a personal <strong class="glow-word">Arduino project</strong> I created using an 
+  <strong class="glow-word">UNO board</strong>, a <strong class="glow-word">DHT11 sensor</strong>,
+  and a <strong class="glow-word">4-pin I2C LCD display</strong>. The goal was to build a reliable system that
+  displays <strong class="glow-word">real-time temperature</strong> and <strong class="glow-word">humidity</strong> values directly from environmental readings.
+
+  <br><br>
+  I used this setup to identify areas in my home where the <strong class="glow-word">air conditioning and heating</strong>
+  seemed to be the most <strong class="glow-word">inefficient</strong>. I placed the sensor in different rooms and observed the output over time. 
+
+  <br><br>
+  After logging data, I found that the <strong class="glow-word">top main bedroom</strong> and the <strong class="glow-word">far bedroom</strong> were the least effective
+  in terms of airflow and temperature balance. On the other hand, the <strong class="glow-word">powder bathroom</strong> had the most consistent output,
+  likely because it’s closest to the <strong class="glow-word">AC unit</strong> and main <strong class="glow-word">vent connections</strong>.
+
+  <br><br>
+  This project taught me how hardware can help identify practical energy inefficiencies, and how sensors can guide real-world optimizations in comfort and energy usage.
+</p>
+    </div>
+
+
+
+    <a href="https://github.com/Fyre-Aspect/Temperature-Humidity-Sensor" class="github-btn" target="_blank">🌐 View on GitHub</a>
+  </div>
+</div>
 <body>
   <div class="cursor"></div>
   <div class="trail-wrapper" id="trail-wrapper"></div>
@@ -23,6 +55,7 @@
       <li><a href="resume.html">Resume</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
+    <button id="theme-toggle" class="theme-btn" title="Toggle Theme">🌙</button>
   </nav>
 
   <main class="home-wrapper">
@@ -47,16 +80,16 @@
           <img src="assets/images/tempsensor.png" alt="Temp Sensor Project">
           <h3>Temperature Sensor</h3>
           <p>Arduino UNO + humidity sensor to log live temp & humidity to an LCD display at certain range.</p>
-          <a class="btn see-more">See More</a>
+          <a class="btn see-more-temp">See More</a>
           <!-- TODO: Link this button to a detailed project page later -->
         </article>
 
-        <!-- Project 2: Arduino Calculator -->
+        <!-- Project 2: Tetris Game -->
         <article class="project-card">
-          <img src="assets/images/Calculator PNG.png" alt="Arduino Calculator Project">
-          <h3>Arduino Calculator</h3>
-          <p>A fully functional calculator using a 4x4 matrix keypad and an I2C LCD display with only 4 pins.</p>
-          <a class="btn see-more">See More</a>
+          <img src="assets/images/Tetris_logo.png" alt="Arduino Calculator Project">
+          <h3>Tetris Replica</h3>
+          <p>A real-time game built using an <br>Arduino + Joystick and a website sharing a local highscore</p>
+          <a class="btn see-more-tetris">See More</a>
           <!-- TODO: Link this button to a detailed project page later -->
         </article>
 
@@ -84,7 +117,7 @@
       <p>
         Volunteered 50+ hours in a university lab conducting soil load testing. Learned how to measure structural stress under different conditions and plotted real-world data using MATLAB to understand soil strength and shape resistance.
       </p>
-      <a class="btn see-more">See More</a>
+      <a class="btn see-more-uw">See More</a>
     </article>
 
     <!-- KW Humane Society -->
@@ -94,7 +127,7 @@
       <p>
         Volunteering every Friday, I’ve contributed 10+ hours to supporting animals in need. This experience has taught me the importance of responsibility, compassion, and teamwork in caring for pets and helping them find loving homes.
       </p>
-      <a class="btn see-more">See More</a>
+      <a class="btn see-more-kw">See More</a>
     </article>
 
     <!-- Gym Training -->
@@ -104,7 +137,7 @@
       <p>
         With over 80+ hours committed, I’ve been training 6 days a week using the Push, Pull, Legs split. This has helped me build discipline, consistency, and an understanding of fitness, recovery, and nutrition for long-term strength and health.
       </p>
-      <a class="btn see-more">See More</a>
+      <a class="btn see-more-gym">See More</a>
     </article>
   </div>
 </section>
@@ -136,5 +169,125 @@
       <p>© Aamir Tinwala. All rights reserved.</p>
     </div>
   </footer>
+<div id="tetrisModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeTetris">&times;</span>
+    <h2>Joystick Controlled Tetris Replica</h2>
+    <div class="modal-videos">
+  <video src="assets/videos/Tetris 1.mp4" controls></video>
+  <video src="assets/videos/Tetris 2.mp4" controls></video>
+</div>
+    
+    <div class="modal-description">
+      <p>
+        This <strong class="glow-word">Tetris replica</strong> was built using an
+        <strong class="glow-word">Arduino UNO</strong>, an <strong class="glow-word">LED matrix</strong>,
+        and a <strong class="glow-word">2-axis joystick</strong> as a controller.
+
+        <br><br>
+        I wanted to challenge myself to recreate a playable version of a classic arcade game,
+        but with <strong class="glow-word">physical controls</strong> instead of a screen interface. I programmed the
+        falling blocks, collision detection, row clearing, and game-over logic entirely in Arduino C++.
+
+        <br><br>
+        The joystick is used to move and rotate the blocks, and the LED matrix updates the display in real time.
+        Later, I experimented with sharing scores online through a serial link to display rankings.
+
+        <br><br>
+        This project taught me about handling timing loops, hardware synchronization, and interactive design.
+        I learned how important it is to plan the game logic, optimize the refresh rate, and make it feel responsive.
+      </p>
+    </div>
+    <a href="https://github.com/Fyre-Aspect/Arduino-Tetris-Game/tree/main" class="github-btn" target="_blank">🌐 View on GitHub</a>
+  </div>
+</div>
+
+<div id="uwModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeUw">&times;</span>
+    <h2>University of Waterloo – Soil Testing</h2>
+    <img src="assets/images/UW Pic 2.jpg" class="uw-header-img" alt="UW Project Image">
+    <div class="modal-description">
+      <p>
+  During my volunteer research work at the University of Waterloo, I helped test and collect data on various types of soil under different stress conditions. This work is crucial for <strong class="glow-word">understanding how soil reacts to pressure</strong>, especially when <strong class="glow-word">wires, pipes, or structural supports</strong> are laid underground. If we don’t know how much <strong class="glow-word">load-bearing capacity</strong> a soil type can handle, underground systems can shift, collapse, or cause uneven foundation settling.
+
+  We used equipment to <strong class="glow-word">simulate pressure conditions</strong> on different soil shapes (cylindrical, square) and types (clay, sand, silt), and then processed the resulting data using <strong class="glow-word">MATLAB</strong> to plot load-versus-deflection graphs.
+
+  The insights I gained helped me understand the real-world relevance of <strong class="glow-word">geotechnical engineering</strong>, and how civil planning must account for natural terrain and failure risk — especially in urban development and infrastructure planning. This opportunity built my <strong class="glow-word">analytical and practical skills</strong> through over <strong class="glow-word">50+ hours of engineering exposure</strong>.
+</p>
+
+    </div>
+    <button class="github-btn" id="uwPhotosBtn">See Photos</button>
+  </div>
+</div>
+<div id="kwModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeKw">&times;</span>
+    <h2>KW Humane Society</h2>
+    <img src="assets/images/KW Humane.png" alt="KW Volunteer Work" />
+    <div class="modal-description">
+      <p>
+  Volunteering at the KW Humane Society has been a deeply fulfilling experience where I learned not only the basics of animal care but the <strong class="glow-word">critical role volunteers play</strong> in keeping the shelter running. Every Friday for a 2-hour shift, I help clean kennels, feed animals, and walk dogs — while ensuring they receive the attention and care they deserve.
+
+  Volunteers form the backbone of animal shelters. Without them, the workload on limited staff would overwhelm the system, leading to <strong class="glow-word">reduced animal welfare, limited adoptions</strong>, and slower rehabilitation. My involvement has helped me build <strong class="glow-word">empathy, responsibility</strong>, and a passion for improving the lives of rescue animals.
+
+  Through this experience (<strong class="glow-word">10+ hours</strong> so far), I’ve come to recognize how much these animals rely on <strong class="glow-word">kindness, consistency</strong>, and <strong class="glow-word">community involvement</strong>. Being part of their journey to adoption makes every hour worthwhile.
+</p>
+
+    </div>
+    <button class="github-btn" id="kwPhotosBtn">See Photos</button>
+  </div>
+</div>
+<div id="gymModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeGym">&times;</span>
+    <h2>Gym Training Routine</h2>
+    <img src="assets/images/gym.jpg" alt="Gym Routine" />
+    <div class="modal-description">
+      <p>
+  I train six days a week following a structured <strong class="glow-word">Push Pull Legs (PPL)</strong> split to maximize strength, muscle recovery, and discipline. This method aligns with scientifically-supported programming by allowing muscle groups to <strong class="glow-word">recover optimally between sessions</strong>.
+
+  - <strong class="glow-word">Push</strong> — Chest, Shoulders, Triceps  
+  - <strong class="glow-word">Pull</strong> — Back, Biceps, Forearms  
+  - <strong class="glow-word">Legs</strong> — Quads, Hamstrings, Calves, Core  
+
+  PPL splits are ideal for <strong class="glow-word">progressive overload</strong> — increasing resistance over time to build strength. I pair this with <strong class="glow-word">compound lifts</strong> like bench press, rows, squats, and overhead press, targeting major muscle groups efficiently.
+
+  Strength-based training also promotes <strong class="glow-word">neural efficiency</strong>, tendon resilience, and body composition improvements. It's not just about aesthetics — it’s about building long-term <strong class="glow-word">health, grit, and mental toughness</strong> through consistent effort and measurable growth.
+</p>
+
+    </div>
+    <button class="github-btn" id="gymPhotosBtn">routine overview</button>
+  </div>
+</div>
+<!-- KW Photo Gallery -->
+<div class="photo-modal" id="kwPhotos">
+  <div class="photo-modal-content">
+    <button class="close-photo" data-target="kwPhotos">&times;</button>
+    <img src="assets/images/kw1.jpg" alt="KW 1">
+    <img src="assets/images/kw2.jpg" alt="KW 2">
+    <img src="assets/images/kw3.jpg" alt="KW 3">
+  </div>
+</div>
+
+<!-- Repeat for UW and Gym -->
+<div class="photo-modal" id="uwPhotos">
+  <div class="photo-modal-content">
+    <button class="close-photo" data-target="uwPhotos">&times;</button>
+    <img src="assets/images/uw1.jpg" alt="UW 1">
+    <img src="assets/images/uw2.jpg" alt="UW 2">
+    <img src="assets/images/uw3.jpg" alt="UW 3">
+  </div>
+</div>
+
+<div class="photo-modal" id="gymPhotos">
+  <div class="photo-modal-content">
+    <button class="close-photo" data-target="gymPhotos">&times;</button>
+    <img src="assets/images/gym1.jpg" alt="Gym 1">
+    <img src="assets/images/gym2.jpg" alt="Gym 2">
+    <img src="assets/images/gym3.jpg" alt="Gym 3">
+  </div>
+</div>
+
 </body>
 </html>
