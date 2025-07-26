@@ -34,7 +34,29 @@ body {
   font-family: 'Segoe UI', sans-serif;
   line-height: 1.6;
   cursor: none;
+  
 }
+body {
+  font-size: 1.05rem; /* Slightly larger base size */
+  line-height: 1.7;
+}
+
+h1, h2, h3, h4 {
+  line-height: 1.3;
+}
+
+.section-heading {
+  font-size: 2.2rem;
+}
+
+.project-card p, 
+.project-card h3, 
+.footer, 
+.navbar a, 
+.footer p {
+  font-size: 1.05rem;
+}
+
 
 /* ==== Cursor ==== */
 .cursor {
@@ -145,6 +167,11 @@ body {
   align-items: center;
   text-align: center;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  height: 100%;
 }
 
 
@@ -620,7 +647,7 @@ body::before {
 body:not(.light-mode)::before {
   background-image: 
     repeating-linear-gradient(60deg, rgba(255, 0, 0, 0.15) 0, transparent 1px, transparent 20px),
-    repeating-linear-gradient(120deg, rgba(255, 0, 0, 0.15) 0, transparent 1px, transparent 20px);
+    repeating-linear-gradient(120deg, rgba(223, 6, 6, 0.15) 0, transparent 1px, transparent 20px);
   background-color: #0d0d0d;
   opacity: 1.9;
   
@@ -913,4 +940,157 @@ body.photo-open {
   display: block;
   margin: 0 auto 1rem;
   border-radius: 12px;
+}
+
+/* ===== Experience Page ===== */
+.experience-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  justify-items: center;
+  padding: 3rem 2rem;
+}
+
+
+.experience-grid .project-card {
+  width: 100%;
+  max-width: 320px;
+}
+
+.experience-grid .last-row {
+  grid-column: 2 / span 1; /* center in the second column */
+}
+
+
+.exp-card {
+  background-color: var(--card-bg);
+  color: var(--text);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  width: 100%;
+  max-width: 340px;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.exp-card.centered {
+  grid-column: 2 / span 1;
+}
+
+.exp-card img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+}
+
+.exp-card .btn {
+  margin-top: 1rem;
+}
+
+/* Light Theme override for cards */
+.light-mode .exp-card {
+  background-color: #e0e0e0;
+  color: #000;
+}
+
+.project-card p,
+.project-card h3 {
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.project-card:hover p,
+.project-card:hover h3 {
+  text-shadow: 0 0 10px var(--red); /* for dark mode */
+}
+
+body.light .project-card:hover p,
+body.light .project-card:hover h3 {
+  text-shadow: 0 0 10px var(--blue); /* for light mode */
+}
+.glow-word:hover {
+  text-shadow: 0 0 10px var(--red);
+}
+
+body.light .glow-word:hover {
+  text-shadow: 0 0 10px var(--blue);
+}
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  border: 2px solid var(--red);
+  color: var(--text);
+  background: transparent;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.btn:hover {
+  background: var(--red);
+  color: #fff;
+}
+
+body.light .btn {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+body.light .btn:hover {
+  background: var(--blue);
+  color: white;
+}
+.split-img {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.split-img img {
+  width: 48%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 6px;
+}
+.project-card p.hours {
+  margin-top: auto;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  text-align: center;
+  padding-top: 0.75rem;
+}
+.centered-row {
+  display: flex;
+  justify-content: center;
+  gap: .6rem;
+  margin-top: 2rem;
+  padding: 3rem 2rem;
+  grid-column: 2 / span 1; /* center in the second column */
+}
+.centered-row .project-card {
+  width: 300px;             /* 4:5 ratio approx */
+  aspect-ratio: 4 / 5;
+  max-width: none;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.theme-toggle {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: var(--red);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  margin-left: 1rem;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.2);
 }

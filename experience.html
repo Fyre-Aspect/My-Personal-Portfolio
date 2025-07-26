@@ -1,27 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Experience | Aamir Tinwala</title>
-  <link rel="stylesheet" href="styles/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Experience</title>
+  <link rel="stylesheet" href="styles/style.css" />
+  <link rel="stylesheet" href="styles/navbar.css" />
+  <link rel="stylesheet" href="styles/animations.css" />
+  <script src="scripts/main.js" defer></script>
 </head>
 <body>
   <div class="cursor"></div>
-  <nav class="navbar">...</nav>
-  <div class="cursor"></div>
-  <nav>…</nav>
+  <div class="trail-wrapper" id="trail-wrapper"></div>
 
-  <main class="content">
-    <h1 class="highlight">Work & Volunteering</h1>
-    <section>
-      <h2>Local Lawn Mowing (2022–2024)</h2>
-      <p>Operated a neighborhood lawn mowing service. Earned $20–25 per job.</p>
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="logo">A a m i r</a>
+    <ul>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="certifications.html">Certifications</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="resume.html">Resume</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <button class="theme-toggle" id="theme-toggle">🌙</button>
+  </nav>
+
+  <!-- Page Header -->
+  <main class="home-wrapper">
+    <section class="section scroll-animate">
+      <h2 class="section-heading"><strong class="glow-word">My Experiences / Extracurriculars</strong></h2>
+      <p class="section-subheading">
+        Here is a showcase of my <strong class="glow-word">extracurriculars</strong> and <strong class="glow-word">experiences</strong> that I’m currently involved in, capturing my journey,<br> commitment, and growth in both academics and life skills.
+      </p>
     </section>
 
-    <section>
-      <h2>Distro – Laurier Campus (2023)</h2>
-      <p>Restocked, packaged, and operated in busy volunteer distro setup.</p>
+    <!-- Extracurriculars -->
+    <section class="section scroll-animate">
+      <h2 class="section-heading"><strong class="glow-word">Extracurriculars</strong></h2>
+      <div class="experience-grid card-grid">
+        <!-- KW Humane -->
+        <article class="project-card">
+          <img src="assets/images/KW Humane.png" alt="KW Humane Society">
+          <h3>KW Humane Society</h3>
+          <p>Supporting pet care, cleaning, and daily tasks. Volunteering every Friday has taught me empathy and the impact of community service.</p>
+          <a class="btn">See More</a>
+          <p class="hours">Hours: 10+ | Dates: May 2024 – Present</p>
+        </article>
+
+        <!-- UW -->
+        <article class="project-card split-img-card">
+          <div class="split-img">
+            <img src="assets/images/UW Pic 1.jpg" alt="UW 1">
+            <img src="assets/images/UW Pic 2.jpg" alt="UW 2">
+          </div>
+          <h3>University of Waterloo</h3>
+          <p>Soil testing and analyzing load capacity using MATLAB. Learned how soil shape and type affect structure, important for underground piping and foundations.</p>
+          <a class="btn">See More</a>
+          <p class="hours">Hours: 50+ | Dates: July 2024 – Present</p>
+        </article>
+
+        <!-- Distro -->
+        <article class="project-card">
+          <img src="assets/images/distro.jpg" alt="Distro Work">
+          <h3>MLU - Distro</h3>
+          <p>Packaging and distributing food/clothes. Gained coordination and leadership experience in a team environment.</p>
+          <a class="btn">See More</a>
+          <p class="hours">Hours: 20+ | Dates: March 2024 – June 2024</p>
+        </article>
+         
+        <!-- File Org -->
+         <div class="centered-row">
+        <article class="project-card">
+          <img src="assets/images/files.jpg" alt="File Organization">
+          <h3>MLU - File Organization</h3>
+          <p>Reorganized physical archives into a digital format for easier access. Learned data management and systemization.</p>
+          <a class="btn">See More</a>
+          <p class="hours">Hours: 15+ | Dates: February 2024 – March 2024</p>
+        </article>
+
+        <!-- Jr Band -->
+        <article class="project-card">
+          <img src="assets/images/band.jpg" alt="Junior Band">
+          <h3>Junior Band</h3>
+          <p>Performed in school and community events. Built teamwork and musical skill through consistent practice.</p>
+          <a class="btn">See More</a>
+          <p class="hours">Hours: 25+ | Dates: September 2023 – June 2024</p>
+        </article>
+         </div>
+    </section>
+
+    <!-- Fitness -->
+    <section class="section scroll-animate">
+      <h2 class="section-heading">Fitness</h2>
+      <div class="experience-grid card-grid">
+        <!-- Gym -->
+        <article class="project-card">
+          <img src="assets/images/gym.jpg" alt="Gym Training">
+          <h3>Gym Training</h3>
+          <p>Following a Push–Pull–Legs routine to build strength and discipline. Training 6 days a week with consistent tracking.</p>
+          <a class="btn">See More</a>
+          <p class="hours">Hours: 80+ | Dates: April 2024 – Present</p>
+        </article>
+
+        <!-- Badminton -->
+        <article class="project-card">
+          <img src="assets/images/badminton.jpg" alt="Badminton">
+          <h3>Badminton</h3>
+          <p>Practicing footwork, agility, and game strategy. Helps me stay sharp and competitive through sports.</p>
+          <a class="btn">See More</a>
+          <p class="hours">Hours: 30+ | Dates: January 2024 – Present</p>
+        </article>
+
+        <!-- Tennis -->
+        <article class="project-card">
+          <img src="assets/images/tennis.jpg" alt="Tennis">
+          <h3>Tennis</h3>
+          <p>Trained on both singles and doubles. Focused on coordination and consistency through competitive games.</p>
+          <a class="btn">See More</a>
+          <p class="hours">Hours: 35+ | Dates: March 2024 – Present</p>
+        </article>
+      </div>
     </section>
   </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>Aamir Tinwala</p>
+      <p>Showcasing a journey of discipline, curiosity, and continuous growth through diverse experiences.</p>
+      <div class="footer-info">
+        <div>
+          <h4>Contact</h4>
+          <p>tinwa2771@wrdsb.ca<br>aamirfire777@gmail.com</p>
+          <p>📞 | 647-695-4298</p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="certifications.html">Certifications</a></li>
+            <li><a href="experience.html">Experience</a></li>
+            <li><a href="resume.html">Resume</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <p>© Aamir Tinwala. All rights reserved.</p>
+    </div>
+  </footer>
 </body>
 </html>

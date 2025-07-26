@@ -85,6 +85,7 @@ themeBtn.addEventListener('click', () => {
 updateThemeIcon(); // Set on page load
 
 
+
 // Optional: track mouse for light-mode glow
 document.addEventListener('mousemove', e => {
   
