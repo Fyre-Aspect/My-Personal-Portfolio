@@ -4,6 +4,32 @@ const navbar = document.getElementById('navbar');
 let lastX = 0;
 let lastY = 0;
 
+// Load theme from localStorage
+const savedTheme = localStorage.getItem('theme');
+
+// Set light as default if no theme is saved
+if (!savedTheme) {
+  document.body.classList.add('light-theme');
+  localStorage.setItem('theme', 'light');
+} else {
+  document.body.classList.add(`${savedTheme}-theme`);
+}
+const themeToggle = document.getElementById('theme-toggle');
+
+themeToggle.addEventListener('click', () => {
+  if (document.body.classList.contains('light-theme')) {
+    document.body.classList.remove('light-theme');
+    document.body.classList.add('dark-theme');
+    localStorage.setItem('theme', 'dark');
+    themeToggle.textContent = '🌙';
+  } else {
+    document.body.classList.remove('dark-theme');
+    document.body.classList.add('light-theme');
+    localStorage.setItem('theme', 'light');
+    themeToggle.textContent = '☀️';
+  }
+});
+
 document.addEventListener('mousemove', e => {
   cursor.style.left = e.clientX + 'px';
   cursor.style.top = e.clientY + 'px';
@@ -211,3 +237,94 @@ document.querySelectorAll('.close-photo').forEach(btn => {
     togglePhotoModal(target, false);
   });
 });
+
+// === Gumball Machine Modal ===
+const gumballBtn = document.querySelector('.see-more-gumball');
+const gumballModal = document.getElementById('gumballModal');
+const closeGumball = document.getElementById('closeGumball');
+
+gumballBtn?.addEventListener('click', () => {
+  gumballModal.style.display = 'flex';
+});
+closeGumball?.addEventListener('click', () => {
+  gumballModal.style.display = 'none';
+});
+window.addEventListener('click', e => {
+  if (e.target === gumballModal) {
+    gumballModal.style.display = 'none';
+  }
+});
+
+// === Calculator Modal ===
+const calculatorBtn = document.querySelector('.see-more-calculator');
+const calculatorModal = document.getElementById('calculatorModal');
+const closeCalculator = document.getElementById('closeCalculator');
+
+calculatorBtn?.addEventListener('click', () => {
+  calculatorModal.style.display = 'flex';
+});
+closeCalculator?.addEventListener('click', () => {
+  calculatorModal.style.display = 'none';
+});
+window.addEventListener('click', e => {
+  if (e.target === calculatorModal) {
+    calculatorModal.style.display = 'none';
+  }
+});
+
+// === Portfolio Modal ===
+const portfolioBtn = document.querySelector('.see-more-portfolio');
+const portfolioModal = document.getElementById('portfolioModal');
+const closePortfolio = document.getElementById('closePortfolio');
+
+portfolioBtn?.addEventListener('click', () => {
+  portfolioModal.style.display = 'flex';
+});
+closePortfolio?.addEventListener('click', () => {
+  portfolioModal.style.display = 'none';
+});
+window.addEventListener('click', e => {
+  if (e.target === portfolioModal) {
+    portfolioModal.style.display = 'none';
+  }
+});
+
+// === Smart Plant Monitor ===
+const plantBtn = document.querySelector('.see-more-plant');
+const plantModal = document.getElementById('plantModal');
+const closePlant = document.getElementById('closePlant');
+plantBtn?.addEventListener('click', () => plantModal.style.display = 'flex');
+closePlant?.addEventListener('click', () => plantModal.style.display = 'none');
+window.addEventListener('click', e => { if (e.target === plantModal) plantModal.style.display = 'none'; });
+
+// === LED Reaction Game ===
+const reactionBtn = document.querySelector('.see-more-reaction');
+const reactionModal = document.getElementById('reactionModal');
+const closeReaction = document.getElementById('closeReaction');
+reactionBtn?.addEventListener('click', () => reactionModal.style.display = 'flex');
+closeReaction?.addEventListener('click', () => reactionModal.style.display = 'none');
+window.addEventListener('click', e => { if (e.target === reactionModal) reactionModal.style.display = 'none'; });
+
+// === Expense Tracker ===
+const expenseBtn = document.querySelector('.see-more-expense');
+const expenseModal = document.getElementById('expenseModal');
+const closeExpense = document.getElementById('closeExpense');
+expenseBtn?.addEventListener('click', () => expenseModal.style.display = 'flex');
+closeExpense?.addEventListener('click', () => expenseModal.style.display = 'none');
+window.addEventListener('click', e => { if (e.target === expenseModal) expenseModal.style.display = 'none'; });
+
+// === Python Calculator ===
+const pythonBtn = document.querySelector('.see-more-python');
+const pythonModal = document.getElementById('pythonModal');
+const closePython = document.getElementById('closePython');
+pythonBtn?.addEventListener('click', () => pythonModal.style.display = 'flex');
+closePython?.addEventListener('click', () => pythonModal.style.display = 'none');
+window.addEventListener('click', e => { if (e.target === pythonModal) pythonModal.style.display = 'none'; });
+
+// === Quote Generator ===
+const quoteBtn = document.querySelector('.see-more-quote');
+const quoteModal = document.getElementById('quoteModal');
+const closeQuote = document.getElementById('closeQuote');
+quoteBtn?.addEventListener('click', () => quoteModal.style.display = 'flex');
+closeQuote?.addEventListener('click', () => quoteModal.style.display = 'none');
+window.addEventListener('click', e => { if (e.target === quoteModal) quoteModal.style.display = 'none'; });

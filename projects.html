@@ -58,22 +58,19 @@
     <button id="theme-toggle" class="theme-btn" title="Toggle Theme">🌙</button>
   </nav>
 
-  <main class="home-wrapper">
-    <section class="hero">
-      <div class="bio">
-        <h1>Welcome to <span class="highlight">my projects tab</span>.</h1>
-        <p>
-          Here I will show you<span class="highlight">Important</span> , interested in <span class="highlight">engineering</span>,
-          <span class="highlight">coding</span>, and building things that matter.
-        </p>
-      </div>
-      <div class="photo">
-        <img src="assets/images/My Picture.jpg" alt="Aamir Tinwala">
-      </div>
-    </section>
+ <section class="section scroll-animate">
+  <h2 class="section-heading"><strong class="highlight">Welcome to My Projects Page</strong></h2>
+  <p class="section-subheading">
+    Here you’ll explore my hands-on projects ranging from <span class="highlight">Arduino builds</span>, 
+    <span class="highlight">engineering interfaces</span>, and <span class="highlight">real-world tools</span> 
+    to experimental ideas in <span class="highlight">machine learning</span> and <span class="highlight">AI utilities</span>. 
+    Each project reflects creativity, problem-solving, and technical exploration, both complete and in development.
+  </p>
+</section>
+
 
     <section class="section scroll-animate">
-      <h2 class="section-heading">Featured Projects</h2>
+      <h2 class="section-heading"><span class="highlight">Featured Projects</span></h2>
       <div class="card-grid">
         <!-- Project 1: Temp Sensor -->
         <article class="project-card">
@@ -95,7 +92,7 @@
 
         <!-- Project 3: AI Health Facts Reader -->
         <article class="project-card">
-          <img src="assets/images/health-reader-placeholder.png" alt="AI Health Facts Reader">
+          <img src="assets/images/Ai Nutrition Reader.png" alt="AI Health Facts Reader">
           <h3>AI Health Facts Reader</h3>
           <p>Reads nutritional facts & tells you if it helps you lose fat, gain muscle, or maintain weight.</p>
           <a class="btn see-more">Not Available Yet</a>
@@ -103,44 +100,79 @@
       </div>
     </section>
 
-    <section class="section scroll-animate">
-  <h2 class="section-heading">Recent Extracurriculars</h2>
+   <section class="section scroll-animate">
+  <h2 class="section-heading">Recent Projects</h2>
   <div class="card-grid">
 
-    <!-- University of Waterloo Soil Testing -->
+    <!-- Gumball Machine -->
     <article class="project-card">
-      <div class="split-image">
-        <img src="assets/images/UW Pic 1.jpg" alt="UW Soil Testing 1" />
-        <img src="assets/images/UW Pic 2.jpg" alt="UW Soil Testing 2" />
-      </div>
-      <h3>University of Waterloo Soil Testing Volunteer</h3>
-      <p>
-        Volunteered 50+ hours in a university lab conducting soil load testing. Learned how to measure structural stress under different conditions and plotted real-world data using MATLAB to understand soil strength and shape resistance.
-      </p>
-      <a class="btn see-more-uw">See More</a>
+      <img src="assets/images/Gumball Machine.jpg" alt="Gumball Machine">
+      <h3>Gumball Machine</h3>
+      <p>This Arduino-based <span>mechanical dispenser</span> releases gumballs using a motor, button, and infrared sensor system, mimicking real-world vending systems.</p>
+      <a class="btn see-more-gumball">See More</a>
     </article>
 
-    <!-- KW Humane Society -->
+    <!-- Arduino Calculator -->
     <article class="project-card">
-      <img src="assets/images/KW Humane.png" alt="KW Humane Society">
-      <h3>KW Humane Society Volunteer</h3>
-      <p>
-        Volunteering every Friday, I’ve contributed 10+ hours to supporting animals in need. This experience has taught me the importance of responsibility, compassion, and teamwork in caring for pets and helping them find loving homes.
-      </p>
-      <a class="btn see-more-kw">See More</a>
+      <img src="assets/images/Calculator PNG.png" alt="Arduino Calculator">
+      <h3>Arduino Calculator</h3>
+      <p>A fully functioning <span>basic calculator</span> built using Arduino, pushbuttons, and a display to perform simple math operations with clean I/O.</p>
+      <a class="btn see-more-calculator">See More</a>
     </article>
 
-    <!-- Gym Training -->
+    <!-- Personal Portfolio -->
     <article class="project-card">
-      <img src="assets/images/gym-placeholder.jpg" alt="Gym Training Routine">
-      <h3>Gym Training – Push Pull Legs Split</h3>
-      <p>
-        With over 80+ hours committed, I’ve been training 6 days a week using the Push, Pull, Legs split. This has helped me build discipline, consistency, and an understanding of fitness, recovery, and nutrition for long-term strength and health.
-      </p>
-      <a class="btn see-more-gym">See More</a>
+      <img src="assets/images/portfolio.png" alt="Personal Portfolio">
+      <h3>Personal Portfolio Website</h3>
+      <p>A custom-coded <span>HTML/CSS/JS site</span> to showcase my projects, extracurriculars, resume, and growth in design, logic, and web dev skills.</p>
+      <a class="btn see-more-portfolio">See More</a>
     </article>
+
+    <!-- Project 4: Smart Plant Monitor -->
+<article class="project-card">
+  <img src="assets/images/Plant Water.jpg" alt="Smart Plant Monitor">
+  <h3>Smart Plant Monitor</h3>
+  <p>A soil moisture system using Arduino to alert when water is needed. Teaches basic sensors and automation.</p>
+  <a class="btn see-more-plant">See More</a>
+</article>
+
+<!-- Project 5: LED Reaction Game -->
+<article class="project-card">
+  <img src="assets/images/placeholder.jpg" alt="LED Reaction Game">
+  <h3>Simon Says</h3>
+  <p>A simple reflex game using LEDs and buttons to measure reaction speed. Great for learning timing logic. With the Arduino Uno</p>
+  <a class="btn see-more-reaction">See More</a>
+</article>
+
+<!-- Project 6: Personal Expense Tracker -->
+<article class="project-card">
+  <img src="assets/images/Expense Tracker.png" alt="Expense Tracker">
+  <h3>Expense Tracker</h3>
+  <p>A basic app to track spending. Introduced me to JavaScript DOM manipulation and localStorage use.</p>
+  <a class="btn see-more-expense">See More</a>
+</article>
+
+<!-- Project 7: Unknown -->
+<article class="project-card">
+  <img src="assets/images/placeholder.jpg" alt="UNKNOWN">
+  <h3>Unknown</h3>
+  <p>Basic calculator CLI app built in Python with functions and logic branching.</p>
+  <a class="btn see-more-python">See More</a>
+</article>
+
+<!-- Project 8: Random Quote Generator -->
+<article class="project-card">
+  <img src="assets/images/Quote Gen.jpg" alt="Quote Generator">
+  <h3>Quote Generator</h3>
+  <p>Generates motivational quotes from an array or API using JavaScript and UI interaction.</p>
+  <a class="btn see-more-quote">See More</a>
+</article>
+
+    
+
   </div>
 </section>
+
 
 
   <footer class="footer">
@@ -202,92 +234,129 @@
   </div>
 </div>
 
-<div id="uwModal" class="modal">
+<!-- Gumball Machine Modal -->
+<div id="gumballModal" class="modal">
   <div class="modal-content">
-    <span class="close-btn" id="closeUw">&times;</span>
-    <h2>University of Waterloo – Soil Testing</h2>
-    <img src="assets/images/UW Pic 2.jpg" class="uw-header-img" alt="UW Project Image">
+    <span class="close-btn" id="closeGumball">&times;</span>
+    <h2>Gumball Machine Project</h2>
+    <img src="assets/images/Gumball Machine.jpg" alt="Gumball Project">
     <div class="modal-description">
       <p>
-  During my volunteer research work at the University of Waterloo, I helped test and collect data on various types of soil under different stress conditions. This work is crucial for <strong class="glow-word">understanding how soil reacts to pressure</strong>, especially when <strong class="glow-word">wires, pipes, or structural supports</strong> are laid underground. If we don’t know how much <strong class="glow-word">load-bearing capacity</strong> a soil type can handle, underground systems can shift, collapse, or cause uneven foundation settling.
-
-  We used equipment to <strong class="glow-word">simulate pressure conditions</strong> on different soil shapes (cylindrical, square) and types (clay, sand, silt), and then processed the resulting data using <strong class="glow-word">MATLAB</strong> to plot load-versus-deflection graphs.
-
-  The insights I gained helped me understand the real-world relevance of <strong class="glow-word">geotechnical engineering</strong>, and how civil planning must account for natural terrain and failure risk — especially in urban development and infrastructure planning. This opportunity built my <strong class="glow-word">analytical and practical skills</strong> through over <strong class="glow-word">50+ hours of engineering exposure</strong>.
-</p>
-
+        I built this <strong class="glow-word">Gumball Machine</strong> to explore how <strong class="glow-word">sensors and motors</strong> work in real vending systems. I wanted to challenge myself with a mechanical build that included <strong class="glow-word">infrared detection</strong> for user input, a <strong class="glow-word">motorized dispenser</strong> system, and button control — giving me hands-on understanding of timing, calibration, and motor response using Arduino.
+      </p>
     </div>
-    <button class="github-btn" id="uwPhotosBtn">See Photos</button>
+    <a class="github-btn" href="#">🌐 View on GitHub</a>
   </div>
 </div>
-<div id="kwModal" class="modal">
+
+<!-- Calculator Modal -->
+<div id="calculatorModal" class="modal">
   <div class="modal-content">
-    <span class="close-btn" id="closeKw">&times;</span>
-    <h2>KW Humane Society</h2>
-    <img src="assets/images/KW Humane.png" alt="KW Volunteer Work" />
+    <span class="close-btn" id="closeCalculator">&times;</span>
+    <h2>Arduino Calculator</h2>
+    <img src="assets/images/Calculator PNG.png" alt="Calculator Project">
     <div class="modal-description">
       <p>
-  Volunteering at the KW Humane Society has been a deeply fulfilling experience where I learned not only the basics of animal care but the <strong class="glow-word">critical role volunteers play</strong> in keeping the shelter running. Every Friday for a 2-hour shift, I help clean kennels, feed animals, and walk dogs — while ensuring they receive the attention and care they deserve.
-
-  Volunteers form the backbone of animal shelters. Without them, the workload on limited staff would overwhelm the system, leading to <strong class="glow-word">reduced animal welfare, limited adoptions</strong>, and slower rehabilitation. My involvement has helped me build <strong class="glow-word">empathy, responsibility</strong>, and a passion for improving the lives of rescue animals.
-
-  Through this experience (<strong class="glow-word">10+ hours</strong> so far), I’ve come to recognize how much these animals rely on <strong class="glow-word">kindness, consistency</strong>, and <strong class="glow-word">community involvement</strong>. Being part of their journey to adoption makes every hour worthwhile.
-</p>
-
+        I made this <strong class="glow-word">calculator project</strong> to solidify my skills in <strong class="glow-word">button matrix input</strong>, <strong class="glow-word">math logic</strong>, and data handling with Arduino. It helped me understand how to capture and process multiple button combinations, format them as math expressions, and output results in a readable way — great practice in <strong class="glow-word">embedded systems</strong> and logic flow.
+      </p>
     </div>
-    <button class="github-btn" id="kwPhotosBtn">See Photos</button>
+    <a class="github-btn" href="#">🌐 View on GitHub</a>
   </div>
 </div>
-<div id="gymModal" class="modal">
+
+<!-- Portfolio Modal -->
+<div id="portfolioModal" class="modal">
   <div class="modal-content">
-    <span class="close-btn" id="closeGym">&times;</span>
-    <h2>Gym Training Routine</h2>
-    <img src="assets/images/gym.jpg" class="uw-header-img" alt="Gym Routine" />
+    <span class="close-btn" id="closePortfolio">&times;</span>
+    <h2>My Portfolio Website</h2>
+    <img src="assets/images/Portfolio.png" alt="Portfolio Screenshot">
     <div class="modal-description">
       <p>
-  I train six days a week following a structured <strong class="glow-word">Push Pull Legs (PPL)</strong> split to maximize strength, muscle recovery, and discipline. This method aligns with scientifically-supported programming by allowing muscle groups to <strong class="glow-word">recover optimally between sessions</strong>.
-
-  - <strong class="glow-word">Push</strong> — Chest, Shoulders, Triceps  
-  - <strong class="glow-word">Pull</strong> — Back, Biceps, Forearms  
-  - <strong class="glow-word">Legs</strong> — Quads, Hamstrings, Calves, Core  
-
-  PPL splits are ideal for <strong class="glow-word">progressive overload</strong> — increasing resistance over time to build strength. I pair this with <strong class="glow-word">compound lifts</strong> like bench press, rows, squats, and overhead press, targeting major muscle groups efficiently.
-
-  Strength-based training also promotes <strong class="glow-word">neural efficiency</strong>, tendon resilience, and body composition improvements. It's not just about aesthetics — it’s about building long-term <strong class="glow-word">health, grit, and mental toughness</strong> through consistent effort and measurable growth.
-</p>
-
+        I built this website from scratch to create a <strong class="glow-word">public portfolio</strong> that reflects my skills and journey. It taught me how to design with <strong class="glow-word">user experience</strong> in mind while organizing my <strong class="glow-word">projects, achievements, and resume</strong>. I used HTML, CSS, JavaScript, and theme toggles, and it’s my way of building a personal brand online.
+      </p>
     </div>
-    <button class="github-btn" id="gymPhotosBtn">Routine Overview</button>
-  </div>
-</div>
-<!-- KW Photo Gallery -->
-<div class="photo-modal" id="kwPhotos">
-  <div class="photo-modal-content">
-    <button class="close-photo" data-target="kwPhotos">&times;</button>
-    <img src="assets/images/kw1.jpg" alt="KW 1">
-    <img src="assets/images/kw2.jpg" alt="KW 2">
-    <img src="assets/images/kw3.jpg" alt="KW 3">
+    <a class="github-btn" href="https://github.com/Fyre-Aspect/My-Personal-Portfolio">🌐 View on GitHub</a>
   </div>
 </div>
 
-<!-- Repeat for UW and Gym -->
-<div class="photo-modal" id="uwPhotos">
-  <div class="photo-modal-content">
-    <button class="close-photo" data-target="uwPhotos">&times;</button>
-    <img src="assets/images/uw1.jpg" alt="UW 1">
-    <img src="assets/images/uw2.jpg" alt="UW 2">
-    <img src="assets/images/uw3.jpg" alt="UW 3">
+<div id="plantModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" id="closePlant">&times;</span>
+    <h2>Smart Plant Monitor</h2>
+    <img src="assets/images/Plant Water.jpg" alt="Plant Monitor Project">
+    <div class="modal-description">
+      <p>
+        I built this project to explore how sensors can help automate everyday life. It was my first time working with a <span class="glow-word">capacitive soil moisture sensor</span> and integrating logic to notify when plants need watering. This experience helped me understand <span class="glow-word">real-time feedback loops</span> and how to keep indoor plants healthy using simple <span class="glow-word">Arduino code</span>.
+      </p>
+    </div>
+    <a class="github-btn" href="#" target="_blank">🌐 View on GitHub</a>
   </div>
 </div>
 
-<div class="photo-modal" id="gymPhotos">
-  <div class="photo-modal-content">
-    <button class="close-photo" data-target="gymPhotos">&times;</button>
-    <img src="assets/images/gym1.jpg" alt="Gym 1">
-    <img src="assets/images/gym2.jpg" alt="Gym 2">
-    <img src="assets/images/gym3.jpg" alt="Gym 3">
+<div id="reactionModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeReaction">&times;</span>
+    <h2>LED Reaction Game</h2>
+    <img src="assets/images/placeholder.jpg" alt="LED Game Project">
+    <div class="modal-description">
+      <p>
+        This game challenges reflexes by lighting up random LEDs and requiring a button press in time. I created it to learn <span class="glow-word">timing logic</span>, <span class="glow-word">input debouncing</span>, and building simple <span class="glow-word">reaction-based feedback</span> using Arduino. It helped build my understanding of <span class="glow-word">event handling</span> and loops.
+      </p>
+    </div>
+    <a class="github-btn" href="#" target="_blank">🌐 View on GitHub</a>
   </div>
 </div>
+
+
+<!-- Expense Tracker Modal -->
+<div id="expenseModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeExpense">&times;</span>
+    <h2>Personal Expense Tracker</h2>
+    <img src="assets/images/Expense Tracker.png" alt="Expense Tracker App">
+    <div class="modal-description">
+      <p>
+        I created this project to manage my personal spending. It allowed me to practice <span class="glow-word">DOM manipulation</span>, <span class="glow-word">data validation</span>, and using <span class="glow-word">localStorage</span> in JavaScript. The UI updates live based on your entries and taught me how to handle inputs cleanly.
+      </p>
+    </div>
+    <a class="github-btn" href="#" target="_blank">🌐 View on GitHub</a>
+  </div>
+</div>
+
+
+<!-- Python Calculator Modal -->
+<div id="pythonModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" id="closePython">&times;</span>
+    <h2>Python Calculator</h2>
+    <img src="assets/images/placeholder.jpg" alt="Python Calculator">
+    <div class="modal-description">
+      <p>
+        This <span class="glow-word">CLI calculator</span> performs basic math operations and uses <span class="glow-word">functions</span> and <span class="glow-word">conditional logic</span> in Python. I built it to understand user input, error handling, and code organization. It’s also a base for future GUI extensions.
+      </p>
+    </div>
+    <a class="github-btn" href="#" target="_blank">🌐 View on GitHub</a>
+  </div>
+</div>
+
+
+<!-- Quote Generator Modal -->
+<div id="quoteModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeQuote">&times;</span>
+    <h2>Quote Generator</h2>
+    <img src="assets/images/Quote Gen.jpg" alt="Quote Generator Project">
+    <div class="modal-description">
+      <p>
+        I built this to display a <span class="glow-word">random quote</span> each time you click a button. It introduced me to <span class="glow-word">arrays</span>, <span class="glow-word">click event listeners</span>, and even connecting to <span class="glow-word">APIs</span> for future upgrades. A fun project that helped me explore the UI <span class="glow-word">interaction model</span>.
+      </p>
+    </div>
+    <a class="github-btn" href="#" target="_blank">🌐 View on GitHub</a>
+  </div>
+</div>
+
+
+
 
 </body>
 </html>
