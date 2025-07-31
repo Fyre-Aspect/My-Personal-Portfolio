@@ -1248,3 +1248,11 @@ body.light .btn:hover {
   border-radius: 10px;
   margin-bottom: 1rem;
 }
+
+.card-grid1 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 tiles per row */
+  gap: 30px;
+  margin-top: 30px;
+  padding: 0 20px;
+}
