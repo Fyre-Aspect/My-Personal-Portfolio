@@ -639,7 +639,7 @@ body::before {
   height: 100vh;
   z-index: -1;
   background-image: 
-    radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(0, 123, 255, 0.2), transparent 60%);
+    radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(39, 132, 185, 0.315), transparent 60%);
   opacity: 1.5;
   pointer-events: none;
   transition: background 0.3s ease;
@@ -647,9 +647,10 @@ body::before {
 
 body:not(.light-mode)::before {
   background-image: 
-    repeating-linear-gradient(60deg, rgba(255, 0, 0, 0.15) 0, transparent 1px, transparent 20px),
-    repeating-linear-gradient(120deg, rgba(223, 6, 6, 0.15) 0, transparent 1px, transparent 20px);
+    repeating-linear-gradient(60deg, rgba(255, 0, 0, 0.15) 0, transparent 0, transparent 20px),
+    repeating-linear-gradient(120deg, rgba(223, 6, 6, 0.15) 0, transparent px, transparent 20px);
   background-color: #0d0d0d;
+  
   opacity: 1.9;
   
 }
@@ -1255,4 +1256,299 @@ body.light .btn:hover {
   gap: 30px;
   margin-top: 30px;
   padding: 0 20px;
+}
+
+.project-card .scrollable-text {
+  max-height: 120px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+/* Highlight the WCSSAA tile to make it bigger and bolder */
+.featured-tile {
+  transform: scale(1.11); /* slightly enlarge */
+  border: 3.1px solid var(--highlight-color, #fd1e00,); /* subtle outline */
+  font-weight: bold;
+  box-shadow: 0 0 12px rgba(255, 0, 0, 0.2); /* glowing effect */
+}
+
+.featured-tile h3 {
+  font-size: 1.4rem;
+}
+
+.featured-tile:hover {
+  box-shadow: 0 0 20px rgba(0, 255, 234, 0.4);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 2rem auto;
+  gap: 1rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.contact-form button {
+  padding: 0.75rem;
+  background-color: #ff5555;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.social-links, .bio {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid var(--form-border);
+  border-radius: 15px;
+  font-size: 1rem;
+  background-color: var(--form-bg);
+  color: var(--text-color);
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: var(--placeholder-color);
+}
+
+.contact-form button {
+  margin-top: 1rem;
+  padding: 0.8rem 1.2rem;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  border: 1px solid var(--btn-border);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.contact-form button:hover {
+  filter: brightness(1.1);
+}
+
+.resume-download {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.download-btn {
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 6px;
+  background-color: var(--highlight-color);
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+}
+
+.download-btn:hover {
+  background-color: var(--highlight-hover);
+}
+
+.availability-note {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: var(--text-color);
+}
+.resume-panel {
+  max-width: 600px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  border: 2px solid var(--border-color);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.resume-panel:hover {
+  transform: scale(1.02);
+}
+
+.resume-panel h3 {
+  font-size: 1.6rem;
+  margin-bottom: 0.8rem;
+}
+
+.resume-panel p {
+  font-size: 1rem;
+  color: var(--text-color);
+  margin-bottom: 1.2rem;
+}
+
+.download-btn {
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: var(--highlight-color);
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.download-btn:hover {
+  background-color: var(--highlight-hover);
+}
+
+.blog-full-post {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  padding: 1.5rem;
+  background-color: var(--card-bg);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Mobile Hamburger Styles */
+.hamburger {
+  display: none;
+  font-size: 26px;
+  background: none;
+  color: var(--accent);
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .navbar ul {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    background-color: var(--bg-color);
+    top: 60px;
+    left: 0;
+    width: 100%;
+    padding: 1rem 0;
+    z-index: 999;
+  }
+
+  .navbar ul.active {
+    display: flex;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .navbar {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .navbar ul li {
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  .card-grid, .card-grid1 {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-content img,
+  .modal-content video {
+    width: 100%;
+    height: auto;
+  }
+
+  .project-card,
+  .award-card {
+    width: 90%;
+    margin: auto;
+  }
+}
+/* Mobile navbar toggle (if used) */
+.nav-toggle {
+  display: none;
+  font-size: 1.5rem;
+  color: var(--red);
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .nav-toggle {
+    display: block;
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    background: #222;
+    width: 100%;
+    display: none;
+  }
+
+  .navbar ul.show {
+    display: flex;
+  }
+}
+.navbar {
+  background-color: #1a1a1a;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--red);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+body.light-mode .navbar {
+  background-color: #e6e6e6;
+  border-bottom: 2px solid var(--accent);
+}
+
+
+.navbar.hide {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.navbar .logo {
+  color: var(--red);
+  font-size: 1.8rem;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 1.7rem;
+  font-size: 1.2rem
+}
+
+.navbar a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+  color: var(--red);
 }

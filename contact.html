@@ -1,20 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Contact | Aamir Tinwala</title>
-  <link rel="stylesheet" href="styles/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact - Aamir Tinwala</title>
+  <link rel="stylesheet" href="styles/style.css" />
+  <link rel="stylesheet" href="styles/navbar.css" />
+  <link rel="stylesheet" href="styles/animations.css" />
+  <script src="scripts/main.js" defer></script>
 </head>
 <body>
   <div class="cursor"></div>
-  <nav class="navbar">...</nav>
-  <div class="cursor"></div>
-  <nav>…</nav>
+  <div class="trail-wrapper" id="trail-wrapper"></div>
 
-  <main class="content">
-    <h1 class="highlight">Contact Me</h1>
-    <p>Email: <a href="mailto:tinwa2771@wrdsb.ca">tinwa2771@wrdsb.ca</a></p>
-    <p>Phone: 647-785-4298</p>
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="logo">A a m i r</a>
+    <button class="hamburger" id="hamburger">&#9776;</button>
+<ul id="nav-links">
+  <li><a href="index.html">Home</a></li>
+  <li><a href="projects.html">Projects</a></li>
+  <li><a href="certifications.html">Certifications</a></li>
+  <li><a href="experience.html">Experience</a></li>
+  <li><a href="Blog.html">Blog</a></li>
+</ul>
+
+    <button class="theme-toggle" id="theme-toggle">🌙</button>
+  </nav>
+
+  <!-- Contact Section -->
+   <section class="section scroll-animate contact-section">
+  <main class="home-wrapper">
+    <section class="section scroll-animate">
+      <h2 class="section-heading"><strong class="highlight">Contact Me</strong></h2>
+      <p class="section-subheading">Reach out with questions, collaboration ideas, or just to say hi!</p>
+
+      <form action="https://formspree.io/f/meozlkrv" method="POST" class="contact-form">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea name="message" placeholder="Your Message" rows="6" required></textarea>
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+
+      <div class="social-links">
+        <h3 class="highlight">Other Contacts:</h3>
+        <p>Email: <span class="highlight">aamirfiretv777@gmail.com</span></p>
+        <p>Phone: <span class="highlight">647-695-4298</span></p>
+        <p>GitHub: <a href="https://github.com/Fyre-Aspect" target="_blank" class="highlight">Fyre-Aspect</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/aamirali-tinwala-6833b6361" target="_blank"  class="highlight">Aamirali Tinwala</a></p>
+      </div>
+
+    <div class="resume-panel scroll-animate">
+  <h3><span class="highlight">Download My Resume</span></h3>
+  <p>Click below to download my updated resume. I am <span class="highlight">actively seeking employment opportunities</span> in tech, design, and leadership roles.</p>
+  <a href="resume/Aamirali Tinwala Resume - Resume.pdf" download class="btn download-btn">📄 Download Resume</a>
+</div>
+
+  
+    </section>
+  </section>
   </main>
+
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>Aamir Tinwala</p>
+      <p>Feel free to connect — I'm always open to opportunities and ideas.</p>
+      <div class="footer-info">
+        <div>
+          <h4>Contact</h4>
+          <p>tinwa2771@wrdsb.ca<br>aamirfiretv777@gmail.com</p>
+          <p>📞 | 647-695-4298</p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="certifications.html">Certifications</a></li>
+            <li><a href="experience.html">Experience</a></li>
+            <li><a href="Blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <p>© Aamir Tinwala. All rights reserved.</p>
+    </div>
+  </footer>
 </body>
 </html>

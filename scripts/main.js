@@ -5,7 +5,9 @@ let lastX = 0;
 let lastY = 0;
 
 // Load theme from localStorage
-const savedTheme = localStorage.getItem('theme');
+const savedTheme = localStorage.getItem('theme') || 'light'; // default to light
+document.body.classList.add(`${savedTheme}-theme`);
+
 
 // Set light as default if no theme is saved
 if (!savedTheme) {
@@ -16,19 +18,25 @@ if (!savedTheme) {
 }
 const themeToggle = document.getElementById('theme-toggle');
 
+// Apply saved theme icon
+const currentTheme = localStorage.getItem('theme') || 'light';
+themeToggle.textContent = currentTheme === 'light' ? '🌙' : '☀️';
+
+// Toggle theme
 themeToggle.addEventListener('click', () => {
-  if (document.body.classList.contains('light-theme')) {
-    document.body.classList.remove('light-theme');
-    document.body.classList.add('dark-theme');
+  const isLight = document.documentElement.classList.contains('light-theme');
+
+  if (isLight) {
+    document.documentElement.classList.replace('light-theme', 'dark-theme');
     localStorage.setItem('theme', 'dark');
-    themeToggle.textContent = '🌙';
-  } else {
-    document.body.classList.remove('dark-theme');
-    document.body.classList.add('light-theme');
-    localStorage.setItem('theme', 'light');
     themeToggle.textContent = '☀️';
+  } else {
+    document.documentElement.classList.replace('dark-theme', 'light-theme');
+    localStorage.setItem('theme', 'light');
+    themeToggle.textContent = '🌙';
   }
 });
+
 
 document.addEventListener('mousemove', e => {
   cursor.style.left = e.clientX + 'px';
@@ -328,3 +336,39 @@ const closeQuote = document.getElementById('closeQuote');
 quoteBtn?.addEventListener('click', () => quoteModal.style.display = 'flex');
 closeQuote?.addEventListener('click', () => quoteModal.style.display = 'none');
 window.addEventListener('click', e => { if (e.target === quoteModal) quoteModal.style.display = 'none'; });
+
+
+
+// Toggle logic
+themeToggle.addEventListener('click', () => {
+  const isLight = document.body.classList.contains('light-theme');
+  document.body.classList.toggle('light-theme', !isLight);
+  document.body.classList.toggle('dark-theme', isLight);
+  localStorage.setItem('theme', isLight ? 'dark' : 'light');
+  themeToggle.textContent = isLight ? '☀️' : '🌙';
+});
+
+const blogBtn1 = document.querySelector('.read-more-blog1');
+const blogModal1 = document.getElementById('blogModal1');
+const closeBlog1 = document.getElementById('closeBlog1');
+
+blogBtn1?.addEventListener('click', () => {
+  blogModal1.style.display = 'flex';
+});
+
+closeBlog1?.addEventListener('click', () => {
+  blogModal1.style.display = 'none';
+});
+
+window.addEventListener('click', e => {
+  if (e.target === blogModal1) {
+    blogModal1.style.display = 'none';
+  }
+});
+
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('nav-links');
+
+hamburger?.addEventListener('click', () => {
+  navLinks.classList.toggle('show');
+});

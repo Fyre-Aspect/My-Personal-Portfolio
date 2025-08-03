@@ -1,22 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Certifications | Aamir Tinwala</title>
-  <link rel="stylesheet" href="styles/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Certifications & Awards</title>
+  <link rel="stylesheet" href="styles/style.css"/>
+  <link rel="stylesheet" href="styles/navbar.css"/>
+  <link rel="stylesheet" href="styles/animations.css"/>
+  <script src="scripts/main.js" defer></script>
+  <script src="scripts/nav.js" defer></script>
 </head>
 <body>
   <div class="cursor"></div>
-  <nav class="navbar">...</nav>
-  <div class="cursor"></div>
-  <nav>…</nav>
+  <div class="trail-wrapper" id="trail-wrapper"></div>
 
-  <main class="content">
-    <h1 class="highlight">Certifications</h1>
-    <ul class="cert-list">
-      <li>Bronze Star Swimming (2024)</li>
-      <li>Top 25% in Gauss Math Contest (2023)</li>
-    </ul>
-  </main>
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="logo">A a m i r</a>
+    <button class="hamburger" id="hamburger">&#9776;</button>
+   <ul id="nav-links">
+  <li><a href="index.html">Home</a></li>
+  <li><a href="projects.html">Projects</a></li>
+  <li><a href="experience.html">Experience</a></li>
+  <li><a href="Blog.html">Blog</a></li>
+  <li><a href="contact.html">Contact</a></li>
+</ul>
+
+    <button id="theme-toggle" class="theme-btn" title="Toggle Theme">🌙</button>
+  </nav>
+
+  <!-- Welcome Section -->
+  <section class="section scroll-animate">
+    <h2 class="section-heading"><strong class="highlight">Welcome to My Certifications</strong></h2>
+    <p class="section-subheading">
+      This page showcases my <span class="highlight">certificates</span>, <span class="highlight">awards</span>, and 
+      <span class="highlight">accomplishments</span> I've earned over the years through <span class="highlight">academics</span>, 
+      <span class="highlight">sports</span>, and personal growth.
+    </p>
+  </section>
+
+  <!-- Awards Section -->
+  <section class="section scroll-animate">
+    <h2 class="section-heading"><span class="highlight">Awards</span></h2>
+    <div class="card-grid">
+      <!-- Award 1 -->
+      <article class="project-card">
+        <img src="assets/images/Falcon Badminton.jpg" alt="Falcon Badminton Invitational">
+        <h3>4th Place – Falcon Invitational</h3>
+        <p><span class="highlight">Placed 4th</span> at the Falcon Badminton Invitational, demonstrating skill and consistency in competitive play.</p>
+      </article>
+
+      <!-- Award 2 (Emphasized Center Panel) -->
+      <article class="project-card featured-tile">
+        <img src="assets/images/wcssaa.png" alt="WCSSAA Badge">
+        <h3>🏸 5th Place – WCSSAA Badminton</h3>
+        <p><span class="highlight">Ranked 5th</span> in WCSSAA 2024 for junior boys doubles badminton, competing among the region's best athletes.</p>
+      </article>
+
+      <!-- Award 3 -->
+      <article class="project-card">
+        <img src="assets/images/Gauss Math.jpg" alt="Gauss Certificate">
+        <h3>Gauss Contest Distinction</h3>
+        <p>Earned <span class="highlight">Certificate of Distinction</span> in the Gauss Mathematics Contest for high-ranking performance.</p>
+      </article>
+
+
+    </div>
+  </section>
+
+  <!-- Other Accomplishments -->
+  <section class="section scroll-animate">
+    <h2 class="section-heading"><span class="highlight">Other Accomplishments</span></h2>
+    <div class="card-grid1">
+      <!-- Accomplishment 1 -->
+      <article class="project-card">
+        <img src="assets/images/Mathmatica.jpg" alt="Mathematica Contest">
+        <h3>Mathematica Runner-Up</h3>
+        <p><span class="highlight">1st Runner-Up</span> in the national <span class="highlight">Mathematica Contest</span> (2019), showcasing problem-solving at an early age.</p>
+      </article>
+
+      <!-- Accomplishment 4 -->
+      <article class="project-card">
+        <img src="assets/images/placeholder.jpg" alt="Accomplishment 4">
+        <h3>Volunteering Milestone</h3>
+        <p class="scrollable-text">Completed over 100 volunteer hours at various community initiatives including shelters and tech events.</p>
+      </article>
+
+            <!-- Award 4 (Swimming) -->
+      <article class="project-card">
+        <img src="assets/images/placeholder.jpg" alt="Swimming Badge">
+        <h3>Swimming Levels Completed</h3>
+        <p><span class="highlight">Completed all swimming levels</span> and currently training toward <span class="highlight">lifeguard certification</span> to further my aquatic skills.</p>
+      </article>
+
+      <!-- Accomplishment 3 -->
+      <article class="project-card">
+        <img src="assets/images/Cross Country.jpg" alt="Cross Country">
+        <h3>TDESAA Cross Country</h3>
+        <p>Participated in <span class="highlight">TDESAA cross country</span> meet — strengthening <span class="highlight">endurance</span>, <span class="highlight">focus</span>, and determination.</p>
+      </article>
+
+            <!-- Accomplishment 2 -->
+      <article class="project-card">
+        <img src="assets/images/placeholder.jpg" alt="Accomplishment 2">
+        <h3>Arduino Workshop</h3>
+        <p class="scrollable-text">Participated in an advanced Arduino workshop learning serial communication, display modules, and project assembly.</p>
+      </article>
+
+      <!-- Accomplishment 5 -->
+      <article class="project-card">
+        <img src="assets/images/Band.png" alt="Music Recital">
+        <h3>Music Recital Performer</h3>
+        <p>Performed at local recitals as a <span class="highlight">flute player</span>, improving confidence and public presence through <span class="highlight">musical expression</span>.</p>
+      </article>
+
+      <!-- Accomplishment 6 -->
+      <article class="project-card">
+        <img src="assets/images/placeholder.jpg" alt="Accomplishment 6">
+        <h3>HTML/CSS Course Completion</h3>
+        <p class="scrollable-text">Completed a course on HTML/CSS fundamentals that helped lay the foundation for building this portfolio website.</p>
+      </article>
+                 
+      <!-- Award 4 (Swimming) -->
+      <article class="project-card">
+        <img src="assets/images/placeholder.jpg" alt="Swimming Badge">
+        <h3>Learnt AI Integration Alone</h3>
+        <p>I have learned how to integrate many integrations of AI into my projects to make it more <span class="highlight">efficient and productive.</span></p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>Aamir Tinwala</p>
+      <p>Student at CHCI showcasing certifications, milestones, and academic highlights through structured effort and passion.</p>
+      <div class="footer-info">
+        <div>
+          <h4>Contact</h4>
+          <p>tinwa2771@wrdsb.ca<br>aamirfire777@gmail.com</p>
+          <p>📞 | 647-695-4298</p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="certifications.html">Certifications</a></li>
+            <li><a href="experience.html">Experience</a></li>
+            <li><a href="Blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <p>© Aamir Tinwala. All rights reserved.</p>
+    </div>
+  </footer>
 </body>
 </html>
