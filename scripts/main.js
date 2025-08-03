@@ -364,11 +364,39 @@ window.addEventListener('click', e => {
   if (e.target === blogModal1) {
     blogModal1.style.display = 'none';
   }
+})
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const hamburger = document.getElementById("hamburger");
+  const navLinks = document.getElementById("nav-links");
+  const navbar = document.getElementById("navbar");
+
+  if (hamburger && navLinks) {
+    hamburger.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+    });
+
+    // Hide menu when a nav link is clicked (optional for mobile UX)
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("show");
+      });
+    });
+  }
+
+  // Scroll show/hide logic — only applies to logo, toggle, and hamburger
+  let lastScrollTop = 0;
+  window.addEventListener("scroll", () => {
+    const scrollTop = window.scrollY;
+    if (scrollTop > lastScrollTop) {
+      navbar.classList.add("hide");
+    } else {
+      navbar.classList.remove("hide");
+    }
+    lastScrollTop = scrollTop;
+  });
 });
 
-const hamburger = document.getElementById('hamburger');
-const navLinks = document.getElementById('nav-links');
 
-hamburger?.addEventListener('click', () => {
-  navLinks.classList.toggle('show');
-});

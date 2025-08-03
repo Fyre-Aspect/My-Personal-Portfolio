@@ -1481,74 +1481,73 @@ body.light .btn:hover {
     margin: auto;
   }
 }
-/* Mobile navbar toggle (if used) */
+
+/* ========== HAMBURGER ICON (MOBILE) ========== */
 .nav-toggle {
   display: none;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   color: var(--red);
   cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {
-  .nav-toggle {
+  .hamburger {
     display: block;
+  }
+
+  .navbar {
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
 
   .navbar ul {
     flex-direction: column;
-    background: #222;
+    align-items: center;
+    background-color: black !important;   /* Force black background */
+    color: white !important;              /* Force white text */
     width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding: 1rem 0;
     display: none;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
   }
 
   .navbar ul.show {
     display: flex;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .navbar ul li {
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  .navbar ul li a {
+    color: white !important; /* Force link text white */
   }
 }
-.navbar {
-  background-color: #1a1a1a;
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 2px solid var(--red);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-body.light-mode .navbar {
-  background-color: #e6e6e6;
-  border-bottom: 2px solid var(--accent);
-}
 
 
-.navbar.hide {
-  transform: translateY(-100%);
-  opacity: 0;
-}
 
-.navbar .logo {
-  color: var(--red);
-  font-size: 1.8rem;
-  text-decoration: none;
-  font-weight: bold;
-}
+  /* Desktop override to re-enable nav on large screens */
+  @media screen and (min-width: 769px) {
+    .navbar ul {
+      display: flex !important;
+      opacity: 1 !important;
+      transform: none !important;
+      position: static !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      background: none !important;
+      padding: 0 !important;
+      box-shadow: none !important;
+    }
+  }
 
-.navbar ul {
-  list-style: none;
-  display: flex;
-  gap: 1.7rem;
-  font-size: 1.2rem
-}
-
-.navbar a {
-  color: var(--text);
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.navbar a:hover {
-  color: var(--red);
-}

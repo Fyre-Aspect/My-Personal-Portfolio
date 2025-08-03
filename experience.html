@@ -4,10 +4,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Experience</title>
+  <title>Aamir Tinwala - Portfolio</title>
+
   <link rel="stylesheet" href="styles/style.css" />
   <link rel="stylesheet" href="styles/navbar.css" />
   <link rel="stylesheet" href="styles/animations.css" />
+  <script src="scripts/main.js" defer></script>
+  <script>
+  const theme = localStorage.getItem('theme') || 'light';
+  document.documentElement.className = `${theme}-theme`;
+</script>
 
 </head>
 <body>
@@ -18,13 +24,13 @@
   <nav class="navbar" id="navbar">
     <a href="index.html" class="logo">A a m i r</a>
     <button class="hamburger" id="hamburger">&#9776;</button>
-    <ul>
+    <ul id="nav-links">
       <li><a href="projects.html">Projects</a></li>
       <li><a href="certifications.html">Certifications</a></li>
       <li><a href="index.html">Home</a></li>
       <li><a href="Blog.html">Blog</a></li>
       <li><a href="contact.html">Contact</a></li>
-      <script src="scripts/main.js" defer></script>
+
     </ul>
     <button class="theme-toggle" id="theme-toggle">🌙</button>
   </nav>
