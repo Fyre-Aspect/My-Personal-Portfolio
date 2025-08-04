@@ -1,6 +1,6 @@
 /* ===== animations.css ===== */
 
-/* Fade in from bottom */
+
 .fade-in-up {
   opacity: 0;
   transform: translateY(20px);
@@ -14,7 +14,7 @@
   }
 }
 
-/* Fade in from left */
+
 .fade-in-left {
   opacity: 0;
   transform: translateX(-20px);
@@ -28,7 +28,7 @@
   }
 }
 
-/* Slide in on scroll */
+
 .scroll-animate {
   opacity: 0;
   transform: translateY(40px);
@@ -38,4 +38,11 @@
 .scroll-animate.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+@media screen and (max-width: 768px) {
+  .scroll-animate {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

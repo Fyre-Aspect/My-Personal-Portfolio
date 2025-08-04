@@ -9,7 +9,7 @@ const savedTheme = localStorage.getItem('theme') || 'light'; // default to light
 document.body.classList.add(`${savedTheme}-theme`);
 
 
-// Set light as default if no theme is saved
+
 if (!savedTheme) {
   document.body.classList.add('light-theme');
   localStorage.setItem('theme', 'light');
@@ -18,7 +18,7 @@ if (!savedTheme) {
 }
 const themeToggle = document.getElementById('theme-toggle');
 
-// Apply saved theme icon
+
 const currentTheme = localStorage.getItem('theme') || 'light';
 themeToggle.textContent = currentTheme === 'light' ? '🌙' : '☀️';
 
@@ -65,7 +65,7 @@ dot.style.transform = 'translate(-75%, -35%)';
 
 
 
-// Click animation
+
 document.addEventListener('click', () => {
   cursor.style.transform = 'translate(-50%, -50%) scale(0.8)';
   setTimeout(() => {
@@ -73,7 +73,7 @@ document.addEventListener('click', () => {
   }, 150);
 });
 
-// Scroll-triggered animation
+
 const elements = document.querySelectorAll('.scroll-animate');
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
@@ -83,7 +83,7 @@ const observer = new IntersectionObserver(entries => {
 
 elements.forEach(el => observer.observe(el));
 
-// Hide nav on scroll down
+
 let lastScroll = 0;
 window.addEventListener('scroll', () => {
   const current = window.scrollY;
@@ -116,11 +116,11 @@ themeBtn.addEventListener('click', () => {
   updateThemeIcon();
 });
 
-updateThemeIcon(); // Set on page load
+updateThemeIcon(); 
 
 
 
-// Optional: track mouse for light-mode glow
+
 document.addEventListener('mousemove', e => {
   
     document.body.style.setProperty('--mouse-x', `${e.clientX}px`);
@@ -129,7 +129,7 @@ document.addEventListener('mousemove', e => {
 );
 
 // === Modal Logic for Temp Sensor Project ===
-const seeMoreBtn = document.querySelector('.see-more-temp'); // for temp sensor
+const seeMoreBtn = document.querySelector('.see-more-temp'); 
 const tempModal = document.getElementById('tempModal');
 const closeTemp = document.getElementById('closeTemp');
 
@@ -233,12 +233,12 @@ function togglePhotoModal(id, show = true) {
 }
 
 
-// Open buttons
+
 document.getElementById('kwPhotosBtn')?.addEventListener('click', () => togglePhotoModal('kwPhotos', true));
 document.getElementById('uwPhotosBtn')?.addEventListener('click', () => togglePhotoModal('uwPhotos', true));
 document.getElementById('gymPhotosBtn')?.addEventListener('click', () => togglePhotoModal('gymPhotos', true));
 
-// Close buttons inside photo modal
+
 document.querySelectorAll('.close-photo').forEach(btn => {
   btn.addEventListener('click', () => {
     const target = btn.getAttribute('data-target');

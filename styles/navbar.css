@@ -30,7 +30,7 @@ body.light-mode .navbar {
   font-weight: bold;
 }
 
-/* ========== NAV LINKS (DESKTOP) ========== */
+
 .navbar ul {
   list-style: none;
   display: flex;
@@ -52,4 +52,10 @@ body.light-mode .navbar {
   color: var(--red);
 }
 
+@media screen and (max-width: 768px) {
+  .scroll-animate {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
 
