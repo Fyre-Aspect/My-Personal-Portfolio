@@ -1345,6 +1345,15 @@ body.light .btn:hover {
   filter: brightness(1.1);
 }
 
+.project-card .tall-image {
+  width: auto !important;
+  height: 300px !important; /* or less if needed */
+  object-fit: contain !important;
+  display: block;
+  margin: 0 auto;
+}
+
+
 .resume-download {
   text-align: center;
   margin-top: 3rem;
@@ -1550,4 +1559,47 @@ body.light .btn:hover {
       box-shadow: none !important;
     }
   }
+
+/* Hide mobile content by default */
+.mobile-only {
+  display: none;
+}
+
+/* Hide desktop content on small screens */
+@media screen and (max-width: 768px) {
+  .desktop-only {
+    display: none !important;
+  }
+
+  .mobile-only {
+    display: flex !important;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .mobile-only .project-card {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .mobile-only .split-img {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .mobile-only .split-img img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+  .project-gif {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  max-height: 300px;
+}
+
 
