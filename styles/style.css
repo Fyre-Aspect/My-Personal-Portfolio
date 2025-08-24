@@ -443,6 +443,25 @@ body {
   transform: translateY(-2px);
 }
 
+.btn.see-more-tidal {
+  display: inline-block;
+  margin-top: 1rem;
+  background-color: var(--red);
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn.see-more-tidal:hover {
+  background-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+
+
 .btn.see-more-uw {
   display: inline-block;
   margin-top: 1rem;

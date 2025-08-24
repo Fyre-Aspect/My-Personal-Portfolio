@@ -280,6 +280,21 @@ window.addEventListener('click', e => {
   }
 });
 
+const tidalBtn = document.querySelector('.see-more-tidal');
+const tidalModal = document.getElementById('tidalModal');
+const closetidal = document.getElementById('tidalClose');
+
+see-more-tidal?.addEventListener('click', () => {
+  tidalBtn.style.display = 'flex';
+});
+tidalBtn?.addEventListener('click', () => {
+  tidalBtn.style.display = 'none';
+});
+window.addEventListener('click', e => {
+  if (e.target === tidalBtn) {
+    tidalBtn.style.display = 'none';
+  }
+});
 // === Portfolio Modal ===
 const portfolioBtn = document.querySelector('.see-more-portfolio');
 const portfolioModal = document.getElementById('portfolioModal');
