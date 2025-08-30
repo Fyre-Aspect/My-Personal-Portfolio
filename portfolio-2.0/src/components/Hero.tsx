@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 
 export default function Hero() {
   const [typedText, setTypedText] = useState('')
@@ -70,56 +71,19 @@ export default function Hero() {
           
           {/* CTA Buttons */}
           <div className="fade-in-up-delay-3" style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a 
-              href="#projects"
-              style={{
-                display: 'inline-block',
-                padding: '1rem 2rem',
-                background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
-                color: 'white',
-                textDecoration: 'none',
-                borderRadius: '0.5rem',
-                fontWeight: '600',
-                transition: 'all 0.3s ease',
-                boxShadow: '0 4px 15px rgba(59, 130, 246, 0.3)'
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px)'
-                e.currentTarget.style.boxShadow = '0 8px 25px rgba(59, 130, 246, 0.4)'
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)'
-                e.currentTarget.style.boxShadow = '0 4px 15px rgba(59, 130, 246, 0.3)'
-              }}
+            <Link 
+              href="/projects"
+              className="cta-button primary"
             >
               View My Work
-            </a>
+            </Link>
             
-            <a 
-              href="#contact"
-              style={{
-                display: 'inline-block',
-                padding: '1rem 2rem',
-                border: '2px solid #475569',
-                color: '#cbd5e1',
-                textDecoration: 'none',
-                borderRadius: '0.5rem',
-                fontWeight: '600',
-                transition: 'all 0.3s ease'
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgba(51, 65, 85, 0.5)'
-                e.currentTarget.style.borderColor = '#60a5fa'
-                e.currentTarget.style.color = '#60a5fa'
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.backgroundColor = 'transparent'
-                e.currentTarget.style.borderColor = '#475569'
-                e.currentTarget.style.color = '#cbd5e1'
-              }}
+            <Link 
+              href="/contact"
+              className="cta-button secondary"
             >
               Get In Touch
-            </a>
+            </Link>
           </div>
         </div>
       </div>

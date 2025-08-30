@@ -7,13 +7,13 @@ import Footer from '../components/Footer'
 
 export default function Home() {
   return (
-    <main>
+    <>
       <Navigation />
       <Hero />
       <Stats />
       <Projects />
       <Extracurriculars />
       <Footer />
-    </main>
+    </>
   )
 }

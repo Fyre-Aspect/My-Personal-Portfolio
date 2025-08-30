@@ -1,19 +1,21 @@
 'use client'
 
+import Link from 'next/link'
+
 export default function Navigation() {
   return (
     <nav className="navbar">
       <div className="nav-content">
-        <a href="#home" className="logo">
+        <Link href="/" className="logo">
           Aamir Tinwala
-        </a>
+        </Link>
         
         <ul className="nav-links">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#extracurriculars">Activities</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><Link href="/">Home</Link></li>
+          <li><Link href="/about">About</Link></li>
+          <li><Link href="/projects">Projects</Link></li>
+          <li><Link href="/activities">Activities</Link></li>
+          <li><Link href="/contact">Contact</Link></li>
         </ul>
       </div>
     </nav>
