@@ -1400,3 +1400,62 @@ body {
 .project-link:hover {
   transform: translateY(-2px);
 }
+
+
+/* Add this to your CSS file - Homepage-specific navigation fixes */
+
+/* Force hamburger button positioning on homepage */
+.navbar .nav-content .mobile-menu-btn {
+  position: absolute !important;
+  right: 1rem !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 1001 !important;
+  flex-shrink: 0 !important;
+}
+
+/* Ensure nav-content has proper positioning context */
+.navbar .nav-content {
+  position: relative !important;
+  width: 100% !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 0 1rem !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  height: 4rem !important;
+  box-sizing: border-box !important;
+}
+
+/* Make sure logo doesn't interfere */
+.navbar .nav-content .logo {
+  flex-shrink: 0 !important;
+  position: relative !important;
+  z-index: 1000 !important;
+}
+
+/* Hide desktop nav on mobile with higher specificity */
+@media (max-width: 768px) {
+  .navbar .nav-content .nav-links {
+    display: none !important;
+  }
+  
+  .navbar .nav-content .mobile-menu-btn {
+    display: flex !important;
+    position: absolute !important;
+    right: 1rem !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar .nav-content {
+    padding: 0 0.75rem !important;
+  }
+  
+  .navbar .nav-content .mobile-menu-btn {
+    right: 0.75rem !important;
+  }
+}
