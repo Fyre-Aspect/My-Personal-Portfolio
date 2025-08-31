@@ -10,6 +10,9 @@ export default function ContactPage() {
     subject: '',
     message: ''
   })
+  
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -18,11 +21,37 @@ export default function ContactPage() {
     })
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission here
-    console.log('Form submitted:', formData)
-    // You can integrate with your preferred form handling service
+    setIsSubmitting(true)
+    setSubmitStatus('idle')
+
+    try {
+      // Replace 'YOUR_FORM_ID' with your actual Formspree form ID
+      const response = await fetch('https://formspree.io/f/mgvlkbdv', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (response.ok) {
+        setSubmitStatus('success')
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        })
+      } else {
+        setSubmitStatus('error')
+      }
+    } catch (error) {
+      setSubmitStatus('error')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -54,7 +83,7 @@ export default function ContactPage() {
                       <div className="method-icon">📧</div>
                       <div>
                         <h3>Email</h3>
-                        <a href="mailto:aamir@example.com">aamir@example.com</a>
+                        <a href="mailto:aamirtinwala7@gmail.com">aamirtinwala7@gmail.com</a>
                       </div>
                     </div>
 
@@ -62,28 +91,30 @@ export default function ContactPage() {
                       <div className="method-icon">💼</div>
                       <div>
                         <h3>LinkedIn</h3>
-                        <a href="https://linkedin.com/in/aamir-tinwala" target="_blank" rel="noopener noreferrer">
-                          linkedin.com/in/aamir-tinwala
+                        <a href="https://www.linkedin.com/in/aamirali-tinwala" target="_blank" rel="noopener noreferrer">
+                          linkedin.com/in/aamirali-tinwala
                         </a>
                       </div>
                     </div>
 
                     <div className="contact-method">
-                      <div className="method-icon">🐙</div>
+                      <div className="method-icon">                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg></div>
                       <div>
                         <h3>GitHub</h3>
-                        <a href="https://github.com/aamir-tinwala" target="_blank" rel="noopener noreferrer">
-                          github.com/aamir-tinwala
+                        <a href="https://github.com/Fyre-Aspect" target="_blank" rel="noopener noreferrer">
+                          Aamir | Fyre-Aspect
                         </a>
                       </div>
                     </div>
 
                     <div className="contact-method">
-                      <div className="method-icon">🐦</div>
+                      <div className="method-icon">O</div>
                       <div>
-                        <h3>Twitter</h3>
-                        <a href="https://twitter.com/aamir_tinwala" target="_blank" rel="noopener noreferrer">
-                          @aamir_tinwala
+                        <h3>Website</h3>
+                        <a href="https://aamirtinwalapersonal-portfolio.vercel.app" target="_blank" rel="noopener noreferrer">
+                          Aamir Portfolio
                         </a>
                       </div>
                     </div>
@@ -94,6 +125,18 @@ export default function ContactPage() {
                   <form className="contact-form" onSubmit={handleSubmit}>
                     <h3>Send Me a Message</h3>
                     
+                    {submitStatus === 'success' && (
+                      <div className="form-status success">
+                        <p>Thank you! Your message has been sent successfully. I'll get back to you soon!</p>
+                      </div>
+                    )}
+                    
+                    {submitStatus === 'error' && (
+                      <div className="form-status error">
+                        <p>Sorry, there was an error sending your message. Please try again or email me directly.</p>
+                      </div>
+                    )}
+                    
                     <div className="form-group">
                       <label htmlFor="name">Name</label>
                       <input
@@ -103,6 +146,7 @@ export default function ContactPage() {
                         value={formData.name}
                         onChange={handleChange}
                         required
+                        disabled={isSubmitting}
                       />
                     </div>
 
@@ -115,6 +159,7 @@ export default function ContactPage() {
                         value={formData.email}
                         onChange={handleChange}
                         required
+                        disabled={isSubmitting}
                       />
                     </div>
 
@@ -127,6 +172,7 @@ export default function ContactPage() {
                         value={formData.subject}
                         onChange={handleChange}
                         required
+                        disabled={isSubmitting}
                       />
                     </div>
 
@@ -139,11 +185,12 @@ export default function ContactPage() {
                         value={formData.message}
                         onChange={handleChange}
                         required
+                        disabled={isSubmitting}
                       ></textarea>
                     </div>
 
-                    <button type="submit" className="submit-button">
-                      Send Message
+                    <button type="submit" className="submit-button" disabled={isSubmitting}>
+                      {isSubmitting ? 'Sending...' : 'Send Message'}
                     </button>
                   </form>
                 </div>
@@ -160,9 +207,9 @@ export default function ContactPage() {
                 </div>
                 
                 <div className="availability-card">
-                  <h3>Full-time Opportunities</h3>
+                  <h3>Part-time Opportunities</h3>
                   <div className="availability-status interested">Interested</div>
-                  <p>Always interested in discussing exciting full-time opportunities.</p>
+                  <p>Always interested in discussing exciting part-time opportunities.</p>
                 </div>
                 
                 <div className="availability-card">
