@@ -1,0 +1,330 @@
+/* Cozy Fire Theme - Replace existing color values in globals.css */
+
+/* Update your existing globals.css by replacing these specific sections: */
+
+/* 1. Replace the body background */
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  color: #fef4e6; /* Updated text color */
+  background: linear-gradient(135deg, #1a1108 0%, #2d1f14 50%, #1a1108 100%); /* New cozy background */
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 2. Update navigation colors */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(26, 17, 8, 0.9); /* Updated navbar background */
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(249, 115, 22, 0.3); /* Orange border */
+  transition: all 0.3s ease;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #f97316, #eab308); /* Orange to gold gradient */
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.nav-links a {
+  color: #e4c5a3; /* Warm text color */
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav-links a:hover {
+  color: #f97316; /* Orange hover */
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(135deg, #f97316, #eab308); /* Orange to gold */
+  transition: width 0.3s ease;
+}
+
+/* 3. Update hero section */
+.hero h1 {
+  font-size: 4rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #f97316, #eab308, #dc2626); /* Fire gradient */
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease-in-out infinite;
+}
+
+.page-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #f97316, #eab308, #dc2626); /* Fire gradient */
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease-in-out infinite;
+}
+
+.typing-text {
+  font-size: 1.5rem;
+  color: #e4c5a3; /* Warm text */
+  margin-bottom: 2rem;
+  min-height: 2rem;
+}
+
+.typing-cursor {
+  border-right: 2px solid #f97316; /* Orange cursor */
+  animation: blink 1s infinite;
+}
+
+.hero-description {
+  font-size: 1.2rem;
+  color: #c4a478; /* Muted warm text */
+  margin-bottom: 3rem;
+  line-height: 1.8;
+}
+
+/* 4. Update buttons */
+.cta-button.primary {
+  background: linear-gradient(135deg, #f97316, #dc2626); /* Orange to red gradient */
+  color: white;
+  box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3); /* Orange shadow */
+}
+
+.cta-button.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(249, 115, 22, 0.4); /* Enhanced orange shadow */
+}
+
+.cta-button.secondary {
+  border: 2px solid #f97316; /* Orange border */
+  color: #e4c5a3; /* Warm text */
+  background: transparent;
+}
+
+.cta-button.secondary:hover {
+  background-color: rgba(249, 115, 22, 0.1); /* Subtle orange background */
+  border-color: #f97316;
+  color: #f97316; /* Orange text */
+}
+
+/* 5. Update cards and sections */
+.project-card,
+.activity-card,
+.stat-card,
+.achievement-card,
+.featured-post,
+.blog-post {
+  background: rgba(45, 31, 20, 0.8); /* Warm dark background */
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(249, 115, 22, 0.2); /* Orange border */
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+}
+
+.project-card:hover,
+.activity-card:hover,
+.stat-card:hover,
+.achievement-card:hover,
+.featured-post:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 50px rgba(220, 38, 38, 0.2); /* Red shadow */
+  border-color: rgba(249, 115, 22, 0.5); /* Enhanced orange border */
+}
+
+/* 6. Update text colors */
+.section-title,
+.page-subtitle,
+.project-title,
+.activity-title,
+.achievement-title,
+.post-title,
+.category-title {
+  color: #fef4e6; /* Primary text color */
+}
+
+.project-description,
+.activity-description,
+.achievement-description,
+.post-excerpt {
+  color: #e4c5a3; /* Secondary text color */
+}
+
+.project-link,
+.read-more-link {
+  color: #f97316; /* Orange links */
+}
+
+.project-link:hover,
+.read-more-link:hover {
+  color: #eab308; /* Gold hover */
+}
+
+/* 7. Update stats section */
+.stat-number {
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #f97316, #eab308); /* Orange to gold */
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  color: #c4a478; /* Muted warm color */
+  font-weight: 500;
+}
+
+/* 8. Update footer */
+.footer {
+  background: rgba(26, 17, 8, 0.9); /* Dark warm background */
+  padding: 3rem 0;
+  border-top: 1px solid rgba(249, 115, 22, 0.3); /* Orange border */
+}
+
+.footer-text {
+  color: #c4a478; /* Muted warm text */
+  margin-bottom: 1rem;
+}
+
+.social-link {
+  background: rgba(45, 31, 20, 0.5); /* Warm background */
+  border: 1px solid rgba(249, 115, 22, 0.3); /* Orange border */
+  color: #e4c5a3; /* Warm text */
+}
+
+.social-link:hover {
+  background: rgba(249, 115, 22, 0.2); /* Orange background */
+  border-color: #f97316;
+  color: #f97316; /* Orange text */
+  transform: translateY(-2px);
+}
+
+/* 9. Update scroll to top button */
+.scroll-top {
+  background: linear-gradient(135deg, #f97316, #dc2626); /* Orange to red */
+  border: none;
+  border-radius: 50%;
+  color: white;
+  box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+}
+
+.scroll-top:hover {
+  transform: scale(1.1);
+  opacity: 1;
+  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4);
+}
+
+/* 10. Update mobile menu */
+.mobile-menu {
+  background: rgba(26, 17, 8, 0.95); /* Dark warm background */
+  backdrop-filter: blur(10px);
+}
+
+.mobile-nav-links a {
+  color: #e4c5a3; /* Warm text */
+}
+
+.mobile-nav-links a:hover {
+  color: #f97316; /* Orange hover */
+}
+
+.hamburger-line {
+  background: #e4c5a3; /* Warm hamburger lines */
+}
+
+/* 11. Special sections backgrounds */
+.stats-section,
+.extracurriculars-section {
+  background: rgba(45, 31, 20, 0.3); /* Warm section background */
+}
+
+.philosophy-section,
+.achievements-reflection,
+.blog-cta,
+.availability-section,
+.philosophy-connection {
+  background: rgba(45, 31, 20, 0.3); /* Warm background */
+}
+
+/* 12. Form elements */
+.form-group input,
+.form-group textarea {
+  background: rgba(26, 17, 8, 0.5); /* Dark warm input background */
+  border: 1px solid rgba(249, 115, 22, 0.3); /* Orange border */
+  color: #fef4e6; /* Light text */
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #f97316; /* Orange focus */
+}
+
+.submit-button {
+  background: linear-gradient(135deg, #f97316, #dc2626); /* Orange to red */
+  color: white;
+}
+
+.submit-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(249, 115, 22, 0.4);
+}
+
+/* 13. Tags and badges */
+.tech-tag,
+.skill-tag,
+.post-tag {
+  background: rgba(249, 115, 22, 0.2); /* Orange background */
+  color: #f97316; /* Orange text */
+}
+
+.filter-tab:hover,
+.filter-tab.active {
+  background: rgba(249, 115, 22, 0.2); /* Orange background */
+  border-color: rgba(249, 115, 22, 0.5); /* Orange border */
+  color: #f97316; /* Orange text */
+}
+
+/* 14. Achievement specific elements */
+.achievement-icon {
+  background: rgba(249, 115, 22, 0.2); /* Orange background */
+  color: #f97316; /* Orange text */
+}
+
+.achievement-date,
+.post-date {
+  color: #f97316; /* Orange accent */
+}
+
+/* 15. Special effects for the theme */
+.project-card::before,
+.ember-effect::before {
+  background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.3), transparent);
+}
+
+/* 16. Category title underlines */
+.category-title::after {
+  background: linear-gradient(135deg, #f97316, #eab308); /* Orange to gold */
+}

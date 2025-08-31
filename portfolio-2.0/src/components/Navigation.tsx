@@ -1,7 +1,8 @@
 'use client'
-
+import { ThemeToggle } from './ThemeProvider'
 import Link from 'next/link'
 import { useState } from 'react'
+
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -23,11 +24,14 @@ export default function Navigation() {
         
         {/* Desktop Navigation */}
         <ul className="nav-links">
-          <li><Link href="/">Home</Link></li>
-          <li><Link href="/about">About</Link></li>
-          <li><Link href="/projects">Projects</Link></li>
-          <li><Link href="/activities">Experiences</Link></li>
-          <li><Link href="/contact">Contact</Link></li>
+            <li><Link href="/" onClick={closeMenu}>Home</Link></li>
+            <li><Link href="/about" onClick={closeMenu}>About</Link></li>
+            <li><Link href="/projects" onClick={closeMenu}>Projects</Link></li>
+            <li><Link href="/activities" onClick={closeMenu}>Experiences</Link></li>
+            <li><Link href="/contact" onClick={closeMenu}>Contact</Link></li>
+            <li><Link href="/achievements"onClick={closeMenu}>Achievements</Link></li>
+            <li><Link href="/blog"onClick={closeMenu}>Blog</Link></li>
+            <li><ThemeToggle /></li>  {/* Add this line */}
         </ul>
 
         {/* Mobile Hamburger Button */}
@@ -41,6 +45,7 @@ export default function Navigation() {
           <span className={`hamburger-line ${isMenuOpen ? 'open' : ''}`}></span>
         </button>
 
+
         {/* Mobile Navigation Menu */}
         <div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
           <ul className="mobile-nav-links">
@@ -49,6 +54,9 @@ export default function Navigation() {
             <li><Link href="/projects" onClick={closeMenu}>Projects</Link></li>
             <li><Link href="/activities" onClick={closeMenu}>Experiences</Link></li>
             <li><Link href="/contact" onClick={closeMenu}>Contact</Link></li>
+            <li><Link href="/achievements"onClick={closeMenu}>Achievements</Link></li>
+            <li><Link href="/blog"onClick={closeMenu}>Blog</Link></li>
+            <li><ThemeToggle /></li>  {/* Add this line */}
           </ul>
         </div>
 

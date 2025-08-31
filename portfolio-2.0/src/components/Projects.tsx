@@ -77,10 +77,6 @@ export default function Projects() {
             </div>
           ))}
         </div>
-        
-        <div className="projects-cta fade-in-up-delay-3">
-          <p>These projects represent my journey from curiosity to capability, each one teaching me valuable lessons about development, problem-solving, and the impact technology can have.</p>
-        </div>
       </div>
     </section>
   )
