@@ -1799,3 +1799,236 @@ body {
     gap: 0.5rem;
   }
 }
+
+/* Blog Post Specific Styles - Add to your existing CSS */
+
+/* Blog Post Content Spacing */
+.blog-post-section {
+  padding: 5rem 0;
+}
+
+.blog-post-hero {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.back-link {
+  display: inline-block;
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+}
+
+.back-link:hover {
+  color: var(--secondary);
+  transform: translateX(-5px);
+}
+
+.blog-post-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.post-body {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+}
+
+.post-lead {
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: var(--bg-card);
+  border-left: 4px solid var(--primary);
+  border-radius: 0.5rem;
+}
+
+.post-body h2 {
+  font-size: 1.8rem;
+  color: var(--text-white);
+  margin: 3rem 0 1.5rem 0;
+  font-weight: 600;
+}
+
+.post-body p {
+  margin-bottom: 1.5rem;
+}
+
+.post-quote {
+  background: var(--bg-tertiary);
+  padding: 2rem;
+  margin: 2rem 0;
+  border-left: 4px solid var(--accent);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--text-primary);
+  border-radius: 0.5rem;
+}
+
+.post-list {
+  margin: 1.5rem 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.post-list li {
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.post-list li::before {
+  content: '→';
+  color: var(--primary);
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+.post-conclusion {
+  background: var(--bg-card);
+  padding: 2rem;
+  border-radius: 0.75rem;
+  margin: 3rem 0;
+  border: 1px solid var(--border);
+}
+
+.post-footer {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.post-navigation {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.nav-link {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+}
+
+.nav-link:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+/* Updated spacing for read more links */
+.read-more-link {
+  display: inline-block;
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  margin-top: 1.5rem; /* Added more top margin */
+  padding-top: 0.5rem; /* Additional padding */
+}
+
+.read-more-link:hover {
+  color: var(--secondary);
+  transform: translateX(5px);
+}
+
+.read-more-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gradient-primary);
+  transition: width 0.3s ease;
+}
+
+.read-more-link:hover::after {
+  width: 100%;
+}
+
+/* Featured post specific spacing */
+.featured-post .post-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.featured-post .post-tags {
+  margin-bottom: 1rem; /* Space before read more link */
+}
+
+/* Regular blog post spacing */
+.blog-post .post-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.blog-post .post-tags {
+  margin-bottom: 1rem; /* Space before read more link */
+}
+
+/* No posts message */
+.no-posts {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Mobile adjustments for blog post spacing */
+@media (max-width: 768px) {
+  .post-body {
+    font-size: 1rem;
+  }
+  
+  .post-lead {
+    font-size: 1.1rem;
+    padding: 1rem;
+  }
+  
+  .post-body h2 {
+    font-size: 1.5rem;
+    margin: 2rem 0 1rem 0;
+  }
+  
+  .post-navigation {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .nav-link {
+    text-align: center;
+    width: 100%;
+    max-width: 200px;
+  }
+  
+  /* Ensure proper spacing on mobile */
+  .read-more-link {
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .post-quote {
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  
+  .post-conclusion {
+    padding: 1.5rem;
+  }
+}

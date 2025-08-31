@@ -71,9 +71,9 @@ export default function Navigation() {
             <li><Link href="/about" onClick={closeMenu}>About</Link></li>
             <li><Link href="/projects" onClick={closeMenu}>Projects</Link></li>
             <li><Link href="/activities" onClick={closeMenu}>Experiences</Link></li>
-            <li><Link href="/contact" onClick={closeMenu}>Contact</Link></li>
             <li><Link href="/achievements" onClick={closeMenu}>Achievements</Link></li>
             <li><Link href="/blog" onClick={closeMenu}>Blog</Link></li>
+            <li><Link href="/contact" onClick={closeMenu}>Contact</Link></li>
             <li><ThemeToggle /></li>
         </ul>
 
@@ -95,9 +95,9 @@ export default function Navigation() {
             <li><Link href="/about" onClick={closeMenu}>About</Link></li>
             <li><Link href="/projects" onClick={closeMenu}>Projects</Link></li>
             <li><Link href="/activities" onClick={closeMenu}>Experiences</Link></li>
-            <li><Link href="/contact" onClick={closeMenu}>Contact</Link></li>
             <li><Link href="/achievements" onClick={closeMenu}>Achievements</Link></li>
             <li><Link href="/blog" onClick={closeMenu}>Blog</Link></li>
+            <li><Link href="/contact" onClick={closeMenu}>Contact</Link></li>
             <li><ThemeToggle /></li>
           </ul>
         </div>

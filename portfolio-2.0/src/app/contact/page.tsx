@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Navigation from '../../components/Navigation'
+import Footer from '../../components/Footer'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -27,7 +28,6 @@ export default function ContactPage() {
     setSubmitStatus('idle')
 
     try {
-      // Replace 'YOUR_FORM_ID' with your actual Formspree form ID
       const response = await fetch('https://formspree.io/f/mgvlkbdv', {
         method: 'POST',
         headers: {
@@ -63,7 +63,8 @@ export default function ContactPage() {
             <div className="contact-hero fade-in-up">
               <h1 className="page-title">Let's Connect</h1>
               <p className="page-subtitle">
-                Ready to collaborate on something amazing? Let's discuss how we can work together.
+                Ready to collaborate on something amazing? Let's discuss how we can work together on 
+                <span className="page-highlight">innovative projects</span> and <span className="page-highlight">meaningful solutions</span>.
               </p>
             </div>
 
@@ -110,7 +111,7 @@ export default function ContactPage() {
                     </div>
 
                     <div className="contact-method">
-                      <div className="method-icon">O</div>
+                      <div className="method-icon">🌐</div>
                       <div>
                         <h3>Website</h3>
                         <a href="https://aamirtinwalapersonal-portfolio.vercel.app" target="_blank" rel="noopener noreferrer">
@@ -203,25 +204,26 @@ export default function ContactPage() {
                 <div className="availability-card">
                   <h3>Freelance Projects</h3>
                   <div className="availability-status available">Available</div>
-                  <p>Open to taking on new freelance projects and consulting work.</p>
+                  <p>Open to taking on <span className="page-highlight">new freelance projects</span> and <span className="page-highlight">consulting work</span> that align with my skills and interests.</p>
                 </div>
                 
                 <div className="availability-card">
                   <h3>Part-time Opportunities</h3>
                   <div className="availability-status interested">Interested</div>
-                  <p>Always interested in discussing exciting part-time opportunities.</p>
+                  <p>Always interested in discussing exciting <span className="page-highlight">part-time opportunities</span> that offer <span className="page-highlight">learning experiences</span> and growth.</p>
                 </div>
                 
                 <div className="availability-card">
                   <h3>Collaborations</h3>
                   <div className="availability-status available">Available</div>
-                  <p>Love collaborating on open source projects and interesting side projects.</p>
+                  <p>Love collaborating on <span className="page-highlight">open source projects</span> and interesting <span className="page-highlight">side projects</span> with fellow developers.</p>
                 </div>
               </div>
             </div>
           </div>
         </section>
       </main>
+      <Footer />
     </>
   )
 }
