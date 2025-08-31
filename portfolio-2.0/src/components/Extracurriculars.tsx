@@ -1,27 +1,24 @@
 export default function Extracurriculars() {
-  const activities = [
+const activities = [
     {
-      title: "Push-Pull-Legs Training",
-      description: "Structured 6-day training split focusing on progressive overload and compound movements. This disciplined approach to fitness mirrors my methodology in software development - consistent effort, measurable progress, and continuous optimization."
+      title: "Soil Testing Internship - University of Waterloo",
+      description: "Working on comprehensive soil analysis projects, plotting stress-strain graphs and testing various soil compositions under different load conditions. This hands-on research experience strengthens my analytical skills and graph plotting skills on MatLab and attention to detail in data collection and interpretation."
     },
     {
-      title: "Open Source Contributions",
-      description: "Active contributor to various open-source projects, particularly in the React and Node.js ecosystem. Believe in giving back to the developer community that has taught me so much."
+      title: "Volunteer - KW Humane Society",
+      description: "Dedicated volunteer helping with animal care, shelter maintenance, and community outreach programs. This experience has taught me compassion, responsibility, and the importance of giving back to the community while working in team-oriented environments."
     },
     {
-      title: "Tech Community Involvement",
-      description: "Regular participant in local developer meetups and hackathons. Enjoy collaborating with other developers and staying current with emerging technologies and best practices."
+      title: "Admin Developer - Tidal Tasks AI",
+      description: "Developing and maintaining administrative systems for AI-powered task management solutions. Working with modern web technologies to create efficient, user-friendly interfaces while collaborating with cross-functional teams in an innovative AI startup environment."
     },
-    {
-      title: "Continuous Learning",
-      description: "Currently expanding expertise in cloud architecture (AWS), machine learning applications, and advanced React patterns. Always exploring new technologies to stay ahead in the rapidly evolving tech landscape."
-    }
   ]
 
   return (
     <section id="extracurriculars" className="extracurriculars-section">
       <div className="container">
-        <h2 className="section-title fade-in-up">Beyond Code</h2>
+        <h2 className="section-title fade-in-up">Recent Extracurriculars
+        </h2>
         
         <div className="activities-grid">
           {activities.map((activity, index) => (

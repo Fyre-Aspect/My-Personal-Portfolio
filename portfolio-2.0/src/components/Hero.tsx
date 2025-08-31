@@ -10,9 +10,9 @@ export default function Hero() {
   
   const texts = [
     "Full-Stack Developer",
-    "Fitness Enthusiast", 
-    "Problem Solver",
-    "Tech Innovator"
+    "Grade 11 Highschool Student", 
+    "IB Programme Candidate",
+    "Engineering Enthusiast",
   ]
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export default function Hero() {
         <div className="hero-content fade-in-up">
           {/* Profile Image */}
           <img 
-            src="/api/placeholder/200/200" 
+            src="/Aamir Pic.jpg" 
             alt="Aamir Tinwala"
             className="profile-image"
           />
@@ -63,10 +63,10 @@ export default function Hero() {
           
           {/* Description */}
           <p className="hero-description fade-in-up-delay-2">
-            Passionate about building exceptional digital experiences with modern technologies. 
-            I combine technical expertise with the discipline and dedication I've developed 
-            through structured fitness training, bringing the same commitment to progressive 
-            improvement to every project I work on.
+             At 16, I'm passionate about building projects that matter. 
+            As a high school student, I bring fresh perspectives to development while maintaining the same 
+            commitment to quality and continuous learning that drives me as a successful developer. Every project 
+            is an opportunity to grow and make a meaningful impact for me.
           </p>
           
           {/* CTA Buttons */}
