@@ -13,57 +13,30 @@ export default function Blog() {
       title: "My Journey into Full-Stack Development at 16",
       excerpt: "How I started programming, the challenges I faced as a young developer, and what I've learned along the way about <span class='page-highlight'>building real projects</span> while balancing <span class='page-highlight'>academic excellence</span>.",
       date: "2024-08-15",
-      readTime: "5 min read",
+      readTime: "4 min read",
       tags: ["Development", "Journey", "Learning"],
       featured: true,
       category: "Development"
     },
     {
       id: 'building-tidal-tasks',
-      title: "Building My First Real-World Project: Tidal Tasks",
+      title: "My First Real-World Project: Tidal Tasks",
       excerpt: "Insights from working as an <span class='page-highlight'>admin developer</span> on an AI-powered task management platform and the <span class='page-highlight'>technical challenges</span> we solved using <span class='page-highlight'>modern web technologies</span>.",
-      date: "2024-07-28",
-      readTime: "7 min read",
+      date: "2025-08-02",
+      readTime: "5 min read",
       tags: ["Projects", "AI", "React"],
       featured: true,
       category: "Projects"
-    },
-    {
-      id: 'balancing-school-development',
-      title: "Balancing High School and Development Work",
-      excerpt: "Tips and strategies for managing <span class='page-highlight'>academic responsibilities</span> while pursuing <span class='page-highlight'>passion projects</span> and gaining <span class='page-highlight'>real-world experience</span>.",
-      date: "2024-07-12",
-      readTime: "4 min read",
-      tags: ["Productivity", "Education", "Balance"],
-      category: "Learning"
     },
     {
       id: 'arduino-adventures',
       title: "Learning Hardware Programming: Arduino Adventures",
       excerpt: "My experience building a <span class='page-highlight'>temperature humidity sensor</span> and diving into the world of <span class='page-highlight'>IoT</span> and <span class='page-highlight'>embedded systems</span>.",
       date: "2024-06-25",
-      readTime: "6 min read",
+      readTime: "2 min read",
       tags: ["Hardware", "Arduino", "IoT"],
       category: "Hardware"
     },
-    {
-      id: 'power-of-open-source',
-      title: "The Power of Open Source for Young Developers",
-      excerpt: "Why contributing to <span class='page-highlight'>open source projects</span> has been crucial to my development journey and how other <span class='page-highlight'>students can get started</span>.",
-      date: "2024-06-10",
-      readTime: "5 min read",
-      tags: ["Open Source", "Community", "Learning"],
-      category: "Community"
-    },
-    {
-      id: 'volunteer-to-tech-skills',
-      title: "From Volunteer Work to Tech Skills",
-      excerpt: "How my volunteer experience at <span class='page-highlight'>KW Humane Society</span> taught me valuable <span class='page-highlight'>soft skills</span> that translate to <span class='page-highlight'>software development</span>.",
-      date: "2024-05-28",
-      readTime: "4 min read",
-      tags: ["Volunteering", "Soft Skills", "Growth"],
-      category: "Community"
-    }
   ]
 
   const categories = ["All", "Development", "Projects", "Learning", "Community", "Hardware"]

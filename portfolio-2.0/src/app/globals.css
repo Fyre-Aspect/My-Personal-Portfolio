@@ -2032,3 +2032,42 @@ body {
     padding: 1.5rem;
   }
 }
+
+
+/* Active Navigation Styles - Add to your existing CSS */
+
+/* Active state for desktop navigation */
+.nav-links a.active {
+  color: var(--primary);
+  font-weight: 600;
+  transform: translateY(-1px);
+}
+
+.nav-links a.active::after {
+  width: 100%;
+  background: var(--gradient-primary);
+}
+
+/* Active state for mobile navigation */
+.mobile-nav-links a.active {
+  color: var(--primary);
+  font-weight: 600;
+  background: rgba(232, 107, 19, 0.1);
+  border-radius: 0.5rem;
+}
+
+/* Add subtle glow effect for active links */
+.nav-links a.active,
+.mobile-nav-links a.active {
+  text-shadow: 0 0 8px rgba(232, 107, 19, 0.3);
+}
+
+/* Hover effect adjustments for active links */
+.nav-links a.active:hover {
+  color: var(--secondary);
+  text-shadow: 0 0 12px rgba(212, 160, 23, 0.4);
+}
+
+.mobile-nav-links a.active:hover {
+  background: rgba(232, 107, 19, 0.15);
+}

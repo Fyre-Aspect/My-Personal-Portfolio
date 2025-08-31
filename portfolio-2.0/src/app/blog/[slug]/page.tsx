@@ -34,10 +34,9 @@ export default function BlogPost() {
                 <h2>The Beginning: From Curiosity to Code</h2>
                 <p>
                   My first encounter with programming was in <span className="page-highlight">Grade 9</span>, when I stumbled upon a 
-                  <span className="page-highlight">Python tutorial</span> on YouTube. What started as casual exploration quickly became 
+                  <span className="page-highlight">C++ Arduino Tutorial For making something cool</span> on YouTube. What started as casual exploration quickly became 
                   an obsession. I spent hours learning about <span className="page-highlight">variables</span>, 
-                  <span className="page-highlight">loops</span>, and <span className="page-highlight">functions</span> — 
-                  the building blocks that would eventually become my toolkit for solving complex problems.
+                  <span className="page-highlight">loops</span>, and <span className="page-highlight">functions</span>.
                 </p>
 
                 <p>
@@ -49,7 +48,7 @@ export default function BlogPost() {
 
                 <h2>Embracing the Full-Stack Journey</h2>
                 <p>
-                  Learning <span className="page-highlight">HTML</span> and <span className="page-highlight">CSS</span> felt like learning a new language — 
+                  Learning <span className="page-highlight">HTML</span> and <span className="page-highlight">CSS</span> felt like learning a new language
                   one that allowed me to paint on the digital canvas. But it was <span className="page-highlight">JavaScript</span> that truly opened doors. 
                   Suddenly, my static pages could respond to user interactions, fetch data, and create dynamic experiences.
                 </p>
@@ -61,8 +60,7 @@ export default function BlogPost() {
                 </p>
 
                 <blockquote className="post-quote">
-                  "The best part about being a young developer is that you approach problems without preconceived limitations. 
-                  Every challenge is an opportunity to learn something new."
+                  "I used to hate this.."
                 </blockquote>
 
                 <h2>Balancing School and Development</h2>
@@ -74,18 +72,11 @@ export default function BlogPost() {
                   while still finding time to code and work on projects.
                 </p>
 
-                <p>
-                  The key has been treating both as complementary rather than competing interests. The 
-                  <span className="page-highlight">analytical thinking</span> I develop in mathematics directly improves my 
-                  <span className="page-highlight">algorithmic problem-solving</span>. The research skills I've honed for IB assignments 
-                  help me navigate technical documentation and learn new frameworks more effectively.
-                </p>
-
                 <h2>Real-World Experience: Tidal Tasks</h2>
                 <p>
                   Landing my role as <span className="page-highlight">Admin Developer</span> at 
                   <span className="page-highlight">Tidal Tasks AI</span> was a pivotal moment in my journey. 
-                  Working on a real product with real users taught me lessons no tutorial could provide:
+                  Working on a real startup with potential real users taught me lessons no tutorial could provide:
                 </p>
 
                 <ul className="post-list">
@@ -102,15 +93,6 @@ export default function BlogPost() {
                   tools, and paradigms emerging regularly. What excites me most is that there's always more to learn, 
                   more problems to solve, and more ways to make a positive impact through technology.
                 </p>
-
-                <p>
-                  My advice to other young developers is simple: <span className="page-highlight">start building</span>. 
-                  Don't wait until you feel "ready" — you'll never feel completely ready. 
-                  The best way to learn is by doing, failing, iterating, and improving. 
-                  Every project, no matter how small, teaches you something valuable about both 
-                  <span className="page-highlight">technical skills</span> and <span className="page-highlight">problem-solving</span>.
-                </p>
-
                 <div className="post-conclusion">
                   <p>
                     The journey from curious teenager to <span className="page-highlight">working developer</span> has been challenging, 
