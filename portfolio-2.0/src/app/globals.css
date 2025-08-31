@@ -11,35 +11,35 @@ html {
 
 /* CSS Custom Properties - Cozy Fire Theme */
 :root {
-  /* Dark Mode Colors (Default) */
-  --bg-primary: #1a1108;
-  --bg-secondary: #2d1f14;
-  --bg-tertiary: #3d2b1e;
-  --bg-card: rgba(45, 31, 20, 0.8);
-  --bg-card-hover: rgba(61, 43, 30, 0.9);
-  --bg-navbar: rgba(26, 17, 8, 0.9);
-  --bg-footer: rgba(26, 17, 8, 0.9);
+  /* Dark Mode Colors (Default) - More subtle warmth */
+  --bg-primary: #0f0d0a;
+  --bg-secondary: #1c1611;
+  --bg-tertiary: #2a201a;
+  --bg-card: rgba(28, 22, 17, 0.8);
+  --bg-card-hover: rgba(42, 32, 26, 0.9);
+  --bg-navbar: rgba(15, 13, 10, 0.9);
+  --bg-footer: rgba(15, 13, 10, 0.9);
   
-  /* Text Colors */
-  --text-primary: #fef4e6;
-  --text-secondary: #e4c5a3;
-  --text-muted: #c4a478;
+  /* Text Colors - Softer warm tones */
+  --text-primary: #f5f1ea;
+  --text-secondary: #d4c4a8;
+  --text-muted: #a89584;
   --text-white: #ffffff;
   
-  /* Brand Colors */
-  --primary: #f97316;
-  --primary-hover: #ea580c;
-  --secondary: #eab308;
-  --secondary-hover: #ca8a04;
-  --accent: #dc2626;
-  --accent-hover: #b91c1c;
+  /* Brand Colors - Slightly muted but still warm */
+  --primary: #e86b13;
+  --primary-hover: #d45208;
+  --secondary: #d4a017;
+  --secondary-hover: #b8850c;
+  --accent: #c53030;
+  --accent-hover: #a02727;
   
-  /* UI Colors */
-  --border: rgba(249, 115, 22, 0.2);
-  --border-hover: rgba(249, 115, 22, 0.4);
-  --border-strong: rgba(249, 115, 22, 0.5);
-  --shadow: rgba(220, 38, 38, 0.1);
-  --shadow-hover: rgba(220, 38, 38, 0.2);
+  /* UI Colors - More subtle */
+  --border: rgba(232, 107, 19, 0.15);
+  --border-hover: rgba(232, 107, 19, 0.3);
+  --border-strong: rgba(232, 107, 19, 0.4);
+  --shadow: rgba(197, 48, 48, 0.08);
+  --shadow-hover: rgba(197, 48, 48, 0.15);
   
   /* Status Colors */
   --success: #10b981;
@@ -628,7 +628,7 @@ body {
 .tech-tag,
 .skill-tag,
 .post-tag {
-  background: rgba(249, 115, 22, 0.2);
+  background: rgba(232, 107, 19, 0.15);
   color: var(--primary);
   padding: 0.25rem 0.75rem;
   border-radius: 9999px;
@@ -708,7 +708,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(249, 115, 22, 0.2);
+  background: rgba(232, 107, 19, 0.15);
   border-radius: 50%;
   color: var(--primary);
 }
@@ -794,7 +794,7 @@ body {
 
 .filter-tab:hover,
 .filter-tab.active {
-  background: rgba(249, 115, 22, 0.2);
+  background: rgba(232, 107, 19, 0.15);
   border-color: var(--border-hover);
   color: var(--primary);
 }
@@ -844,7 +844,7 @@ body {
 
 .post-read-time {
   padding: 0.25rem 0.75rem;
-  background: rgba(249, 115, 22, 0.2);
+  background: rgba(232, 107, 19, 0.15);
   border-radius: 1rem;
   font-size: 0.8rem;
   color: var(--primary);
