@@ -51,11 +51,9 @@ export default function About() {
 
                 <h3>Beyond the Classroom</h3>
                 <p>
-                  I'm passionate about <span className="page-highlight">sustainable innovation</span>, 
-                  <span className="page-highlight">social entrepreneurship</span>, and finding ways technology can address 
-                  <span className="page-highlight">global challenges</span>. Whether it's through developing solutions, 
-                  participating in <span className="page-highlight">events</span>, or engaging in 
-                  <span className="page-highlight">community outreach</span>, I believe in using my skills for positive impact.
+                  I'm passionate about <span className="page-highlight"> playing sports</span>, 
+                  <span className="page-highlight">working out</span>, and finding ways to pass time efficiently. Whether it's through developing solutions, 
+                  participating in <span className="page-highlight">events</span>, or engaging in<span className="page-highlight">community outreach</span>, I believe in using my skills for positive impact.
                 </p>
               </div>
 

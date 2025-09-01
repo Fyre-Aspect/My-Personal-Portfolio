@@ -7,7 +7,7 @@ export default function ProjectsPage() {
       title: "Tidal Tasks",
       description: "A comprehensive task management platform with real-time collaboration, advanced project tracking, and team productivity features. Built with modern web technologies for seamless user experience and optimal performance.",
       role: "Admin Developer",
-      technologies: ["React", "Node.js", "TypeScript", "MongoDB", "Socket.io", "JWT"],
+      technologies: ["React", "Node.js", "TypeScript", "Tailwind CSS", "Gemini API", "Firebase"],
       features: [
         "Real-time task collaboration",
         "Advanced project analytics",
