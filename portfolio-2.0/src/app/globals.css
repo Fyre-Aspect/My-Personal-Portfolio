@@ -2071,3 +2071,299 @@ body {
 .mobile-nav-links a.active:hover {
   background: rgba(232, 107, 19, 0.15);
 }
+
+/* Project Status Styles - Add these to your existing CSS */
+
+/* Project Status Section */
+.project-status {
+  margin-bottom: 1rem;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+}
+
+/* Status Badge Variants */
+.status-badge.in-progress {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(245, 158, 11, 0.2));
+  color: var(--warning);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.status-badge.prototyping {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(37, 99, 235, 0.2));
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.status-badge.complete---no-demo-available {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.2));
+  color: var(--success);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+/* Status Badge Hover Effects */
+.status-badge:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.status-badge.in-progress:hover {
+  box-shadow: 0 2px 12px rgba(251, 191, 36, 0.4);
+}
+
+.status-badge.prototyping:hover {
+  box-shadow: 0 2px 12px rgba(59, 130, 246, 0.4);
+}
+
+.status-badge.complete---no-demo-available:hover {
+  box-shadow: 0 2px 12px rgba(16, 185, 129, 0.4);
+}
+
+/* Enhanced Project Header */
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.project-header .project-title {
+  flex: 1;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-white);
+  line-height: 1.3;
+}
+
+.project-role {
+  background: var(--gradient-accent);
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.project-role:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px var(--shadow-hover);
+}
+
+/* Updated project links to handle missing buttons */
+.project-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.project-links:empty {
+  display: none;
+}
+
+/* Improved spacing for projects without links */
+.project-showcase-card .project-content > *:last-child {
+  margin-bottom: 0;
+}
+
+/* Enhanced hover effects for project cards */
+.project-showcase-card:hover .project-title {
+  background: var(--gradient-primary);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease;
+}
+
+.project-showcase-card:hover .status-badge {
+  transform: scale(1.1);
+}
+
+.project-showcase-card:hover .project-role {
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px var(--shadow-hover);
+}
+
+/* Mobile responsive adjustments for status badges */
+@media (max-width: 768px) {
+  .project-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .project-header .project-title {
+    order: 1;
+  }
+  
+  .project-role {
+    order: 2;
+    align-self: flex-start;
+  }
+  
+  .project-status {
+    order: 3;
+    width: 100%;
+  }
+  
+  .status-badge {
+    width: 100%;
+    text-align: center;
+    padding: 0.75rem 1rem;
+  }
+  
+  .project-links {
+    flex-direction: column;
+  }
+  
+  .project-link {
+    text-align: center;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-header .project-title {
+    font-size: 1.25rem;
+  }
+  
+  .project-role {
+    font-size: 0.7rem;
+    padding: 0.35rem 0.8rem;
+  }
+  
+  .status-badge {
+    font-size: 0.8rem;
+    padding: 0.6rem 1rem;
+  }
+}
+
+/* Enhanced project image container with proper fitting */
+.project-image {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  width: 100%;
+  height: 600px;
+  background: var(--bg-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+}
+
+.project-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+  z-index: 1;
+}
+
+.project-showcase-card:hover .project-image::before {
+  left: 100%;
+}
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  transition: all 0.3s ease;
+  border-radius: 0.5rem;
+  background: var(--bg-primary);
+  padding: 0.5rem;
+}
+
+.project-showcase-card:hover .project-image img {
+  transform: scale(1.05);
+}
+
+/* Alternative styling for different image types */
+.project-image.cover img {
+  object-fit: cover;
+  padding: 0;
+}
+
+.project-image.fill img {
+  object-fit: fill;
+}
+
+/* Responsive image adjustments */
+@media (max-width: 768px) {
+  .project-image {
+    height: 450px;
+  }
+  
+  .project-image img {
+    padding: 0.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-image {
+    height: 200px;
+  }
+}
+
+/* Enhanced tech tags for better visibility */
+.tech-tags .tech-tag {
+  background: rgba(232, 107, 19, 0.15);
+  color: var(--primary);
+  padding: 0.4rem 0.8rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(232, 107, 19, 0.2);
+}
+
+.tech-tags .tech-tag:hover {
+  background: rgba(232, 107, 19, 0.25);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(232, 107, 19, 0.3);
+}
+
+/* Light theme adjustments for new elements */
+[data-theme="light"] .status-badge.in-progress {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.3), rgba(245, 158, 11, 0.3));
+  border: 1px solid rgba(251, 191, 36, 0.4);
+}
+
+[data-theme="light"] .status-badge.prototyping {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(37, 99, 235, 0.3));
+  border: 1px solid rgba(59, 130, 246, 0.4);
+}
+
+[data-theme="light"] .status-badge.complete---no-demo-available {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(5, 150, 105, 0.3));
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+[data-theme="light"] .tech-tags .tech-tag {
+  background: rgba(194, 65, 12, 0.2);
+  border: 1px solid rgba(194, 65, 12, 0.3);
+}
+
+[data-theme="light"] .tech-tags .tech-tag:hover {
+  background: rgba(194, 65, 12, 0.3);
+  box-shadow: 0 2px 8px rgba(194, 65, 12, 0.3);
+}
