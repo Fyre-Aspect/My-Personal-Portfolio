@@ -88,6 +88,24 @@ export default function ProjectsPage() {
       image: "/tempsensor.png",
       status: null
     },
+
+        {
+      title: "Simon Says Game",
+      description: "An Arduino-based IoT built simon says game made for quicker reflexes and progressive difficulty.",
+      role: "IoT Developer",
+      technologies: ["Arduino", "C++", "Buttons", "Data Logging", "Serial Communication", "LED Lights"],
+      features: [
+        "Real-time data monitoring",
+        "Automated difficulty increase",
+        "difficulty calibration system",
+        "Serial data output",
+        "High Score tracking"
+      ],
+      liveUrl: null,
+      githubUrl: null,
+      image: "/Simon Says.gif",
+      status: null
+    },
     {
       title: "Arduino Calculator",
       description: "A functional calculator built with Arduino featuring a keypad interface and LCD display. Supports basic arithmetic operations with a clean user interface and responsive button interactions.",
