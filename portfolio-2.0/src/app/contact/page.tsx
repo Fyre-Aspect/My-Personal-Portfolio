@@ -109,17 +109,18 @@ export default function ContactPage() {
                         </a>
                       </div>
                     </div>
-
-                    <div className="contact-method">
-                      <div className="method-icon">🌐</div>
+                      <div className="contact-method">
+                      <div className="method-icon">📞</div>
                       <div>
-                        <h3>Website</h3>
-                        <a href="https://aamirtinwalapersonal-portfolio.vercel.app" target="_blank" rel="noopener noreferrer">
-                          Aamir Portfolio
+                        <h3>Phone</h3>
+                        <a href="tel:+1 2263390855" target="_blank" rel="noopener noreferrer">
+                          Call Me @ 226-339-0855
                         </a>
                       </div>
                     </div>
                   </div>
+
+                  
                 </div>
 
                 <div className="contact-form-container fade-in-up-delay-2">
