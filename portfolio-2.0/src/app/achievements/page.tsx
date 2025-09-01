@@ -1,4 +1,5 @@
 import Navigation from '../../components/Navigation'
+import Footer from '../../components/Footer'
 
 export default function Achievements() {
   const achievements = [
@@ -148,7 +149,10 @@ export default function Achievements() {
             </div>
           </div>
         </section>
+        
       </main>
+      <Footer />
     </>
+    
   )
 }

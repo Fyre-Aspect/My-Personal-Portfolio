@@ -1,4 +1,5 @@
 import Navigation from '../../components/Navigation'
+import Footer from '../../components/Footer'
 
 export default function ProjectsPage() {
   const projects = [
@@ -126,6 +127,7 @@ export default function ProjectsPage() {
           </div>
         </section>
       </main>
+      <Footer />
     </>
   )
 }
