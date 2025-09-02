@@ -52,21 +52,21 @@ export default function Hero() {
           {/* Main Heading */}
           <h1>Hi, I'm Aamir</h1>
           
-          {/* Typing Animation */}
+          {/* Typing Animation with theme colors */}
           <div className="typing-text fade-in-up-delay-1">
             <span>I'm a </span>
-            <span style={{ color: '#60a5fa', fontWeight: '600' }}>
+            <span className="highlight-text">
               {typedText}
               <span className="typing-cursor"></span>
             </span>
           </div>
           
-          {/* Description */}
+          {/* Description with highlighted keywords */}
           <p className="hero-description fade-in-up-delay-2">
-             At 16, I'm passionate about building projects that matter. 
-            As a high school student, I bring fresh perspectives to development while maintaining the same 
-            commitment to quality and continuous learning that drives me as a successful developer. Every project 
-            is an opportunity to grow and make a meaningful impact for me.
+            At <span className="highlight-keyword">16</span>, I'm passionate about building <span className="highlight-keyword">projects that matter</span>. 
+            As a <span className="highlight-keyword">high school student</span>, I bring <span className="highlight-keyword">fresh perspectives</span> to development while maintaining the same 
+            commitment to <span className="highlight-keyword">quality</span> and <span className="highlight-keyword">continuous learning</span> that drives me as a successful developer. Every project 
+            is an opportunity to <span className="highlight-keyword">grow</span> and make a <span className="highlight-keyword">meaningful impact</span> for me.
           </p>
           
           {/* CTA Buttons */}
