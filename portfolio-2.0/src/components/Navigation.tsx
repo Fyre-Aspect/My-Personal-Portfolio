@@ -2,12 +2,14 @@
 import { ThemeToggle } from './ThemeProvider'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isNavVisible, setIsNavVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
+  const pathname = usePathname()
 
   useEffect(() => {
     const controlNavbar = () => {
@@ -46,6 +48,25 @@ export default function Navigation() {
     setIsMenuOpen(false)
   }
 
+  // Helper function to check if a link is active
+  const isActiveLink = (href: string) => {
+    if (href === '/') {
+      return pathname === '/'
+    }
+    return pathname.startsWith(href)
+  }
+
+  // Navigation links data
+  const navLinks = [
+    { href: '/', label: 'Home' },
+    { href: '/about', label: 'About' },
+    { href: '/projects', label: 'Projects' },
+    { href: '/activities', label: 'Experiences' },
+    { href: '/achievements', label: 'Achievements' },
+    { href: '/blog', label: 'Blog' },
+    { href: '/contact', label: 'Contact' },
+  ]
+
   return (
     <nav className={`navbar ${!isNavVisible ? 'hidden' : ''} ${isScrolled ? 'scrolled' : ''}`}>
       <div className="nav-content">
@@ -67,14 +88,18 @@ export default function Navigation() {
         
         {/* Desktop Navigation */}
         <ul className="nav-links">
-            <li><Link href="/" onClick={closeMenu}>Home</Link></li>
-            <li><Link href="/about" onClick={closeMenu}>About</Link></li>
-            <li><Link href="/projects" onClick={closeMenu}>Projects</Link></li>
-            <li><Link href="/activities" onClick={closeMenu}>Experiences</Link></li>
-            <li><Link href="/achievements" onClick={closeMenu}>Achievements</Link></li>
-            <li><Link href="/blog" onClick={closeMenu}>Blog</Link></li>
-            <li><Link href="/contact" onClick={closeMenu}>Contact</Link></li>
-            <li><ThemeToggle /></li>
+          {navLinks.map((link) => (
+            <li key={link.href}>
+              <Link 
+                href={link.href} 
+                onClick={closeMenu}
+                className={isActiveLink(link.href) ? 'active' : ''}
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
+          <li><ThemeToggle /></li>
         </ul>
 
         {/* Mobile Hamburger Button */}
@@ -91,13 +116,17 @@ export default function Navigation() {
         {/* Mobile Navigation Menu */}
         <div className={`mobile-menu ${isMenuOpen ? 'open' : ''}`}>
           <ul className="mobile-nav-links">
-            <li><Link href="/" onClick={closeMenu}>Home</Link></li>
-            <li><Link href="/about" onClick={closeMenu}>About</Link></li>
-            <li><Link href="/projects" onClick={closeMenu}>Projects</Link></li>
-            <li><Link href="/activities" onClick={closeMenu}>Experiences</Link></li>
-            <li><Link href="/achievements" onClick={closeMenu}>Achievements</Link></li>
-            <li><Link href="/blog" onClick={closeMenu}>Blog</Link></li>
-            <li><Link href="/contact" onClick={closeMenu}>Contact</Link></li>
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link 
+                  href={link.href} 
+                  onClick={closeMenu}
+                  className={isActiveLink(link.href) ? 'active' : ''}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
             <li><ThemeToggle /></li>
           </ul>
         </div>
