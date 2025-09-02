@@ -55,3 +55,4 @@ export default function Footer() {
     </>
   )
 } // End of Footer component
+// End of Footer component
