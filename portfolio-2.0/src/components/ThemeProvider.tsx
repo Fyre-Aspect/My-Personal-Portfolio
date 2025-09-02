@@ -6,7 +6,7 @@ type Theme = 'dark' | 'light'
 
 interface ThemeContextType {
   theme: Theme
-  toggleTheme: () => void
+  toggleTheme: () => void //test
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
