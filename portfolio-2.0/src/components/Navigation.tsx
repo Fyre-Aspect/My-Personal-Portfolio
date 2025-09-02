@@ -14,11 +14,15 @@ export default function Navigation() {
   useEffect(() => {
     const controlNavbar = () => {
       const currentScrollY = window.scrollY
+      const scrollDifference = lastScrollY - currentScrollY
 
-      // Show navbar when scrolling up, hide when scrolling down
-      if (currentScrollY < lastScrollY || currentScrollY < 50) {
+      // Show navbar when scrolling up significantly (more than 100px) or near top
+      if (currentScrollY < 100) {
         setIsNavVisible(true)
-      } else {
+      } else if (scrollDifference > 100) {
+        setIsNavVisible(true)
+      } else if (scrollDifference < -50) {
+        // Hide when scrolling down more than 50px
         setIsNavVisible(false)
         setIsMenuOpen(false) // Close mobile menu when hiding navbar
       }
