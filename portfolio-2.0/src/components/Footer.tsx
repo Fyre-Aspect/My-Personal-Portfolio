@@ -13,7 +13,7 @@ export default function Footer() {
             <h2 className="section-title" style={{ marginBottom: '2rem' }}>Let's Connect</h2>
             
             <p className="footer-text" style={{ fontSize: '1.1rem', marginBottom: '2rem' }}>
-              Ready to collaborate on something amazing? Let's discuss how we can work together. Mail @ aamirtinwala7@gmail.com or connect on LinkedIn and GitHub!
+              Ready to collaborate on something amazing? Let's discuss how we can work together. Shoot a message in the <a href="./contact" className="project-link">contact</a> section
             </p>
             
             <div className="social-links">
@@ -54,4 +54,4 @@ export default function Footer() {
       </button>
     </>
   )
-}
+} 
