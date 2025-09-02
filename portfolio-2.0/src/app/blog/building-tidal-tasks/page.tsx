@@ -48,7 +48,7 @@ export default function BlogPost() {
                 </p>
 
                 <blockquote className="post-quote">
-                  "THe most challenging wasn't the actual programming, it was to mee the expectations of the Team. 💀"
+                  "The most challenging wasn't the actual programming, it was to meet the expectations of the Team. 💀"
                 </blockquote>
 
                 <h2>AI Integration Challenges</h2>
