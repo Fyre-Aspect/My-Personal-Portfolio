@@ -37,7 +37,7 @@ export function useTheme() {
   return context
 }
 
-// Theme Toggle Button Component
+
 export function ThemeToggle() {
   const { theme, toggleTheme } = useTheme()
 
