@@ -54,7 +54,4 @@ export default function Footer() {
       </button>
     </>
   )
-} // End of Footer component
-// End of Footer component
-
-// End of Footer component
+} 
