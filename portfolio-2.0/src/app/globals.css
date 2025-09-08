@@ -3344,41 +3344,104 @@ body {
 }
 
 
-/* TARGETED MOBILE FIXES - Add these specific rules to your globals.css */
+/* HOMEPAGE WITH PAGE-CONTENT WRAPPER - MOBILE FIXES */
 
-/* Fix mobile viewport and prevent horizontal scroll */
+/* Base mobile prevention rules */
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
 }
 
 body {
-  /* Prevent horizontal scroll on mobile */
   overflow-x: hidden;
   width: 100%;
+  min-width: 100%;
 }
 
-/* Ensure containers don't exceed viewport width */
-* {
+/* Ensure all elements use border-box */
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
-/* Navigation mobile fixes - don't change desktop behavior */
+/* Page content adjustments for homepage */
+.page-content {
+  padding-top: 6rem;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Hero section - remove extra top padding since page-content handles it */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  /* Remove top padding since page-content provides it */
+  padding: 2rem 0;
+  width: 100%;
+}
+
+/* Navigation container fixes */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: var(--bg-navbar);
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid var(--border);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(0);
+}
+
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Container width fixes */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* MOBILE SPECIFIC FIXES */
 @media (max-width: 768px) {
-  .nav-content {
-    padding: 0 1rem; /* Reduce padding on mobile */
-    width: 100%;
-    justify-content: space-between;
+  /* Page content mobile adjustment */
+  .page-content {
+    padding-top: 5rem; /* Slightly less for mobile */
   }
   
-  .logo-container {
-    flex-shrink: 1;
+  /* Navigation mobile fixes */
+  .nav-content {
+    padding: 0 1rem;
     min-width: 0;
-    max-width: calc(100% - 3rem); /* Leave space for hamburger */
+    gap: 0.5rem;
+  }
+  
+  /* Logo container - prevent overflow */
+  .logo-container {
+    flex: 1;
+    min-width: 0;
+    max-width: calc(100% - 3rem); /* Reserve space for hamburger */
+    overflow: hidden;
   }
   
   .logo {
-    font-size: 1.1rem; /* Smaller on mobile */
+    font-size: 1.1rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -3390,13 +3453,74 @@ body {
     flex-shrink: 0;
   }
   
+  /* Hamburger button - ensure it's always visible */
   .mobile-menu-btn {
-    flex-shrink: 0;
+    display: flex;
     width: 2rem;
     height: 2rem;
+    flex-shrink: 0;
+    margin-left: auto;
   }
   
-  /* Fix mobile menu positioning */
+  /* Hide desktop navigation */
+  .nav-links {
+    display: none;
+  }
+  
+  /* Hero adjustments */
+  .hero {
+    min-height: calc(100vh - 5rem); /* Account for smaller page-content padding */
+    padding: 1rem 0;
+  }
+  
+  .hero-content {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+  
+  .typing-text {
+    font-size: 1.1rem;
+  }
+  
+  .hero-description {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .profile-image {
+    width: 150px;
+    height: 150px;
+    max-width: 35vw;
+    max-height: 35vw;
+  }
+  
+  /* CTA buttons - stack vertically */
+  .hero-content > div:last-child {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+  
+  .cta-button {
+    width: 100% !important;
+    max-width: 280px !important;
+    padding: 1rem 1.5rem !important;
+    text-align: center;
+  }
+  
+  /* Container mobile padding */
+  .container {
+    padding: 0 1rem;
+  }
+  
+  /* Mobile menu fixes */
   .mobile-menu {
     position: fixed;
     top: 4.5rem;
@@ -3411,59 +3535,30 @@ body {
     z-index: 999;
     transform: translateX(100%);
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
   
   .mobile-menu.open {
     transform: translateX(0);
   }
-}
-
-/* Hero section mobile adjustments - preserve desktop centering */
-@media (max-width: 768px) {
-  .hero {
-    padding: 6rem 0 2rem; /* Add top padding for navbar */
-  }
   
-  .hero-content {
-    padding: 0 1rem;
+  .mobile-menu-overlay {
+    position: fixed;
+    top: 4.5rem;
+    left: 0;
     width: 100%;
-  }
-  
-  .hero h1 {
-    font-size: 2.5rem;
-    line-height: 1.2;
-  }
-  
-  .typing-text {
-    font-size: 1.1rem;
-  }
-  
-  .hero-description {
-    font-size: 1rem;
-  }
-  
-  .profile-image {
-    width: 150px;
-    height: 150px;
-  }
-  
-  /* Make CTA buttons stack on mobile */
-  .hero-content > div:last-child {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 1rem !important;
-    align-items: center !important;
-  }
-  
-  .cta-button {
-    width: 100% !important;
-    max-width: 280px !important;
-    text-align: center;
+    height: calc(100vh - 4.5rem);
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
   }
 }
 
 /* Very small screens */
 @media (max-width: 480px) {
+  .page-content {
+    padding-top: 4.5rem;
+  }
+  
   .nav-content {
     padding: 0 0.75rem;
   }
@@ -3482,6 +3577,10 @@ body {
     height: 1.8rem;
   }
   
+  .hero {
+    min-height: calc(100vh - 4.5rem);
+  }
+  
   .hero h1 {
     font-size: 2rem;
   }
@@ -3490,46 +3589,70 @@ body {
     font-size: 1rem;
   }
   
+  .hero-description {
+    font-size: 0.95rem;
+  }
+  
   .profile-image {
     width: 120px;
     height: 120px;
   }
   
   .container {
-    padding: 0 1rem;
+    padding: 0 0.75rem;
+  }
+  
+  .cta-button {
+    padding: 0.875rem 1.25rem !important;
+    font-size: 0.9rem;
   }
 }
 
-/* Fix viewport height issues on iOS */
-@supports (-webkit-appearance: none) {
+/* Ensure sections maintain proper width */
+.stats-section,
+.projects-section, 
+.extracurriculars-section {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Fix any remaining width issues */
+@media (max-width: 768px) {
+  .stats-section .container,
+  .projects-section .container,
+  .extracurriculars-section .container {
+    padding: 0 1rem;
+    width: 100%;
+  }
+  
+  .projects-grid,
+  .activities-grid,
+  .stats-grid {
+    width: 100%;
+  }
+}
+
+/* iOS Safari viewport fixes */
+@supports (-webkit-touch-callout: none) {
   .hero {
     min-height: -webkit-fill-available;
   }
 }
 
-/* Ensure mobile menu doesn't cause horizontal scroll */
-.mobile-menu-overlay {
-  position: fixed;
-  top: 4.5rem;
-  left: 0;
-  width: 100%;
-  height: calc(100vh - 4.5rem);
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 998;
-}
-
-/* Make sure all sections maintain proper spacing */
+/* Debug helper - remove after testing */
 @media (max-width: 768px) {
-  .stats-section,
-  .projects-section,
-  .extracurriculars-section {
-    padding-left: 0;
-    padding-right: 0;
+  .nav-content {
+    /* Uncomment to see navigation boundaries */
+    /* border: 1px solid red; */
   }
   
-  .stats-section .container,
-  .projects-section .container,
-  .extracurriculars-section .container {
-    padding: 0 1rem;
+  .logo-container {
+    /* Uncomment to see logo container boundaries */
+    /* border: 1px solid blue; */
+  }
+  
+  .mobile-menu-btn {
+    /* Uncomment to see hamburger button boundaries */
+    /* border: 1px solid green; */
   }
 }
