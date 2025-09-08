@@ -3662,3 +3662,65 @@ body {
   margin: 0 auto;
   text-align: center;
 }
+
+/* Logo container background styling - Add this to your existing CSS */
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  flex-shrink: 0;
+  margin-right: auto;
+  
+  /* New background styling */
+  background: var(--logo-bg);
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+  border: 1px solid var(--logo-border);
+}
+
+.logo-container:hover {
+  background: var(--logo-bg-hover);
+  border-color: var(--logo-border-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+/* Add these new CSS variables to your :root section */
+:root {
+  /* Existing variables... */
+  
+  /* Logo background colors - Dark mode */
+  --logo-bg: rgba(245, 245, 245, 0.377);
+  --logo-bg-hover: rgba(245, 245, 245, 0.616);
+  --logo-border: rgba(245, 245, 245, 0.1);
+  --logo-border-hover: rgba(232, 107, 19, 0.3);
+}
+
+/* Light mode logo background */
+[data-theme="light"] {
+  /* Existing light mode variables... */
+  
+  /* Logo background colors - Light mode */
+  --logo-bg: rgba(107, 114, 128, 0.1);
+  --logo-bg-hover: rgba(107, 114, 128, 0.15);
+  --logo-border: rgba(107, 114, 128, 0.15);
+  --logo-border-hover: rgba(194, 65, 12, 0.4);
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .logo-container {
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-container {
+    padding: 0.35rem 0.7rem;
+    border-radius: 0.5rem;
+  }
+}
