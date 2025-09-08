@@ -1,3 +1,5 @@
+// Add this to your Hero.tsx component
+
 'use client'
 
 import { useEffect, useState } from 'react'
@@ -15,6 +17,28 @@ export default function Hero() {
     "Engineering Enthusiast",
   ]
 
+  // Fix mobile viewport height issues
+  useEffect(() => {
+    const setVH = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+    
+    setVH();
+    window.addEventListener('resize', setVH);
+    window.addEventListener('orientationchange', setVH);
+    
+    // Also set on load for initial render
+    window.addEventListener('load', setVH);
+    
+    return () => {
+      window.removeEventListener('resize', setVH);
+      window.removeEventListener('orientationchange', setVH);
+      window.removeEventListener('load', setVH);
+    };
+  }, []);
+
+  // Typing animation effect
   useEffect(() => {
     const timeout = setTimeout(() => {
       const currentText = texts[currentIndex]
@@ -47,6 +71,10 @@ export default function Hero() {
             src="/Aamir Pic.jpg" 
             alt="Aamir Tinwala"
             className="profile-image"
+            loading="eager"
+            // Add explicit dimensions to prevent layout shift
+            width="200"
+            height="200"
           />
           
           {/* Main Heading */}

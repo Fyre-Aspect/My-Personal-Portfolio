@@ -15,6 +15,8 @@ export const metadata: Metadata = {
     description: 'Building digital experiences with modern technologies at 16',
     type: 'website',
   },
+  // Add proper viewport meta tag
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes',
 }
 
 export default function RootLayout({
@@ -25,14 +27,49 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Ensure proper viewport handling */}
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+        {/* Add font-display swap for better loading */}
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            @font-face {
+              font-family: 'Inter-fallback';
+              src: local('Arial'), local('Helvetica'), local('sans-serif');
+              ascent-override: 90%;
+              descent-override: 22%;
+              line-gap-override: 0%;
+              size-adjust: 107%;
+            }
+            
+            /* Prevent layout shifts during font loading */
+            body {
+              font-family: 'Inter-fallback', system-ui, -apple-system, sans-serif;
+            }
+            
+            .fonts-loaded body {
+              font-family: 'Inter', 'Inter-fallback', system-ui, -apple-system, sans-serif;
+            }
+          `
+        }} />
       </head>
       <body className={inter.className}>
         <ThemeProvider>
           {children}
         </ThemeProvider>
+        
+        {/* Add script to detect when fonts are loaded */}
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            if ('fonts' in document) {
+              document.fonts.ready.then(() => {
+                document.documentElement.classList.add('fonts-loaded');
+              });
+            }
+          `
+        }} />
       </body>
     </html>
   )
