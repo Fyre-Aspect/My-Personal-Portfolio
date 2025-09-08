@@ -3342,3 +3342,361 @@ body {
 .achievement-card:hover {
   animation: cardFloat 3s ease-in-out infinite;
 }
+
+
+/* CRITICAL MOBILE FIXES - Add these to your globals.css or replace existing rules */
+
+/* Ensure proper mobile viewport behavior */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: var(--gradient-bg);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background 0.3s ease, color 0.3s ease;
+  /* Fix mobile scrolling issues */
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  touch-action: manipulation;
+  width: 100%;
+  min-width: 100%;
+}
+
+/* Container fixes */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Navigation fixes */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: var(--bg-navbar);
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid var(--border);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(0);
+  box-sizing: border-box;
+}
+
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+/* Logo container mobile fixes */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  flex-shrink: 0;
+  max-width: 60%;
+  min-width: 0;
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  background: var(--gradient-primary);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* CRITICAL HOMEPAGE FIX - Hero section needs proper top spacing */
+.hero {
+  min-height: 100vh;
+  min-height: 100dvh; /* Better mobile support */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  /* IMPORTANT: Add top padding to prevent navbar overlap */
+  padding: 8rem 0 2rem;
+  width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.hero-content {
+  max-width: 800px;
+  width: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+/* Profile image mobile optimization */
+.profile-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin: 0 auto 2rem;
+  border: 4px solid var(--border-strong);
+  box-shadow: 0 0 30px var(--shadow-hover);
+  transition: all 0.3s ease;
+  object-fit: cover;
+  max-width: 40vw;
+  max-height: 40vw;
+}
+
+/* Typography mobile optimization */
+.hero h1 {
+  font-size: 4rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  background: var(--gradient-hero);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease-in-out infinite;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+.typing-text {
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  min-height: 2rem;
+  word-wrap: break-word;
+}
+
+.hero-description {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  margin-bottom: 3rem;
+  line-height: 1.8;
+  max-width: 100%;
+}
+
+/* Button optimization */
+.cta-button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  min-height: 44px;
+  min-width: 120px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Mobile breakpoints with important overrides */
+@media (max-width: 768px) {
+  /* Container mobile fixes */
+  .container {
+    padding: 0 1rem !important;
+  }
+  
+  .nav-content {
+    padding: 0 1rem !important;
+  }
+  
+  /* CRITICAL: Hero mobile adjustments */
+  .hero {
+    padding: 6rem 0 2rem !important;
+    min-height: calc(100vh - 4.5rem);
+    min-height: calc(100dvh - 4.5rem);
+  }
+  
+  /* Typography scaling */
+  .hero h1 {
+    font-size: 2.5rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  .typing-text {
+    font-size: 1.25rem !important;
+  }
+  
+  .hero-description {
+    font-size: 1rem !important;
+    margin-bottom: 2rem !important;
+  }
+  
+  .profile-image {
+    width: 150px !important;
+    height: 150px !important;
+    max-width: 35vw !important;
+    max-height: 35vw !important;
+  }
+  
+  /* Button stacking for mobile */
+  .hero-content > div:last-child {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+  
+  .cta-button {
+    width: 100% !important;
+    max-width: 280px !important;
+    padding: 1rem 1.5rem !important;
+  }
+  
+  /* Navigation mobile fixes */
+  .nav-links {
+    display: none;
+  }
+  
+  .mobile-menu-btn {
+    display: flex;
+  }
+  
+  .mobile-menu {
+    position: fixed;
+    top: 4.5rem;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: calc(100vh - 4.5rem);
+    height: calc(100dvh - 4.5rem);
+    background: var(--bg-navbar);
+    backdrop-filter: blur(15px);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 2rem 1rem;
+    z-index: 999;
+    transform: translateX(100%);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .mobile-menu.open {
+    transform: translateX(0);
+  }
+  
+  .logo {
+    font-size: 1.1rem !important;
+  }
+  
+  .logo-icon {
+    width: 2rem !important;
+    height: 2rem !important;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 2rem !important;
+  }
+  
+  .typing-text {
+    font-size: 1.1rem !important;
+  }
+  
+  .hero-description {
+    font-size: 0.95rem !important;
+  }
+  
+  .profile-image {
+    width: 120px !important;
+    height: 120px !important;
+    max-width: 30vw !important;
+    max-height: 30vw !important;
+  }
+  
+  .container {
+    padding: 0 0.75rem !important;
+  }
+  
+  .nav-content {
+    padding: 0 0.75rem !important;
+  }
+  
+  .logo {
+    font-size: 1rem !important;
+  }
+  
+  .logo-icon {
+    width: 1.75rem !important;
+    height: 1.75rem !important;
+  }
+  
+  .cta-button {
+    font-size: 0.9rem !important;
+    padding: 0.875rem 1.25rem !important;
+  }
+}
+
+/* Fix viewport height for iOS Safari */
+@media screen and (max-width: 768px) {
+  :root {
+    --vh: 1vh;
+  }
+  
+  .hero {
+    min-height: calc(var(--vh, 1vh) * 100);
+  }
+}
+
+/* Ensure all sections after hero have proper spacing */
+.stats-section,
+.projects-section,
+.extracurriculars-section {
+  position: relative;
+  z-index: 1;
+  background: var(--gradient-bg);
+}
+
+/* Fix any potential margin collapse issues */
+.hero + .stats-section {
+  margin-top: 0;
+}
+
+/* Ensure footer doesn't have layout issues */
+.footer {
+  background: var(--bg-footer);
+  padding: 3rem 0;
+  border-top: 1px solid var(--border);
+  position: relative;
+  z-index: 1;
+}
+
+/* Mobile menu overlay fix */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 4.5rem;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 4.5rem);
+  height: calc(100dvh - 4.5rem);
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+}
