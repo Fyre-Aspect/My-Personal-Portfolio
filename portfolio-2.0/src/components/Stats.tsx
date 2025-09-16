@@ -1,8 +1,8 @@
 export default function Stats() {
   const stats = [
     { number: '2+', label: 'Years Experience', description: 'Gained 100+ Volunteer Hours' },
-    { number: '20+', label: 'Projects Completed', description: 'Building Projects that Matter' },
-    { number: '50+', label: 'Commits', description: 'Github Repos' },
+    { number: '10+', label: 'Projects Completed', description: 'Building Projects that Matter' },
+    { number: '300+', label: 'Commits', description: 'Projects' },
     { number: '100%', label: 'Commitment', description: 'To continuous improvement' }
   ]
 
