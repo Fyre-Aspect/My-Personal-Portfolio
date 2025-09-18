@@ -27,7 +27,7 @@ export default function ActivitiesPage() {
         "Responsibility and compassion development",
         "Public communication skills"
       ],
-      image: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&h=300&fit=crop&crop=center"
+      image: "/KW.png"
     },
     {
       title: "Admin Developer - Tidal Tasks AI",
