@@ -50,7 +50,7 @@ export default function Achievements() {
           description: "The International Baccalaureate programme is developing my critical thinking, research skills, and global perspective while preparing me for university-level work",
           date: "2023-Present",
           icon: "🎓",
-          image: "https://www.ibo.org/globalassets/new-structure/icons-and-logos/images/ib-world-school-logo-1-colour.png",
+          image: "https://upload.wikimedia.org/wikipedia/commons/f/fd/IB_LOGO.png",
           growthAspect: "Intellectual Rigor"
         },
         {
@@ -93,7 +93,7 @@ export default function Achievements() {
         },
         {
           title: "Peer Mentoring in Programming",
-          description: "Teaching programming to some family friends and cousing has improved my communication skills and reinforced my own learning while helping others succeed",
+          description: "Teaching programming to some family friends and cousins has improved my communication skills and reinforced my own learning while helping others succeed",
           date: "2025",
           icon: "🤝",
           image: "https://www.liberty.edu/casas/wp-content/uploads/sites/25/2020/05/mentoring.jpg",
