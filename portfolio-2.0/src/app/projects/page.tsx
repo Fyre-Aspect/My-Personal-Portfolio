@@ -3,6 +3,7 @@ import Footer from '../../components/Footer'
 
 export default function ProjectsPage() {
   const projects = [
+
     {
       title: "Tidal Tasks",
       description: "A comprehensive task management platform with real-time collaboration, advanced project tracking, and team productivity features. Built with modern web technologies for seamless user experience and optimal performance.",
@@ -19,6 +20,25 @@ export default function ProjectsPage() {
       githubUrl: null,
       image: "/Tidal Tasks.png",
       status: null
+    },
+    {
+      title: "Lyra AI Tutor",
+      description: "An intelligent AI study companion built during Hack the Valley IX that revolutionizes group learning sessions. Lyra joins Discord voice calls to provide real-time assistance, keeps discussions focused, and automatically generates study materials. Built in 36 hours with the Gemini API to solve the chaos of group study sessions.",
+      role: "Full-Stack Developer & Team Lead",
+      technologies: ["Python", "Discord.py", "Gemini API", "Natural Language Processing", "Voice Recognition", "AI/ML"],
+      features: [
+        "Real-time voice Q&A and explanations",
+        "Intelligent focus tracking and redirection",
+        "Automatic summary generation",
+        "AI-powered note-taking system",
+        "Dynamic quiz creation from discussions",
+        "Multi-user voice channel support"
+      ],
+      liveUrl: "https://drive.google.com/file/d/13ddMZT3ef86wQq0UwaW_hvPqQTuHNiIc/view?usp=sharing",
+      githubUrl: "https://github.com/Fyre-Aspect/LyraTutorAI",
+      image: "Tutor Bot.png",
+      status: null,
+      demoLabel: "Watch Demo"
     },
     {
       title: "Personal Portfolio",
@@ -88,8 +108,7 @@ export default function ProjectsPage() {
       image: "/tempsensor.png",
       status: null
     },
-
-        {
+    {
       title: "Simon Says Game",
       description: "An Arduino-based IoT built simon says game made for quicker reflexes and progressive difficulty.",
       role: "IoT Developer",
@@ -230,7 +249,7 @@ export default function ProjectsPage() {
                             target={project.liveUrl === "/" ? "_self" : "_blank"}
                             rel={project.liveUrl === "/" ? "" : "noopener noreferrer"}
                           >
-                            {project.liveUrl === "/" ? "View Portfolio" : "Live Demo"} →
+                            {project.demoLabel || (project.liveUrl === "/" ? "View Portfolio" : "Live Demo")} →
                           </a>
                         )}
                         {project.githubUrl && (

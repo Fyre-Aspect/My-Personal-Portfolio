@@ -91,13 +91,16 @@ export default function Achievements() {
           image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToHrK9W35tl3XoMbG1gJVMzdwmWowztb-jYQ&s",
           growthAspect: "Empathy Development"
         },
+
         {
-          title: "Peer Mentoring in Programming",
-          description: "Teaching programming to some family friends and cousins has improved my communication skills and reinforced my own learning while helping others succeed",
+          title: "Hack the Valley IX - Lyra AI Study Bot",
+          description: "36 hours of intense development at my first hackathon resulted in Lyra, an AI Discord bot that revolutionizes group study sessions. Working with the Gemini API, our team built a voice-enabled study companion that answers questions in real-time, tracks focus, and generates automatic summaries and quizzes—transforming chaotic study calls into productive learning experiences",
           date: "2025",
-          icon: "🤝",
-          image: "https://www.liberty.edu/casas/wp-content/uploads/sites/25/2020/05/mentoring.jpg",
-          growthAspect: "Leadership Skills"
+          icon: "🤖",
+          image: "/Lyra Bot.jpg",
+          growthAspect: "Innovation & Teamwork",
+          link: "https://www.linkedin.com/feed/update/urn:li:activity:7381078715910479872",
+          github: "https://github.com/Fyre-Aspect/LyraTutorAI"
         },
         {
           title: "University of Waterloo Internship",
