@@ -11,7 +11,7 @@ export default function Achievements() {
           title: "Admin Developer at Tidal Tasks AI",
           description: "Leading administrative systems development taught me professional coding standards, project management, and how to contribute meaningfully to a tech startup as a student",
           date: "2025-Present",
-          icon: "💻",
+          icon: "",
           image: "/Tidal Tasks.png",
           growthAspect: "Professional Development"
         },
@@ -19,7 +19,7 @@ export default function Achievements() {
           title: "Full-Stack Portfolio Development",
           description: "Creating this portfolio from scratch using Next.js and TypeScript enhanced my problem-solving abilities and gave me confidence in modern web development",
           date: "2025-Present",
-          icon: "🌐",
+          icon: "",
           image: "/FullStack.png",
           growthAspect: "Self-Directed Learning"
         },
@@ -27,7 +27,7 @@ export default function Achievements() {
           title: "Hardware Programming with Arduino",
           description: "Developing IoT sensors using C++ expanded my technical horizons beyond web development and taught me how software interfaces with physical hardware",
           date: "2025-Present",
-          icon: "⚡",
+          icon: "",
           image: "/Arduino Workshop.jpg",
           growthAspect: "Technical Versatility"
         },
@@ -35,7 +35,7 @@ export default function Achievements() {
           title: "HTML Completion Course",
           description: "Mastering HTML fundamentals provided the foundation for all my web development work and taught me the importance of semantic, accessible code",
           date: "2024",
-          icon: "📄",
+          icon: "",
           image: "/HTML.png",
           growthAspect: "Foundation Building"
         }
@@ -49,7 +49,7 @@ export default function Achievements() {
           title: "IB Programme Candidate",
           description: "The International Baccalaureate programme is developing my critical thinking, research skills, and global perspective while preparing me for university-level work",
           date: "2023-Present",
-          icon: "🎓",
+          icon: "",
           image: "https://upload.wikimedia.org/wikipedia/commons/f/fd/IB_LOGO.png",
           growthAspect: "Intellectual Rigor"
         },
@@ -57,7 +57,7 @@ export default function Achievements() {
           title: "Grade 11 Academic Excellence",
           description: "Maintaining high academic standards while pursuing extracurricular projects has taught me time management and how to balance multiple priorities effectively",
           date: "Present",
-          icon: "📚",
+          icon: "",
           image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpEXBqCiAYGMs1pJQCqCctsmF-i92_Thi5cg&s",
           growthAspect: "Time Management"
         },
@@ -65,7 +65,7 @@ export default function Achievements() {
           title: "Mathematica Competition 2019",
           description: "Participating in this prestigious mathematics competition at a young age sparked my love for problem-solving and analytical thinking",
           date: "2019",
-          icon: "🧮",
+          icon: "",
           image: "/Mathmatica.jpg",
           growthAspect: "Early Achievement"
         },
@@ -73,7 +73,7 @@ export default function Achievements() {
           title: "Gauss Math Competition Distinction",
           description: "Earning distinction in the Gauss Mathematics Competition validated my mathematical abilities and encouraged me to pursue STEM subjects more seriously",
           date: "2023",
-          icon: "🏆",
+          icon: "",
           image: "/Gauss Math.jpg",
           growthAspect: "Academic Recognition"
         }
@@ -91,12 +91,11 @@ export default function Achievements() {
           image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToHrK9W35tl3XoMbG1gJVMzdwmWowztb-jYQ&s",
           growthAspect: "Empathy Development"
         },
-
         {
           title: "Hack the Valley IX - Lyra AI Study Bot",
           description: "36 hours of intense development at my first hackathon resulted in Lyra, an AI Discord bot that revolutionizes group study sessions. Working with the Gemini API, our team built a voice-enabled study companion that answers questions in real-time, tracks focus, and generates automatic summaries and quizzes—transforming chaotic study calls into productive learning experiences",
           date: "2025",
-          icon: "🤖",
+          icon: "",
           image: "/Lyra Bot.jpg",
           growthAspect: "Innovation & Teamwork",
           link: "https://www.linkedin.com/feed/update/urn:li:activity:7381078715910479872",
@@ -106,7 +105,7 @@ export default function Achievements() {
           title: "University of Waterloo Internship",
           description: "Conducting soil analysis research exposed me to university-level scientific work and taught me proper research methodology and data analysis",
           date: "2024-Present",
-          icon: "🔬",
+          icon: "",
           image: "/UW Pic 2.jpg",
           growthAspect: "Research Experience"
         },
@@ -114,7 +113,7 @@ export default function Achievements() {
           title: "Community Project Development",
           description: "Working on local technology initiatives has shown me how programming skills can directly benefit my community and solve real problems",
           date: "2023",
-          icon: "🌟",
+          icon: "",
           image: "https://www.qodo.ai/wp-content/uploads/2025/02/Top-10-Developer-Communities-You-Should-Explore-1-1024x687.png",
           growthAspect: "Social Impact"
         }
@@ -128,7 +127,7 @@ export default function Achievements() {
           title: "Badminton Falcon Tournament - 4th Place",
           description: "Competing at tournament level taught me how to perform under pressure, work with a doubles partner, and handle both victories and defeats gracefully",
           date: "2024",
-          icon: "🏸",
+          icon: "",
           image: "/Falcon Badminton.jpg",
           growthAspect: "Competitive Spirit"
         },
@@ -136,7 +135,7 @@ export default function Achievements() {
           title: "WCCSAA Badminton - 5th Place",
           description: "Regional competition experience showed me the value of consistent practice, team support, and representing my school with pride",
           date: "2025",
-          icon: "🥉",
+          icon: "",
           image: "/wcssaa.png",
           growthAspect: "Team Representation"
         },
@@ -144,7 +143,7 @@ export default function Achievements() {
           title: "Swimming Certification Completion",
           description: "Achieving all swimming levels developed my persistence, physical fitness, and water safety skills while building confidence in challenging myself",
           date: "2024",
-          icon: "🏊",
+          icon: "",
           image: "/Swimming.jpg",
           growthAspect: "Personal Achievement"
         },
@@ -152,7 +151,7 @@ export default function Achievements() {
           title: "TDESSAA Cross Country Participant",
           description: "Training for and competing in cross country taught me mental toughness, goal-setting, and how individual effort contributes to team success",
           date: "2022-2023",
-          icon: "🏃",
+          icon: "",
           image: "/Cross Country.jpg",
           growthAspect: "Mental Resilience"
         }
@@ -191,9 +190,11 @@ export default function Achievements() {
                             alt={achievement.title}
                             className="card-image"
                           />
-                          <div className="image-overlay">
-                            <div className="achievement-icon">{achievement.icon}</div>
-                          </div>
+                          {achievement.icon && (
+                            <div className="image-overlay">
+                              <div className="achievement-icon">{achievement.icon}</div>
+                            </div>
+                          )}
                         </div>
                         
                         <div className="achievement-content">
@@ -207,6 +208,18 @@ export default function Achievements() {
                           <div className="achievement-footer">
                             <span className="achievement-date">{achievement.date}</span>
                           </div>
+                          {achievement.link && (
+                            <div className="achievement-links">
+                              <a 
+                                href={achievement.link} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="project-link"
+                              >
+                                LinkedIn Post →
+                              </a>
+                            </div>
+                          )}
                         </div>
                       </div>
                     ))}

@@ -2233,7 +2233,10 @@ body {
   .project-link {
     text-align: center;
     width: 100%;
-  }
+    padding: 2rem 0;
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
 }
 
 @media (max-width: 480px) {
