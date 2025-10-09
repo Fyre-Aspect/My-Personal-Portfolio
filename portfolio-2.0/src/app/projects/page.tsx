@@ -106,7 +106,7 @@ const projects = [
     ],
     liveUrl: null,
     githubUrl: "https://github.com/Fyre-Aspect/Gumball-Machine",
-    image: "/gumball machine.jpg",
+    image: "/Gumball Machine.jpg",
     status: null
   },
   {
