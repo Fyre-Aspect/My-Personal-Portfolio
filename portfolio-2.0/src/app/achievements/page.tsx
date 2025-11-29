@@ -124,6 +124,14 @@ export default function Achievements() {
       description: "Developing resilience, teamwork, and physical wellness through sports and personal challenges",
       items: [
         {
+          title: "7th place Tennis WCSAA boys Singles senior tennis",
+          description: "Achieved 7th place in the regional tournament with a 2-0 match record, demonstrating competitive spirit and athletic dedication.",
+          date: "2025",
+          icon: "",
+          image: "/wcssaa.png",
+          growthAspect: "Competitive Spirit"
+        },
+        {
           title: "Badminton Falcon Tournament - 4th Place",
           description: "Competing at tournament level taught me how to perform under pressure, work with a doubles partner, and handle both victories and defeats gracefully",
           date: "2024",

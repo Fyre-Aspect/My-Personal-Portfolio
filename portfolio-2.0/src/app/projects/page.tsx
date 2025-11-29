@@ -24,7 +24,7 @@ const projects = [
     title: "Lyra AI Tutor",
     description: "An intelligent AI study companion built during Hack the Valley IX that revolutionizes group learning sessions. Lyra joins Discord voice calls to provide real-time assistance, keeps discussions focused, and automatically generates study materials. Built in 36 hours with the Gemini API to solve the chaos of group study sessions.",
     role: "Full-Stack Developer & Team Lead",
-    technologies: ["Python", "Discord.py", "Gemini API", "Natural Language Processing", "Voice Recognition", "AI/ML"],
+    technologies: [, "Discord.py", "Gemini API", "Natural Language Processing", "Voice Recognition", "AI/ML"],
     features: [
       "Real-time voice Q&A and explanations",
       "Intelligent focus tracking and redirection",
@@ -59,10 +59,26 @@ const projects = [
     demoLabel: "View Demo"
   },
   {
+    title: "CatBot",
+    description: "A personalized easy tutor chatbot designed to teach hard concepts in simple terms. It links videos with similar concepts to enhance learning. Built to provide accessible education through AI.",
+    role: "Full-Stack Developer",
+    technologies: ["AI", "Chatbot", "Gemini API", "Next.js", "Firebase", "TypeScript", "Vercel"],
+    features: [
+      "Personalized tutoring",
+      "Simplified concept explanation",
+      "Video resource linking",
+      "Interactive chat interface"
+    ],
+    liveUrl: "https://catgpt-nine.vercel.app",
+    githubUrl: "https://github.com/Fyre-Aspect/CatBot",
+    image: "/CatBot.png",
+    status: null
+  },
+  {
     title: "Personal Portfolio",
     description: "This very website! A modern, responsive portfolio showcasing my development skills and projects. Built with Next.js and custom CSS, featuring smooth animations, optimized performance, and a cozy fire theme.",
     role: "Full-Stack Developer",
-    technologies: ["Next.js", "TypeScript", "CSS", "Vercel", "Git"],
+    technologies: ["Next.js", "TypeScript", "CSS", "Vercel", "Git", "Gemini API", "AI"],
     features: [
       "Fully responsive design",
       "Custom CSS animations",

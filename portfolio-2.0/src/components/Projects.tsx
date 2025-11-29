@@ -1,14 +1,6 @@
 export default function Projects() {
   const projects = [
     {
-      title: "Portfolio Website",
-      description: "This very website! Built to showcase my journey as a <span class='page-highlight'>young developer</span>, featuring <span class='page-highlight'>modern design principles</span>, <span class='page-highlight'>smooth animations</span>, and <span class='page-highlight'>responsive layouts</span>. Created to demonstrate my <span class='page-highlight'>technical skills</span> and passion for <span class='page-highlight'>web development</span> while still in <span class='page-highlight'>high school</span>.",
-      technologies: ["Next.js", "TypeScript", "CSS", "Vercel"],
-      liveUrl: "#",
-      githubUrl: "https://github.com/Fyre-Aspect/My-Personal-Portfolio",
-      motivation: "To establish my <span class='page-highlight'>digital presence</span> and showcase my growth as a developer"
-    },
-    {
       title: "Tidal Tasks",
       description: "A comprehensive <span class='page-highlight'>task management application</span> where I serve as the <span class='page-highlight'>admin developer</span>. This project showcases my ability to work with <span class='page-highlight'>modern web technologies</span> and <span class='page-highlight'>AI integration</span>. Built to help users organize their workflow efficiently with <span class='page-highlight'>intelligent task suggestions</span> and <span class='page-highlight'>real-time updates</span>.",
       technologies: ["React", "Gemini API", "Firebase", "TypeScript", "Tailwind CSS", "Vercel"],
@@ -18,12 +10,22 @@ export default function Projects() {
       role: "Admin Developer"
     },
     {
-      title: "Temperature Humidity Sensor",
-      description: "An <span class='page-highlight'>IoT project</span> that demonstrates my versatility beyond <span class='page-highlight'>web development</span>. Built a smart <span class='page-highlight'>environmental monitoring system</span> using <span class='page-highlight'>Arduino</span> and <span class='page-highlight'>C++</span>, showcasing my ability to work with <span class='page-highlight'>hardware</span> and <span class='page-highlight'>embedded systems programming</span> at a young age.",
-      technologies: ["C++", "Arduino", "DHT Sensor", "LCD Display", "Electronics"],
-      liveUrl: "#",
-      githubUrl: "https://github.com/Fyre-Aspect/Temperature-Humidity-Sensor",
-      motivation: "To explore <span class='page-highlight'>hardware programming</span> and understand the intersection of <span class='page-highlight'>software and physical systems</span>"
+      title: "Shurplus",
+      description: "An end-to-end <span class='page-highlight'>automated logistics platform</span> that acts like a 'Facebook Marketplace' for food rescue. Built to solve the 'Inventory Chaos' faced by food banks, Shurplus connects donors, volunteers, and food banks in one <span class='page-highlight'>AI-powered dashboard</span>.",
+      technologies: ["Next.js", "AI Agents", "Logistics Algorithms", "Computer Vision", "Barcode Scanning"],
+      liveUrl: "https://shurplus.vercel.app",
+      githubUrl: "https://github.com/Fyre-Aspect/ShurPlus-AI",
+      motivation: "To solve <span class='page-highlight'>food insecurity</span> through <span class='page-highlight'>intelligent automation</span> and efficient logistics.",
+      role: "Full-Stack Developer"
+    },
+    {
+      title: "Lyra AI Tutor",
+      description: "An <span class='page-highlight'>intelligent AI study companion</span> that revolutionizes group learning sessions. Lyra joins Discord voice calls to provide <span class='page-highlight'>real-time assistance</span>, keeps discussions focused, and automatically generates study materials.",
+      technologies: ["Python", "Discord.py", "Gemini API", "NLP", "Voice Recognition"],
+      liveUrl: "https://drive.google.com/file/d/13ddMZT3ef86wQq0UwaW_hvPqQTuHNiIc/view?usp=sharing",
+      githubUrl: "https://github.com/Fyre-Aspect/LyraTutorAI",
+      motivation: "To transform chaotic <span class='page-highlight'>group study sessions</span> into productive <span class='page-highlight'>learning experiences</span>.",
+      role: "Team Lead"
     }
   ]
 

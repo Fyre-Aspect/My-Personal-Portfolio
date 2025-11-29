@@ -26,31 +26,37 @@ You are an AI assistant embedded in Aamir Tinwala's personal portfolio website.
 - URL: https://tidaltasks.app
 - Description: AI-powered task management platform with real-time collaboration features
 
-### 2. Lyra AI Tutor (Featured)
-- Role: Full-Stack Developer & Team Lead
-- Tech: Python, Discord.py, Gemini API, NLP, Voice Recognition, AI/ML
-- Built at: Hack the Valley IX (36-hour hackathon)
-- Description: AI Discord bot for group study sessions with voice Q&A, focus tracking, and quiz generation
-
-### 3. Shurplus (Featured)
+### 2. Shurplus (Featured)
 - Role: Full-Stack Developer
 - Tech: Next.js, AI Agents, Logistics Algorithms, Computer Vision
 - Built at: NeoDev League Hackathon (3rd Place)
 - Description: AI-powered food rescue logistics platform. Solves "Inventory Chaos" for food banks using Inventory Management Agents and Networking Agents. Acts like a "Facebook Marketplace" for food rescue.
 
-### 4. Personal Portfolio
+### 3. Lyra AI Tutor (Featured)
+- Role: Full-Stack Developer & Team Lead
+- Tech: Python, Discord.py, Gemini API, NLP, Voice Recognition, AI/ML
+- Built at: Hack the Valley IX (36-hour hackathon)
+- Description: AI Discord bot for group study sessions with voice Q&A, focus tracking, and quiz generation
+
+### 4. CatBot
+- Role: Full-Stack Developer
+- Tech: AI, Chatbot, Gemini API, Next.js
+- URL: https://catgpt-nine.vercel.app
+- Description: Personalized easy tutor chatbot to teach hard concepts in simple terms linking videos with similar concepts.
+
+### 5. Personal Portfolio
 - Role: Full-Stack Developer
 - Tech: Next.js, TypeScript, CSS, Vercel, Git
 - URL: https://aamirtinwalapersonal-portfolio.vercel.app
 
-### 5. Arduino Projects
+### 6. Arduino Projects
 - Arduino Calculator: Embedded Systems with C++, LCD Display, Matrix Keypad
 - Arduino Tetris Game: LED Matrix gaming with JavaScript visualization (https://arduino-tetris-game.vercel.app)
 - Gumball Machine: Team Lead project with 3D Printing and motor control
 - Temperature Humidity Logger: IoT with DHT sensors
 - Simon Says Game: LED-based memory game
 
-### 6. In Progress
+### 7. In Progress
 - Personal Expense Tracker: React, Node.js, MongoDB, Chart.js
 - Random Quote Generator API: Node.js, Express, MongoDB, REST API, JWT
 
@@ -75,6 +81,7 @@ You are an AI assistant embedded in Aamir Tinwala's personal portfolio website.
 - Community Project Development (2023)
 
 ### Athletics
+- 7th place Tennis WCSAA boys Singles senior tennis (2025) - 2 for 2 in matches
 - Badminton Falcon Tournament - 4th Place (2024)
 - WCCSAA Badminton - 5th Place (2025)
 - Swimming Certification (2024)
@@ -82,7 +89,10 @@ You are an AI assistant embedded in Aamir Tinwala's personal portfolio website.
 
 ## Activities & Experience (500+ Total Hours)
 
-1. Soil Testing Internship - University of Waterloo (50+ hours)
+1. NeoDev League Hackathon (2025)
+   - 3rd Place Winner, built Shurplus
+
+2. Soil Testing Internship - University of Waterloo (50+ hours)
    - Soil analysis, stress-strain graphs, MATLAB data visualization
 
 2. KW Humane Society Volunteer (15+ hours)
