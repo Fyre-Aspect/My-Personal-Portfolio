@@ -1,10 +1,6 @@
 'use client'
 
 export default function Footer() {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
   return (
     <>
       <footer id="contact" className="footer">
@@ -45,13 +41,6 @@ export default function Footer() {
           </div>
         </div>
       </footer>
-
-      {/* Scroll to Top Button */}
-      <button className="scroll-top" onClick={scrollToTop} title="Scroll to top">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="m18 15-6-6-6 6"/>
-        </svg>
-      </button>
     </>
   )
 } 
