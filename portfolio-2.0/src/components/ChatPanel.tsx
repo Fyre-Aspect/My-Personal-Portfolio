@@ -12,9 +12,24 @@ interface ChatPanelProps {
 
 // Helper to parse navigation tag
 const parseMessageContent = (content: string) => {
-  const navMatch = content.match(/{{BUTTON:\s*([^}]+)}}/);
-  const cleanContent = content.replace(/{{BUTTON:\s*[^}]+}}/, '').trim();
-  return { cleanContent, navPath: navMatch ? navMatch[1].trim() : null };
+  const buttonMatch = content.match(/{{BUTTON:\s*([^}]+)}}/);
+  const redirectMatch = content.match(/{{REDIRECT:\s*([^}]+)}}/);
+  
+  let cleanContent = content;
+  let navPath = null;
+  let isAuto = false;
+
+  if (buttonMatch) {
+    cleanContent = content.replace(/{{BUTTON:\s*[^}]+}}/, '').trim();
+    navPath = buttonMatch[1].trim();
+    isAuto = false;
+  } else if (redirectMatch) {
+    cleanContent = content.replace(/{{REDIRECT:\s*[^}]+}}/, '').trim();
+    navPath = redirectMatch[1].trim();
+    isAuto = true;
+  }
+
+  return { cleanContent, navPath, isAuto };
 };
 
 export default function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
@@ -34,6 +49,19 @@ export default function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
   const [hasStarted, setHasStarted] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const lastProcessedMessageId = useRef<string | null>(null);
+
+  // Handle auto-redirects
+  useEffect(() => {
+    const lastMessage = messages[messages.length - 1];
+    if (lastMessage?.role === 'assistant' && lastMessage.id !== lastProcessedMessageId.current) {
+      const { navPath, isAuto } = parseMessageContent(lastMessage.content);
+      if (isAuto && navPath) {
+        lastProcessedMessageId.current = lastMessage.id;
+        router.push(navPath);
+      }
+    }
+  }, [messages, router]);
 
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
@@ -91,8 +119,8 @@ export default function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
       {/* Header */}
       <div className="chat-header">
         <div className="chat-header__info">
-          <div className="chat-header__avatar">
-            <span>AT</span>
+          <div className="chat-header__avatar" style={{ background: 'transparent', border: 'none', boxShadow: 'none' }}>
+            <img src="/favicon.ico" alt="AI" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
           </div>
           <div className="chat-header__text">
             <h3 className="chat-header__title">Aamir&apos;s AI Assistant</h3>
@@ -238,15 +266,15 @@ export default function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
                 </div>
               )}
               {messages.map((message) => {
-                const { cleanContent, navPath } = parseMessageContent(message.content);
+                const { cleanContent, navPath, isAuto } = parseMessageContent(message.content);
                 return (
                   <div
                     key={message.id}
                     className={`chat-message chat-message--${message.role}`}
                   >
                     {message.role === 'assistant' && (
-                      <div className="chat-message__avatar">
-                        <span>AT</span>
+                      <div className="chat-message__avatar" style={{ background: 'transparent', border: 'none', boxShadow: 'none' }}>
+                        <img src="/favicon.ico" alt="AI" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                       </div>
                     )}
                     <div className="chat-message__bubble">
@@ -256,7 +284,7 @@ export default function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
                           __html: cleanContent || '<span class="chat-typing"><span></span><span></span><span></span></span>' 
                         }}
                       />
-                      {navPath && (
+                      {navPath && !isAuto && (
                         <button
                           className="chat-nav-btn"
                           onClick={() => {

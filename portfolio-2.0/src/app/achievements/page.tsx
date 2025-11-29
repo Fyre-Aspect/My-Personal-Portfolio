@@ -183,7 +183,11 @@ export default function Achievements() {
                   
                   <div className="achievements-grid">
                     {category.items.map((achievement, achievementIndex) => (
-                      <div key={achievementIndex} className="achievement-card">
+                      <div 
+                        key={achievementIndex} 
+                        className="achievement-card"
+                        id={achievement.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
+                      >
                         <div className="achievement-image">
                           <img 
                             src={achievement.image} 

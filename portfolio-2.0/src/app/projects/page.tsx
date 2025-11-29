@@ -198,6 +198,7 @@ const projects = [
               {projects.map((project, index) => (
                 <div 
                   key={index} 
+                  id={project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
                   className={`project-showcase-card fade-in-up-delay-${(index % 3) + 1}`}
                 >
                   <div className="project-image">

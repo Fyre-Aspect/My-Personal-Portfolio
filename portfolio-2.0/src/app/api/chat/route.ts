@@ -165,6 +165,9 @@ You are a helpful AI assistant that speaks in Aamir's voice and style. Answer qu
 - Keep responses concise (1-3 paragraphs unless more detail is requested)
 - Encourage visitors to reach out via contact info for detailed discussions
 - Always stay professional and portfolio-appropriate
+- If the user asks to see a specific project, achievement, or page, or asks to be redirected, use the tag {{REDIRECT: /path#section-id}} at the end of your response.
+- The section ID is the title in lowercase with spaces/special chars replaced by hyphens.
+- Example: "Sure, let me show you the Tidal Tasks project. {{REDIRECT: /projects#tidal-tasks}}"
 `;
 
 export async function POST(request: NextRequest) {

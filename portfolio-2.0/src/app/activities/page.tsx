@@ -136,11 +136,12 @@ export default function ActivitiesPage() {
               </p>
             </div>
 
-            <div className="activities-showcase">
+            <div className="activities-grid">
               {activities.map((activity, index) => (
                 <div 
                   key={index} 
-                  className={`activity-showcase-card fade-in-up-delay-${(index % 3) + 1}`}
+                  id={activity.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
+                  className={`activity-card fade-in-up-delay-${(index % 3) + 1}`}
                 >
                   <div className="activity-image">
                     <img 
