@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect, FormEvent, KeyboardEvent } from 'react';
+import { useRouter } from 'next/navigation';
 import { useChat } from '@/hooks/useChat';
 import { ChatMode } from '@/types/chat';
 
@@ -9,7 +10,15 @@ interface ChatPanelProps {
   onClose: () => void;
 }
 
+// Helper to parse navigation tag
+const parseMessageContent = (content: string) => {
+  const navMatch = content.match(/{{BUTTON:\s*([^}]+)}}/);
+  const cleanContent = content.replace(/{{BUTTON:\s*[^}]+}}/, '').trim();
+  return { cleanContent, navPath: navMatch ? navMatch[1].trim() : null };
+};
+
 export default function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
+  const router = useRouter();
   const {
     messages,
     mode,
@@ -228,29 +237,49 @@ export default function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
                   <p>Ask me anything about Aamir&apos;s work, projects, or experience!</p>
                 </div>
               )}
-              {messages.map((message) => (
-                <div
-                  key={message.id}
-                  className={`chat-message chat-message--${message.role}`}
-                >
-                  {message.role === 'assistant' && (
-                    <div className="chat-message__avatar">
-                      <span>AT</span>
-                    </div>
-                  )}
-                  <div className="chat-message__bubble">
-                    <p className="chat-message__text">
-                      {message.content || (
-                        <span className="chat-typing">
-                          <span></span>
-                          <span></span>
-                          <span></span>
-                        </span>
+              {messages.map((message) => {
+                const { cleanContent, navPath } = parseMessageContent(message.content);
+                return (
+                  <div
+                    key={message.id}
+                    className={`chat-message chat-message--${message.role}`}
+                  >
+                    {message.role === 'assistant' && (
+                      <div className="chat-message__avatar">
+                        <span>AT</span>
+                      </div>
+                    )}
+                    <div className="chat-message__bubble">
+                      <p 
+                        className="chat-message__text"
+                        dangerouslySetInnerHTML={{ 
+                          __html: cleanContent || '<span class="chat-typing"><span></span><span></span><span></span></span>' 
+                        }}
+                      />
+                      {navPath && (
+                        <button
+                          className="chat-nav-btn"
+                          onClick={() => {
+                            router.push(navPath);
+                            // Trigger next step
+                            const nextStepMap: Record<string, string> = {
+                              '/projects': "I'm ready to see the projects.",
+                              '/activities': "I'm ready to see the experiences.",
+                              '/achievements': "I'm ready to see the achievements.",
+                              '/contact': "I'm ready to see the contact info.",
+                              '/': "Thanks for the tour!"
+                            };
+                            const msg = nextStepMap[navPath] || "Continue tour.";
+                            sendMessage(msg);
+                          }}
+                        >
+                          Continue Tour →
+                        </button>
                       )}
-                    </p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
               {error && (
                 <div className="chat-error">
                   <p>{error}</p>

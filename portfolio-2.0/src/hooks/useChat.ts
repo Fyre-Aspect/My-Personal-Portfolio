@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback, useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import { ChatMessage, ChatMode, createMessage } from '@/types/chat';
 
 interface UseChatReturn {
@@ -15,6 +16,7 @@ interface UseChatReturn {
 }
 
 export function useChat(): UseChatReturn {
+  const router = useRouter();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [mode, setModeState] = useState<ChatMode>('chat');
   const [isLoading, setIsLoading] = useState(false);
