@@ -8,6 +8,14 @@ export default function Achievements() {
       description: "Building foundational programming skills and real-world development experience",
       items: [
         {
+          title: "NeoDev League Hackathon - 3rd Place",
+          description: "Representing Cameron Heights, our team secured 3rd place by building Shurplus, an AI-powered logistics platform for food rescue. We tackled the problem of 'Inventory Chaos' using intelligent automation agents.",
+          date: "2025",
+          icon: "",
+          image: "/ShurPlus.png",
+          growthAspect: "Technical Innovation"
+        },
+        {
           title: "Admin Developer at Tidal Tasks AI",
           description: "Leading administrative systems development taught me professional coding standards, project management, and how to contribute meaningfully to a tech startup as a student",
           date: "2025-Present",
@@ -52,14 +60,6 @@ export default function Achievements() {
           icon: "",
           image: "https://upload.wikimedia.org/wikipedia/commons/f/fd/IB_LOGO.png",
           growthAspect: "Intellectual Rigor"
-        },
-        {
-          title: "Grade 11 Academic Excellence",
-          description: "Maintaining high academic standards while pursuing extracurricular projects has taught me time management and how to balance multiple priorities effectively",
-          date: "Present",
-          icon: "",
-          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpEXBqCiAYGMs1pJQCqCctsmF-i92_Thi5cg&s",
-          growthAspect: "Time Management"
         },
         {
           title: "Mathematica Competition 2019",
@@ -181,11 +181,11 @@ export default function Achievements() {
                     <p className="category-description">{category.description}</p>
                   </div>
                   
-                  <div className="achievements-grid">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                     {category.items.map((achievement, achievementIndex) => (
                       <div 
                         key={achievementIndex} 
-                        className="achievement-card"
+                        className="achievement-card text-sm"
                         id={achievement.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}
                       >
                         <div className="achievement-image">

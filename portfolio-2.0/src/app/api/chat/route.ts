@@ -32,25 +32,32 @@ You are an AI assistant embedded in Aamir Tinwala's personal portfolio website.
 - Built at: Hack the Valley IX (36-hour hackathon)
 - Description: AI Discord bot for group study sessions with voice Q&A, focus tracking, and quiz generation
 
-### 3. Personal Portfolio
+### 3. Shurplus (Featured)
+- Role: Full-Stack Developer
+- Tech: Next.js, AI Agents, Logistics Algorithms, Computer Vision
+- Built at: NeoDev League Hackathon (3rd Place)
+- Description: AI-powered food rescue logistics platform. Solves "Inventory Chaos" for food banks using Inventory Management Agents and Networking Agents. Acts like a "Facebook Marketplace" for food rescue.
+
+### 4. Personal Portfolio
 - Role: Full-Stack Developer
 - Tech: Next.js, TypeScript, CSS, Vercel, Git
 - URL: https://aamirtinwalapersonal-portfolio.vercel.app
 
-### 4. Arduino Projects
+### 5. Arduino Projects
 - Arduino Calculator: Embedded Systems with C++, LCD Display, Matrix Keypad
 - Arduino Tetris Game: LED Matrix gaming with JavaScript visualization (https://arduino-tetris-game.vercel.app)
 - Gumball Machine: Team Lead project with 3D Printing and motor control
 - Temperature Humidity Logger: IoT with DHT sensors
 - Simon Says Game: LED-based memory game
 
-### 5. In Progress
+### 6. In Progress
 - Personal Expense Tracker: React, Node.js, MongoDB, Chart.js
 - Random Quote Generator API: Node.js, Express, MongoDB, REST API, JWT
 
 ## Achievements
 
 ### Technical
+- NeoDev League Hackathon - 3rd Place (2025) - Built Shurplus
 - Admin Developer at Tidal Tasks AI (2025-Present)
 - Full-Stack Portfolio Development (2025-Present)
 - Hardware Programming with Arduino (2025-Present)

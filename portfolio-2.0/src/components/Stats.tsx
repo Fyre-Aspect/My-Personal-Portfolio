@@ -3,7 +3,7 @@ export default function Stats() {
     { number: '2+', label: 'Years Experience', description: 'Gained 100+ Volunteer Hours' },
     { number: '10+', label: 'Projects Completed', description: 'Building Projects that Matter' },
     { number: '300+', label: 'Commits', description: 'Projects' },
-    { number: '100%', label: 'Commitment', description: 'To continuous improvement' }
+
   ]
 
   return (

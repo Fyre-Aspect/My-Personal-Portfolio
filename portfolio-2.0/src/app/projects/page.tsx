@@ -40,6 +40,25 @@ const projects = [
     demoLabel: "Watch Demo"
   },
   {
+    title: "Shurplus",
+    description: "An end-to-end automated logistics platform that acts like a 'Facebook Marketplace' for food rescue. Built to solve the 'Inventory Chaos' faced by food banks, Shurplus connects donors, volunteers, and food banks in one AI-powered dashboard. Features intelligent Inventory Management Agents and Networking Agents to optimize food rescue operations.",
+    role: "Full-Stack Developer",
+    technologies: ["Next.js", "AI Agents", "Logistics Algorithms", "Computer Vision", "Barcode Scanning"],
+    features: [
+      "Inventory Management Agents for FoodBanks",
+      "Networking Agent for route optimization",
+      "Barcode scanning & image recognition",
+      "Real-time donor-volunteer connection",
+      "Automated expiry tracking"
+    ],
+    liveUrl: "https://shurplus.vercel.app",
+    githubUrl: "https://github.com/Fyre-Aspect/ShurPlus-AI",
+    videoUrl: "https://drive.google.com/file/d/1FZ8oS6N8X4uBfk2XLDgoTzGiVSs1T8UM/view",
+    image: "/Shurplus.png",
+    status: "Hackathon Win",
+    demoLabel: "View Demo"
+  },
+  {
     title: "Personal Portfolio",
     description: "This very website! A modern, responsive portfolio showcasing my development skills and projects. Built with Next.js and custom CSS, featuring smooth animations, optimized performance, and a cozy fire theme.",
     role: "Full-Stack Developer",
@@ -243,7 +262,7 @@ const projects = [
                       </div>
                     </div>
                     
-                    {(project.liveUrl || project.githubUrl) && (
+                    {(project.liveUrl || project.githubUrl || (project as any).videoUrl) && (
                       <div className="project-links">
                         {project.liveUrl && (
                           <a 
@@ -253,6 +272,16 @@ const projects = [
                             rel={project.liveUrl === "/" ? "" : "noopener noreferrer"}
                           >
                             {project.demoLabel || (project.liveUrl === "/" ? "View Portfolio" : "Live Demo")} →
+                          </a>
+                        )}
+                        {(project as any).videoUrl && (
+                          <a 
+                            href={(project as any).videoUrl} 
+                            className="project-link secondary"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Watch Video →
                           </a>
                         )}
                         {project.githubUrl && (
