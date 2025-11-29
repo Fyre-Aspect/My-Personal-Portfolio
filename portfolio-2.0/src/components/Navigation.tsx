@@ -63,7 +63,6 @@ export default function Navigation() {
   // Navigation links data
   const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/about', label: 'About' },
     { href: '/projects', label: 'Projects' },
     { href: '/activities', label: 'Experiences' },
     { href: '/achievements', label: 'Achievements' },
