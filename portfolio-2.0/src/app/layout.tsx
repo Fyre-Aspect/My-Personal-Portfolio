@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { Suspense } from 'react'
 import './globals.css'
 import { ThemeProvider } from '../components/ThemeProvider'
 import ChatWidget from '@/components/ChatWidget'
+import Analytics from '@/components/Analytics'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -63,6 +65,9 @@ export default function RootLayout({
         
         {/* AI Chatbot Widget */}
         <ChatWidget />
+        <Suspense fallback={null}>
+          <Analytics />
+        </Suspense>
         
         {/* Add script to detect when fonts are loaded */}
         <script dangerouslySetInnerHTML={{
