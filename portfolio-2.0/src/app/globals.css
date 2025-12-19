@@ -379,12 +379,7 @@ body {
   font-size: 4rem;
   font-weight: 800;
   margin-bottom: 1rem;
-  background: var(--gradient-hero);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 200% 200%;
-  animation: gradientShift 3s ease-in-out infinite;
+  color: var(--text-white);
 }
 
 /* Typing text with theme colors - Updated to match theme */
