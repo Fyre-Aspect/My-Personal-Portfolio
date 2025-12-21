@@ -15,13 +15,13 @@ export default function Projects() {
       technologies: ["Next.js", "AI Agents", "Logistics Algorithms", "Computer Vision", "Barcode Scanning"],
       liveUrl: "https://shurplus.vercel.app",
       githubUrl: "https://github.com/Fyre-Aspect/ShurPlus-AI",
-      motivation: "To solve <span class='page-highlight'>food insecurity</span> through <span class='page-highlight'>intelligent automation</span> and efficient logistics.",
-      role: "Full-Stack Developer"
+      motivation: "To solve <span class='page-highlight'>food insecurity</span> through<span class='page-highlight'>intelligent automation</span> and efficient logistics.",
+      role: "Hackathon 3rd Place Winner"
     },
     {
       title: "Lyra AI Tutor",
       description: "An <span class='page-highlight'>intelligent AI study companion</span> that revolutionizes group learning sessions. Lyra joins Discord voice calls to provide <span class='page-highlight'>real-time assistance</span>, keeps discussions focused, and automatically generates study materials.",
-      technologies: ["Python", "Discord.py", "Gemini API", "NLP", "Voice Recognition"],
+      technologies: ["Python", "Discord bot API3", "Gemini API", "NLP", "Voice Recognition"],
       liveUrl: "https://drive.google.com/file/d/13ddMZT3ef86wQq0UwaW_hvPqQTuHNiIc/view?usp=sharing",
       githubUrl: "https://github.com/Fyre-Aspect/LyraTutorAI",
       motivation: "To transform chaotic <span class='page-highlight'>group study sessions</span> into productive <span class='page-highlight'>learning experiences</span>.",
