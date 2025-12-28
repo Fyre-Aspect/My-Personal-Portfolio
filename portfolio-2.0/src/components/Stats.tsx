@@ -38,7 +38,7 @@ export default function Stats() {
   return (
     <section className="stats-section">
       <div className="container">
-        <h2 className="section-title fade-in-up">By The Numbers</h2>
+        <h2 className="section-title fade-in-up">Stats</h2>
         
         <div className="stats-grid">
           {stats.map((stat, index) => (
@@ -56,7 +56,7 @@ export default function Stats() {
         </div>
 
         <div className="tech-stack fade-in-up-delay-4">
-          <h3 className="tech-stack-title">Tech Stack</h3>
+          
           <div className="tech-stack-carousel" aria-label="Tech stack carousel">
             <div className="tech-stack-track">
               {carouselItems.map((tech, index) => (
