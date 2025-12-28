@@ -6,6 +6,35 @@ export default function Stats() {
 
   ]
 
+  const techStack = [
+    'JavaScript',
+    'Python',
+    'TypeScript',
+    'React',
+    'Next.js',
+    'Node.js',
+    'Firebase',
+    'MongoDB',
+    'Tailwind CSS',
+    'Vercel',
+    'Google Cloud',
+    'Oracle',
+    'Snowflake',
+    'Flask',
+    'Vite',
+    'Vue.js',
+    'npm',
+    'Yarn',
+    'Git',
+    'GitHub',
+    'Jest',
+    'Figma',
+    'Canva',
+    'Windows Terminal',
+  ]
+
+  const carouselItems = [...techStack, ...techStack]
+
   return (
     <section className="stats-section">
       <div className="container">
@@ -24,6 +53,19 @@ export default function Stats() {
               </p>
             </div>
           ))}
+        </div>
+
+        <div className="tech-stack fade-in-up-delay-4">
+          <h3 className="tech-stack-title">Tech Stack</h3>
+          <div className="tech-stack-carousel" aria-label="Tech stack carousel">
+            <div className="tech-stack-track">
+              {carouselItems.map((tech, index) => (
+                <span key={`${tech}-${index}`} className="tech-tag">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

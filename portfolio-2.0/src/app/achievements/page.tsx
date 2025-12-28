@@ -93,7 +93,7 @@ export default function Achievements() {
         },
         {
           title: "Hack the Valley IX - Lyra AI Study Bot",
-          description: "36 hours of intense development at my first hackathon resulted in Lyra, an AI Discord bot that revolutionizes group study sessions. Working with the Gemini API, our team built a voice-enabled study companion that answers questions in real-time, tracks focus, and generates automatic summaries and quizzes—transforming chaotic study calls into productive learning experiences",
+          description: "36 hours of intense development at my first hackathon resulted in Lyra, an AI Discord bot that improves group study sessions. Working with the Gemini API, our team built a voice-enabled study companion that answers questions in real-time, tracks focus, and generates automatic summaries and quizzes, turning chaotic study calls into productive learning experiences",
           date: "2025",
           icon: "",
           image: "/Lyra Bot.jpg",
@@ -244,7 +244,7 @@ export default function Achievements() {
               <div className="reflection-content">
                 <h2>The Journey of Holistic Development</h2>
                 <p className="reflection-intro">
-                  Each achievement represents more than just a milestone—it's a building block in my development
+                  Each achievement represents more than just a milestone. It's a building block in my development
                   as a student, community member, and future leader. These experiences are teaching me that true
                   growth comes from challenging yourself across multiple dimensions.
                 </p>
@@ -274,7 +274,7 @@ export default function Achievements() {
                 <div className="future-vision">
                   <h3>Building Tomorrow's Foundation Today</h3>
                   <p>
-                    These achievements aren't just about recognition—they're about becoming the kind of person who can tackle 
+                    These achievements aren't just about recognition. They're about becoming the kind of person who can tackle 
                     complex problems, lead teams effectively, and make a positive impact on the world. Each challenge I take on 
                     now is preparing me for the greater challenges and opportunities that lie ahead in university and beyond.
                   </p>

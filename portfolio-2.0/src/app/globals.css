@@ -633,6 +633,59 @@ body {
   font-weight: 500;
 }
 
+/* Tech stack carousel (By The Numbers) */
+.tech-stack {
+  margin-top: 3rem;
+}
+
+.tech-stack-title {
+  color: var(--text-white);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.tech-stack-carousel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 1rem;
+  overflow: hidden;
+}
+
+.tech-stack-track {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: max-content;
+  will-change: transform;
+  animation: tech-stack-scroll 32s linear infinite;
+}
+
+.tech-stack-carousel:hover .tech-stack-track {
+  animation-play-state: paused;
+}
+
+@keyframes tech-stack-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-stack-track {
+    animation: none;
+  }
+
+  .tech-stack-carousel {
+    overflow-x: auto;
+  }
+}
+
 /* Projects Section */
 .projects-section {
   padding: 5rem 0;
