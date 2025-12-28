@@ -12,9 +12,8 @@ export default function Hero() {
   
   const texts = [
     "Full-Stack Developer",
-    "Grade 11 Highschool Student", 
-    "IB Programme Candidate",
-    "Engineering Enthusiast",
+    "Grade 11 Student", 
+    "IB Candidate",
   ]
 
   // Fix mobile viewport height issues
@@ -91,10 +90,7 @@ export default function Hero() {
           
           {/* Description with highlighted keywords */}
           <p className="hero-description fade-in-up-delay-2">
-            I'm <span className="highlight-keyword">16</span> and in <span className="highlight-keyword">Grade 11</span> (IB candidate). I like building things people can actually use.
-            I've worked as an <span className="highlight-keyword">Admin Developer</span> on <span className="highlight-keyword">Tidal Tasks</span> (task management), built <span className="highlight-keyword">Shurplus</span>
-            (food rescue logistics, <span className="highlight-keyword">3rd place</span> at a hackathon), and led <span className="highlight-keyword">Lyra AI Tutor</span> (a <span className="highlight-keyword">Discord</span> study bot).
-            I care about simple, clear experiences, and shipping projects I'm proud to show.
+            I'm 16 and in Grade 11 (IB candidate). I build things people can use—like <span className="highlight-keyword">Shurplus</span> (food rescue app, 3rd at NeoDev Hackathon), <span className="highlight-keyword">Lyra AI Tutor</span> (Discord study bot), and admin work at <span className="highlight-keyword">Tidal Tasks</span>. I care about clean design and shipping work I'm proud of.
           </p>
           
           {/* CTA Buttons */}

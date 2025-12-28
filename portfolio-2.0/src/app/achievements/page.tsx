@@ -5,163 +5,163 @@ export default function Achievements() {
   const achievements = [
     {
       category: "Technical Development",
-      description: "Building foundational programming skills and real-world development experience",
+      description: "Building real projects and gaining professional experience",
       items: [
         {
           title: "NeoDev League Hackathon - 3rd Place",
-          description: "Representing Cameron Heights, our team secured 3rd place by building Shurplus, an AI-powered logistics platform for food rescue. We tackled the problem of 'Inventory Chaos' using intelligent automation agents.",
+          description: "Built Shurplus, an AI-powered logistics platform for food rescue using intelligent automation agents.",
           date: "2025",
           icon: "",
           image: "/ShurPlus.png",
-          growthAspect: "Technical Innovation"
+          growthAspect: "Hackathon"
         },
         {
           title: "Admin Developer at Tidal Tasks AI",
-          description: "Leading administrative systems development taught me professional coding standards, project management, and how to contribute meaningfully to a tech startup as a student",
+          description: "Building admin systems and contributing features for an AI-powered task management startup.",
           date: "2025-Present",
           icon: "",
           image: "/Tidal Tasks.png",
-          growthAspect: "Professional Development"
+          growthAspect: "Startup"
         },
         {
           title: "Full-Stack Portfolio Development",
-          description: "Creating this portfolio from scratch using Next.js and TypeScript enhanced my problem-solving abilities and gave me confidence in modern web development",
+          description: "Designed and built this portfolio from scratch using Next.js and TypeScript.",
           date: "2025-Present",
           icon: "",
           image: "/FullStack.png",
-          growthAspect: "Self-Directed Learning"
+          growthAspect: "Web Dev"
         },
         {
           title: "Hardware Programming with Arduino",
-          description: "Developing IoT sensors using C++ expanded my technical horizons beyond web development and taught me how software interfaces with physical hardware",
+          description: "Developed IoT sensors using C++ for hardware-software integration projects.",
           date: "2025-Present",
           icon: "",
           image: "/Arduino Workshop.jpg",
-          growthAspect: "Technical Versatility"
+          growthAspect: "IoT"
         },
         {
           title: "HTML Completion Course",
-          description: "Mastering HTML fundamentals provided the foundation for all my web development work and taught me the importance of semantic, accessible code",
+          description: "Foundational web development training covering semantic HTML and accessibility.",
           date: "2024",
           icon: "",
           image: "/HTML.png",
-          growthAspect: "Foundation Building"
+          growthAspect: "Certified"
         }
       ]
     },
     {
       category: "Academic Excellence",
-      description: "Challenging myself with rigorous coursework and competitive academic programs",
+      description: "Rigorous coursework and competitive academic programs",
       items: [
         {
           title: "IB Programme Candidate",
-          description: "The International Baccalaureate programme is developing my critical thinking, research skills, and global perspective while preparing me for university-level work",
+          description: "Enrolled in the International Baccalaureate programme with focus on critical thinking and research.",
           date: "2023-Present",
           icon: "",
           image: "https://upload.wikimedia.org/wikipedia/commons/f/fd/IB_LOGO.png",
-          growthAspect: "Intellectual Rigor"
+          growthAspect: "IB"
         },
         {
           title: "Mathematica Competition 2019",
-          description: "Participating in this prestigious mathematics competition at a young age sparked my love for problem-solving and analytical thinking",
+          description: "Early participant in prestigious mathematics competition.",
           date: "2019",
           icon: "",
           image: "/Mathmatica.jpg",
-          growthAspect: "Early Achievement"
+          growthAspect: "Math"
         },
         {
           title: "Gauss Math Competition Distinction",
-          description: "Earning distinction in the Gauss Mathematics Competition validated my mathematical abilities and encouraged me to pursue STEM subjects more seriously",
+          description: "Earned distinction in the Gauss Mathematics Competition.",
           date: "2023",
           icon: "",
           image: "/Gauss Math.jpg",
-          growthAspect: "Academic Recognition"
+          growthAspect: "Distinction"
         }
       ]
     },
     {
       category: "Community Engagement",
-      description: "Contributing to my community while developing empathy and leadership skills",
+      description: "Contributing to community through volunteer work and projects",
       items: [
         {
-          title: "200+ Hours of Volunteer Hours",
-          description: "Volunteering extensively has taught me the value of giving back, developed my empathy, and improved my organizational skills",
+          title: "200+ Volunteer Hours",
+          description: "Extensive volunteering across multiple organizations including food banks and animal shelters.",
           date: "2023-Present",
           icon: "",
           image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToHrK9W35tl3XoMbG1gJVMzdwmWowztb-jYQ&s",
-          growthAspect: "Empathy Development"
+          growthAspect: "Volunteer"
         },
         {
           title: "Hack the Valley IX - Lyra AI Study Bot",
-          description: "36 hours of intense development at my first hackathon resulted in Lyra, an AI Discord bot that improves group study sessions. Working with the Gemini API, our team built a voice-enabled study companion that answers questions in real-time, tracks focus, and generates automatic summaries and quizzes, turning chaotic study calls into productive learning experiences",
+          description: "36-hour hackathon project: built an AI Discord bot with voice recognition for group study sessions using Gemini API.",
           date: "2025",
           icon: "",
           image: "/Lyra Bot.jpg",
-          growthAspect: "Innovation & Teamwork",
+          growthAspect: "Hackathon",
           link: "https://www.linkedin.com/feed/update/urn:li:activity:7381078715910479872",
           github: "https://github.com/Fyre-Aspect/LyraTutorAI"
         },
         {
           title: "University of Waterloo Internship",
-          description: "Conducting soil analysis research exposed me to university-level scientific work and taught me proper research methodology and data analysis",
+          description: "Conducted soil analysis research with proper scientific methodology and MATLAB data visualization.",
           date: "2024-Present",
           icon: "",
           image: "/UW Pic 2.jpg",
-          growthAspect: "Research Experience"
+          growthAspect: "Research"
         },
         {
           title: "Community Project Development",
-          description: "Working on local technology initiatives has shown me how programming skills can directly benefit my community and solve real problems",
+          description: "Local technology initiatives using programming to solve community problems.",
           date: "2023",
           icon: "",
           image: "https://www.qodo.ai/wp-content/uploads/2025/02/Top-10-Developer-Communities-You-Should-Explore-1-1024x687.png",
-          growthAspect: "Social Impact"
+          growthAspect: "Community"
         }
       ]
     },
     {
-      category: "Personal Growth & Athletics",
-      description: "Developing resilience, teamwork, and physical wellness through sports and personal challenges",
+      category: "Athletics",
+      description: "Competitive sports and physical development",
       items: [
         {
-          title: "7th place Tennis WCSAA boys Singles senior tennis",
-          description: "Achieved 7th place in the regional tournament with a 2-0 match record, demonstrating competitive spirit and athletic dedication.",
+          title: "7th Place - WCSAA Tennis Singles",
+          description: "Regional tournament placement with 2-0 match record in senior boys singles.",
           date: "2025",
           icon: "",
           image: "/wcssaa.png",
-          growthAspect: "Competitive Spirit"
+          growthAspect: "Tennis"
         },
         {
           title: "Badminton Falcon Tournament - 4th Place",
-          description: "Competing at tournament level taught me how to perform under pressure, work with a doubles partner, and handle both victories and defeats gracefully",
+          description: "Tournament-level doubles competition representing Cameron Heights.",
           date: "2024",
           icon: "",
           image: "/Falcon Badminton.jpg",
-          growthAspect: "Competitive Spirit"
+          growthAspect: "Badminton"
         },
         {
           title: "WCCSAA Badminton - 5th Place",
-          description: "Regional competition experience showed me the value of consistent practice, team support, and representing my school with pride",
+          description: "Regional competition as school team representative.",
           date: "2025",
           icon: "",
           image: "/wcssaa.png",
-          growthAspect: "Team Representation"
+          growthAspect: "Badminton"
         },
         {
-          title: "Swimming Certification Completion",
-          description: "Achieving all swimming levels developed my persistence, physical fitness, and water safety skills while building confidence in challenging myself",
+          title: "Swimming Certification",
+          description: "Completed all swimming certification levels including lifeguard training.",
           date: "2024",
           icon: "",
           image: "/Swimming.jpg",
-          growthAspect: "Personal Achievement"
+          growthAspect: "Swimming"
         },
         {
-          title: "TDESSAA Cross Country Participant",
-          description: "Training for and competing in cross country taught me mental toughness, goal-setting, and how individual effort contributes to team success",
+          title: "TDESSAA Cross Country",
+          description: "Trained and competed in regional cross country events.",
           date: "2022-2023",
           icon: "",
           image: "/Cross Country.jpg",
-          growthAspect: "Mental Resilience"
+          growthAspect: "Running"
         }
       ]
     }
@@ -174,10 +174,9 @@ export default function Achievements() {
         <section className="achievements-section">
           <div className="container">
             <div className="achievements-hero fade-in-up">
-              <h1 className="page-title">Growth Through Achievement</h1>
+              <h1 className="page-title">Achievements</h1>
               <p className="page-subtitle">
-                How each milestone in my high school journey is shaping me into a well-rounded individual,
-                preparing me for future challenges and opportunities
+                Milestones across tech, academics, community, and athletics
               </p>
             </div>
 
@@ -242,42 +241,28 @@ export default function Achievements() {
 
             <div className="growth-reflection fade-in-up-delay-3">
               <div className="reflection-content">
-                <h2>The Journey of Holistic Development</h2>
-                <p className="reflection-intro">
-                  Each achievement represents more than just a milestone. It's a building block in my development
-                  as a student, community member, and future leader. These experiences are teaching me that true
-                  growth comes from challenging yourself across multiple dimensions.
-                </p>
+                <h2>What I'm Building Toward</h2>
                 
                 <div className="growth-dimensions">
                   <div className="dimension-card">
-                    <h3>Technical Mastery</h3>
-                    <p>From basic HTML to leading development projects, I'm building the technical foundation needed for a career in technology while learning to work professionally.</p>
+                    <h3>Technical Skills</h3>
+                    <p>From HTML basics to leading hackathon projects, building a foundation for a career in tech.</p>
                   </div>
                   
                   <div className="dimension-card">
                     <h3>Academic Rigor</h3>
-                    <p>The IB programme and mathematics competitions are preparing me for university-level thinking and teaching me how to excel in challenging academic environments.</p>
+                    <p>IB programme and math competitions preparing me for university-level work.</p>
                   </div>
                   
                   <div className="dimension-card">
-                    <h3>Community Leadership</h3>
-                    <p>Through volunteering and mentoring, I'm discovering how to contribute meaningfully to others' lives while developing empathy and communication skills.</p>
+                    <h3>Community Impact</h3>
+                    <p>200+ volunteer hours and community tech projects.</p>
                   </div>
                   
                   <div className="dimension-card">
-                    <h3>Personal Resilience</h3>
-                    <p>Athletic competitions and personal challenges are building mental toughness, teaching me to handle pressure, and showing me the value of consistent effort.</p>
+                    <h3>Athletics</h3>
+                    <p>Competitive tennis, badminton, swimming, and cross country.</p>
                   </div>
-                </div>
-
-                <div className="future-vision">
-                  <h3>Building Tomorrow's Foundation Today</h3>
-                  <p>
-                    These achievements aren't just about recognition. They're about becoming the kind of person who can tackle 
-                    complex problems, lead teams effectively, and make a positive impact on the world. Each challenge I take on 
-                    now is preparing me for the greater challenges and opportunities that lie ahead in university and beyond.
-                  </p>
                 </div>
               </div>
             </div>

@@ -61,10 +61,9 @@ export default function ContactPage() {
         <section className="contact-page-section">
           <div className="container">
             <div className="contact-hero fade-in-up">
-              <h1 className="page-title">Let's Connect</h1>
+              <h1 className="page-title">Contact</h1>
               <p className="page-subtitle">
-                Ready to collaborate on something amazing? Let's discuss how we can work together on 
-                <span className="page-highlight">innovative projects</span> and <span className="page-highlight">meaningful solutions</span>.
+                Let's connect and build something together
               </p>
             </div>
 
@@ -73,10 +72,8 @@ export default function ContactPage() {
                 <div className="contact-info fade-in-up-delay-1">
                   <h2>Get in Touch</h2>
                   <p>
-                    I'm always interested in hearing about new opportunities, interesting projects, 
-                    or just connecting with fellow developers and fitness enthusiasts. Whether you 
-                    have a project in mind, want to collaborate, or just want to chat about code 
-                    and compound movements, I'd love to hear from you!
+                    Open to new opportunities, project collaborations, or just a conversation about tech. 
+                    Feel free to reach out!
                   </p>
 
                   <div className="contact-methods">

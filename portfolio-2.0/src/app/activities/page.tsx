@@ -6,7 +6,7 @@ export default function ActivitiesPage() {
     {
       title: "Soil Testing Internship - University of Waterloo",
       hours: "50+ hours",
-      description: "Structured research experience focusing on <span class='page-highlight'>comprehensive soil analysis</span> and <span class='page-highlight'>data interpretation</span>. This disciplined approach to <span class='page-highlight'>scientific methodology</span> mirrors my approach to learning - <span class='page-highlight'>systematic analysis</span>, <span class='page-highlight'>attention to detail</span>, and <span class='page-highlight'>evidence-based conclusions</span>.",
+      description: "Research experience in soil analysis, stress-strain plotting, and MATLAB data visualization under university supervision.",
       details: [
         "Comprehensive soil analysis projects",
         "Stress-strain graph plotting",
@@ -19,12 +19,11 @@ export default function ActivitiesPage() {
     {
       title: "KW Humane Society Volunteer",
       hours: "15+ hours",
-      description: "Active volunteer contributing to <span class='page-highlight'>animal welfare</span> and <span class='page-highlight'>community outreach</span>. Developing <span class='page-highlight'>empathy</span> and <span class='page-highlight'>responsibility</span> while learning to work effectively in <span class='page-highlight'>team environments</span> with diverse volunteers.",
+      description: "Animal care, facility maintenance, and community outreach support at the local humane society.",
       details: [
         "Animal care and maintenance",
         "Community outreach programs",
         "Team collaboration projects",
-        "Responsibility and compassion development",
         "Public communication skills"
       ],
       image: "/KW.png"
@@ -32,51 +31,47 @@ export default function ActivitiesPage() {
     {
       title: "Admin Developer - Tidal Tasks AI",
       hours: "30+ hours",
-      description: "Professional development role in a <span class='page-highlight'>startup environment</span>. Leading <span class='page-highlight'>administrative systems development</span> for <span class='page-highlight'>AI-powered solutions</span>, gaining <span class='page-highlight'>real-world experience</span> with <span class='page-highlight'>modern web technologies</span>.",
+      description: "Building admin systems and features for an AI-powered task management startup.",
       details: [
         "Administrative system development",
         "AI integration and optimization",
         "Cross-functional team collaboration",
-        "Modern web technology implementation",
-        "User experience design principles"
+        "Modern web technology implementation"
       ],
       image: "/Tidal Tasks.png"
     },
     {
       title: "MLU File Organizer - Martin Luther University",
       hours: "50+ hours",
-      description: "Organizational role requiring <span class='page-highlight'>attention to detail</span> and <span class='page-highlight'>efficient workflow management</span>. Learning to navigate <span class='page-highlight'>office environments</span> while developing <span class='page-highlight'>administrative skills</span> and <span class='page-highlight'>professional communication</span>.",
+      description: "Document organization and administrative support in a university office environment.",
       details: [
         "Document organization and filing systems",
         "Office workflow optimization",
         "Professional communication skills",
-        "Administrative task management",
-        "Workplace efficiency improvement"
+        "Administrative task management"
       ],
       image: "/Files.png"
     },
     {
       title: "Wilfrid Laurier Distro Volunteer Assistant",
       hours: "20+ hours",
-      description: "Hands-on volunteer work focused on <span class='page-highlight'>supply chain management</span> and <span class='page-highlight'>logistics coordination</span>. Building <span class='page-highlight'>teamwork skills</span> while contributing to <span class='page-highlight'>community support initiatives</span>.",
+      description: "Inventory management, package handling, and logistics coordination for campus distribution.",
       details: [
         "Inventory restocking and management",
         "Supply chain coordination",
         "Package handling and distribution",
-        "Workspace organization",
-        "Team collaboration in fast-paced environment"
+        "Workspace organization"
       ],
       image: "/Distro.jpg"
     },
     {
-      title: "Jr. Band - Flute Player (Flutist)",
+      title: "Jr. Band - Flute Player",
       hours: "30+ hours",
-      description: "Musical development through <span class='page-highlight'>disciplined practice</span> and <span class='page-highlight'>ensemble collaboration</span>. Learning the importance of <span class='page-highlight'>timing</span>, <span class='page-highlight'>coordination</span>, and contributing to a <span class='page-highlight'>collective goal</span>.",
+      description: "Ensemble performance and musical development through school band program.",
       details: [
         "Musical technique development",
         "Ensemble coordination and timing",
         "Performance under pressure",
-        "Creative expression and interpretation",
         "Collaborative artistic creation"
       ],
       image: "/Band.png"
@@ -84,10 +79,9 @@ export default function ActivitiesPage() {
     {
       title: "Tennis Team",
       hours: "90+ hours",
-      description: "Competitive athletics developing <span class='page-highlight'>strategic thinking</span> and <span class='page-highlight'>mental resilience</span>. Learning to analyze opponents, adapt strategies mid-game, and maintain <span class='page-highlight'>focus under pressure</span>.",
+      description: "Competitive school tennis with tournament experience including 7th place WCSAA finish.",
       details: [
-        "Strategic game planning and adaptation",
-        "Mental toughness and resilience",
+        "Strategic game planning",
         "Individual performance optimization",
         "Competitive pressure management",
         "Physical conditioning and technique"
@@ -97,11 +91,10 @@ export default function ActivitiesPage() {
     {
       title: "Badminton Team",
       hours: "150+ hours",
-      description: "Extensive team sport experience emphasizing <span class='page-highlight'>quick decision-making</span> and <span class='page-highlight'>precise coordination</span>. Developing <span class='page-highlight'>leadership skills</span> while learning from both victories and defeats.",
+      description: "School team badminton with tournament placements including 4th at Falcon Tournament.",
       details: [
         "Rapid decision-making under pressure",
         "Team strategy development",
-        "Leadership and mentorship roles",
         "Precision and technical skill refinement",
         "Competitive teamwork dynamics"
       ],
@@ -110,13 +103,12 @@ export default function ActivitiesPage() {
     {
       title: "Swimming Lifeguard Lessons",
       hours: "80+ hours",
-      description: "Safety-focused training building <span class='page-highlight'>responsibility</span> and <span class='page-highlight'>crisis management skills</span>. Learning to stay calm in emergency situations while developing <span class='page-highlight'>teaching abilities</span> and <span class='page-highlight'>water safety expertise</span>.",
+      description: "Complete swimming certification including lifeguard training, CPR, and first aid.",
       details: [
-        "Emergency response and crisis management",
-        "Water safety instruction and education",
+        "Emergency response training",
+        "Water safety instruction",
         "CPR and first aid certification",
-        "Teaching and communication skills",
-        "Responsibility for others' safety"
+        "Teaching and communication skills"
       ],
       image: "https://i0.wp.com/blog.myswimpro.com/wp-content/uploads/2023/10/freestyle-stroke-breathing-technique-myswimpro.jpeg?fit=1500%2C1000&ssl=1"
     }
@@ -129,10 +121,9 @@ export default function ActivitiesPage() {
         <section className="activities-page-section">
           <div className="container">
             <div className="activities-hero fade-in-up">
-              <h1 className="page-title">Beyond the Classroom</h1>
+              <h1 className="page-title">Activities</h1>
               <p className="page-subtitle">
-                Diverse experiences that shape my approach to <span className="page-highlight">learning</span>, 
-                <span className="page-highlight">problem-solving</span>, and <span className="page-highlight">personal growth</span> as a versatile student seeking continuous development
+                Volunteering, work experience, and athletics
               </p>
             </div>
 
