@@ -91,10 +91,10 @@ export default function Hero() {
           
           {/* Description with highlighted keywords */}
           <p className="hero-description fade-in-up-delay-2">
-            At <span className="highlight-keyword">16</span>, I'm passionate about building <span className="highlight-keyword">projects that matter</span>. 
-            As a <span className="highlight-keyword">high school student</span>, I bring <span className="highlight-keyword">fresh perspectives</span> to development while maintaining the same 
-            commitment to <span className="highlight-keyword">quality</span> and <span className="highlight-keyword">continuous learning</span> that drives me as a successful developer. Every project 
-            is an opportunity to <span className="highlight-keyword">grow</span> and make a <span className="highlight-keyword">meaningful impact</span> for me.
+            I'm <span className="highlight-keyword">16</span> and in <span className="highlight-keyword">Grade 11</span> (IB candidate). I like building things people can actually use.
+            I've worked as an <span className="highlight-keyword">Admin Developer</span> on <span className="highlight-keyword">Tidal Tasks</span> (task management), built <span className="highlight-keyword">Shurplus</span>
+            (food rescue logistics — <span className="highlight-keyword">3rd place</span> at a hackathon), and led <span className="highlight-keyword">Lyra AI Tutor</span> (a <span className="highlight-keyword">Discord</span> study bot).
+            I care about simple, clear experiences — and shipping projects I'm proud to show.
           </p>
           
           {/* CTA Buttons */}

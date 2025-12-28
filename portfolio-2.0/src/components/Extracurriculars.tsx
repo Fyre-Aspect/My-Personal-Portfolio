@@ -20,7 +20,7 @@ const activities: { title: string; description: string; image?: string }[] = [
       <div className="container">
         <h2 className="section-title fade-in-up">Recent Extracurriculars</h2>
         <p className="section-subtitle fade-in-up-delay-1">
-          Beyond coding, these experiences shape my approach to <span className="page-highlight">problem-solving</span>, 
+          Beyond school, these experiences shape my approach to <span className="page-highlight">problem-solving</span>, 
           <span className="page-highlight">collaboration</span>, and <span className="page-highlight">continuous learning</span>
         </p>
         
