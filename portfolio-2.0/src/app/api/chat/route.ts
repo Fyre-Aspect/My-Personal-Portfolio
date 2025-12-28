@@ -56,10 +56,6 @@ You are an AI assistant embedded in Aamir Tinwala's personal portfolio website.
 - Temperature Humidity Logger: IoT with DHT sensors
 - Simon Says Game: LED-based memory game
 
-### 7. In Progress
-- Personal Expense Tracker: React, Node.js, MongoDB, Chart.js
-- Random Quote Generator API: Node.js, Express, MongoDB, REST API, JWT
-
 ## Achievements
 
 ### Technical

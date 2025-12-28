@@ -177,40 +177,6 @@ const projects = [
     githubUrl: null,
     image: "/Simon Says.gif",
     status: null
-  },
-  {
-    title: "Personal Expense Tracker",
-    description: "A comprehensive expense tracking application designed to help users manage their finances effectively. Currently in the prototyping phase with features for budget management, expense categorization, and financial insights.",
-    role: "Full-Stack Developer",
-    technologies: ["React", "Node.js", "MongoDB", "Chart.js", "Express"],
-    features: [
-      "Expense categorization system",
-      "Budget tracking and alerts",
-      "Financial insights dashboard",
-      "Data visualization charts",
-      "Secure user authentication"
-    ],
-    liveUrl: null,
-    githubUrl: null,
-    image: "/Expense Tracker.png",
-    status: "Prototyping"
-  },
-  {
-    title: "Random Quote Generator API",
-    description: "An uplifting quote generator API designed to improve mood and provide daily inspiration. Currently in development with features for categorized quotes, mood-based recommendations, and daily quote delivery.",
-    role: "Backend Developer",
-    technologies: ["Node.js", "Express", "MongoDB", "REST API", "JWT"],
-    features: [
-      "Mood-based quote selection",
-      "Daily inspiration delivery",
-      "Quote categorization system",
-      "User preference tracking",
-      "RESTful API endpoints"
-    ],
-    liveUrl: null,
-    githubUrl: null,
-    image: "/Quote Gen.jpg",
-    status: "In Progress"
   }
 ];
 

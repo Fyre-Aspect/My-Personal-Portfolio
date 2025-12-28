@@ -238,34 +238,6 @@ export default function Achievements() {
                 </div>
               ))}
             </div>
-
-            <div className="growth-reflection fade-in-up-delay-3">
-              <div className="reflection-content">
-                <h2>What I'm Building Toward</h2>
-                
-                <div className="growth-dimensions">
-                  <div className="dimension-card">
-                    <h3>Technical Skills</h3>
-                    <p>From HTML basics to leading hackathon projects, building a foundation for a career in tech.</p>
-                  </div>
-                  
-                  <div className="dimension-card">
-                    <h3>Academic Rigor</h3>
-                    <p>IB programme and math competitions preparing me for university-level work.</p>
-                  </div>
-                  
-                  <div className="dimension-card">
-                    <h3>Community Impact</h3>
-                    <p>200+ volunteer hours and community tech projects.</p>
-                  </div>
-                  
-                  <div className="dimension-card">
-                    <h3>Athletics</h3>
-                    <p>Competitive tennis, badminton, swimming, and cross country.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </section>
       </main>

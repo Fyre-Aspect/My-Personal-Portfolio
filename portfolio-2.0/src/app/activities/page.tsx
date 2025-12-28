@@ -159,48 +159,6 @@ export default function ActivitiesPage() {
                 </div>
               ))}
             </div>
-
-            <div className="philosophy-connection fade-in-up-delay-3">
-              <h2>Building Versatility Through Diversity</h2>
-              <p>
-                Each experience represents a different facet of growth - from <span className="page-highlight">technical precision</span> in research labs 
-                to <span className="page-highlight">split-second decision-making</span> on sports courts. This diversity of experiences creates a 
-                <span className="page-highlight">well-rounded foundation</span> for tackling complex challenges and adapting to new environments. 
-                As a student committed to <span className="page-highlight">continuous learning</span>, I actively seek opportunities that push me 
-                outside my comfort zone and expand my <span className="page-highlight">skill set</span>.
-              </p>
-              
-              <div className="connection-grid">
-                <div className="connection-card">
-                  <h3>Research → Analytical Thinking</h3>
-                  <p>Laboratory work and data analysis have sharpened my <span className="page-highlight">critical thinking</span> and ability to draw <span className="page-highlight">evidence-based conclusions</span>.</p>
-                </div>
-                
-                <div className="connection-card">
-                  <h3>Service → Leadership & Empathy</h3>
-                  <p>Volunteer work has developed my <span className="page-highlight">leadership abilities</span> and deepened my understanding of <span className="page-highlight">community impact</span>.</p>
-                </div>
-
-                
-                <div className="connection-card">
-                  <h3>Professional Work → Real-World Application</h3>
-                  <p>Workplace experiences bridge <span className="page-highlight">academic theory</span> with <span className="page-highlight">practical implementation</span>, preparing me for future challenges.</p>
-                </div>
-
-              </div>
-              
-              <div className="growth-commitment">
-                <h3>Commitment to Growth</h3>
-                <p>
-                  With over <span className="page-highlight">500+ hours</span> invested across these diverse activities, I've learned that 
-                  growth comes from embracing variety. Each new challenge - whether mastering a <span className="page-highlight">flute piece</span>, 
-                  organizing complex <span className="page-highlight">filing systems</span>, or developing <span className="page-highlight">emergency response skills</span> - 
-                  adds another tool to my problem-solving toolkit. This breadth of experience makes me a more 
-                  <span className="page-highlight">adaptable</span>, <span className="page-highlight">resilient</span>, and 
-                  <span className="page-highlight">collaborative</span> student ready to tackle whatever comes next.
-                </p>
-              </div>
-            </div>
           </div>
         </section>
       </main>

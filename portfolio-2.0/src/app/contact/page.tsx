@@ -106,15 +106,6 @@ export default function ContactPage() {
                         </a>
                       </div>
                     </div>
-                      <div className="contact-method">
-                      <div className="method-icon">📞</div>
-                      <div>
-                        <h3>Phone</h3>
-                        <a href="tel:+1 2263390855" target="_blank" rel="noopener noreferrer">
-                          Call Me @ 226-339-0855
-                        </a>
-                      </div>
-                    </div>
                   </div>
 
                   
@@ -192,29 +183,6 @@ export default function ContactPage() {
                       {isSubmitting ? 'Sending...' : 'Send Message'}
                     </button>
                   </form>
-                </div>
-              </div>
-            </div>
-
-            <div className="availability-section fade-in-up-delay-3">
-              <h2>Current Availability</h2>
-              <div className="availability-cards">
-                <div className="availability-card">
-                  <h3>Freelance Projects</h3>
-                  <div className="availability-status available">Available</div>
-                  <p>Open to taking on <span className="page-highlight">new freelance projects</span> and <span className="page-highlight">consulting work</span> that align with my skills and interests.</p>
-                </div>
-                
-                <div className="availability-card">
-                  <h3>Part-time Opportunities</h3>
-                  <div className="availability-status interested">Interested</div>
-                  <p>Always interested in discussing exciting <span className="page-highlight">part-time opportunities</span> that offer <span className="page-highlight">learning experiences</span> and growth.</p>
-                </div>
-                
-                <div className="availability-card">
-                  <h3>Collaborations</h3>
-                  <div className="availability-status available">Available</div>
-                  <p>Love collaborating on <span className="page-highlight">open source projects</span> and interesting <span className="page-highlight">side projects</span> with fellow developers.</p>
                 </div>
               </div>
             </div>
