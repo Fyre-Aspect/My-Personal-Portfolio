@@ -125,7 +125,7 @@ export default function ChatPanel({ isOpen, onClose }: ChatPanelProps) {
           <div className="chat-header__text">
             <h3 className="chat-header__title">Aamir&apos;s AI Assistant</h3>
             <span className="chat-header__status">
-              {isLoading ? 'Typing...' : 'Online'}
+              {isLoading ? 'Typing...' : ''}
             </span>
           </div>
         </div>

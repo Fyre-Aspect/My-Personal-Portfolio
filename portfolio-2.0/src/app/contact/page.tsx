@@ -28,7 +28,7 @@ export default function ContactPage() {
     setSubmitStatus('idle')
 
     try {
-      const response = await fetch('https://formspree.io/f/mgvlkbdv', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -103,6 +103,16 @@ export default function ContactPage() {
                         <h3>GitHub</h3>
                         <a href="https://github.com/Fyre-Aspect" target="_blank" rel="noopener noreferrer">
                           Aamir | Fyre-Aspect
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="contact-method resume-download">
+                      <div className="method-icon">📄</div>
+                      <div>
+                        <h3>Resume</h3>
+                        <a href="/Resume.pdf" download className="resume-link">
+                          Download My Resume →
                         </a>
                       </div>
                     </div>
