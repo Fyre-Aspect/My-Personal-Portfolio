@@ -7,7 +7,7 @@ body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   line-height: 1.6;
   color: #fef4e6; /* Updated text color */
-  background: linear-gradient(135deg, #1a1108 0%, #2d1f14 50%, #1a1108 100%); /* New cozy background */
+  background: #1a1108; /* New cozy background */
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -28,10 +28,7 @@ body {
 .logo {
   font-size: 1.5rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #f97316, #eab308); /* Orange to gold gradient */
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #f97316;
   text-decoration: none;
   flex-shrink: 0;
 }
@@ -55,7 +52,7 @@ body {
   left: 0;
   width: 0;
   height: 2px;
-  background: linear-gradient(135deg, #f97316, #eab308); /* Orange to gold */
+  background: #f97316;
   transition: width 0.3s ease;
 }
 
@@ -64,12 +61,7 @@ body {
   font-size: 4rem;
   font-weight: 800;
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, #f97316, #eab308, #dc2626); /* Fire gradient */
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 200% 200%;
-  animation: gradientShift 3s ease-in-out infinite;
+  color: #f97316;
 }
 
 .page-title {
@@ -77,12 +69,7 @@ body {
   font-weight: 800;
   text-align: center;
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, #f97316, #eab308, #dc2626); /* Fire gradient */
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 200% 200%;
-  animation: gradientShift 3s ease-in-out infinite;
+  color: #f97316;
 }
 
 .typing-text {
@@ -106,7 +93,7 @@ body {
 
 /* 4. Update buttons */
 .cta-button.primary {
-  background: linear-gradient(135deg, #f97316, #dc2626); /* Orange to red gradient */
+  background: #f97316;
   color: white;
   box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3); /* Orange shadow */
 }

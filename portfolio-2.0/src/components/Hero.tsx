@@ -76,7 +76,8 @@ export default function Hero() {
           />
           
           {/* Main Heading */}
-          <h1>Hey, I'm Aamir (hire me pls)</h1>
+          <h1>Hey, I'm Aamir</h1>
+          <p className="hero-subtitle">hire me pls</p>
           
           {/* Typing Animation with theme colors */}
           <div className="typing-text fade-in-up-delay-1">
