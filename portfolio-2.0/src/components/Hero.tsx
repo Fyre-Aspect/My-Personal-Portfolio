@@ -71,13 +71,12 @@ export default function Hero() {
             alt="Aamir Tinwala"
             className="profile-image"
             loading="eager"
-            // Add explicit dimensions to prevent layout shift
             width="200"
             height="200"
           />
           
           {/* Main Heading */}
-          <h1>Hi, I'm Aamir</h1>
+          <h1>Hey, I'm Aamir (hire me pls)</h1>
           
           {/* Typing Animation with theme colors */}
           <div className="typing-text fade-in-up-delay-1">
@@ -90,7 +89,7 @@ export default function Hero() {
           
           {/* Description with highlighted keywords */}
           <p className="hero-description fade-in-up-delay-2">
-            I'm 16 and in Grade 11 (IB candidate). I build things people can use—like <span className="highlight-keyword">Shurplus</span> (food rescue app, 3rd at NeoDev Hackathon), <span className="highlight-keyword">Lyra AI Tutor</span> (Discord study bot), and admin work at <span className="highlight-keyword">Tidal Tasks</span>. I care about clean design and shipping work I'm proud of.
+            I'm 16 and in Grade 11 (IB candidate). I build things that matter, recent projects: <span className="highlight-keyword">Shurplus</span> (food rescue app, 3rd at NeoDev Hackathon), <span className="highlight-keyword">Lyra AI Tutor</span> (Discord study bot), and an admin software engineer at <span className="highlight-keyword">Tidal Tasks</span>. I care about clean design and shipping work I'm proud of.
           </p>
           
           {/* CTA Buttons */}
