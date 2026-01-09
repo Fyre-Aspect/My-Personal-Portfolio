@@ -112,12 +112,16 @@ export function useChat(): UseChatReturn {
   }, []);
 
   const startTour = useCallback(() => {
-    setMode('tour');
-    // Automatically send a tour start message
-    setTimeout(() => {
-      sendMessage("Hi! I'd like to take a guided tour of Aamir's portfolio.");
-    }, 100);
-  }, [setMode, sendMessage]);
+    setModeState('tour');
+    setMessages([]);
+    setError(null);
+    // Directly inject the first tour message without calling the AI
+    const tourStartMessage = createMessage(
+      'assistant',
+      `Hi there! I'm Aamir, a <span class="highlight">Full-Stack Developer</span> and <span class="highlight">Young Innovator</span> in Grade 11. Let's explore my work! {{BUTTON: /projects}}`
+    );
+    setMessages([tourStartMessage]);
+  }, []);
 
   const clearChat = useCallback(() => {
     setMessages([]);
