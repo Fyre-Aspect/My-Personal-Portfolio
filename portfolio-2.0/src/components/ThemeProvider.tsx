@@ -1,12 +1,12 @@
 'use client'
 
-import { createContext, useContext, useState, ReactNode } from 'react'
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 
 type Theme = 'dark' | 'light'
 
 interface ThemeContextType {
   theme: Theme
-  toggleTheme: () => void //test
+  toggleTheme: () => void
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
@@ -17,12 +17,28 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const toggleTheme = () => {
     const newTheme: Theme = theme === 'dark' ? 'light' : 'dark'
     setTheme(newTheme)
+    
+    // Update both data-theme attribute and .dark class for compatibility
     document.documentElement.setAttribute('data-theme', newTheme)
+    if (newTheme === 'dark') {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
   }
+
+  // Sync theme on mount
+  useEffect(() => {
+    const currentTheme = document.documentElement.getAttribute('data-theme') as Theme || 'light'
+    setTheme(currentTheme)
+    if (currentTheme === 'dark') {
+      document.documentElement.classList.add('dark')
+    }
+  }, [])
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <div className="theme-cozy-fire">
+      <div className="theme-wrapper">
         {children}
       </div>
     </ThemeContext.Provider>

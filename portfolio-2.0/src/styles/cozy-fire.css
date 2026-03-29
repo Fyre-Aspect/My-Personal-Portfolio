@@ -1,132 +1,81 @@
-/* Cozy Fire Theme - Replace existing color values in globals.css */
+/* Theme Utility Classes - Extends globals.css */
+/* This file provides component-specific theme styling */
 
-/* Update your existing globals.css by replacing these specific sections: */
-
-/* 1. Replace the body background */
-body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  line-height: 1.6;
-  color: #fef4e6; /* Updated text color */
-  background: #1a1108; /* New cozy background */
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* 2. Update navigation colors */
+/* Navigation colors - aligned with new theme */
 .navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-  background: rgba(26, 17, 8, 0.9); /* Updated navbar background */
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(249, 115, 22, 0.3); /* Orange border */
-  transition: all 0.3s ease;
+  background: var(--bg-navbar);
+  border-bottom: 1px solid var(--border);
 }
 
 .logo {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #f97316;
-  text-decoration: none;
-  flex-shrink: 0;
+  color: var(--primary);
 }
 
 .nav-links a {
-  color: #e4c5a3; /* Warm text color */
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease;
-  position: relative;
+  color: var(--muted-foreground);
 }
 
 .nav-links a:hover {
-  color: #f97316; /* Orange hover */
+  color: var(--primary);
 }
 
 .nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: #f97316;
-  transition: width 0.3s ease;
+  background: var(--primary);
 }
 
-/* 3. Update hero section */
+/* Hero section styling */
 .hero h1 {
-  font-size: 4rem;
-  font-weight: 800;
-  margin-bottom: 1rem;
-  color: #f97316;
+  color: var(--primary);
 }
 
 .page-title {
-  font-size: 3.5rem;
-  font-weight: 800;
-  text-align: center;
-  margin-bottom: 1rem;
-  color: #f97316;
+  color: var(--primary);
 }
 
 .typing-text {
-  font-size: 1.5rem;
-  color: #e4c5a3; /* Warm text */
-  margin-bottom: 2rem;
-  min-height: 2rem;
+  color: var(--muted-foreground);
 }
 
 .typing-cursor {
-  border-right: 2px solid #f97316; /* Orange cursor */
-  animation: blink 1s infinite;
+  border-right: 2px solid var(--primary);
 }
 
 .hero-description {
-  font-size: 1.2rem;
-  color: #c4a478; /* Muted warm text */
-  margin-bottom: 3rem;
-  line-height: 1.8;
+  color: var(--text-muted);
 }
 
-/* 4. Update buttons */
+/* Button styling */
 .cta-button.primary {
-  background: #f97316;
-  color: white;
-  box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3); /* Orange shadow */
+  background: var(--primary);
+  color: var(--primary-foreground);
+  box-shadow: 0 4px 15px var(--shadow);
 }
 
 .cta-button.primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(249, 115, 22, 0.4); /* Enhanced orange shadow */
+  background: var(--primary-hover);
+  box-shadow: 0 8px 25px var(--shadow-hover);
 }
 
 .cta-button.secondary {
-  border: 2px solid #f97316; /* Orange border */
-  color: #e4c5a3; /* Warm text */
-  background: transparent;
+  border: 2px solid var(--border);
+  color: var(--muted-foreground);
 }
 
 .cta-button.secondary:hover {
-  background-color: rgba(249, 115, 22, 0.1); /* Subtle orange background */
-  border-color: #f97316;
-  color: #f97316; /* Orange text */
+  background-color: var(--muted);
+  border-color: var(--primary);
+  color: var(--primary);
 }
 
-/* 5. Update cards and sections */
+/* Card styling */
 .project-card,
 .activity-card,
 .stat-card,
 .achievement-card,
 .featured-post,
 .blog-post {
-  background: rgba(45, 31, 20, 0.8); /* Warm dark background */
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(249, 115, 22, 0.2); /* Orange border */
-  border-radius: 1rem;
-  transition: all 0.3s ease;
+  background: var(--card);
+  border: 1px solid var(--border);
 }
 
 .project-card:hover,
@@ -134,12 +83,11 @@ body {
 .stat-card:hover,
 .achievement-card:hover,
 .featured-post:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 25px 50px rgba(220, 38, 38, 0.2); /* Red shadow */
-  border-color: rgba(249, 115, 22, 0.5); /* Enhanced orange border */
+  box-shadow: 0 25px 50px var(--shadow-hover);
+  border-color: var(--border-hover);
 }
 
-/* 6. Update text colors */
+/* Text colors */
 .section-title,
 .page-subtitle,
 .project-title,
@@ -147,104 +95,92 @@ body {
 .achievement-title,
 .post-title,
 .category-title {
-  color: #fef4e6; /* Primary text color */
+  color: var(--foreground);
 }
 
 .project-description,
 .activity-description,
 .achievement-description,
 .post-excerpt {
-  color: #e4c5a3; /* Secondary text color */
+  color: var(--muted-foreground);
 }
 
 .project-link,
 .read-more-link {
-  color: #f97316; /* Orange links */
+  color: var(--primary);
 }
 
 .project-link:hover,
 .read-more-link:hover {
-  color: #eab308; /* Gold hover */
+  color: var(--secondary-foreground);
 }
 
-/* 7. Update stats section */
+/* Stats section */
 .stat-number {
-  font-size: 3rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, #f97316, #eab308); /* Orange to gold */
+  background: linear-gradient(135deg, var(--primary), var(--chart-4));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 0.5rem;
 }
 
 .stat-label {
-  color: #c4a478; /* Muted warm color */
-  font-weight: 500;
+  color: var(--text-muted);
 }
 
-/* 8. Update footer */
+/* Footer styling */
 .footer {
-  background: rgba(26, 17, 8, 0.9); /* Dark warm background */
-  padding: 3rem 0;
-  border-top: 1px solid rgba(249, 115, 22, 0.3); /* Orange border */
+  background: var(--bg-footer);
+  border-top: 1px solid var(--border);
 }
 
 .footer-text {
-  color: #c4a478; /* Muted warm text */
-  margin-bottom: 1rem;
+  color: var(--text-muted);
 }
 
 .social-link {
-  background: rgba(45, 31, 20, 0.5); /* Warm background */
-  border: 1px solid rgba(249, 115, 22, 0.3); /* Orange border */
-  color: #e4c5a3; /* Warm text */
+  background: var(--muted);
+  border: 1px solid var(--border);
+  color: var(--muted-foreground);
 }
 
 .social-link:hover {
-  background: rgba(249, 115, 22, 0.2); /* Orange background */
-  border-color: #f97316;
-  color: #f97316; /* Orange text */
-  transform: translateY(-2px);
+  background: var(--accent);
+  border-color: var(--primary);
+  color: var(--primary);
 }
 
-/* 9. Update scroll to top button */
+/* Scroll to top button */
 .scroll-top {
-  background: linear-gradient(135deg, #f97316, #dc2626); /* Orange to red */
-  border: none;
-  border-radius: 50%;
-  color: white;
-  box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+  background: linear-gradient(135deg, var(--primary), var(--destructive));
+  color: var(--primary-foreground);
+  box-shadow: 0 4px 15px var(--shadow);
 }
 
 .scroll-top:hover {
-  transform: scale(1.1);
-  opacity: 1;
-  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4);
+  box-shadow: 0 6px 20px var(--shadow-hover);
 }
 
-/* 10. Update mobile menu */
+/* Mobile menu */
 .mobile-menu {
-  background: rgba(26, 17, 8, 0.95); /* Dark warm background */
-  backdrop-filter: blur(10px);
+  background: var(--bg-navbar);
 }
 
 .mobile-nav-links a {
-  color: #e4c5a3; /* Warm text */
+  color: var(--muted-foreground);
 }
 
 .mobile-nav-links a:hover {
-  color: #f97316; /* Orange hover */
+  color: var(--primary);
 }
 
 .hamburger-line {
-  background: #e4c5a3; /* Warm hamburger lines */
+  background: var(--muted-foreground);
 }
 
-/* 11. Special sections backgrounds */
+/* Section backgrounds */
 .stats-section,
 .extracurriculars-section {
-  background: rgba(45, 31, 20, 0.3); /* Warm section background */
+  background: var(--muted);
 }
 
 .philosophy-section,
@@ -252,66 +188,71 @@ body {
 .blog-cta,
 .availability-section,
 .philosophy-connection {
-  background: rgba(45, 31, 20, 0.3); /* Warm background */
+  background: var(--muted);
 }
 
-/* 12. Form elements */
+/* Form elements */
 .form-group input,
 .form-group textarea {
-  background: rgba(26, 17, 8, 0.5); /* Dark warm input background */
-  border: 1px solid rgba(249, 115, 22, 0.3); /* Orange border */
-  color: #fef4e6; /* Light text */
+  background: var(--input);
+  border: 1px solid var(--border);
+  color: var(--foreground);
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
+  border-color: var(--ring);
   outline: none;
-  border-color: #f97316; /* Orange focus */
+  box-shadow: 0 0 0 2px rgba(155, 44, 44, 0.2);
 }
 
 .submit-button {
-  background: linear-gradient(135deg, #f97316, #dc2626); /* Orange to red */
-  color: white;
+  background: linear-gradient(135deg, var(--primary), var(--destructive));
+  color: var(--primary-foreground);
 }
 
 .submit-button:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(249, 115, 22, 0.4);
+  box-shadow: 0 8px 25px var(--shadow-hover);
 }
 
-/* 13. Tags and badges */
+/* Tags and badges */
 .tech-tag,
 .skill-tag,
 .post-tag {
-  background: rgba(249, 115, 22, 0.2); /* Orange background */
-  color: #f97316; /* Orange text */
+  background: var(--accent);
+  color: var(--accent-foreground);
 }
 
 .filter-tab:hover,
 .filter-tab.active {
-  background: rgba(249, 115, 22, 0.2); /* Orange background */
-  border-color: rgba(249, 115, 22, 0.5); /* Orange border */
-  color: #f97316; /* Orange text */
+  background: var(--accent);
+  border-color: var(--border-hover);
+  color: var(--accent-foreground);
 }
 
-/* 14. Achievement specific elements */
+/* Achievement elements */
 .achievement-icon {
-  background: rgba(249, 115, 22, 0.2); /* Orange background */
-  color: #f97316; /* Orange text */
+  background: var(--accent);
+  color: var(--accent-foreground);
 }
 
 .achievement-date,
 .post-date {
-  color: #f97316; /* Orange accent */
+  color: var(--primary);
 }
 
-/* 15. Special effects for the theme */
+/* Special effects */
 .project-card::before,
 .ember-effect::before {
-  background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.3), transparent);
+  background: linear-gradient(90deg, transparent, rgba(155, 44, 44, 0.2), transparent);
 }
 
-/* 16. Category title underlines */
+.dark .project-card::before,
+.dark .ember-effect::before {
+  background: linear-gradient(90deg, transparent, rgba(185, 28, 28, 0.25), transparent);
+}
+
+/* Category title underlines */
 .category-title::after {
-  background: linear-gradient(135deg, #f97316, #eab308); /* Orange to gold */
+  background: linear-gradient(135deg, var(--primary), var(--chart-4));
 }

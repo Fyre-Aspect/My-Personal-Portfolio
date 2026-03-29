@@ -11,9 +11,10 @@ export default function Hero() {
   const [isDeleting, setIsDeleting] = useState(false)
   
   const texts = [
-    "Full-Stack Developer",
+    "Developer",
+    "Lab Assistant",
     "Grade 11 Student", 
-    "IB Candidate",
+    "IB Programme",
   ]
 
   // Fix mobile viewport height issues

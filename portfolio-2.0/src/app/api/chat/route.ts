@@ -12,7 +12,7 @@ You are an AI assistant embedded in Aamir Tinwala's personal portfolio website.
 ## About Aamir Tinwala
 - Age: 16 years old
 - Education: Grade 11 High School Student, IB Programme Candidate
-- Roles: Full-Stack Developer, Young Innovator, Engineering Enthusiast
+- Roles: Developer, Young Innovator, Engineering Enthusiast
 - Contact: aamirtinwala7@gmail.com | 226-339-0855
 - LinkedIn: linkedin.com/in/aamirali-tinwala
 - GitHub: github.com/Fyre-Aspect
@@ -27,25 +27,25 @@ You are an AI assistant embedded in Aamir Tinwala's personal portfolio website.
 - Description: AI-powered task management platform with real-time collaboration features
 
 ### 2. Shurplus (Featured)
-- Role: Full-Stack Developer
+- Role:
 - Tech: Next.js, AI Agents, Logistics Algorithms, Computer Vision
 - Built at: NeoDev League Hackathon (3rd Place)
 - Description: AI-powered food rescue logistics platform. Solves "Inventory Chaos" for food banks using Inventory Management Agents and Networking Agents. Acts like a "Facebook Marketplace" for food rescue.
 
 ### 3. Lyra AI Tutor (Featured)
-- Role: Full-Stack Developer & Team Lead
+- Role: 
 - Tech: Python, Discord.py, Gemini API, NLP, Voice Recognition, AI/ML
 - Built at: Hack the Valley IX (36-hour hackathon)
 - Description: AI Discord bot for group study sessions with voice Q&A, focus tracking, and quiz generation
 
 ### 4. CatBot
-- Role: Full-Stack Developer
+- Role: 
 - Tech: AI, Chatbot, Gemini API, Next.js
 - URL: https://catgpt-nine.vercel.app
 - Description: Personalized easy tutor chatbot to teach hard concepts in simple terms linking videos with similar concepts.
 
 ### 5. Personal Portfolio
-- Role: Full-Stack Developer
+- Role: developer.
 - Tech: Next.js, TypeScript, CSS, Vercel, Git
 - URL: https://aamirtinwalapersonal-portfolio.vercel.app
 

@@ -1,12 +1,31 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Poppins, Libre_Baskerville, IBM_Plex_Mono } from 'next/font/google'
 import { Suspense } from 'react'
 import './globals.css'
 import { ThemeProvider } from '../components/ThemeProvider'
 import ChatWidget from '@/components/ChatWidget'
 import Analytics from '@/components/Analytics'
 
-const inter = Inter({ subsets: ['latin'] })
+const poppins = Poppins({ 
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800'],
+  variable: '--font-sans',
+  display: 'swap',
+})
+
+const libreBaskerville = Libre_Baskerville({ 
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-serif',
+  display: 'swap',
+})
+
+const ibmPlexMono = IBM_Plex_Mono({ 
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-mono',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'Aamir Tinwala - Full-Stack Developer & Young Innovator',
@@ -28,37 +47,36 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" data-theme="light">
+    <html lang="en" data-theme="light" className={`${poppins.variable} ${libreBaskerville.variable} ${ibmPlexMono.variable}`}>
       <head>
         {/* Ensure proper viewport handling */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
         {/* Add font-display swap for better loading */}
         <style dangerouslySetInnerHTML={{
           __html: `
             @font-face {
-              font-family: 'Inter-fallback';
+              font-family: 'Poppins-fallback';
               src: local('Arial'), local('Helvetica'), local('sans-serif');
-              ascent-override: 90%;
+              ascent-override: 92%;
               descent-override: 22%;
               line-gap-override: 0%;
-              size-adjust: 107%;
+              size-adjust: 105%;
             }
             
             /* Prevent layout shifts during font loading */
             body {
-              font-family: 'Inter-fallback', system-ui, -apple-system, sans-serif;
+              font-family: 'Poppins-fallback', system-ui, -apple-system, sans-serif;
             }
             
             .fonts-loaded body {
-              font-family: 'Inter', 'Inter-fallback', system-ui, -apple-system, sans-serif;
+              font-family: var(--font-sans), 'Poppins-fallback', system-ui, -apple-system, sans-serif;
             }
           `
         }} />
       </head>
-      <body className={inter.className}>
+      <body className={poppins.className}>
         <ThemeProvider>
           {children}
         </ThemeProvider>

@@ -1,126 +1,67 @@
-/* Cozy Fire Theme Variables */
-:root {
-  /* Dark Mode Colors */
-  --bg-primary: #1a1108;
-  --bg-secondary: #2d1f14;
-  --bg-tertiary: #3d2b1e;
-  --bg-card: rgba(45, 31, 20, 0.8);
-  --bg-card-hover: rgba(61, 43, 30, 0.9);
-  
-  /* Text Colors */
-  --text-primary: #fef4e6;
-  --text-secondary: #e4c5a3;
-  --text-muted: #c4a478;
-  
-  /* Brand Colors */
-  --primary: #f97316;
-  --primary-hover: #ea580c;
-  --secondary: #eab308;
-  --secondary-hover: #ca8a04;
-  --accent: #dc2626;
-  --accent-hover: #b91c1c;
-  
-  /* UI Colors */
-  --border: rgba(249, 115, 22, 0.2);
-  --border-hover: rgba(249, 115, 22, 0.4);
-  --shadow: rgba(220, 38, 38, 0.1);
-  --shadow-hover: rgba(220, 38, 38, 0.2);
-  
-  /* Gradient-safe fallbacks */
-  --gradient-primary: var(--primary);
-  --gradient-accent: var(--accent);
-  --gradient-bg: var(--bg-primary);
-}
-
-/* Light Mode Override */
-[data-theme="light"] {
-  --bg-primary: #fffbf0;
-  --bg-secondary: #fef4e6;
-  --bg-tertiary: #fde5c7;
-  --bg-card: rgba(254, 244, 230, 0.8);
-  --bg-card-hover: rgba(253, 229, 199, 0.9);
-  
-  --text-primary: #2d1f14;
-  --text-secondary: #4a3426;
-  --text-muted: #6b4e38;
-  
-  --primary: #c2410c;
-  --primary-hover: #9a3412;
-  --secondary: #ca8a04;
-  --secondary-hover: #a16207;
-  --accent: #991b1b;
-  --accent-hover: #7f1d1d;
-  
-  --border: rgba(194, 65, 12, 0.2);
-  --border-hover: rgba(194, 65, 12, 0.4);
-  --shadow: rgba(153, 27, 27, 0.1);
-  --shadow-hover: rgba(153, 27, 27, 0.2);
-  
-  --gradient-primary: var(--primary);
-  --gradient-accent: var(--accent);
-  --gradient-bg: var(--bg-primary);
-}
+/* Theme Variables - New Color System */
+/* This file provides additional theme utilities and animations */
 
 /* Theme Application Classes */
-.theme-cozy-fire {
-  background: var(--bg-primary);
-  color: var(--text-primary);
+.theme-wrapper {
+  background: var(--background);
+  color: var(--foreground);
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-.theme-cozy-fire .card {
-  background: var(--bg-card);
+.theme-wrapper .card {
+  background: var(--card);
   border: 1px solid var(--border);
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
 }
 
-.theme-cozy-fire .card:hover {
-  background: var(--bg-card-hover);
+.theme-wrapper .card:hover {
+  background: var(--muted);
   border-color: var(--border-hover);
-  box-shadow: 0 20px 40px var(--shadow-hover);
+  box-shadow: var(--shadow-offset-x) var(--shadow-offset-y) var(--shadow-blur) var(--shadow-spread) var(--shadow-color);
 }
 
-.theme-cozy-fire .btn-primary {
-  background: var(--gradient-primary);
-  color: white;
+.theme-wrapper .btn-primary {
+  background: var(--primary);
+  color: var(--primary-foreground);
   border: none;
   box-shadow: 0 4px 15px var(--shadow);
 }
 
-.theme-cozy-fire .btn-primary:hover {
+.theme-wrapper .btn-primary:hover {
+  background: var(--primary-hover);
   box-shadow: 0 8px 25px var(--shadow-hover);
   transform: translateY(-2px);
 }
 
-.theme-cozy-fire .btn-secondary {
+.theme-wrapper .btn-secondary {
   border: 2px solid var(--border);
-  color: var(--text-secondary);
+  color: var(--muted-foreground);
   background: transparent;
 }
 
-.theme-cozy-fire .btn-secondary:hover {
-  background-color: var(--bg-tertiary);
+.theme-wrapper .btn-secondary:hover {
+  background-color: var(--muted);
   border-color: var(--primary);
   color: var(--primary);
 }
 
-.theme-cozy-fire .text-gradient {
-  background: var(--gradient-primary);
+.theme-wrapper .text-gradient {
+  background: linear-gradient(135deg, var(--primary), var(--accent-foreground));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.theme-cozy-fire .accent-gradient {
-  background: var(--gradient-accent);
+.theme-wrapper .accent-gradient {
+  background: linear-gradient(135deg, var(--accent), var(--secondary));
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* Fire-themed animations */
-@keyframes fireGlow {
+/* Theme-aware glow animations */
+@keyframes themeGlow {
   0%, 100% {
     box-shadow: 0 0 20px var(--shadow);
   }
@@ -129,27 +70,32 @@
   }
 }
 
-.theme-cozy-fire .fire-glow {
-  animation: fireGlow 2s ease-in-out infinite;
+.theme-wrapper .theme-glow {
+  animation: themeGlow 2s ease-in-out infinite;
 }
 
 /* Warm ember effect for interactive elements */
-.theme-cozy-fire .ember-effect {
+.theme-wrapper .ember-effect {
   position: relative;
   overflow: hidden;
 }
 
-.theme-cozy-fire .ember-effect::before {
+.theme-wrapper .ember-effect::before {
   content: '';
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: rgba(249, 115, 22, 0.25);
+  background: rgba(155, 44, 44, 0.15);
   transition: left 0.5s ease;
 }
 
-.theme-cozy-fire .ember-effect:hover::before {
+.theme-wrapper .ember-effect:hover::before {
   left: 100%;
+}
+
+/* Dark mode specific ember effect */
+.dark .theme-wrapper .ember-effect::before {
+  background: rgba(185, 28, 28, 0.2);
 }
