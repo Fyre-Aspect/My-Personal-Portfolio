@@ -9,6 +9,16 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Liquid Glass Background Animation */
+@keyframes moveBackground {
+  from {
+    background-position: 0% 0%;
+  }
+  to {
+    background-position: 0% -1000%;
+  }
+}
+
 /* CSS Custom Properties - New Theme System */
 :root {
   /* Core Theme Variables - Light Mode (Default) */
@@ -303,6 +313,229 @@ body {
 
 .navbar.hidden {
   transform: translateY(-100%);
+}
+
+/* Glass Navigation Styles */
+.glass-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 0.75rem 1rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(0);
+}
+
+.glass-navbar.hidden {
+  transform: translateY(-120%);
+}
+
+.glass-nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.5rem 1rem;
+}
+
+.glass-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+}
+
+.glass-logo-container:hover {
+  transform: scale(1.02);
+}
+
+.glass-logo-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+}
+
+.glass-logo-icon:hover {
+  transform: scale(1.1);
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.glass-logo {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--foreground);
+  background: linear-gradient(135deg, var(--primary), var(--foreground));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+}
+
+.glass-nav-links {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.glass-nav-link {
+  color: var(--foreground);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.75rem;
+  transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+  position: relative;
+}
+
+.glass-nav-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.glass-nav-link.active {
+  background: rgba(255, 255, 255, 0.25);
+  color: var(--primary);
+}
+
+.glass-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: width 0.3s ease;
+  border-radius: 1px;
+}
+
+.glass-nav-link:hover::after,
+.glass-nav-link.active::after {
+  width: 60%;
+}
+
+/* Glass Mobile Menu Button */
+.glass-mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  gap: 5px;
+  transition: all 0.3s ease;
+}
+
+.glass-mobile-menu-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.glass-hamburger-line {
+  width: 1.25rem;
+  height: 2px;
+  background: var(--foreground);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.glass-hamburger-line.open:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.glass-hamburger-line.open:nth-child(2) {
+  opacity: 0;
+}
+
+.glass-hamburger-line.open:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Glass Mobile Menu */
+.glass-mobile-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.glass-mobile-menu.open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.glass-mobile-nav-links {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.glass-mobile-nav-links .glass-nav-link {
+  display: block;
+  padding: 0.75rem 1rem;
+  text-align: center;
+}
+
+.glass-mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: -1;
+}
+
+/* Responsive styles for glass navbar */
+@media (max-width: 768px) {
+  .glass-nav-links {
+    display: none;
+  }
+
+  .glass-mobile-menu-btn {
+    display: flex;
+  }
+
+  .glass-mobile-menu {
+    display: block;
+  }
+
+  .glass-navbar {
+    padding: 0.5rem;
+  }
+
+  .glass-logo {
+    font-size: 1.1rem;
+  }
+
+  .glass-logo-icon {
+    width: 2rem;
+    height: 2rem;
+  }
 }
 
 .nav-content {
