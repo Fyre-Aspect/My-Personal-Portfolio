@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import styles from './HeroSection.module.css';
 
-const roles = ["Full-Stack Developer", "Hardware Builder", "AI Tinkerer", "IB Student"];
+const roles = ["Web-App Developer", "Lab Intern", "Grade 11 HS Student", "IB Student"];
 
 export default function HeroSection() {
   const [roleIndex, setRoleIndex] = useState(0);
@@ -21,7 +21,7 @@ export default function HeroSection() {
         <div className={styles.icChip}>ATmega328P // Aamir OS v1.0</div>
         
         <div className={styles.terminalBadge}>
-          $ asmir --status=available-for-hire
+          $ aamir --status=available-for-hire
         </div>
         
         <h1 className={styles.mainHeading}>Aamir Tinwala</h1>
