@@ -1,0 +1,28 @@
+.dashboardWrapper {
+  position: relative;
+  min-height: 100vh;
+  background-color: transparent;
+  overflow: hidden;
+}
+
+.pcbGrid {
+  position: fixed;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, var(--color-text-primary) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-text-primary) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: traceGlow 4s infinite alternate ease-in-out;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.contentWrapper {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes traceGlow {
+  0%, 100% { opacity: .01; }
+  50% { opacity: .04; }
+}

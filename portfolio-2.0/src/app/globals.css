@@ -44,7 +44,7 @@ html {
   --chart-4: #b45309;
   --chart-5: #92400e;
   --popover: #faf7f5;
-  --primary: #9b2c2c;
+  --primary: var(--color-accent);
   --sidebar: #f0ebe8;
   --font-mono: 'IBM Plex Mono', monospace;
   --font-sans: 'Poppins', sans-serif;
@@ -129,7 +129,7 @@ html {
   --chart-4: #fbbf24;
   --chart-5: #f59e0b;
   --popover: #292524;
-  --primary: #b91c1c;
+  --primary: var(--color-accent);
   --sidebar: #1c1917;
   --secondary: #92400e;
   --background: #1c1917;
@@ -193,7 +193,7 @@ html {
   --chart-4: #b45309;
   --chart-5: #92400e;
   --popover: #faf7f5;
-  --primary: #9b2c2c;
+  --primary: var(--color-accent);
   --sidebar: #f0ebe8;
   --secondary: #fdf2d6;
   --background: #faf7f5;
@@ -414,7 +414,7 @@ body {
 
 .glass-nav-link.active {
   background: rgba(255, 255, 255, 0.25);
-  color: var(--primary);
+  color: var(--color-accent);
 }
 
 .glass-nav-link::after {
@@ -579,7 +579,7 @@ body {
 
 .logo-icon:hover {
   transform: scale(1.1);
-  border-color: var(--primary);
+  border-color: var(--color-accent);
   box-shadow: 0 0 15px var(--shadow-hover);
 }
 
@@ -612,7 +612,7 @@ body {
 }
 
 .nav-links a:hover {
-  color: var(--primary);
+  color: var(--color-accent);
   transform: translateY(-1px);
 }
 
@@ -641,7 +641,7 @@ body {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 50%;
-  color: var(--primary);
+  color: var(--color-accent);
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -725,7 +725,7 @@ body {
 }
 
 .mobile-nav-links a:hover {
-  color: var(--primary);
+  color: var(--color-accent);
 }
 
 .mobile-menu-overlay {
@@ -844,7 +844,7 @@ body {
 
 /* Highlighted keywords with hover effects - Enhanced */
 .highlight-keyword {
-  color: var(--primary);
+  color: var(--color-accent);
   font-weight: 600;
   position: relative;
   cursor: pointer;
@@ -878,7 +878,7 @@ body {
 
 /* Additional highlight keyword styles for specific pages */
 .page-highlight {
-  color: var(--primary);
+  color: var(--color-accent);
   font-weight: 600;
   position: relative;
   cursor: pointer;
@@ -914,35 +914,36 @@ body {
 /* CTA Buttons */
 .cta-button {
   display: inline-block;
-  padding: 1rem 2rem;
+  padding: 12px 24px;
   text-decoration: none;
-  border-radius: 0.5rem;
+  border-radius: 4px;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: all 0.2s;
   cursor: pointer;
 }
 
 .cta-button.primary {
-  background: var(--gradient-accent);
-  color: white;
-  box-shadow: 0 4px 15px var(--shadow);
+  background: var(--color-accent);
+  color: var(--color-bg) !important;
+  border: transparent;
+  box-shadow: none;
 }
 
 .cta-button.primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px var(--shadow-hover);
+  opacity: 0.9;
+  transform: none;
+  box-shadow: none;
 }
 
 .cta-button.secondary {
-  border: 2px solid var(--border-strong);
-  color: var(--text-secondary);
+  border: 1px solid var(--color-text-secondary);
+  color: var(--color-text-primary) !important;
   background: transparent;
 }
 
 .cta-button.secondary:hover {
-  background-color: var(--bg-tertiary);
-  border-color: var(--primary);
-  color: var(--primary);
+  border-color: var(--color-text-primary);
+  background: transparent;
 }
 
 /* Card Components */
@@ -962,7 +963,7 @@ body {
   background: var(--bg-card);
   backdrop-filter: blur(10px);
   border: 1px solid var(--border);
-  border-radius: 1rem;
+  border-radius: 4px;
   padding: 2rem;
   transition: all 0.3s ease;
 }
@@ -1007,7 +1008,7 @@ body {
 /* Links */
 .project-link,
 .read-more-link {
-  color: var(--primary);
+  color: var(--color-accent);
   text-decoration: none;
   font-weight: 500;
   transition: all 0.3s ease;
@@ -1038,10 +1039,7 @@ body {
 }
 
 /* Stats Section */
-.stats-section {
-  padding: 5rem 0;
-  background: var(--bg-secondary);
-}
+.stats-section { padding: 5rem 0; background: transparent; }
 
 .stats-grid {
   display: grid;
@@ -1053,10 +1051,9 @@ body {
 .stat-number {
   font-size: 3rem;
   font-weight: 800;
-  background: var(--gradient-primary);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--color-accent);
+  background: none;
+  -webkit-text-fill-color: initial;
   margin-bottom: 0.5rem;
 }
 
@@ -1081,7 +1078,7 @@ body {
 .tech-stack-carousel {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 1rem;
+  border-radius: 4px;
   padding: 1rem;
   overflow: hidden;
 }
@@ -1207,13 +1204,13 @@ body {
 .project-motivation {
   background: var(--bg-tertiary);
   padding: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 4px;
   margin-bottom: 1.5rem;
   border-left: 3px solid var(--primary);
 }
 
 .project-motivation h4 {
-  color: var(--primary);
+  color: var(--color-accent);
   font-size: 0.9rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
@@ -1233,7 +1230,7 @@ body {
 .skill-tag,
 .post-tag {
   background: rgba(232, 107, 19, 0.15);
-  color: var(--primary);
+  color: var(--color-accent);
   padding: 0.25rem 0.75rem;
   border-radius: 9999px;
   font-size: 0.875rem;
@@ -1314,7 +1311,7 @@ body {
   justify-content: center;
   background: rgba(232, 107, 19, 0.15);
   border-radius: 50%;
-  color: var(--primary);
+  color: var(--color-accent);
 }
 
 .achievement-content {
@@ -1333,15 +1330,15 @@ body {
 }
 
 .achievement-date {
-  color: var(--primary);
+  color: var(--color-accent);
   font-size: 0.9rem;
   font-weight: 500;
 }
 
 .achievements-reflection {
-  background: var(--bg-secondary);
+  background: transparent;
   padding: 3rem;
-  border-radius: 1rem;
+  border-radius: 4px;
   text-align: center;
 }
 
@@ -1400,7 +1397,7 @@ body {
 .filter-tab.active {
   background: rgba(232, 107, 19, 0.15);
   border-color: var(--border-hover);
-  color: var(--primary);
+  color: var(--color-accent);
 }
 
 .blog-posts {
@@ -1443,15 +1440,15 @@ body {
 }
 
 .post-date {
-  color: var(--primary);
+  color: var(--color-accent);
 }
 
 .post-read-time {
   padding: 0.25rem 0.75rem;
   background: rgba(232, 107, 19, 0.15);
-  border-radius: 1rem;
+  border-radius: 4px;
   font-size: 0.8rem;
-  color: var(--primary);
+  color: var(--color-accent);
 }
 
 .post-title {
@@ -1467,9 +1464,9 @@ body {
 }
 
 .blog-cta {
-  background: var(--bg-secondary);
+  background: transparent;
   padding: 3rem;
-  border-radius: 1rem;
+  border-radius: 4px;
   text-align: center;
 }
 
@@ -1513,7 +1510,7 @@ body {
 
 .about-text h3 {
   font-size: 1.5rem;
-  color: var(--primary);
+  color: var(--color-accent);
   margin: 2rem 0 1rem 0;
 }
 
@@ -1534,15 +1531,15 @@ body {
 }
 
 .skill-category h4 {
-  color: var(--primary);
+  color: var(--color-accent);
   margin-bottom: 1rem;
   font-size: 1.1rem;
 }
 
 .philosophy-section {
-  background: var(--bg-secondary);
+  background: transparent;
   padding: 3rem;
-  border-radius: 1rem;
+  border-radius: 4px;
   margin-top: 3rem;
 }
 
@@ -1561,7 +1558,7 @@ body {
 }
 
 .philosophy-card h3 {
-  color: var(--primary);
+  color: var(--color-accent);
   margin-bottom: 1rem;
 }
 
@@ -1607,7 +1604,7 @@ body {
   width: 100%;
   height: 250px;
   object-fit: cover;
-  border-radius: 0.5rem;
+  border-radius: 4px;
 }
 
 .project-features {
@@ -1615,7 +1612,7 @@ body {
 }
 
 .project-features h4 {
-  color: var(--primary);
+  color: var(--color-accent);
   margin-bottom: 0.5rem;
 }
 
@@ -1644,7 +1641,7 @@ body {
 }
 
 .project-tech h4 {
-  color: var(--primary);
+  color: var(--color-accent);
   margin-bottom: 1rem;
 }
 
@@ -1654,23 +1651,26 @@ body {
 }
 
 .project-link.primary {
-  background: var(--gradient-primary);
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
+  background: var(--color-accent);
+  color: var(--color-bg) !important;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-weight: 600;
   display: inline-block;
+  text-decoration: none;
+  transition: all 0.2s;
 }
 
 .project-link.secondary {
-  border: 1px solid var(--border-strong);
-  color: var(--text-secondary);
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
+  border: 1px solid var(--color-text-secondary);
+  color: var(--color-text-primary) !important;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-weight: 600;
+  background: transparent;
   display: inline-block;
+  text-decoration: none;
+  transition: all 0.2s;
 }
 
 .project-link:hover {
@@ -1714,7 +1714,7 @@ body {
 }
 
 .activity-details h4 {
-  color: var(--primary);
+  color: var(--color-accent);
   margin-bottom: 1rem;
 }
 
@@ -1733,16 +1733,16 @@ body {
 
 .activity-details li::before {
   content: '•';
-  color: var(--primary);
+  color: var(--color-accent);
   position: absolute;
   left: 0;
   font-weight: bold;
 }
 
 .philosophy-connection {
-  background: var(--bg-secondary);
+  background: transparent;
   padding: 3rem;
-  border-radius: 1rem;
+  border-radius: 4px;
   text-align: center;
 }
 
@@ -1769,7 +1769,7 @@ body {
 }
 
 .connection-card h3 {
-  color: var(--primary);
+  color: var(--color-accent);
   margin-bottom: 1rem;
 }
 
@@ -1818,7 +1818,7 @@ body {
   align-items: center;
   gap: 1rem;
   padding: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 4px;
 }
 
 .method-icon {
@@ -1826,7 +1826,7 @@ body {
 }
 
 .contact-method h3 {
-  color: var(--primary);
+  color: var(--color-accent);
   margin-bottom: 0.25rem;
 }
 
@@ -1837,7 +1837,7 @@ body {
 }
 
 .contact-method a:hover {
-  color: var(--primary);
+  color: var(--color-accent);
 }
 
 .contact-form h3 {
@@ -1863,7 +1863,7 @@ body {
   padding: 0.75rem;
   background: var(--bg-tertiary);
   border: 1px solid var(--border);
-  border-radius: 0.5rem;
+  border-radius: 4px;
   color: var(--text-primary);
   font-family: inherit;
   transition: border-color 0.3s ease;
@@ -1872,7 +1872,7 @@ body {
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--primary);
+  border-color: var(--color-accent);
 }
 
 .form-group input:disabled,
@@ -1883,14 +1883,14 @@ body {
 
 .submit-button {
   width: 100%;
-  padding: 1rem;
-  background: var(--gradient-primary);
-  color: white;
+  padding: 12px 24px;
+  background: var(--color-accent);
+  color: var(--background);
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 4px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s;
 }
 
 .submit-button:hover:not(:disabled) {
@@ -1907,7 +1907,7 @@ body {
 /* Form Status Messages */
 .form-status {
   padding: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 4px;
   margin-bottom: 1.5rem;
   text-align: center;
 }
@@ -1930,9 +1930,9 @@ body {
 }
 
 .availability-section {
-  background: var(--bg-secondary);
+  background: transparent;
   padding: 3rem;
-  border-radius: 1rem;
+  border-radius: 4px;
   text-align: center;
 }
 
@@ -1979,7 +1979,7 @@ body {
 /* Extracurriculars Section */
 .extracurriculars-section {
   padding: 5rem 0;
-  background: var(--bg-secondary);
+  background: transparent;
 }
 
 .activities-grid {
@@ -2031,8 +2031,8 @@ body {
 
 .social-link:hover {
   background: var(--bg-card-hover);
-  border-color: var(--primary);
-  color: var(--primary);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
   transform: translateY(-2px);
 }
 
@@ -2140,7 +2140,7 @@ a.contact-link {
   height: 2px;
   bottom: -2px;
   left: 0;
-  background-color: var(--primary);
+  background-color: var(--color-accent);
   transition: width 0.3s ease;
 }
 
@@ -2402,7 +2402,7 @@ a.contact-link {
 
 .back-link {
   display: inline-block;
-  color: var(--primary);
+  color: var(--color-accent);
   text-decoration: none;
   font-weight: 500;
   margin-bottom: 2rem;
@@ -2433,7 +2433,7 @@ a.contact-link {
   padding: 1.5rem;
   background: var(--bg-card);
   border-left: 4px solid var(--primary);
-  border-radius: 0.5rem;
+  border-radius: 4px;
 }
 
 .post-body h2 {
@@ -2455,7 +2455,7 @@ a.contact-link {
   font-style: italic;
   font-size: 1.15rem;
   color: var(--text-primary);
-  border-radius: 0.5rem;
+  border-radius: 4px;
 }
 
 .post-list {
@@ -2472,7 +2472,7 @@ a.contact-link {
 
 .post-list li::before {
   content: '→';
-  color: var(--primary);
+  color: var(--color-accent);
   position: absolute;
   left: 0;
   font-weight: bold;
@@ -2499,25 +2499,25 @@ a.contact-link {
 }
 
 .nav-link {
-  color: var(--primary);
+  color: var(--color-accent);
   text-decoration: none;
   font-weight: 500;
   transition: all 0.3s ease;
   padding: 0.75rem 1.5rem;
   border: 1px solid var(--border);
-  border-radius: 0.5rem;
+  border-radius: 4px;
 }
 
 .nav-link:hover {
   background: var(--bg-card-hover);
-  border-color: var(--primary);
+  border-color: var(--color-accent);
   transform: translateY(-2px);
 }
 
 /* Updated spacing for read more links */
 .read-more-link {
   display: inline-block;
-  color: var(--primary);
+  color: var(--color-accent);
   text-decoration: none;
   font-weight: 500;
   transition: all 0.3s ease;
@@ -2626,7 +2626,7 @@ a.contact-link {
 
 /* Active state for desktop navigation */
 .nav-links a.active {
-  color: var(--primary);
+  color: var(--color-accent);
   font-weight: 600;
   transform: translateY(-1px);
 }
@@ -2638,10 +2638,10 @@ a.contact-link {
 
 /* Active state for mobile navigation */
 .mobile-nav-links a.active {
-  color: var(--primary);
+  color: var(--color-accent);
   font-weight: 600;
   background: rgba(232, 107, 19, 0.1);
-  border-radius: 0.5rem;
+  border-radius: 4px;
 }
 
 /* Add subtle glow effect for active links */
@@ -2879,7 +2879,7 @@ a.contact-link {
   object-fit: contain;
   object-position: center;
   transition: all 0.3s ease;
-  border-radius: 0.5rem;
+  border-radius: 4px;
   background: var(--bg-primary);
   padding: 0.5rem;
 }
@@ -2918,7 +2918,7 @@ a.contact-link {
 /* Enhanced tech tags for better visibility */
 .tech-tags .tech-tag {
   background: rgba(232, 107, 19, 0.15);
-  color: var(--primary);
+  color: var(--color-accent);
   padding: 0.4rem 0.8rem;
   border-radius: 9999px;
   font-size: 0.875rem;
@@ -2976,7 +2976,7 @@ a.contact-link {
   background: var(--bg-card);
   backdrop-filter: blur(10px);
   border: 1px solid var(--border);
-  border-radius: 1rem;
+  border-radius: 4px;
   padding: 0;
   transition: all 0.3s ease;
   overflow: hidden;
@@ -3063,7 +3063,7 @@ a.contact-link {
 }
 
 .activity-details h4 {
-  color: var(--primary);
+  color: var(--color-accent);
   margin-bottom: 1rem;
   font-size: 1rem;
   font-weight: 600;
@@ -3085,7 +3085,7 @@ a.contact-link {
 
 .activity-details li::before {
   content: '→';
-  color: var(--primary);
+  color: var(--color-accent);
   position: absolute;
   left: 0;
   font-weight: bold;
@@ -3098,7 +3098,7 @@ a.contact-link {
 
 /* Enhanced philosophy connection section */
 .philosophy-connection {
-  background: var(--bg-secondary);
+  background: transparent;
   padding: 4rem 3rem;
   border-radius: 1.5rem;
   text-align: center;
@@ -3137,7 +3137,7 @@ a.contact-link {
 .connection-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 1rem;
+  border-radius: 4px;
   padding: 2rem;
   transition: all 0.3s ease;
   text-align: left;
@@ -3151,7 +3151,7 @@ a.contact-link {
 }
 
 .connection-card h3 {
-  color: var(--primary);
+  color: var(--color-accent);
   margin-bottom: 1rem;
   font-size: 1.1rem;
   font-weight: 600;
@@ -3167,7 +3167,7 @@ a.contact-link {
 .growth-commitment {
   background: var(--bg-tertiary);
   border: 1px solid var(--border);
-  border-radius: 1rem;
+  border-radius: 4px;
   padding: 2.5rem;
   text-align: left;
   margin-top: 3rem;
@@ -3446,7 +3446,7 @@ a.contact-link {
   background: var(--bg-card);
   backdrop-filter: blur(15px);
   border: 1px solid var(--border);
-  border-radius: 1rem;
+  border-radius: 4px;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
@@ -3607,7 +3607,7 @@ a.contact-link {
 }
 
 .achievement-date {
-  color: var(--primary);
+  color: var(--color-accent);
   font-size: 0.85rem;
   font-weight: 600;
   background: rgba(232, 107, 19, 0.1);
@@ -3619,7 +3619,7 @@ a.contact-link {
 
 /* Growth Reflection Section */
 .growth-reflection {
-  background: var(--bg-secondary);
+  background: transparent;
   padding: 4rem 3rem;
   border-radius: 2rem;
   border: 1px solid var(--border);
@@ -3699,7 +3699,7 @@ a.contact-link {
   background: var(--bg-card);
   backdrop-filter: blur(15px);
   border: 1px solid var(--border);
-  border-radius: 1rem;
+  border-radius: 4px;
   padding: 2rem;
   text-align: left;
   transition: all 0.3s ease;
@@ -3731,7 +3731,7 @@ a.contact-link {
 }
 
 .dimension-card h3 {
-  color: var(--primary);
+  color: var(--color-accent);
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 1rem;
@@ -4331,7 +4331,7 @@ body {
 @media (max-width: 480px) {
   .logo-container {
     padding: 0.35rem 0.7rem;
-    border-radius: 0.5rem;
+    border-radius: 4px;
   }
 }
 
@@ -4361,7 +4361,7 @@ body {
 }
 
 .github-cta-icon {
-  color: var(--primary);
+  color: var(--color-accent);
   opacity: 0.9;
 }
 
@@ -4382,16 +4382,17 @@ body {
 .github-cta-button {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  padding: 1rem 2rem;
-  background: var(--primary);
-  color: white;
+  padding: 12px 24px;
+  background: var(--color-accent);
+  color: var(--background);
   text-decoration: none;
-  border-radius: 0.75rem;
+  border-radius: 4px;
   font-weight: 600;
   font-size: 1rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px var(--shadow);
+  transition: all 0.2s;
+  box-shadow: none;
 }
 
 .github-cta-button:hover {
@@ -4405,7 +4406,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
-  color: var(--primary);
+  color: var(--color-accent);
   font-weight: 500;
   transition: all 0.3s ease;
 }
@@ -4436,4 +4437,22 @@ body {
     width: 100%;
     justify-content: center;
   }
+}
+
+
+
+@keyframes traceGlow {
+  0%, 100% { opacity: 0.02; }
+  50% { opacity: 0.06; }
+}
+
+.global-pcb-grid {
+  position: fixed;
+  inset: 0;
+  background-image: linear-gradient(to right, var(--color-text-primary) 1px, transparent 1px), linear-gradient(to bottom, var(--color-text-primary) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: traceGlow 4s infinite alternate ease-in-out;
+  opacity: 0.04;
+  z-index: -1;
+  pointer-events: none;
 }

@@ -77,6 +77,7 @@ export default function RootLayout({
         }} />
       </head>
       <body className={poppins.className}>
+        <div className="global-pcb-grid"></div>
         <ThemeProvider>
           {children}
         </ThemeProvider>

@@ -17,7 +17,6 @@ export default function HeroSection() {
 
   return (
     <section className={styles.hero}>
-      <div className={styles.pcbGrid}></div>
       <div className={styles.content}>
         <div className={styles.icChip}>ATmega328P // Aamir OS v1.0</div>
         
@@ -39,8 +38,8 @@ export default function HeroSection() {
         </p>
 
         <div className={styles.ctaGroup}>
-          <Link href="/projects" className={styles.btnPrimary}>View My Work →</Link>
-          <Link href="mailto:aamirtinwala@example.com" className={styles.btnSecondary}>Get In Touch</Link>
+          <Link href="/projects" className="cta-button primary">View My Work →</Link>
+          <Link href="mailto:aamirtinwala@example.com" className="cta-button secondary">Get In Touch</Link>
         </div>
 
         <div className={styles.statsRow}>
