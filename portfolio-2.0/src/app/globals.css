@@ -21,6 +21,15 @@ html {
 
 /* CSS Custom Properties - New Theme System */
 :root {
+  /* New Color System */
+  --color-accent: #FF8F21;
+  --color-accent-gold: #F5C254;
+  --color-hardware: #66C78C;
+  --color-surface: var(--card);
+  --color-bg: var(--background);
+  --color-text-primary: var(--foreground);
+  --color-text-secondary: var(--muted-foreground);
+
   /* Core Theme Variables - Light Mode (Default) */
   --card: #faf7f5;
   --ring: #9b2c2c;

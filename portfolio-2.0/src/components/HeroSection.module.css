@@ -1,0 +1,162 @@
+.hero {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-bg);
+  overflow: hidden;
+  padding: 4rem 2rem;
+}
+
+/* Background tracing lines */
+.pcbGrid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, var(--color-text-primary) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-text-primary) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: traceGlow 4s infinite alternate ease-in-out;
+  z-index: 0;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  width: 100%;
+}
+
+.terminalBadge {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.9rem;
+  color: var(--color-accent);
+  margin-bottom: 1.5rem;
+  display: inline-block;
+}
+
+.terminalBadge::after {
+  content: '█';
+  animation: blink 1s infinite;
+  margin-left: 4px;
+}
+
+.icChip {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 1px solid var(--color-text-secondary);
+  padding: 8px 12px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  color: var(--color-hardware);
+  background: var(--color-surface);
+  border-left: 3px solid var(--color-hardware);
+  border-right: 3px solid var(--color-hardware);
+}
+
+.mainHeading {
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 700;
+  font-size: clamp(48px, 6vw, 80px);
+  color: var(--color-text-primary);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.roleCycleWrapper {
+  height: 40px;
+  margin-bottom: 1.5rem;
+}
+
+.roleText {
+  font-size: 1.5rem;
+  color: var(--color-text-secondary);
+  animation: fadeRole 3s infinite;
+}
+
+.bio {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  max-width: 600px;
+}
+
+.ctaGroup {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 4rem;
+}
+
+.btnPrimary {
+  background: var(--color-accent);
+  color: var(--color-bg);
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.btnPrimary:hover { opacity: 0.9; }
+
+.btnSecondary {
+  border: 1px solid var(--color-text-secondary);
+  color: var(--color-text-primary);
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.2s;
+}
+
+.btnSecondary:hover { border-color: var(--color-text-primary); }
+
+.statsRow {
+  display: flex;
+  gap: 1.5rem;
+  color: var(--color-text-secondary);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.9rem;
+}
+
+.statItem {
+  display: flex;
+  align-items: center;
+}
+
+.statItem:not(:last-child)::after {
+  content: '';
+  display: inline-block;
+  width: 2px;
+  height: 20px;
+  background: var(--color-surface);
+  margin-left: 1.5rem;
+}
+
+.scrollIndicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--color-text-secondary);
+  animation: chevronBounce 2s infinite ease-in-out;
+}
+
+@keyframes traceGlow { 0%,100%{opacity:.01} 50%{opacity:.04} }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+@keyframes fadeRole { 0%{opacity:0;transform:translateY(8px)} 20%,80%{opacity:1;transform:translateY(0)} 100%{opacity:0;transform:translateY(-8px)} }
+@keyframes chevronBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+
+@media (max-width: 768px) {
+  .mainHeading { font-size: clamp(40px, 8vw, 48px); }
+  .statsRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .statItem:not(:last-child)::after { display: none; }
+  .icChip { position: static; margin-bottom: 1.5rem; display: inline-block; }
+}

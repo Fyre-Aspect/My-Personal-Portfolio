@@ -1,6 +1,6 @@
 import Navigation from '../components/Navigation'
-import Hero from '../components/Hero'
-import Stats from '../components/Stats'
+import HeroSection from '../components/HeroSection'
+import ProjectPreviewStrip from '../components/ProjectPreviewStrip'
 import Projects from '../components/Projects'
 import Extracurriculars from '../components/Extracurriculars'
 import Footer from '../components/Footer'
@@ -10,9 +10,8 @@ export default function Home() {
     <>
       <Navigation />
       <main className="page-content">
-        <Hero />
-        <Stats />
-        <Projects />
+        <HeroSection />
+        <ProjectPreviewStrip />
         <Extracurriculars />
       </main>
       <Footer />

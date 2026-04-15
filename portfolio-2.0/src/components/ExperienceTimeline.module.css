@@ -1,0 +1,183 @@
+.timelineWrapper {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.spine {
+  position: absolute;
+  top: 4rem;
+  bottom: 4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  background-color: rgba(255, 143, 33, 0.3);
+  z-index: 0;
+}
+
+.cardContainer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+}
+
+.card {
+  width: 540px;
+  min-height: 148px;
+  border-radius: 12px;
+  background-color: var(--color-surface);
+  padding: 1.5rem;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.card.left {
+  margin-right: 50%;
+  transform: translateX(-2rem);
+  border-right: 3px solid transparent; /* placeholder */
+}
+
+.card.right {
+  margin-left: 50%;
+  transform: translateX(2rem);
+  border-left: 3px solid transparent;
+}
+
+.card.orange {
+  border-color: rgba(255, 143, 33, 0.4);
+}
+.card.left.orange { border-right-color: var(--color-accent); border-right-width: 3px; border-right-style: solid; }
+.card.right.orange { border-left-color: var(--color-accent); border-left-width: 3px; border-left-style: solid; }
+
+.card.gold {
+  border-color: rgba(245, 194, 84, 0.4);
+}
+.card.left.gold { border-right-color: var(--color-accent-gold); border-right-width: 3px; border-right-style: solid; }
+.card.right.gold { border-left-color: var(--color-accent-gold); border-left-width: 3px; border-left-style: solid; }
+
+.dot {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  z-index: 2;
+}
+.card.left .dot { right: -2rem; transform: translate(50%, -50%); }
+.card.right .dot { left: -2rem; transform: translate(-50%, -50%); }
+
+.dot.orange { background-color: var(--color-accent); }
+.dot.gold { background-color: var(--color-accent-gold); }
+
+.connector {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 2px;
+  width: 2rem;
+  z-index: 1;
+}
+.card.left .connector { right: -2rem; }
+.card.right .connector { left: -2rem; }
+.connector.orange { background-color: rgba(255, 143, 33, 0.3); }
+.connector.gold { background-color: rgba(245, 194, 84, 0.3); }
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.dateBadge {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.1);
+  color: var(--color-text-primary);
+}
+
+.hoursPill {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.org {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 1rem;
+}
+
+.hoverDesc {
+  font-size: 0.875rem;
+  color: var(--color-text-primary);
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 0;
+}
+
+.card:hover .hoverDesc {
+  opacity: 1;
+  max-height: 100px;
+  margin-bottom: 1rem;
+}
+
+.tagsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  font-size: 0.7rem;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 768px) {
+  .spine {
+    left: 24px;
+    transform: none;
+  }
+  .card.left, .card.right {
+    margin: 0 0 0 48px;
+    transform: none;
+    width: calc(100% - 48px);
+    border-right: 1px solid rgba(255, 143, 33, 0.4);
+    border-left-width: 3px;
+    border-left-style: solid;
+  }
+  .card.left.orange, .card.right.orange { border-left-color: var(--color-accent); }
+  .card.left.gold, .card.right.gold { border-left-color: var(--color-accent-gold); }
+
+  .dot {
+    left: -24px !important;
+    right: auto !important;
+    transform: translate(-50%, -50%) !important;
+  }
+  
+  .connector {
+    left: -24px !important;
+    right: auto !important;
+  }
+}
