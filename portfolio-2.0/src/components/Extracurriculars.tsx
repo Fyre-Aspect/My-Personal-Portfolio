@@ -1,8 +1,8 @@
 export default function Extracurriculars() {
 const activities: { title: string; description: string; image?: string }[] = [
     {
-      title: "NeoDev League Hackathon - 3rd Place",
-      description: "Secured 3rd place by building <span class='page-highlight'>Shurplus</span>, an AI-powered logistics platform. This win at the <span class='page-highlight'>NeoDev League</span> demonstrates my ability to build <span class='page-highlight'>award-winning solutions</span> under pressure.",
+      title: "MechMania - 1st Place",
+      description: "Engineering competition — built an automated <span class='page-highlight'>puck-shooting robot controller</span> from scratch. Led the <span class='page-highlight'>conveyor belt</span> strategy. Won <span class='page-highlight'>1st place out of 12 teams</span>, undefeated.",
     },
     {
       title: "Soil Testing Internship - University of Waterloo",
