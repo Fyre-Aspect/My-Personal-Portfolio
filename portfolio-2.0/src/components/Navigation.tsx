@@ -1,5 +1,4 @@
 'use client'
-import { ThemeToggle } from './ThemeProvider'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
@@ -111,7 +110,6 @@ export default function Navigation() {
                   </Link>
                 </li>
               ))}
-              <li><ThemeToggle /></li>
             </ul>
 
             {/* Mobile Hamburger Button */}
@@ -142,7 +140,6 @@ export default function Navigation() {
                   </Link>
                 </li>
               ))}
-              <li><ThemeToggle /></li>
             </ul>
           </GlassEffect>
         </div>

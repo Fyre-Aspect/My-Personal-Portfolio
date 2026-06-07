@@ -20,7 +20,7 @@ export default function CursorSpotlight() {
  
     let raf = 0;
     let targetX = window.innerWidth / 2;
-    let targetY = window.innerHeight / 2;
+    let targetY = window.innerHeight / 2;1
     let curX = targetX;
     let curY = targetY;
 

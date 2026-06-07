@@ -117,28 +117,6 @@ export const projects: Project[] = [
     status: null,
   },
   {
-    title: "Spell Chess with Stockfish",
-    description:
-      "Custom chess app built with Next.js and React where pieces cast spells instead of just moving. Stockfish AI handles the engine, CSS Modules handle the styling — fully playable in the browser.",
-    role: "Full-Stack Developer",
-    technologies: ["Next.js", "React", "TypeScript", "Stockfish AI", "CSS Modules"],
-    liveUrl: null,
-    githubUrl: "https://github.com/Fyre-Aspect/Spell-Chess-With-Stockfish",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/ChessSet.jpg/640px-ChessSet.jpg",
-    status: null,
-  },
-  {
-    title: "Job Search Automation",
-    description:
-      "Python tool that scrapes entry-level dev jobs from Indeed, RemoteOK, and The Muse daily, then emails new matches automatically via GitHub Actions. No more manually refreshing job boards.",
-    role: "Automation Developer",
-    technologies: ["Python", "GitHub Actions", "SMTP", "RSS", "RemoteOK API", "The Muse API"],
-    liveUrl: null,
-    githubUrl: "https://github.com/Fyre-Aspect/Job-Search-Automation-Tool",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/400px-Python-logo-notext.svg.png",
-    status: null,
-  },
-  {
     title: "Arduino Tetris",
     description:
       "Classic Tetris on Arduino controlled by joystick, with real-time score tracking and LED matrix display.",

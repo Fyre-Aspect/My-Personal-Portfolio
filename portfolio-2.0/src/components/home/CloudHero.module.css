@@ -1,7 +1,7 @@
 /* Tall scroll zone drives the animation; the stage stays pinned inside it. */
 .scrollZone {
   position: relative;
-  height: 260vh;
+  height: 320vh;
   z-index: 1;
 }
 
@@ -15,21 +15,7 @@
   justify-content: center;
 }
 
-/* ------------------------------------------------------------------- Sky */
-
-.sky {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: linear-gradient(
-    180deg,
-    #2a6fb0 0%,
-    #5a9fd4 28%,
-    #9cc9ec 55%,
-    #d8ecfb 80%,
-    #f3fbff 100%
-  );
-}
+/* ------------------------------------------------------------------- Sun + whiteout */
 
 .sun {
   position: absolute;
@@ -46,6 +32,25 @@
     rgba(255, 226, 170, 0) 70%
   );
   filter: blur(4px);
+}
+
+.whiteout {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120vmax;
+  height: 120vmax;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  z-index: 4;
+  pointer-events: none;
+  background: radial-gradient(
+    circle,
+    #ffffff 0%,
+    #ffffff 45%,
+    rgba(255, 255, 255, 0.7) 65%,
+    rgba(255, 255, 255, 0) 80%
+  );
 }
 
 /* ------------------------------------------------------------------- Clouds */

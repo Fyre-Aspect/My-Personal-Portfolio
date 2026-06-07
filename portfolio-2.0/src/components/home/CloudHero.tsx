@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useScroll, useTransform, type MotionValue } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import styles from './CloudHero.module.css';
 
 function Cloud({ className, style }: { className?: string; style?: React.CSSProperties }) {
@@ -16,10 +16,6 @@ function Cloud({ className, style }: { className?: string; style?: React.CSSProp
   );
 }
 
-interface CloudLayerProps {
-  progress: MotionValue<number>;
-}
-
 export default function CloudHero() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -27,39 +23,41 @@ export default function CloudHero() {
     offset: ['start start', 'end start'],
   });
 
-  // Hero content (photo + name) drifts up, scales toward the viewer, then fades.
-  const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '-30%']);
-  const contentScale = useTransform(scrollYProgress, [0, 0.7], [1, 1.18]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.45, 0.6], [1, 1, 0]);
+  // Hero content rushes toward the viewer, blurs, and fades as you take off.
+  const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '-22%']);
+  const contentScale = useTransform(scrollYProgress, [0, 0.7], [1, 1.35]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.32, 0.46], [1, 1, 0]);
+  const contentBlur = useTransform(scrollYProgress, [0, 0.4], ['blur(0px)', 'blur(14px)']);
 
-  // Cloud banks part and rush past as you "fly" upward — different depths = parallax.
-  const frontX = useTransform(scrollYProgress, [0, 1], ['0%', '-75%']);
-  const frontXRight = useTransform(scrollYProgress, [0, 1], ['0%', '75%']);
-  const frontScale = useTransform(scrollYProgress, [0, 1], [1, 2.6]);
-  const frontY = useTransform(scrollYProgress, [0, 1], ['0%', '40%']);
+  // Cloud banks part and rush past — bigger scale = more intrusive takeoff.
+  const frontX = useTransform(scrollYProgress, [0, 1], ['0%', '-90%']);
+  const frontXRight = useTransform(scrollYProgress, [0, 1], ['0%', '90%']);
+  const frontScale = useTransform(scrollYProgress, [0, 1], [1, 3.8]);
+  const frontY = useTransform(scrollYProgress, [0, 1], ['0%', '55%']);
 
-  const midX = useTransform(scrollYProgress, [0, 1], ['0%', '-45%']);
-  const midXRight = useTransform(scrollYProgress, [0, 1], ['0%', '45%']);
-  const midScale = useTransform(scrollYProgress, [0, 1], [1, 1.8]);
+  const midX = useTransform(scrollYProgress, [0, 1], ['0%', '-55%']);
+  const midXRight = useTransform(scrollYProgress, [0, 1], ['0%', '55%']);
+  const midScale = useTransform(scrollYProgress, [0, 1], [1, 2.2]);
 
-  const farScale = useTransform(scrollYProgress, [0, 1], [1, 1.3]);
+  const farScale = useTransform(scrollYProgress, [0, 1], [1, 1.5]);
   const farOpacity = useTransform(scrollYProgress, [0, 0.8], [0.9, 0]);
 
-  // Sky brightens, then dissolves to reveal the themed content underneath.
-  const skyOpacity = useTransform(scrollYProgress, [0, 0.7, 1], [1, 1, 0]);
-  const sunScale = useTransform(scrollYProgress, [0, 1], [1, 1.6]);
+  // A full "fly into the cloud" whiteout right in the middle of the takeoff.
+  const whiteoutOpacity = useTransform(scrollYProgress, [0.3, 0.55, 0.85], [0, 1, 0]);
+  const whiteoutScale = useTransform(scrollYProgress, [0.3, 0.85], [0.4, 3]);
+
+  const sunScale = useTransform(scrollYProgress, [0, 1], [1, 1.8]);
+  const sunOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
     <div ref={ref} className={styles.scrollZone}>
       <div className={styles.sticky}>
-        {/* Sky gradient + sun glow */}
-        <motion.div className={styles.sky} style={{ opacity: skyOpacity }}>
-          <motion.div className={styles.sun} style={{ scale: sunScale }} />
-        </motion.div>
+        {/* Sun glow (sky gradient itself comes from the fixed SkyScene behind) */}
+        <motion.div className={styles.sun} style={{ scale: sunScale, opacity: sunOpacity }} />
 
         {/* Far clouds */}
         <motion.div className={styles.cloudLayer} style={{ scale: farScale, opacity: farOpacity }}>
-          <Cloud className={styles.cloudFar} style={{ top: '18%', left: '12%' }} />
+          <Cloud className={styles.cloudFar} style={{ top: '16%', left: '12%' }} />
           <Cloud className={styles.cloudFar} style={{ top: '26%', right: '14%' }} />
           <Cloud className={styles.cloudFar} style={{ top: '8%', left: '46%' }} />
         </motion.div>
@@ -67,7 +65,7 @@ export default function CloudHero() {
         {/* Hero content */}
         <motion.div
           className={styles.content}
-          style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
+          style={{ y: contentY, scale: contentScale, opacity: contentOpacity, filter: contentBlur }}
         >
           <div className={styles.photoRing}>
             <img src="/Aamir Pic.jpg" alt="Aamir Tinwala" className={styles.photo} />
@@ -83,22 +81,29 @@ export default function CloudHero() {
 
         {/* Mid clouds */}
         <motion.div className={styles.cloudLayer} style={{ x: midX, scale: midScale }}>
-          <Cloud className={styles.cloudMid} style={{ top: '34%', left: '-6%' }} />
+          <Cloud className={styles.cloudMid} style={{ top: '32%', left: '-8%' }} />
         </motion.div>
         <motion.div className={styles.cloudLayer} style={{ x: midXRight, scale: midScale }}>
-          <Cloud className={styles.cloudMid} style={{ top: '40%', right: '-6%' }} />
+          <Cloud className={styles.cloudMid} style={{ top: '42%', right: '-8%' }} />
         </motion.div>
 
-        {/* Front cloud bank — rushes past, framing the bottom like takeoff */}
+        {/* Front cloud bank */}
         <motion.div className={styles.cloudLayer} style={{ x: frontX, y: frontY, scale: frontScale }}>
-          <Cloud className={styles.cloudFront} style={{ bottom: '-8%', left: '-12%' }} />
+          <Cloud className={styles.cloudFront} style={{ bottom: '-10%', left: '-14%' }} />
         </motion.div>
         <motion.div className={styles.cloudLayer} style={{ x: frontXRight, y: frontY, scale: frontScale }}>
-          <Cloud className={styles.cloudFront} style={{ bottom: '-12%', right: '-12%' }} />
+          <Cloud className={styles.cloudFront} style={{ bottom: '-14%', right: '-14%' }} />
         </motion.div>
         <motion.div className={styles.cloudLayer} style={{ y: frontY, scale: frontScale }}>
-          <Cloud className={styles.cloudFront} style={{ bottom: '-20%', left: '28%' }} />
+          <Cloud className={styles.cloudFront} style={{ bottom: '-24%', left: '26%' }} />
         </motion.div>
+
+        {/* Whiteout — fly straight through a cloud */}
+        <motion.div
+          className={styles.whiteout}
+          style={{ opacity: whiteoutOpacity, scale: whiteoutScale }}
+          aria-hidden="true"
+        />
       </div>
     </div>
   );

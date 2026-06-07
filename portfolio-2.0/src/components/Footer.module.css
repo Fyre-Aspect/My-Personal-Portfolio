@@ -1,0 +1,99 @@
+.footer {
+  position: relative;
+  z-index: 1;
+  padding: 4rem 1.5rem 3rem;
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  width: 100%;
+  max-width: 720px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(10px);
+  border: 3px solid #0a2c47;
+  border-radius: 26px;
+  box-shadow: 8px 8px 0 rgba(10, 44, 71, 0.85);
+  padding: 3rem 2rem;
+}
+
+.tag {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #2a6fb0;
+}
+
+.title {
+  font-family: 'IBM Plex Mono', var(--font-mono, monospace);
+  font-weight: 700;
+  font-size: clamp(32px, 5vw, 52px);
+  color: #0a2c47;
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+  margin-top: 0.5rem;
+}
+
+.text {
+  margin: 1rem auto 2rem;
+  max-width: 460px;
+  color: #11436a;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.cta {
+  display: inline-block;
+  font-family: var(--font-mono, monospace);
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fff;
+  background: var(--color-accent);
+  border: 2px solid #0a2c47;
+  padding: 0.8rem 1.8rem;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 4px 4px 0 rgba(10, 44, 71, 0.85);
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+
+.cta:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 rgba(10, 44, 71, 0.85);
+}
+
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 0.9rem;
+  margin: 2rem 0 1.5rem;
+}
+
+.socialLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #0a2c47;
+  color: #0a2c47;
+  transition: transform 0.16s ease, background-color 0.16s ease, color 0.16s ease;
+}
+
+.socialLink:hover {
+  transform: translateY(-3px);
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.copy {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  color: #2a6fb0;
+  line-height: 1.6;
+}
