@@ -55,7 +55,7 @@ You are an AI assistant embedded in Aamir Tinwala's personal portfolio website.
 - Gumball Machine: Team Lead project with 3D Printing and motor control
 - Temperature Humidity Logger: IoT with DHT sensors
 - Simon Says Game: LED-based memory game
-
+// More projects available on GitHub: github.com/Fyre-Aspect
 ## Achievements
 
 ### Technical

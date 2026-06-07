@@ -26,7 +26,7 @@ const ibmPlexMono = IBM_Plex_Mono({
   variable: '--font-mono',
   display: 'swap',
 })
-
+//this is just to be able to meta data
 export const metadata: Metadata = {
   title: 'Aamir Tinwala - Full-Stack Developer & Young Innovator',
   description: 'Portfolio of Aamir Tinwala - 16-year-old Full-Stack Developer specializing in React, Next.js, and modern web technologies. Building the future one project at a time.',

@@ -114,6 +114,8 @@ html {
   --gradient-bg: var(--background);
 }
 
+/* basically simple logic context */
+
 /* Dark Mode Theme */
 .dark,
 [data-theme="dark"] {

@@ -10,7 +10,7 @@ export default function ChatWidget() {
   const toggleChat = () => {
     setIsOpen(!isOpen);
   };
-
+// impotant bugs to resolve here but unaffecting the program but jsut simple latency issues.
   return (
     <>
       {/* Chat Toggle Button */}
@@ -27,7 +27,7 @@ export default function ChatWidget() {
             height="24"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="currentColor"
+            stroke="currentColor" 
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -35,7 +35,7 @@ export default function ChatWidget() {
             <line x1="18" y1="6" x2="6" y2="18" />
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
-        ) : (
+        ) : ( 
           // Chat icon
           <svg
             width="24"

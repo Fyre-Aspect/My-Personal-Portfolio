@@ -4,6 +4,16 @@ import Footer from '../../components/Footer'
 export default function ProjectsPage() {
 const projects = [
   {
+    title: "STEAM ICAC 2026 — Saliency-Aware Video Codec",
+    description: "Saliency-aware video codec for stationary surveillance cameras, presented at the STEAM Innovation Challenge Annual Conference 2026 (University of Toronto). Exploits fixed camera viewpoints by replacing non-salient pixels with a learned background, then compresses with H.265 — inter-frame prediction collapses static regions to near-zero bits. Achieved 81% file size reduction on 1080p footage (33.9 MB → 6.5 MB) and 34.76 dB PSNR on salient content. Output is fully standards-compliant H.265 mp4, compatible with any decoder.",
+    role: "Computer Science Researcher",
+    technologies: ["Python", "YOLOv8", "H.265 / libx265", "OpenCV", "PyTorch", "Optical Flow", "NumPy"],
+    liveUrl: null,
+    githubUrl: "https://github.com/SaiAmartya/steam-icac-2026",
+    image: "/Medal.png",
+    status: "STEAM ICAC 2026 — CS Showcase"
+  },
+  {
     title: "MechMania — Robot Controller",
     description: "Researched ESP32 wireless comms from scratch, wrote connection firmware, then built the handheld controller hardware end-to-end. Went undefeated through a 12-team ladder tournament.",
     role: "Controller Engineer",

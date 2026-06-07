@@ -8,6 +8,14 @@ export default function Achievements() {
       description: "Hackathons and engineering competitions where the team placed",
       items: [
         {
+          title: "STEAM ICAC 2026 — Computer Science Showcase",
+          description: "Presented a saliency-aware video codec at the STEAM Innovation Challenge Annual Conference (May 28–29, University of Toronto). The codec identifies salient regions in surveillance footage using YOLOv8, optical flow, and spectral residual analysis, replacing non-salient pixels with a learned background before H.265 compression. Achieved 81% file size reduction on 1080p CCTV footage with a saliency-weighted PSNR of 34.76 dB.",
+          date: "2026",
+          icon: "",
+          image: "/Certificate Steam.png",
+          growthAspect: "CS Research"
+        },
+        {
           title: "MechMania — 1st Place (Undefeated)",
           description: "Won First Place out of 12 teams at MechMania, an engineering competition building automated puck-shooting mechanisms. Went undefeated through a full ladder tournament. Led the conveyor belt concept and built the controller system from scratch.",
           date: "2026",
@@ -214,13 +222,13 @@ export default function Achievements() {
                           </div>
                           {achievement.link && (
                             <div className="achievement-links">
-                              <a 
-                                href={achievement.link} 
-                                target="_blank" 
+                              <a
+                                href={achievement.link}
+                                target="_blank"
                                 rel="noopener noreferrer"
                                 className="project-link"
                               >
-                                LinkedIn Post →
+                                {(achievement as any).linkLabel ?? 'LinkedIn Post'} →
                               </a>
                             </div>
                           )}
