@@ -57,12 +57,30 @@
 .roleCycleWrapper {
   height: 40px;
   margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rolePrefix {
+  font-family: var(--font-mono, monospace);
+  font-size: 1.25rem;
+  color: var(--color-hardware);
 }
 
 .roleText {
   font-size: 1.5rem;
-  color: var(--color-text-secondary);
-  animation: fadeRole 3s infinite;
+  color: var(--color-text-primary);
+  font-family: var(--font-mono, monospace);
+  letter-spacing: 0.5px;
+}
+
+.typeCaret {
+  display: inline-block;
+  width: 11px;
+  height: 1.4rem;
+  background: var(--color-accent);
+  animation: blink 1.05s step-end infinite;
 }
 
 .bio {
@@ -89,6 +107,13 @@
 .statItem {
   display: flex;
   align-items: center;
+  transition: color 0.2s ease, transform 0.2s ease;
+  cursor: default;
+}
+
+.statItem:hover {
+  color: var(--color-accent);
+  transform: translateY(-2px);
 }
 
 .statItem:not(:last-child)::after {
@@ -111,7 +136,6 @@
 
 @keyframes traceGlow { 0%,100%{opacity:.01} 50%{opacity:.04} }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-@keyframes fadeRole { 0%{opacity:0;transform:translateY(8px)} 20%,80%{opacity:1;transform:translateY(0)} 100%{opacity:0;transform:translateY(-8px)} }
 @keyframes chevronBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
 
 @media (max-width: 768px) {

@@ -1,0 +1,304 @@
+.carousel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ------------------------------------------------------------- Counter */
+
+.counter {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-family: var(--font-mono, monospace);
+  margin-bottom: 1.5rem;
+}
+
+.counterActive {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  line-height: 1;
+}
+
+.counterTotal {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+}
+
+/* ------------------------------------------------------------- Stage */
+
+.stage {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.cardViewport {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  height: 460px;
+  perspective: 1400px;
+}
+
+.card {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: grab;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+.card:active {
+  cursor: grabbing;
+}
+
+/* ------------------------------------------------------------- Card image */
+
+.cardImage {
+  position: relative;
+  height: 100%;
+  background: var(--color-bg);
+  overflow: hidden;
+}
+
+.cardImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+}
+
+.imageFallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'IBM Plex Mono', var(--font-mono, monospace);
+  font-size: 6rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  background:
+    radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--color-accent) 18%, transparent), transparent 60%),
+    var(--color-surface);
+}
+
+.badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--color-bg);
+  background: var(--color-accent);
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+}
+
+/* ------------------------------------------------------------- Card body */
+
+.cardBody {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.role {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-hardware);
+  margin-bottom: 0.75rem;
+}
+
+.title {
+  font-family: 'IBM Plex Mono', var(--font-mono, monospace);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.desc {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  font-size: 0.92rem;
+  margin-bottom: 1.25rem;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.tag {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.7rem;
+  color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-top: auto;
+}
+
+.link {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.link:hover {
+  color: var(--color-accent);
+}
+
+.primary {
+  color: var(--color-accent);
+}
+
+.noLink {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+/* ------------------------------------------------------------- Nav buttons */
+
+.navBtn {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.18s ease, color 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
+}
+
+.navBtn:hover {
+  color: var(--color-bg);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  transform: scale(1.08);
+}
+
+.navBtn:active {
+  transform: scale(0.96);
+}
+
+/* ------------------------------------------------------------- Dots */
+
+.dots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  max-width: 420px;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: var(--color-border);
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease, width 0.2s ease;
+}
+
+.dot:hover {
+  background: var(--color-text-secondary);
+}
+
+.dotActive {
+  width: 26px;
+  border-radius: 999px;
+  background: var(--color-accent);
+}
+
+/* ------------------------------------------------------------- Hint */
+
+.hint {
+  margin-top: 1.25rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.hint kbd {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  border: 1px solid var(--color-border);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  padding: 1px 6px;
+  color: var(--color-text-primary);
+  background: var(--color-surface);
+}
+
+/* ------------------------------------------------------------- Responsive */
+
+@media (max-width: 760px) {
+  .card {
+    grid-template-columns: 1fr;
+    grid-template-rows: 200px 1fr;
+  }
+  .cardViewport {
+    height: 600px;
+  }
+  .cardBody {
+    padding: 1.5rem;
+  }
+  .title {
+    font-size: 1.25rem;
+  }
+  .navBtn {
+    width: 44px;
+    height: 44px;
+  }
+  .stage {
+    gap: 0.5rem;
+  }
+}

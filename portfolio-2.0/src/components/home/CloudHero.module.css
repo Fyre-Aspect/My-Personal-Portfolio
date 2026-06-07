@@ -1,0 +1,188 @@
+/* Tall scroll zone drives the animation; the stage stays pinned inside it. */
+.scrollZone {
+  position: relative;
+  height: 260vh;
+  z-index: 1;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ------------------------------------------------------------------- Sky */
+
+.sky {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(
+    180deg,
+    #2a6fb0 0%,
+    #5a9fd4 28%,
+    #9cc9ec 55%,
+    #d8ecfb 80%,
+    #f3fbff 100%
+  );
+}
+
+.sun {
+  position: absolute;
+  top: 14%;
+  left: 50%;
+  width: 320px;
+  height: 320px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 250, 235, 0.95) 0%,
+    rgba(255, 226, 170, 0.55) 35%,
+    rgba(255, 226, 170, 0) 70%
+  );
+  filter: blur(4px);
+}
+
+/* ------------------------------------------------------------------- Clouds */
+
+.cloudLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.cloudFar,
+.cloudMid,
+.cloudFront {
+  position: absolute;
+  color: #ffffff;
+}
+
+.cloudFar {
+  width: 240px;
+  opacity: 0.7;
+  filter: blur(6px);
+}
+
+.cloudMid {
+  width: 480px;
+  opacity: 0.92;
+  filter: blur(3px);
+}
+
+.cloudFront {
+  width: 720px;
+  opacity: 1;
+  filter: blur(2px);
+  color: #f7fbff;
+}
+
+/* ------------------------------------------------------------------- Content */
+
+.content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  will-change: transform, opacity;
+  padding: 0 1.5rem;
+}
+
+.photoRing {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  padding: 5px;
+  background: linear-gradient(135deg, #ffffff, rgba(255, 255, 255, 0.4));
+  box-shadow: 0 20px 50px rgba(20, 60, 100, 0.35);
+  margin-bottom: 1.75rem;
+  animation: floaty 5.5s ease-in-out infinite;
+}
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.kicker {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #0d3a5c;
+  background: rgba(255, 255, 255, 0.55);
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+  margin-bottom: 1.25rem;
+}
+
+.name {
+  font-family: 'IBM Plex Mono', var(--font-mono, monospace);
+  font-weight: 700;
+  font-size: clamp(48px, 8vw, 92px);
+  line-height: 1;
+  letter-spacing: -2px;
+  background: linear-gradient(160deg, #0a2c47 0%, #11436a 55%, #2a6fb0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 4px 18px rgba(255, 255, 255, 0.55));
+}
+
+.role {
+  margin-top: 1rem;
+  font-size: clamp(18px, 2.4vw, 26px);
+  font-weight: 600;
+  color: #11436a;
+}
+
+.scrollCue {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #0d3a5c;
+}
+
+.chevron {
+  font-size: 1.4rem;
+  animation: bob 2s ease-in-out infinite;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrollZone { height: 100vh; }
+  .chevron { animation: none; }
+}
+
+@media (max-width: 640px) {
+  .photoRing { width: 130px; height: 130px; }
+  .cloudFront { width: 460px; }
+  .cloudMid { width: 320px; }
+}

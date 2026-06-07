@@ -7,13 +7,32 @@ const roles = ["Web-App Developer", "Lab Intern", "Grade 11 HS Student", "IB Stu
 
 export default function HeroSection() {
   const [roleIndex, setRoleIndex] = useState(0);
+  const [text, setText] = useState('');
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
-    const cycle = setInterval(() => {
+    const current = roles[roleIndex];
+
+    // Pause when a word is fully typed, then start deleting.
+    if (!deleting && text === current) {
+      const hold = setTimeout(() => setDeleting(true), 1600);
+      return () => clearTimeout(hold);
+    }
+
+    // Once fully deleted, advance to the next role.
+    if (deleting && text === '') {
+      setDeleting(false);
       setRoleIndex((prev) => (prev + 1) % roles.length);
-    }, 3000);
-    return () => clearInterval(cycle);
-  }, []);
+      return;
+    }
+
+    const step = setTimeout(() => {
+      setText((prev) =>
+        deleting ? prev.slice(0, -1) : current.slice(0, prev.length + 1)
+      );
+    }, deleting ? 45 : 90);
+    return () => clearTimeout(step);
+  }, [text, deleting, roleIndex]);
 
   return (
     <section className={styles.hero}>
@@ -27,9 +46,9 @@ export default function HeroSection() {
         <h1 className={styles.mainHeading}>Aamir Tinwala</h1>
         
         <div className={styles.roleCycleWrapper}>
-          <div key={roleIndex} className={styles.roleText}>
-            {roles[roleIndex]}
-          </div>
+          <span className={styles.rolePrefix}>&gt;_</span>
+          <span className={styles.roleText}>{text}</span>
+          <span className={styles.typeCaret} aria-hidden="true"></span>
         </div>
 
         <p className={styles.bio}>

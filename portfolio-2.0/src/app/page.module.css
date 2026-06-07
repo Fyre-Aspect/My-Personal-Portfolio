@@ -1,28 +1,87 @@
 .dashboardWrapper {
   position: relative;
+  z-index: 1;
   min-height: 100vh;
   background-color: transparent;
-  overflow: hidden;
-}
-
-.pcbGrid {
-  position: fixed;
-  inset: 0;
-  background-image: 
-    linear-gradient(to right, var(--color-text-primary) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--color-text-primary) 1px, transparent 1px);
-  background-size: 40px 40px;
-  animation: traceGlow 4s infinite alternate ease-in-out;
-  z-index: 0;
-  pointer-events: none;
 }
 
 .contentWrapper {
   position: relative;
   z-index: 1;
+  /* Transparent so the fixed SkyScene shows through behind the content. */
+  background: transparent;
 }
 
-@keyframes traceGlow {
-  0%, 100% { opacity: .01; }
-  50% { opacity: .04; }
+.homeSection {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 5rem 1.5rem;
+}
+
+.sectionHead {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.sectionTag {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #0d3a5c;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  border: 2px solid #0a2c47;
+}
+
+.sectionTitle {
+  font-family: 'IBM Plex Mono', var(--font-mono, monospace);
+  font-weight: 700;
+  font-size: clamp(32px, 4vw, 56px);
+  color: #0a2c47;
+  margin-top: 1rem;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  text-shadow: 0 3px 18px rgba(255, 255, 255, 0.55);
+}
+
+.sectionSub {
+  margin-top: 0.75rem;
+  color: #11436a;
+  font-weight: 500;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.legend {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  color: #0d3a5c;
+}
+
+.legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: rgba(255, 255, 255, 0.55);
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+}
+
+.legend kbd {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: #0a2c47;
+  color: #fff;
+  border-radius: 5px;
+  padding: 1px 6px;
 }

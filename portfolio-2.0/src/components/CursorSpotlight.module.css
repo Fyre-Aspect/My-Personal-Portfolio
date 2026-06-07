@@ -1,0 +1,14 @@
+.spotlight {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  background: radial-gradient(
+    560px circle at var(--x, 50%) var(--y, 50%),
+    color-mix(in srgb, var(--color-accent) 13%, transparent),
+    color-mix(in srgb, var(--color-accent) 4%, transparent) 35%,
+    transparent 65%
+  );
+}
