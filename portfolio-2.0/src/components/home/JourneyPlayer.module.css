@@ -1,0 +1,47 @@
+.player {
+  position: fixed;
+  top: 40%;
+  right: 1.1rem;
+  transform: translateY(-50%);
+  z-index: 950;
+  display: inline-flex;   /* visible by default — hidden on desktop below */
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.6rem 1.1rem;
+  border: none;
+  border-radius: 999px;
+  font-family: var(--font-mono, monospace);
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.3px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--color-accent, #ff8f21), #ff6f3c);
+  box-shadow: 0 6px 22px rgba(255, 110, 50, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.player:active {
+  transform: translateY(-50%) scale(0.94);
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Hide on desktop — phone only */
+@media (min-width: 769px) {
+  .player {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .player {
+    transition: none;
+  }
+}

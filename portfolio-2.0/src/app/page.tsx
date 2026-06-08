@@ -1,5 +1,4 @@
 import Navigation from '../components/Navigation'
-import Footer from '../components/Footer'
 import SkyScene from '../components/sky/SkyScene'
 import CloudHero from '../components/home/CloudHero'
 import HomeScroll from '../components/home/HomeScroll'
@@ -16,7 +15,6 @@ export default function Home() {
           <HomeScroll />
         </div>
       </main>
-      <Footer />
     </>
   )
 }

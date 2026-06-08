@@ -2,8 +2,9 @@
 
 import { useRef } from 'react';
 import Link from 'next/link';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import styles from './HomeScroll.module.css';
+import CityFinale from './CityFinale';
 
 function CloudShape({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return (
@@ -135,12 +136,13 @@ export default function HomeScroll() {
     target: wrapRef,
     offset: ['start end', 'end start'],
   });
+  const p = useSpring(scrollYProgress, { stiffness: 80, damping: 30, mass: 0.4 });
 
-  const cloud1X = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
-  const cloud2X = useTransform(scrollYProgress, [0, 1], ['6%', '-6%']);
-  const cloud3X = useTransform(scrollYProgress, [0, 1], ['-4%', '4%']);
-  const cloudY1 = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
-  const cloudY2 = useTransform(scrollYProgress, [0, 1], ['0%', '-15%']);
+  const cloud1X = useTransform(p, [0, 1], ['-8%', '8%']);
+  const cloud2X = useTransform(p, [0, 1], ['6%', '-6%']);
+  const cloud3X = useTransform(p, [0, 1], ['-4%', '4%']);
+  const cloudY1 = useTransform(p, [0, 1], ['0%', '20%']);
+  const cloudY2 = useTransform(p, [0, 1], ['0%', '-15%']);
 
   return (
     <div ref={wrapRef} className={styles.wrap}>
@@ -166,20 +168,7 @@ export default function HomeScroll() {
         <FeatureRow key={f.title} f={f} i={i} />
       ))}
 
-      <motion.div
-        className={styles.finale}
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, amount: 0.6 }}
-        transition={{ duration: 0.7 }}
-      >
-        <h2 className={styles.finaleTitle}>There&apos;s plenty more where that came from.</h2>
-        <p className={styles.finaleSub}>See everything I&apos;ve built, won, and done.</p>
-        <div className={styles.finaleButtons}>
-          <Link href="/projects" className={styles.btnPrimary}>All Projects</Link>
-          <Link href="/achievements" className={styles.btnSecondary}>All Achievements</Link>
-        </div>
-      </motion.div>
+      <CityFinale />
     </div>
   );
 }

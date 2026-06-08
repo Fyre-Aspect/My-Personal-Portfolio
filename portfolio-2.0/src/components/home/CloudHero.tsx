@@ -1,7 +1,7 @@
 'use client';
 
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import styles from './CloudHero.module.css';
 
 function Cloud({ className, style }: { className?: string; style?: React.CSSProperties }) {
@@ -16,66 +16,127 @@ function Cloud({ className, style }: { className?: string; style?: React.CSSProp
   );
 }
 
+const easeInOutCubic = (t: number) =>
+  t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+function PlayButton() {
+  const [playing, setPlaying] = useState(false);
+  const rafRef = useRef<number | null>(null);
+  const lastSetY = useRef<number>(-1);
+
+  const stop = useCallback(() => {
+    if (rafRef.current !== null) { cancelAnimationFrame(rafRef.current); rafRef.current = null; }
+    lastSetY.current = -1;
+    setPlaying(false);
+  }, []);
+
+  const play = useCallback(() => {
+    const maxY = document.documentElement.scrollHeight - window.innerHeight;
+    if (window.scrollY >= maxY - 8) window.scrollTo({ top: 0, behavior: 'instant' });
+    const startY = window.scrollY;
+    const distance = maxY - startY;
+    if (distance <= 0) return;
+    const duration = Math.max(5000, 26000 * (distance / Math.max(maxY, 1)));
+    const startTime = performance.now();
+    setPlaying(true);
+    const step = (now: number) => {
+      const t = Math.min(1, (now - startTime) / duration);
+      const nextY = Math.round(startY + distance * easeInOutCubic(t));
+      lastSetY.current = nextY;
+      document.documentElement.scrollTop = nextY;
+      if (t < 1) { rafRef.current = requestAnimationFrame(step); }
+      else { rafRef.current = null; lastSetY.current = -1; setPlaying(false); }
+    };
+    rafRef.current = requestAnimationFrame(step);
+  }, []);
+
+  useEffect(() => {
+    if (!playing) return;
+    const onScroll = () => {
+      const actual = Math.round(document.documentElement.scrollTop);
+      if (lastSetY.current >= 0 && Math.abs(actual - lastSetY.current) > 3) stop();
+    };
+    const onTouch = () => stop();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('touchstart', onTouch, { passive: true });
+    window.addEventListener('keydown', stop);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('touchstart', onTouch);
+      window.removeEventListener('keydown', stop);
+    };
+  }, [playing, stop]);
+
+  useEffect(() => () => stop(), [stop]);
+
+  return (
+    <button
+      type="button"
+      className={styles.playBtn}
+      onClick={() => playing ? stop() : play()}
+      aria-label={playing ? 'Stop' : 'Play the journey'}
+    >
+      {playing ? (
+        <>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
+            <rect x="6" y="5" width="4" height="14" rx="1" />
+            <rect x="14" y="5" width="4" height="14" rx="1" />
+          </svg>
+          Stop
+        </>
+      ) : (
+        <>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
+            <path d="M8 5.14v13.72c0 .79.87 1.27 1.54.84l10.78-6.86a1 1 0 0 0 0-1.68L9.54 4.3A1 1 0 0 0 8 5.14z" />
+          </svg>
+          Play the journey
+        </>
+      )}
+    </button>
+  );
+}
+
 export default function CloudHero() {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start start', 'end start'],
-  });
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
+  const p = useSpring(scrollYProgress, { stiffness: 70, damping: 28, mass: 0.4 });
 
-  // Hero content rushes toward viewer, blurs, fades.
-  const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '-22%']);
-  const contentScale = useTransform(scrollYProgress, [0, 0.7], [1, 1.35]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.32, 0.46], [1, 1, 0]);
-  const contentBlur = useTransform(scrollYProgress, [0, 0.4], ['blur(0px)', 'blur(14px)']);
+  const contentY = useTransform(p, [0, 1], ['0%', '-22%']);
+  const contentScale = useTransform(p, [0, 0.8], [1, 1.25]);
+  const contentOpacity = useTransform(p, [0, 0.4, 0.6], [1, 1, 0]);
+  const contentBlur = useTransform(p, [0, 0.5], ['blur(0px)', 'blur(10px)']);
 
-  // Cloud banks part and rush past.
-  const frontX = useTransform(scrollYProgress, [0, 1], ['0%', '-90%']);
-  const frontXRight = useTransform(scrollYProgress, [0, 1], ['0%', '90%']);
-  const frontScale = useTransform(scrollYProgress, [0, 1], [1, 3.8]);
-  const frontY = useTransform(scrollYProgress, [0, 1], ['0%', '55%']);
-
-  const midX = useTransform(scrollYProgress, [0, 1], ['0%', '-55%']);
-  const midXRight = useTransform(scrollYProgress, [0, 1], ['0%', '55%']);
-  const midScale = useTransform(scrollYProgress, [0, 1], [1, 2.2]);
-
-  const farScale = useTransform(scrollYProgress, [0, 1], [1, 1.5]);
-
-  // KEY FIX: fade ALL clouds to 0 before the sticky section releases.
-  // This prevents a visual "snap" when position:sticky unpins at 320vh.
-  const cloudMasterOpacity = useTransform(scrollYProgress, [0.5, 0.8], [1, 0]);
-
-  // Whiteout: peaks at 0.55, fully gone by 0.85.
-  const whiteoutOpacity = useTransform(scrollYProgress, [0.3, 0.55, 0.85], [0, 1, 0]);
-  const whiteoutScale = useTransform(scrollYProgress, [0.3, 0.85], [0.4, 3]);
-
-  // Sun fades before clouds do.
-  const sunScale = useTransform(scrollYProgress, [0, 1], [1, 1.8]);
-  const sunOpacity = useTransform(scrollYProgress, [0, 0.42, 0.7], [1, 0.5, 0]);
+  const frontX = useTransform(p, [0, 1], ['0%', '-90%']);
+  const frontXRight = useTransform(p, [0, 1], ['0%', '90%']);
+  const frontScale = useTransform(p, [0, 1], [1, 3.8]);
+  const frontY = useTransform(p, [0, 1], ['0%', '55%']);
+  const midX = useTransform(p, [0, 1], ['0%', '-55%']);
+  const midXRight = useTransform(p, [0, 1], ['0%', '55%']);
+  const midScale = useTransform(p, [0, 1], [1, 2.2]);
+  const farScale = useTransform(p, [0, 1], [1, 1.5]);
+  const cloudMasterOpacity = useTransform(p, [0.55, 0.85], [1, 0]);
+  const whiteoutOpacity = useTransform(p, [0.35, 0.6, 0.9], [0, 1, 0]);
+  const whiteoutScale = useTransform(p, [0.35, 0.9], [0.4, 3]);
+  const sunScale = useTransform(p, [0, 1], [1, 1.8]);
+  const sunOpacity = useTransform(p, [0, 0.45, 0.72], [1, 0.5, 0]);
 
   return (
     <div ref={ref} className={styles.scrollZone}>
       <div className={styles.sticky}>
         <motion.div className={styles.sun} style={{ scale: sunScale, opacity: sunOpacity }} />
 
-        {/* All cloud layers share a master opacity that fades to 0 before sticky releases */}
         <motion.div style={{ opacity: cloudMasterOpacity, position: 'absolute', inset: 0, pointerEvents: 'none' }}>
-          {/* Far clouds */}
           <motion.div className={styles.cloudLayer} style={{ scale: farScale }}>
             <Cloud className={styles.cloudFar} style={{ top: '16%', left: '12%' }} />
             <Cloud className={styles.cloudFar} style={{ top: '26%', right: '14%' }} />
             <Cloud className={styles.cloudFar} style={{ top: '8%', left: '46%' }} />
           </motion.div>
-
-          {/* Mid clouds */}
           <motion.div className={styles.cloudLayer} style={{ x: midX, scale: midScale }}>
             <Cloud className={styles.cloudMid} style={{ top: '32%', left: '-8%' }} />
           </motion.div>
           <motion.div className={styles.cloudLayer} style={{ x: midXRight, scale: midScale }}>
             <Cloud className={styles.cloudMid} style={{ top: '42%', right: '-8%' }} />
           </motion.div>
-
-          {/* Front cloud bank */}
           <motion.div className={styles.cloudLayer} style={{ x: frontX, y: frontY, scale: frontScale }}>
             <Cloud className={styles.cloudFront} style={{ bottom: '-10%', left: '-14%' }} />
           </motion.div>
@@ -87,13 +148,15 @@ export default function CloudHero() {
           </motion.div>
         </motion.div>
 
-        {/* Hero content */}
         <motion.div
           className={styles.content}
           style={{ y: contentY, scale: contentScale, opacity: contentOpacity, filter: contentBlur }}
         >
+          {/* Play button lives here on mobile — naturally above the photo */}
+          <PlayButton />
+
           <div className={styles.photoRing}>
-            <img src="/Aamir Pic.jpg" alt="Aamir Tinwala" className={styles.photo} />
+            <img src="/Aamir%20Pic.jpg" alt="Aamir Tinwala" className={styles.photo} />
           </div>
 
           <div className={styles.statusBadge}>
@@ -110,7 +173,6 @@ export default function CloudHero() {
           </div>
         </motion.div>
 
-        {/* Whiteout — fly straight through a cloud */}
         <motion.div
           className={styles.whiteout}
           style={{ opacity: whiteoutOpacity, scale: whiteoutScale }}

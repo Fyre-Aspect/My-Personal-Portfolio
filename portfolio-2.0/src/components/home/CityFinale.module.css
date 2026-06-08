@@ -1,0 +1,251 @@
+/* Tall scroll zone drives the arrival; the canyon stays pinned inside it.
+   Full-bleed so the canyon spans the viewport even when nested in a centered column. */
+.scrollZone {
+  position: relative;
+  height: 220vh;
+  z-index: 1;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1100px;
+}
+
+/* ----------------------------------------------------- Sky sliver + celestials */
+
+.skyGap {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  will-change: opacity;
+}
+
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 6px 1px rgba(255, 255, 255, 0.9);
+  animation: twinkle 3.4s ease-in-out infinite;
+}
+
+.star:nth-child(2) { animation-delay: 0.8s; }
+.star:nth-child(3) { animation-delay: 1.6s; }
+.star:nth-child(4) { animation-delay: 2.4s; }
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+
+.moon {
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 38%, #fff7e6 0%, #ffe6b0 55%, #f3c97a 100%);
+  box-shadow: 0 0 60px 12px rgba(255, 220, 150, 0.45);
+}
+
+/* ----------------------------------------------------- Canyon walls */
+
+.canyon {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.wall {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 70%;
+  will-change: transform, opacity;
+  background-color: #ffce8a;
+  /* lit-window grid: warm cells carved by a dark mullion grid */
+  background-image:
+    repeating-linear-gradient(90deg, #0c1024 0 5px, transparent 5px 24px),
+    repeating-linear-gradient(0deg, #0c1024 0 6px, transparent 6px 22px),
+    /* floor-by-floor brightness banding so it doesn't look uniform */
+    repeating-linear-gradient(0deg, rgba(8, 10, 28, 0.55) 0 44px, rgba(8, 10, 28, 0) 44px 110px);
+  box-shadow: inset 0 0 120px 30px rgba(6, 8, 22, 0.7);
+}
+
+.wallLeft {
+  left: 0;
+  clip-path: polygon(0 0, 40% 13%, 47% 100%, 0 100%);
+  background-blend-mode: normal;
+  filter: saturate(1.05);
+}
+
+.wallRight {
+  right: 0;
+  clip-path: polygon(100% 0, 60% 13%, 53% 100%, 100% 100%);
+}
+
+/* Cool/warm split so the two faces catch dusk light differently */
+.wallLeft::after,
+.wallRight::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(120, 70, 160, 0.35), rgba(0, 0, 0, 0) 60%);
+  mix-blend-mode: multiply;
+}
+
+.wallRight::after {
+  background: linear-gradient(240deg, rgba(210, 100, 90, 0.32), rgba(0, 0, 0, 0) 60%);
+}
+
+/* Neon signage accents */
+.neon {
+  position: absolute;
+  border-radius: 4px;
+  filter: blur(0.4px);
+  animation: flicker 5s ease-in-out infinite;
+}
+
+.neonA {
+  top: 34%;
+  left: 16%;
+  width: 10px;
+  height: 120px;
+  background: #ff4d8d;
+  box-shadow: 0 0 18px 4px rgba(255, 77, 141, 0.8);
+}
+
+.neonB {
+  top: 28%;
+  right: 16%;
+  width: 10px;
+  height: 150px;
+  background: #34e3ff;
+  box-shadow: 0 0 18px 4px rgba(52, 227, 255, 0.8);
+  animation-delay: 1.2s;
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  47% { opacity: 1; }
+  49% { opacity: 0.4; }
+  51% { opacity: 1; }
+  92% { opacity: 0.7; }
+}
+
+/* Street at the base of the canyon */
+.street {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 16%;
+  background: linear-gradient(180deg, #16182e 0%, #070814 100%);
+  clip-path: polygon(0 0, 100% 0, 88% 100%, 12% 100%);
+  box-shadow: 0 -10px 50px 10px rgba(255, 150, 80, 0.15);
+}
+
+/* ----------------------------------------------------- Closing message */
+
+.cta {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  padding: 0 1.5rem;
+  max-width: 640px;
+  will-change: transform, opacity;
+}
+
+.arrived {
+  display: inline-block;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #ffd9a0;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 18px rgba(255, 180, 100, 0.6);
+}
+
+.title {
+  font-family: 'IBM Plex Mono', var(--font-mono, monospace);
+  font-weight: 700;
+  font-size: clamp(28px, 4vw, 50px);
+  color: #fff;
+  line-height: 1.12;
+  letter-spacing: -1px;
+  text-shadow: 0 6px 30px rgba(0, 0, 0, 0.55);
+}
+
+.sub {
+  margin-top: 1rem;
+  color: #f3e6d6;
+  font-size: 1.05rem;
+  font-weight: 500;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+}
+
+.buttons {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.btnPrimary,
+.btnSecondary {
+  font-family: var(--font-mono, monospace);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.8rem 1.6rem;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: transform 0.18s ease;
+}
+
+.btnPrimary {
+  color: #fff;
+  background: var(--color-accent);
+  box-shadow: 0 10px 30px rgba(255, 143, 33, 0.5);
+}
+
+.btnSecondary {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(6px);
+}
+
+.btnPrimary:hover,
+.btnSecondary:hover {
+  transform: translateY(-3px);
+}
+
+/* ----------------------------------------------------- Responsive / reduced motion */
+
+@media (max-width: 640px) {
+  .wall { width: 86%; }
+  .wallLeft { clip-path: polygon(0 0, 44% 16%, 50% 100%, 0 100%); }
+  .wallRight { clip-path: polygon(100% 0, 56% 16%, 50% 100%, 100% 100%); }
+  .moon { width: 52px; height: 52px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrollZone { height: 100vh; }
+  .star, .neon { animation: none; }
+}

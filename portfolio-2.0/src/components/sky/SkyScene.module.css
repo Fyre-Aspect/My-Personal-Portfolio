@@ -9,6 +9,11 @@
 .gradient {
   position: absolute;
   inset: 0;
+  will-change: opacity;
+}
+
+/* Bright daytime sky (top of the journey) */
+.day {
   background: linear-gradient(
     180deg,
     #3f86c4 0%,
@@ -17,6 +22,39 @@
     #c2e0f6 72%,
     #e8f5fe 100%
   );
+}
+
+/* Golden hour (mid journey) */
+.gold {
+  background: linear-gradient(
+    180deg,
+    #4a78b8 0%,
+    #7c8fc4 28%,
+    #c98fa8 55%,
+    #f2b277 80%,
+    #ffd9a0 100%
+  );
+}
+
+/* Dusk over the city (end of journey) */
+.dusk {
+  background: linear-gradient(
+    180deg,
+    #0e1230 0%,
+    #23254e 26%,
+    #4a3a6e 46%,
+    #8a4a78 64%,
+    #d2674f 82%,
+    #f2a55a 100%
+  );
+}
+
+/* ------------------------------------------------------------- Clouds */
+
+.clouds {
+  position: absolute;
+  inset: 0;
+  will-change: opacity;
 }
 
 .drift1,
@@ -50,6 +88,26 @@
 @keyframes drift {
   from { transform: translateX(-30vw); }
   to { transform: translateX(130vw); }
+}
+
+/* ------------------------------------------------------------- Distant skyline */
+
+.skylineWrap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 42vh;
+  will-change: transform, opacity;
+}
+
+.skyline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 -8px 40px rgba(255, 150, 80, 0.25));
 }
 
 @media (prefers-reduced-motion: reduce) {
