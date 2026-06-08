@@ -1,0 +1,317 @@
+/* Full-screen interstitial that plays during page navigation. Idle = fully
+   off-screen and click-through; only the cover/reveal phases bring it in. */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.overlay.active {
+  pointer-events: auto;
+}
+
+/* ------------------------------------------------------- Dusk panels */
+
+.half {
+  position: absolute;
+  inset: 0;
+  /* A twilight sky like the site's dusk journey: a soft sky-blue bloom behind
+     the core, a faint warm horizon glow low down, over a night-to-twilight blue
+     gradient. Both halves share the same full-screen image so the seam hides. */
+  background:
+    radial-gradient(60% 50% at 50% 44%, rgba(150, 200, 255, 0.30), rgba(110, 165, 235, 0.10) 40%, transparent 72%),
+    radial-gradient(150% 70% at 50% 124%, rgba(255, 188, 130, 0.16), transparent 60%),
+    linear-gradient(180deg, #07173a 0%, #103056 38%, #275785 72%, #3a6ea6 100%);
+  will-change: transform;
+}
+
+/* the diagonal slash line the screen is cut along */
+.halfTop {
+  clip-path: polygon(0 0, 100% 0, 100% 38%, 0 62%);
+  transform: translateY(-110%);
+}
+
+.halfBottom {
+  clip-path: polygon(0 62%, 100% 38%, 100% 100%, 0 100%);
+  transform: translateY(110%);
+}
+
+.cover .halfTop {
+  animation: coverTop 0.42s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+}
+.cover .halfBottom {
+  animation: coverBottom 0.42s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+}
+.reveal .halfTop {
+  animation: revealTop 0.62s cubic-bezier(0.5, 0, 0.18, 1) forwards;
+}
+.reveal .halfBottom {
+  animation: revealBottom 0.62s cubic-bezier(0.5, 0, 0.18, 1) forwards;
+}
+
+@keyframes coverTop {
+  from { transform: translateY(-110%); }
+  to { transform: translateY(0); }
+}
+@keyframes coverBottom {
+  from { transform: translateY(110%); }
+  to { transform: translateY(0); }
+}
+@keyframes revealTop {
+  from { transform: translateY(0); }
+  to { transform: translateY(-112%); }
+}
+@keyframes revealBottom {
+  from { transform: translateY(0); }
+  to { transform: translateY(112%); }
+}
+
+/* ------------------------------------------------------- Energy core loader */
+
+/* Soft sky bloom behind the core that breathes in time with the orb */
+.aura {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 620px;
+  height: 620px;
+  margin: -310px 0 0 -310px;
+  max-width: 92vw;
+  max-height: 92vw;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(160, 205, 255, 0.45) 0%, rgba(110, 160, 235, 0.20) 36%, transparent 70%);
+  filter: blur(12px);
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.4s ease;
+  will-change: transform, opacity;
+}
+
+.cover .aura {
+  opacity: 1;
+  transition-delay: 0.18s;
+  animation: auraPulse 2.2s ease-in-out infinite;
+}
+
+.reveal .aura {
+  opacity: 0;
+}
+
+@keyframes auraPulse {
+  0%, 100% { transform: scale(0.86); opacity: 0.55; }
+  50% { transform: scale(1.12); opacity: 1; }
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 240px;
+  height: 240px;
+  margin: -120px 0 0 -120px;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.35s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* fade in once the panels have closed; flare out on reveal */
+.cover .loader {
+  opacity: 1;
+  transform: scale(1);
+  transition-delay: 0.2s;
+}
+
+.reveal .loader {
+  opacity: 0;
+  transform: scale(1.18);
+  transition-delay: 0s;
+}
+
+/* 3D stage for the orbiting rings */
+.core {
+  position: absolute;
+  inset: 0;
+  perspective: 720px;
+  transform-style: preserve-3d;
+}
+
+/* concentric rings, each centered via inset+auto so transform is pure rotation */
+.ring {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  border-radius: 50%;
+  border-style: solid;
+  border-color: transparent;
+  will-change: transform;
+}
+
+.ring1 {
+  width: 220px;
+  height: 220px;
+  border-width: 3px;
+  border-top-color: #5aa6ff;
+  border-bottom-color: #5aa6ff;
+  box-shadow: 0 0 22px rgba(90, 166, 255, 0.6), inset 0 0 18px rgba(90, 166, 255, 0.3);
+}
+
+.ring2 {
+  width: 162px;
+  height: 162px;
+  border-width: 3px;
+  border-left-color: #8fd3ff;
+  border-right-color: #8fd3ff;
+  box-shadow: 0 0 20px rgba(143, 211, 255, 0.55), inset 0 0 16px rgba(143, 211, 255, 0.3);
+}
+
+.ring3 {
+  width: 108px;
+  height: 108px;
+  border-width: 2.5px;
+  border-top-color: #cde7ff;
+  border-bottom-color: #cde7ff;
+  box-shadow: 0 0 18px rgba(205, 231, 255, 0.6), inset 0 0 14px rgba(205, 231, 255, 0.35);
+}
+
+.cover .ring1 { animation: spin1 2.6s linear infinite; }
+.cover .ring2 { animation: spin2 3.4s linear infinite; }
+.cover .ring3 { animation: spin3 2.0s linear infinite; }
+
+@keyframes spin1 {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+@keyframes spin2 {
+  from { transform: rotateZ(58deg) rotateX(0deg); }
+  to { transform: rotateZ(58deg) rotateX(360deg); }
+}
+@keyframes spin3 {
+  from { transform: rotateZ(-54deg) rotateX(0deg); }
+  to { transform: rotateZ(-54deg) rotateX(-360deg); }
+}
+
+/* a lone spark riding the outer orbit */
+.dot {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+}
+
+.dot::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 12px 3px rgba(255, 214, 150, 0.9);
+}
+
+.cover .dot { animation: spinDot 1.6s linear infinite; }
+
+@keyframes spinDot {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* the pulsing core orb — a small sun: hot white core, directional sphere
+   shading (lit top-left, shadowed lower-right) and a soft layered corona */
+.orb {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 36% 32%, #ffffff 0%, #fff3d0 22%, #ffd884 48%, #ffa845 74%, #f4812a 100%);
+  box-shadow:
+    0 0 28px rgba(255, 180, 90, 0.9),
+    0 0 64px rgba(255, 150, 60, 0.5),
+    0 0 120px rgba(255, 140, 50, 0.25),
+    inset -7px -8px 16px rgba(150, 70, 20, 0.45),
+    inset 6px 6px 14px rgba(255, 255, 255, 0.5);
+  will-change: transform, box-shadow;
+}
+
+.cover .orb { animation: orbPulse 2.2s ease-in-out infinite; }
+
+@keyframes orbPulse {
+  0%, 100% {
+    transform: scale(0.84);
+    box-shadow:
+      0 0 22px rgba(255, 180, 90, 0.75),
+      0 0 48px rgba(255, 150, 60, 0.35),
+      0 0 90px rgba(255, 140, 50, 0.18),
+      inset -7px -8px 16px rgba(150, 70, 20, 0.45),
+      inset 6px 6px 14px rgba(255, 255, 255, 0.5);
+  }
+  50% {
+    transform: scale(1.12);
+    box-shadow:
+      0 0 42px rgba(255, 205, 130, 0.95),
+      0 0 86px rgba(255, 150, 60, 0.55),
+      0 0 150px rgba(255, 140, 50, 0.3),
+      inset -7px -8px 16px rgba(150, 70, 20, 0.45),
+      inset 6px 6px 14px rgba(255, 255, 255, 0.55);
+  }
+}
+
+/* ------------------------------------------------------- Dev test button */
+
+.testBtn {
+  position: fixed;
+  left: max(1rem, env(safe-area-inset-left));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  z-index: 1200;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  font-family: var(--font-mono, monospace);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.3px;
+  color: #fff;
+  background: rgba(18, 24, 46, 0.7);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  opacity: 0.55;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.testBtn:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.testIcon {
+  font-size: 0.95rem;
+  filter: drop-shadow(0 0 6px rgba(255, 190, 110, 0.7));
+}
+
+/* ------------------------------------------------------- Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .cover .halfTop,
+  .cover .halfBottom { animation-duration: 0.2s; }
+  .reveal .halfTop,
+  .reveal .halfBottom { animation-duration: 0.2s; }
+  .cover .ring1,
+  .cover .ring2,
+  .cover .ring3,
+  .cover .dot,
+  .cover .orb,
+  .cover .aura { animation: none; }
+}

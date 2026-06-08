@@ -249,6 +249,103 @@
   cursor: not-allowed;
 }
 
+/* -------------------------------------------------- Thank-you screen */
+
+.thanks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  animation: thanksIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes thanksIn {
+  from { opacity: 0; transform: translateY(24px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.thanksCard {
+  position: relative;
+  text-align: center;
+  max-width: 560px;
+  width: 100%;
+  padding: 3rem 2.25rem 2.5rem;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border: 3px solid #0a2c47;
+  border-radius: 28px;
+  box-shadow: 8px 8px 0 rgba(10, 44, 71, 0.8);
+}
+
+.thanksIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 5rem;
+  height: 5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 50%;
+  color: #fff;
+  background: linear-gradient(135deg, var(--color-accent, #ff8f21), #ff6f3c);
+  border: 3px solid #0a2c47;
+  box-shadow: 4px 4px 0 rgba(10, 44, 71, 0.8);
+  animation: pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s both;
+}
+
+@keyframes pop {
+  from { transform: scale(0); }
+  to   { transform: scale(1); }
+}
+
+/* the check draws itself on */
+.checkPath {
+  stroke-dasharray: 30;
+  stroke-dashoffset: 30;
+  animation: draw 0.5s ease-out 0.55s forwards;
+}
+
+@keyframes draw {
+  to { stroke-dashoffset: 0; }
+}
+
+.thanksActions {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.thanksPrimary,
+.thanksSecondary {
+  font-family: var(--font-mono, monospace);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.8rem 1.7rem;
+  border-radius: 999px;
+  cursor: pointer;
+  text-decoration: none;
+  border: 2px solid #0a2c47;
+  box-shadow: 4px 4px 0 rgba(10, 44, 71, 0.8);
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+
+.thanksPrimary {
+  color: #fff;
+  background: var(--color-accent);
+}
+
+.thanksSecondary {
+  color: #0a2c47;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.thanksPrimary:hover,
+.thanksSecondary:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 rgba(10, 44, 71, 0.8);
+}
+
 /* -------------------------------------------------- Status banners */
 
 .statusSuccess {

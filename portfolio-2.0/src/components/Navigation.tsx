@@ -1,154 +1,227 @@
 'use client'
 import Link from 'next/link'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback, useRef, FormEvent } from 'react'
 import { usePathname } from 'next/navigation'
-import { GlassEffect, GlassFilter } from './ui/liquid-glass'
+import { useChat } from '@/hooks/useChat'
+import styles from './Navigation.module.css'
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/activities', label: 'Experiences' },
+  { href: '/achievements', label: 'Achievements' },
+  { href: '/contact', label: 'Contact' },
+]
+
+// Strip the tour navigation tags the model sometimes emits; we're chat-only now.
+const cleanAnswer = (content: string) =>
+  content.replace(/{{\s*(?:BUTTON|REDIRECT):[^}]+}}/g, '').trim()
 
 export default function Navigation() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isNavVisible, setIsNavVisible] = useState(true)
-  const [lastScrollY, setLastScrollY] = useState(0)
+  const [pinned, setPinned] = useState(false) // click / chat-locked open
+  const [revealed, setRevealed] = useState(false) // burger faded in
+  const [hoverOpen, setHoverOpen] = useState(false) // cursor parked in the corner
+  const [isTouch, setIsTouch] = useState(false)
+  const [inputValue, setInputValue] = useState('')
   const pathname = usePathname()
 
+  const { messages, isLoading, error, sendMessage, clearChat } = useChat()
+  const logEndRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
+  const wasOpen = useRef(false)
+
+  const open = pinned || hoverOpen
+  const chatting = messages.length > 0
+
+  const isActiveLink = useCallback(
+    (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href)),
+    [pathname]
+  )
+
+  // Desktop: fade the burger in as the cursor nears the top-right corner and
+  // open the menu once it's parked over the nav's area. Touch taps to open.
   useEffect(() => {
-    const controlNavbar = () => {
-      const currentScrollY = window.scrollY
-      const scrollDifference = lastScrollY - currentScrollY
-
-      // Show navbar when scrolling up significantly (more than 100px) or near top
-      if (currentScrollY < 100) {
-        setIsNavVisible(true)
-      } else if (scrollDifference > 100) {
-        setIsNavVisible(true)
-      } else if (scrollDifference < -50) {
-        // Hide when scrolling down more than 50px
-        setIsNavVisible(false)
-        setIsMenuOpen(false) // Close mobile menu when hiding navbar
-      }
-
-      // Add background when scrolled
-      if (currentScrollY > 50) {
-        setIsScrolled(true)
-      } else {
-        setIsScrolled(false)
-      }
-
-      setLastScrollY(currentScrollY)
+    const touch = window.matchMedia('(hover: none)').matches
+    setIsTouch(touch)
+    if (touch) {
+      setRevealed(true)
+      return
     }
 
-    window.addEventListener('scroll', controlNavbar, { passive: true })
+    const onMove = (e: MouseEvent) => {
+      const dx = window.innerWidth - e.clientX
+      const dy = e.clientY
+      const nearCorner = dx < 240 && dy < 240
+      const overArea = dx < 340 && dy < 520 // includes the open panel + chat
+      setRevealed(nearCorner || window.scrollY < 80)
+      setHoverOpen(overArea)
+    }
+    const onScroll = () => {
+      if (window.scrollY < 80) setRevealed(true)
+    }
+
+    window.addEventListener('mousemove', onMove, { passive: true })
+    window.addEventListener('scroll', onScroll, { passive: true })
+    setRevealed(true)
+    const settle = setTimeout(() => {
+      if (window.scrollY >= 80) setRevealed(false)
+    }, 2200)
 
     return () => {
-      window.removeEventListener('scroll', controlNavbar)
+      window.removeEventListener('mousemove', onMove)
+      window.removeEventListener('scroll', onScroll)
+      clearTimeout(settle)
     }
-  }, [lastScrollY])
+  }, [])
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
-  }
-
-  const closeMenu = () => {
-    setIsMenuOpen(false)
-  }
-
-  // Helper function to check if a link is active
-  const isActiveLink = (href: string) => {
-    if (href === '/') {
-      return pathname === '/'
+  // Close on Escape
+  useEffect(() => {
+    if (!open) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setPinned(false)
+        setHoverOpen(false)
+        inputRef.current?.blur()
+      }
     }
-    return pathname.startsWith(href)
-  }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [open])
 
-  // Navigation links data
-  const navLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/projects', label: 'Projects' },
-    { href: '/activities', label: 'Experiences' },
-    { href: '/achievements', label: 'Achievements' },
-    { href: '/contact', label: 'Contact' },
-  ]
+  // Keep the latest answer in view
+  useEffect(() => {
+    if (chatting) logEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages, chatting])
+
+  // Forget the conversation once the menu closes — reopening starts fresh.
+  // While it stays open the history is kept so you can keep asking.
+  useEffect(() => {
+    if (wasOpen.current && !open) {
+      clearChat()
+      setInputValue('')
+    }
+    wasOpen.current = open
+  }, [open, clearChat])
+
+  const handleSend = (e: FormEvent) => {
+    e.preventDefault()
+    const text = inputValue.trim()
+    if (!text || isLoading) return
+    setPinned(true)
+    sendMessage(text)
+    setInputValue('')
+  }
 
   return (
     <>
-      <GlassFilter />
-      <nav className={`glass-navbar ${!isNavVisible ? 'hidden' : ''} ${isScrolled ? 'scrolled' : ''}`}>
-        <GlassEffect 
-          className="rounded-2xl px-4 py-2 hover:rounded-3xl w-full max-w-6xl mx-auto"
-          style={{
-            boxShadow: isScrolled 
-              ? "0 8px 32px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.15)"
-              : "0 6px 6px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1)",
+      {open && (pinned || isTouch) && (
+        <div className={styles.backdrop} onClick={() => setPinned(false)} />
+      )}
+
+      <div className={styles.root}>
+        <button
+          type="button"
+          className={`${styles.burger} ${revealed || open ? styles.revealed : ''} ${
+            open ? styles.open : ''
+          }`}
+          onClick={() => setPinned((v) => !v)}
+          onMouseEnter={() => {
+            setRevealed(true)
+            setHoverOpen(true)
           }}
+          aria-label="Toggle navigation menu"
+          aria-expanded={open}
         >
-          <div className="glass-nav-content">
-            <Link href="/" className="glass-logo-container" onClick={closeMenu}>
-              <img 
-                src="/favicon.ico" 
-                alt="Aamir Tinwala Logo" 
-                className="glass-logo-icon"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = 'none';
-                }}
-              />
-              <div className="glass-logo">
-                Aamir Tinwala
+          <span className={styles.line} />
+          <span className={styles.line} />
+          <span className={styles.line} />
+        </button>
+
+        <nav
+          className={`${styles.panel} ${open ? styles.open : ''} ${
+            chatting ? styles.chatting : ''
+          }`}
+          aria-hidden={!open}
+          onMouseEnter={() => setHoverOpen(true)}
+        >
+          <ul className={styles.list}>
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  onClick={() => {
+                    setPinned(false)
+                    setHoverOpen(false)
+                  }}
+                  className={`${styles.link} ${isActiveLink(link.href) ? styles.active : ''}`}
+                >
+                  {link.label}
+                  <span className={styles.dot} />
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          {/* Embedded AI assistant */}
+          <div className={styles.chat}>
+            {chatting && (
+              <div className={styles.chatLog}>
+                {messages.map((m) => {
+                  const text = cleanAnswer(m.content)
+                  return (
+                    <div
+                      key={m.id}
+                      className={`${styles.msg} ${
+                        m.role === 'user' ? styles.msgUser : styles.msgAI
+                      }`}
+                    >
+                      {m.role === 'assistant' && !text ? (
+                        <span className={styles.typing}>
+                          <span />
+                          <span />
+                          <span />
+                        </span>
+                      ) : (
+                        <span
+                          className={styles.msgText}
+                          dangerouslySetInnerHTML={{ __html: text }}
+                        />
+                      )}
+                    </div>
+                  )
+                })}
+                {error && <div className={styles.chatError}>{error}</div>}
+                <div ref={logEndRef} />
               </div>
-            </Link>
-            
-            {/* Desktop Navigation */}
-            <ul className="glass-nav-links">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <Link 
-                    href={link.href} 
-                    onClick={closeMenu}
-                    className={`glass-nav-link ${isActiveLink(link.href) ? 'active' : ''}`}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            )}
 
-            {/* Mobile Hamburger Button */}
-            <button 
-              className="glass-mobile-menu-btn"
-              onClick={toggleMenu}
-              aria-label="Toggle navigation menu"
-            >
-              <span className={`glass-hamburger-line ${isMenuOpen ? 'open' : ''}`}></span>
-              <span className={`glass-hamburger-line ${isMenuOpen ? 'open' : ''}`}></span>
-              <span className={`glass-hamburger-line ${isMenuOpen ? 'open' : ''}`}></span>
-            </button>
+            <form className={styles.chatBar} onSubmit={handleSend}>
+              <input
+                ref={inputRef}
+                type="text"
+                className={styles.chatInput}
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onFocus={() => setPinned(true)}
+                placeholder="Ask my AI anything…"
+                aria-label="Ask the AI assistant"
+                disabled={isLoading}
+              />
+              <button
+                type="submit"
+                className={styles.chatSend}
+                disabled={!inputValue.trim() || isLoading}
+                aria-label="Send"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="12" y1="19" x2="12" y2="5" />
+                  <polyline points="5 12 12 5 19 12" />
+                </svg>
+              </button>
+            </form>
           </div>
-        </GlassEffect>
-
-        {/* Mobile Navigation Menu */}
-        <div className={`glass-mobile-menu ${isMenuOpen ? 'open' : ''}`}>
-          <GlassEffect className="rounded-2xl p-4 mt-2 mx-4">
-            <ul className="glass-mobile-nav-links">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <Link 
-                    href={link.href} 
-                    onClick={closeMenu}
-                    className={`glass-nav-link ${isActiveLink(link.href) ? 'active' : ''}`}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </GlassEffect>
-        </div>
-
-        {/* Overlay for mobile menu */}
-        {isMenuOpen && (
-          <div className="glass-mobile-menu-overlay" onClick={closeMenu}></div>
-        )}
-      </nav>
+        </nav>
+      </div>
     </>
   )
 }

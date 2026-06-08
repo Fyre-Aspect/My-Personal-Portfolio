@@ -3,7 +3,7 @@ import { Poppins, Libre_Baskerville, IBM_Plex_Mono } from 'next/font/google'
 import { Suspense } from 'react'
 import './globals.css'
 import { ThemeProvider } from '../components/ThemeProvider'
-import ChatWidget from '@/components/ChatWidget'
+import KatanaTransition from '@/components/KatanaTransition'
 import Analytics from '@/components/Analytics'
 
 const poppins = Poppins({ 
@@ -79,11 +79,11 @@ export default function RootLayout({
       <body className={poppins.className}>
         <div className="global-pcb-grid"></div>
         <ThemeProvider>
-          {children}
+          <KatanaTransition>
+            {children}
+          </KatanaTransition>
         </ThemeProvider>
-        
-        {/* AI Chatbot Widget */}
-        <ChatWidget />
+
         <Suspense fallback={null}>
           <Analytics />
         </Suspense>

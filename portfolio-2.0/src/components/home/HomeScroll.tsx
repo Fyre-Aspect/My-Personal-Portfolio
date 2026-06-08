@@ -79,54 +79,66 @@ const FEATURED_ACHIEVEMENTS: Feature[] = [
   },
 ];
 
+/* Drives a scroll-linked 3D entrance: the element flies up out of depth and
+   settles flat as it reaches the middle of the viewport — the same "coming
+   toward you" language as the cloud dive, so the page reads as one descent. */
+function useDepthEntrance(amount = 1) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'center center'],
+  });
+  const p = useSpring(scrollYProgress, { stiffness: 120, damping: 26, mass: 0.5 });
+  const opacity = useTransform(p, [0, 0.6], [0, 1]);
+  const y = useTransform(p, [0, 1], [110 * amount, 0]);
+  const z = useTransform(p, [0, 1], [-260 * amount, 0]);
+  const rotateX = useTransform(p, [0, 1], [14 * amount, 0]);
+  const scale = useTransform(p, [0, 1], [0.9, 1]);
+  return { ref, style: { opacity, y, z, rotateX, scale } as const };
+}
+
 function Suspense({ children }: { children: React.ReactNode }) {
+  const { ref, style } = useDepthEntrance(1.1);
   return (
-    <motion.h2
-      className={styles.suspense}
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: false, amount: 0.7 }}
-      transition={{ duration: 0.7, ease: 'easeOut' }}
-    >
-      {children}
-    </motion.h2>
+    <div ref={ref} className={styles.suspenseStage}>
+      <motion.h2 className={styles.suspense} style={style}>
+        {children}
+      </motion.h2>
+    </div>
   );
 }
 
 function FeatureRow({ f, i }: { f: Feature; i: number }) {
   const flip = i % 2 === 1;
+  const { ref, style } = useDepthEntrance(1);
   return (
-    <motion.div
-      className={`${styles.feature} ${flip ? styles.flip : ''}`}
-      initial={{ opacity: 0, y: 70 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: false, amount: 0.35 }}
-      transition={{ duration: 0.72, ease: 'easeOut' }}
-    >
-      <div className={styles.featureMedia} style={f.mediaBg ? { background: f.mediaBg } : undefined}>
-        {f.image && <img src={f.image} alt={f.title} loading="lazy" />}
-        {!f.image && f.mediaLabel && (
-          <div className={styles.mediaOverlay}>
-            {f.mediaLabel.split('·').map((s, idx) => (
-              <span key={idx}>{s.trim()}</span>
-            ))}
-          </div>
-        )}
-      </div>
-      <div className={styles.featureText}>
-        <span className={styles.kicker}>{f.index}</span>
-        <h3 className={styles.featureTitle}>{f.title}</h3>
-        <p className={styles.featureLine}>{f.line}</p>
-        <Link
-          href={f.href}
-          className={styles.openLink}
-          target={f.external ? '_blank' : undefined}
-          rel={f.external ? 'noopener noreferrer' : undefined}
-        >
-          Open
-        </Link>
-      </div>
-    </motion.div>
+    <div ref={ref} className={styles.featureStage}>
+      <motion.div className={`${styles.feature} ${flip ? styles.flip : ''}`} style={style}>
+        <div className={styles.featureMedia} style={f.mediaBg ? { background: f.mediaBg } : undefined}>
+          {f.image && <img src={f.image} alt={f.title} loading="lazy" />}
+          {!f.image && f.mediaLabel && (
+            <div className={styles.mediaOverlay}>
+              {f.mediaLabel.split('·').map((s, idx) => (
+                <span key={idx}>{s.trim()}</span>
+              ))}
+            </div>
+          )}
+        </div>
+        <div className={styles.featureText}>
+          <span className={styles.kicker}>{f.index}</span>
+          <h3 className={styles.featureTitle}>{f.title}</h3>
+          <p className={styles.featureLine}>{f.line}</p>
+          <Link
+            href={f.href}
+            className={styles.openLink}
+            target={f.external ? '_blank' : undefined}
+            rel={f.external ? 'noopener noreferrer' : undefined}
+          >
+            Open
+          </Link>
+        </div>
+      </motion.div>
+    </div>
   );
 }
 

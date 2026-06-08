@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import Navigation from '../../components/Navigation'
-import Footer from '../../components/Footer'
 import SkyScene from '../../components/sky/SkyScene'
 import styles from './contact.module.css'
 
@@ -44,6 +44,36 @@ export default function ContactPage() {
       <SkyScene />
       <div className={styles.shell}>
         <main className={styles.page}>
+          {submitStatus === 'success' ? (
+            <div className={styles.thanks}>
+              <div className={styles.thanksCard}>
+                <span className={styles.thanksIcon} aria-hidden="true">
+                  <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <path className={styles.checkPath} d="M4 12.5l5 5L20 6.5" />
+                  </svg>
+                </span>
+                <span className={styles.tag}>// message received</span>
+                <h1 className={styles.title}>Thank you!</h1>
+                <p className={styles.subtitle}>
+                  Your message just landed in my inbox. I read every one myself —
+                  expect to hear back from me soon, usually within a day or two.
+                </p>
+                <div className={styles.thanksActions}>
+                  <button
+                    type="button"
+                    onClick={() => setSubmitStatus('idle')}
+                    className={styles.thanksSecondary}
+                  >
+                    Send another
+                  </button>
+                  <Link href="/" className={styles.thanksPrimary}>
+                    Back to home →
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ) : (
+          <>
           <div className={styles.head}>
             <span className={styles.tag}>// say hello</span>
             <h1 className={styles.title}>Let&apos;s Connect</h1>
@@ -111,11 +141,6 @@ export default function ContactPage() {
             <div className={styles.formCard}>
               <h2 className={styles.formTitle}>Send a message</h2>
 
-              {submitStatus === 'success' && (
-                <div className={styles.statusSuccess}>
-                  Message sent! I&apos;ll get back to you soon.
-                </div>
-              )}
               {submitStatus === 'error' && (
                 <div className={styles.statusError}>
                   Something went wrong — email me directly instead.
@@ -150,8 +175,9 @@ export default function ContactPage() {
               </form>
             </div>
           </div>
+          </>
+          )}
         </main>
-        <Footer />
       </div>
     </>
   )

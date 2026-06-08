@@ -7,6 +7,25 @@
   display: flex;
   flex-direction: column;
   gap: 7rem;
+  /* shared vanishing point so every section rises out of the same 3D space —
+     keeps the descent feeling like one continuous object, not stacked cards */
+  perspective: 1600px;
+  perspective-origin: 50% 30%;
+}
+
+/* Each section sits in its own 3D stage so transforms read as depth, not skew. */
+.suspenseStage,
+.featureStage {
+  position: relative;
+  z-index: 1;
+  transform-style: preserve-3d;
+}
+
+.suspenseStage .suspense,
+.featureStage .feature {
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 }
 
 /* ----------------------------------------------------- Parallax cloud decorations */

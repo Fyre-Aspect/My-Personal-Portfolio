@@ -43,20 +43,43 @@ export default function CityFinale() {
         </motion.div>
 
         <motion.div className={styles.canyon} style={{ scale: canyonScale }}>
+          {/* Distant back-row buildings for parallax depth behind the canyon */}
+          <motion.div
+            className={styles.backRow}
+            style={{ y: wallsY, opacity: wallsOpacity }}
+            aria-hidden="true"
+          >
+            <span className={styles.backTower} style={{ left: '30%', height: '46%', width: '7%' }} />
+            <span className={styles.backTower} style={{ left: '40%', height: '58%', width: '9%' }} />
+            <span className={styles.backTower} style={{ left: '52%', height: '50%', width: '8%' }} />
+            <span className={styles.backTower} style={{ left: '62%', height: '62%', width: '7%' }} />
+          </motion.div>
+
           <motion.div
             className={`${styles.wall} ${styles.wallLeft}`}
             style={{ y: wallsY, opacity: wallsOpacity }}
             aria-hidden="true"
           >
+            <span className={styles.facade} />
+            <span className={styles.edgeLight} />
+            <span className={styles.roof} style={{ top: '11%', left: '28%' }} />
             <span className={`${styles.neon} ${styles.neonA}`} />
+            <span className={`${styles.neonSign} ${styles.neonSignA}`} />
           </motion.div>
+
           <motion.div
             className={`${styles.wall} ${styles.wallRight}`}
             style={{ y: wallsY, opacity: wallsOpacity }}
             aria-hidden="true"
           >
+            <span className={styles.facade} />
+            <span className={styles.edgeLight} />
+            <span className={styles.roof} style={{ top: '11%', right: '30%' }} />
             <span className={`${styles.neon} ${styles.neonB}`} />
+            <span className={`${styles.neonSign} ${styles.neonSignB}`} />
           </motion.div>
+
+          <div className={styles.haze} aria-hidden="true" />
           <div className={styles.street} aria-hidden="true" />
         </motion.div>
 
