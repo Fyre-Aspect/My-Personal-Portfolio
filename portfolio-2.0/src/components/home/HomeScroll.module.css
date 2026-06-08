@@ -7,11 +7,45 @@
   display: flex;
   flex-direction: column;
   gap: 7rem;
+  overflow: visible;
+}
+
+/* ----------------------------------------------------- Parallax cloud decorations */
+
+.cloudDeco {
+  position: absolute;
+  pointer-events: none;
+  color: rgba(255, 255, 255, 0.28);
+  z-index: 0;
+  will-change: transform;
+}
+
+.cloudDeco1 {
+  width: 520px;
+  top: 8%;
+  left: -260px;
+  filter: blur(3px);
+}
+
+.cloudDeco2 {
+  width: 380px;
+  top: 38%;
+  right: -200px;
+  filter: blur(4px);
+}
+
+.cloudDeco3 {
+  width: 440px;
+  bottom: 22%;
+  left: -200px;
+  filter: blur(3px);
 }
 
 /* ----------------------------------------------------- Suspense lines */
 
 .suspense {
+  position: relative;
+  z-index: 1;
   font-family: 'IBM Plex Mono', var(--font-mono, monospace);
   font-weight: 700;
   font-size: clamp(30px, 5vw, 58px);
@@ -27,6 +61,8 @@
 /* ----------------------------------------------------- Feature rows */
 
 .feature {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
@@ -55,6 +91,35 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
+}
+
+.mediaOverlay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.5rem;
+}
+
+.mediaOverlay span {
+  font-family: 'IBM Plex Mono', var(--font-mono, monospace);
+  font-weight: 700;
+  font-size: clamp(14px, 1.6vw, 18px);
+  color: rgba(255, 255, 255, 0.92);
+  text-align: center;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.5px;
+}
+
+.mediaOverlay span:first-child {
+  font-size: clamp(11px, 1.2vw, 14px);
+  font-weight: 500;
+  opacity: 0.72;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
 }
 
 .feature:hover .featureMedia img {
@@ -112,6 +177,8 @@
 /* ----------------------------------------------------- Finale */
 
 .finale {
+  position: relative;
+  z-index: 1;
   text-align: center;
   margin-top: 3rem;
 }

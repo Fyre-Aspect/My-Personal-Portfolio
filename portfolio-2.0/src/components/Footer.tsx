@@ -9,7 +9,7 @@ export default function Footer() {
         <h2 className={styles.title}>Let&apos;s Connect</h2>
         <p className={styles.text}>
           Got an idea, an opportunity, or just want to talk tech? I&apos;d love to
-          hear from you — let&apos;s build something together.
+          hear from you. Let&apos;s build something together.
         </p>
 
         <Link href="/contact" className={styles.cta}>

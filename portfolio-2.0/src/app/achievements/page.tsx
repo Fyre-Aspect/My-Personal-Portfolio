@@ -16,7 +16,7 @@ export default function Achievements() {
             <span className={chrome.tag}>// the trophy case</span>
             <h1 className={chrome.title}>Achievements</h1>
             <p className={chrome.subtitle}>
-              Milestones across tech, academics, community, and athletics — hover or
+              Milestones across tech, academics, community, and athletics. Hover or
               arrow-key through the panels.
             </p>
             <div className={chrome.hint}>

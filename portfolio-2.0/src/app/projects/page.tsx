@@ -15,7 +15,7 @@ export default function ProjectsPage() {
             <span className={chrome.tag}>// the lineup</span>
             <h1 className={chrome.title}>Projects</h1>
             <p className={chrome.subtitle}>
-              Hover a panel or fly through with the arrow keys — then hit the shown
+              Hover a panel or fly through with the arrow keys. Hit the shown
               keys to open it up.
             </p>
             <div className={chrome.hint}>

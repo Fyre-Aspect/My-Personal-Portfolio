@@ -13,18 +13,18 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: "STEAM ICAC 2026 — Saliency-Aware Video Codec",
+    title: "STEAM ICAC 2026 - Saliency-Aware Video Codec",
     description:
-      "Saliency-aware video codec for stationary surveillance cameras, presented at the STEAM Innovation Challenge Annual Conference 2026 (University of Toronto). Exploits fixed camera viewpoints by replacing non-salient pixels with a learned background, then compresses with H.265 — inter-frame prediction collapses static regions to near-zero bits. Achieved 81% file size reduction on 1080p footage (33.9 MB → 6.5 MB) and 34.76 dB PSNR on salient content. Output is fully standards-compliant H.265 mp4, compatible with any decoder.",
+      "Saliency-aware video codec for stationary surveillance cameras, presented at the STEAM Innovation Challenge Annual Conference 2026 (University of Toronto). Exploits fixed camera viewpoints by replacing non-salient pixels with a learned background, then compresses with H.265 - inter-frame prediction collapses static regions to near-zero bits. Achieved 81% file size reduction on 1080p footage (33.9 MB to 6.5 MB) and 34.76 dB PSNR on salient content. Output is fully standards-compliant H.265 mp4, compatible with any decoder.",
     role: "Computer Science Researcher",
     technologies: ["Python", "YOLOv8", "H.265 / libx265", "OpenCV", "PyTorch", "Optical Flow", "NumPy"],
     liveUrl: null,
     githubUrl: "https://github.com/SaiAmartya/steam-icac-2026",
     image: "/Medal.png",
-    status: "STEAM ICAC 2026 — CS Showcase",
+    status: "STEAM ICAC 2026 - CS Showcase",
   },
   {
-    title: "MechMania — Robot Controller",
+    title: "MechMania - Robot Controller",
     description:
       "Researched ESP32 wireless comms from scratch, wrote connection firmware, then built the handheld controller hardware end-to-end. Went undefeated through a 12-team ladder tournament.",
     role: "Controller Engineer",
@@ -32,7 +32,18 @@ export const projects: Project[] = [
     liveUrl: null,
     githubUrl: null,
     image: "/Mechmania.jpg",
-    status: "1st Place — 12 Teams",
+    status: "1st Place - 12 Teams",
+  },
+  {
+    title: "UWaterloo Geothermal Lab",
+    description:
+      "Research assistant at the University of Waterloo's geothermal energy lab. Supported soil durability testing for residential geothermal coil systems - evaluating how well different soil compositions conduct and retain heat when coils are buried underground for house heating and cooling. Assisted with sample collection, lab analysis, and documentation of results that directly inform geothermal system design.",
+    role: "Research Assistant",
+    technologies: ["MATLAB", "Data Analysis", "Soil Testing", "Lab Research", "Scientific Documentation"],
+    liveUrl: null,
+    githubUrl: null,
+    image: "/UW Pic 2.jpg",
+    status: "University of Waterloo - Geothermal Lab",
   },
   {
     title: "Waypoint",
@@ -45,12 +56,12 @@ export const projects: Project[] = [
     videoUrl: "https://www.youtube.com/watch?v=b7HLdGY1vIY&t=1s",
     image:
       "https://raw.githubusercontent.com/waypoint9404-ops/hackcanada/main/public/waypoint_pwa_icon_1772889865943.png",
-    status: "HackCanada — Top 7th Overall",
+    status: "HackCanada - Top 7th Overall",
   },
   {
     title: "LangLua",
     description:
-      "Chrome extension + React dashboard built at EurekaHacks. Replaces words on any page with translations — hover for ElevenLabs audio and Gemini-powered quizzes. Streak and LinguaCoins gamification across 10 languages.",
+      "Chrome extension + React dashboard built at EurekaHacks. Replaces words on any page with translations - hover for ElevenLabs audio and Gemini-powered quizzes. Streak and LinguaCoins gamification across 10 languages.",
     role: "Full-Stack Developer",
     technologies: ["Chrome Extension MV3", "TypeScript", "React", "Gemini", "ElevenLabs", "Vite"],
     liveUrl: null,
@@ -62,7 +73,7 @@ export const projects: Project[] = [
     title: "Tidal Tasks",
     description:
       "AI task management platform with real-time collaboration, project analytics, and automated workflows. I handle admin development and ongoing feature implementation.",
-    role: "Admin Developer",
+    role: "Developer",
     technologies: ["React", "TypeScript", "Firebase", "Gemini API", "Tailwind CSS"],
     liveUrl: "https://tidaltasks.app",
     githubUrl: null,
@@ -91,7 +102,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/Fyre-Aspect/ShurPlus-AI",
     videoUrl: "https://drive.google.com/file/d/1FZ8oS6N8X4uBfk2XLDgoTzGiVSs1T8UM/view",
     image: "/ShurPlus.png",
-    status: "3rd Place — NeoDev",
+    status: "3rd Place - NeoDev",
     demoLabel: "View Demo",
   },
   {
@@ -108,7 +119,7 @@ export const projects: Project[] = [
   {
     title: "Personal Portfolio",
     description:
-      "This site — built from scratch with Next.js and custom CSS. Smooth animations, dark fire theme, and an integrated AI chat assistant.",
+      "This site - built from scratch with Next.js and custom CSS. Smooth animations, sky theme, and an integrated AI chat assistant.",
     role: "Full-Stack Developer",
     technologies: ["Next.js", "TypeScript", "CSS", "Gemini API"],
     liveUrl: "https://aamirtinwalapersonal-portfolio.vercel.app",

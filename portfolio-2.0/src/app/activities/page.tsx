@@ -15,7 +15,7 @@ export default function ActivitiesPage() {
             <span className={chrome.tag}>// beyond the classroom</span>
             <h1 className={chrome.title}>Experiences</h1>
             <p className={chrome.subtitle}>
-              A timeline of everything I&apos;ve done beyond the classroom — hover any
+              A timeline of everything I&apos;ve done beyond the classroom. Hover any
               card to read the full story.
             </p>
           </div>
