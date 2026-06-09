@@ -16,6 +16,7 @@ function toItem(p: (typeof projects)[number]): ComicItem {
     description: p.description,
     tags: p.technologies,
     actions,
+    shape: p.size,
   };
 }
 

@@ -1,22 +1,10 @@
 'use client'
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import styles from './KatanaTransition.module.css'
 
 type Status = 'idle' | 'cover' | 'reveal'
-
-const KatanaContext = createContext<{ play: () => void }>({ play: () => {} })
-
-/** Replay the katana transition from anywhere (used by the dev test button). */
-export const useKatana = () => useContext(KatanaContext)
 
 /**
  * A page-transition interstitial: vibrant dusk panels close over the screen, a
@@ -104,12 +92,8 @@ export default function KatanaTransition({ children }: { children: React.ReactNo
 
   useEffect(() => () => clearTimers(), [clearTimers])
 
-  const play = useCallback(() => cover(true), [cover])
-
-  const isDev = process.env.NODE_ENV !== 'production'
-
   return (
-    <KatanaContext.Provider value={{ play }}>
+    <>
       {children}
 
       <div
@@ -135,17 +119,6 @@ export default function KatanaTransition({ children }: { children: React.ReactNo
           </div>
         </div>
       </div>
-
-      {isDev && (
-        <button
-          type="button"
-          className={styles.testBtn}
-          onClick={play}
-          aria-label="Preview the page transition"
-        >
-          <span className={styles.testIcon}>◉</span> Test transition
-        </button>
-      )}
-    </KatanaContext.Provider>
+    </>
   )
 }

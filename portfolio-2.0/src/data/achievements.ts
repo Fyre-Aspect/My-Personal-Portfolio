@@ -114,9 +114,9 @@ export const achievements: AchievementCategory[] = [
         growthAspect: 'Research',
       },
       {
-        title: '200+ Volunteer Hours',
+        title: '150+ Volunteer Hours',
         description:
-          'Extensive volunteering across multiple organizations including food banks, animal shelters, and university campuses.',
+          'Over 150 volunteer hours total across multiple organizations - food banks, animal shelters, and university campuses - not just any single placement.',
         date: '2023-Present',
         image: '/KW Humane.png',
         growthAspect: 'Volunteer',

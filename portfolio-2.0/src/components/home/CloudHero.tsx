@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import styles from './CloudHero.module.css';
 
@@ -13,86 +13,6 @@ function Cloud({ className, style }: { className?: string; style?: React.CSSProp
       />
       <ellipse cx="110" cy="84" rx="96" ry="34" fill="currentColor" opacity="0.85" />
     </svg>
-  );
-}
-
-const easeInOutCubic = (t: number) =>
-  t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-
-function PlayButton() {
-  const [playing, setPlaying] = useState(false);
-  const rafRef = useRef<number | null>(null);
-  const lastSetY = useRef<number>(-1);
-
-  const stop = useCallback(() => {
-    if (rafRef.current !== null) { cancelAnimationFrame(rafRef.current); rafRef.current = null; }
-    lastSetY.current = -1;
-    setPlaying(false);
-  }, []);
-
-  const play = useCallback(() => {
-    const maxY = document.documentElement.scrollHeight - window.innerHeight;
-    if (window.scrollY >= maxY - 8) window.scrollTo({ top: 0, behavior: 'instant' });
-    const startY = window.scrollY;
-    const distance = maxY - startY;
-    if (distance <= 0) return;
-    const duration = Math.max(5000, 26000 * (distance / Math.max(maxY, 1)));
-    const startTime = performance.now();
-    setPlaying(true);
-    const step = (now: number) => {
-      const t = Math.min(1, (now - startTime) / duration);
-      const nextY = Math.round(startY + distance * easeInOutCubic(t));
-      lastSetY.current = nextY;
-      document.documentElement.scrollTop = nextY;
-      if (t < 1) { rafRef.current = requestAnimationFrame(step); }
-      else { rafRef.current = null; lastSetY.current = -1; setPlaying(false); }
-    };
-    rafRef.current = requestAnimationFrame(step);
-  }, []);
-
-  useEffect(() => {
-    if (!playing) return;
-    const onScroll = () => {
-      const actual = Math.round(document.documentElement.scrollTop);
-      if (lastSetY.current >= 0 && Math.abs(actual - lastSetY.current) > 3) stop();
-    };
-    const onTouch = () => stop();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('touchstart', onTouch, { passive: true });
-    window.addEventListener('keydown', stop);
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('touchstart', onTouch);
-      window.removeEventListener('keydown', stop);
-    };
-  }, [playing, stop]);
-
-  useEffect(() => () => stop(), [stop]);
-
-  return (
-    <button
-      type="button"
-      className={styles.playBtn}
-      onClick={() => playing ? stop() : play()}
-      aria-label={playing ? 'Stop' : 'Play the journey'}
-    >
-      {playing ? (
-        <>
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
-            <rect x="6" y="5" width="4" height="14" rx="1" />
-            <rect x="14" y="5" width="4" height="14" rx="1" />
-          </svg>
-          Stop
-        </>
-      ) : (
-        <>
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
-            <path d="M8 5.14v13.72c0 .79.87 1.27 1.54.84l10.78-6.86a1 1 0 0 0 0-1.68L9.54 4.3A1 1 0 0 0 8 5.14z" />
-          </svg>
-          Play the journey
-        </>
-      )}
-    </button>
   );
 }
 
@@ -152,9 +72,6 @@ export default function CloudHero() {
           className={styles.content}
           style={{ y: contentY, scale: contentScale, opacity: contentOpacity, filter: contentBlur }}
         >
-          {/* Play button lives here on mobile — naturally above the photo */}
-          <PlayButton />
-
           <div className={styles.photoRing}>
             <img src="/Aamir%20Pic.jpg" alt="Aamir Tinwala" className={styles.photo} />
           </div>

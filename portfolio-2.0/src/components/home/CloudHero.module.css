@@ -92,30 +92,6 @@
   max-width: 520px;
 }
 
-/* ------------------------------------------------------------------- Play button (mobile only) */
-
-.playBtn {
-  display: none; /* hidden on desktop */
-  align-items: center;
-  gap: 0.4rem;
-  margin-bottom: 1.2rem;
-  padding: 0.5rem 1.1rem;
-  border: none;
-  border-radius: 999px;
-  font-family: var(--font-mono, monospace);
-  font-weight: 700;
-  font-size: 0.8rem;
-  letter-spacing: 0.3px;
-  color: #fff;
-  background: linear-gradient(135deg, var(--color-accent, #ff8f21), #ff6f3c);
-  box-shadow: 0 6px 18px rgba(255, 110, 50, 0.45);
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  transition: transform 0.15s ease;
-}
-
-.playBtn:active { transform: scale(0.95); }
-
 /* ------------------------------------------------------------------- Photo */
 
 .photoRing {
@@ -231,8 +207,6 @@
 /* ------------------------------------------------------------------- Mobile */
 
 @media (max-width: 640px) {
-  .playBtn { display: inline-flex; }
-
   .photoRing { width: 120px; height: 120px; }
 
   .cloudFront { width: 420px; }

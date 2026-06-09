@@ -18,6 +18,7 @@ export interface ComicItem {
   description: string;
   tags: string[];
   actions: ComicAction[];
+  shape?: 'big' | 'wide' | 'tall' | 'small';
 }
 
 const SHAPES = ['big', 'wide', 'small', 'tall', 'small', 'wide', 'small', 'tall', 'small'] as const;
@@ -84,7 +85,7 @@ export default function ComicGrid({ items }: { items: ComicItem[] }) {
       onMouseEnter={() => engage(idRef.current)}
     >
       {items.map((item, i) => {
-        const shape = SHAPES[i % SHAPES.length];
+        const shape = item.shape ?? SHAPES[i % SHAPES.length];
         return (
           <div
             key={item.title}

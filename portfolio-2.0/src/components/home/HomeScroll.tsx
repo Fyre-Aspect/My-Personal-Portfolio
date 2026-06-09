@@ -25,6 +25,8 @@ interface Feature {
   image?: string;
   mediaBg?: string;
   mediaLabel?: string;
+  /** Render the image contained (with padding) rather than cropped — for logos. */
+  logo?: boolean;
   href: string;
   external?: boolean;
 }
@@ -55,27 +57,29 @@ const FEATURED_PROJECTS: Feature[] = [
   },
 ];
 
-const FEATURED_ACHIEVEMENTS: Feature[] = [
+const FEATURED_EXPERIENCES: Feature[] = [
   {
-    index: 'Achievement 01',
-    title: 'WCCSAA Badminton - 5th Place',
-    line: 'Regional badminton competition representing the school. Competed at the WCCSAA level as part of the school team.',
-    image: '/wcssaa.png',
-    href: '/achievements',
+    index: 'Experience 01',
+    title: 'UWaterloo Geothermal Lab',
+    line: 'Research assistant at the University of Waterloo geothermal lab — soil heat-conduction testing that ties straight into my thermodynamics studies.',
+    image: '/UW Pic 1.jpg',
+    href: '/activities',
   },
   {
-    index: 'Achievement 02',
-    title: 'KW Humane Society Volunteer',
-    line: 'Part of 200+ volunteer hours across Kitchener-Waterloo. Helped care for animals and support adoption programs at the KW Humane Society.',
-    image: '/KW.png',
-    href: '/achievements',
+    index: 'Experience 02',
+    title: 'Tidal Tasks — Co-Founder',
+    line: 'Co-founded an AI task-management startup. Led the mobile rework, shipped features, and ran the social channels.',
+    image: '/Tidal Tasks.png',
+    href: '/activities',
   },
   {
-    index: 'Achievement 03',
-    title: 'Food Distribution Volunteer',
-    line: 'Regular volunteer at local food distribution programs, helping sort and deliver food packages to families across the KW region.',
-    image: '/Distro.jpg',
-    href: '/achievements',
+    index: 'Experience 03',
+    title: 'Global Heart Sync — Advisor',
+    line: 'Volunteer advisor reshaping how the platform structures its app to draw in and retain a younger audience.',
+    image: '/Global Heart Sync.png',
+    mediaBg: 'linear-gradient(135deg, #f6fbff 0%, #e6f1ff 100%)',
+    logo: true,
+    href: '/activities',
   },
 ];
 
@@ -114,7 +118,10 @@ function FeatureRow({ f, i }: { f: Feature; i: number }) {
   return (
     <div ref={ref} className={styles.featureStage}>
       <motion.div className={`${styles.feature} ${flip ? styles.flip : ''}`} style={style}>
-        <div className={styles.featureMedia} style={f.mediaBg ? { background: f.mediaBg } : undefined}>
+        <div
+          className={`${styles.featureMedia} ${f.logo ? styles.logoMedia : ''}`}
+          style={f.mediaBg ? { background: f.mediaBg } : undefined}
+        >
           {f.image && <img src={f.image} alt={f.title} loading="lazy" />}
           {!f.image && f.mediaLabel && (
             <div className={styles.mediaOverlay}>
@@ -174,9 +181,9 @@ export default function HomeScroll() {
         <FeatureRow key={f.title} f={f} i={i} />
       ))}
 
-      <Suspense>There&apos;s more to me than <em>code</em>.</Suspense>
+      <Suspense>Where I&apos;ve put in the <em>work</em>.</Suspense>
 
-      {FEATURED_ACHIEVEMENTS.map((f, i) => (
+      {FEATURED_EXPERIENCES.map((f, i) => (
         <FeatureRow key={f.title} f={f} i={i} />
       ))}
 
