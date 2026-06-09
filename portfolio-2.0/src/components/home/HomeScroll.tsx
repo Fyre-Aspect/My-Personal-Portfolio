@@ -168,13 +168,13 @@ export default function HomeScroll() {
         <CloudShape />
       </motion.div>
 
-      <Suspense>Some things I&apos;ve built.</Suspense>
+      <Suspense>Stuff I&apos;ve actually <em>shipped</em>.</Suspense>
 
       {FEATURED_PROJECTS.map((f, i) => (
         <FeatureRow key={f.title} f={f} i={i} />
       ))}
 
-      <Suspense>Beyond the&nbsp;code.</Suspense>
+      <Suspense>There&apos;s more to me than <em>code</em>.</Suspense>
 
       {FEATURED_ACHIEVEMENTS.map((f, i) => (
         <FeatureRow key={f.title} f={f} i={i} />

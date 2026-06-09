@@ -181,12 +181,12 @@
 /* ------------------------------------------------------------------- Name + role */
 
 .name {
-  font-family: 'IBM Plex Mono', var(--font-mono, monospace);
-  font-weight: 700;
+  font-family: var(--font-display, 'Fredoka'), 'Poppins', sans-serif;
+  font-weight: 600;
   /* min keeps it from overflowing narrow phones; clamp scales with viewport */
-  font-size: clamp(28px, 8vw, 92px);
-  line-height: 1.05;
-  letter-spacing: -1.5px;
+  font-size: clamp(30px, 8.5vw, 96px);
+  line-height: 1.02;
+  letter-spacing: -0.5px;
   background: linear-gradient(160deg, #0a2c47 0%, #11436a 55%, #2a6fb0 100%);
   -webkit-background-clip: text;
   background-clip: text;

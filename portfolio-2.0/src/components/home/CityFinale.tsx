@@ -85,7 +85,7 @@ export default function CityFinale() {
 
         <motion.div className={styles.cta} style={{ opacity: ctaOpacity, y: ctaY }}>
           <span className={styles.arrived}>You&apos;ve arrived</span>
-          <h2 className={styles.title}>There&apos;s plenty more where that came from.</h2>
+          <h2 className={styles.title}>There&apos;s <em>plenty more</em> where that came from.</h2>
           <p className={styles.sub}>See everything I&apos;ve built, won, and done.</p>
           <div className={styles.buttons}>
             <Link href="/projects" className={styles.btnPrimary}>All Projects</Link>

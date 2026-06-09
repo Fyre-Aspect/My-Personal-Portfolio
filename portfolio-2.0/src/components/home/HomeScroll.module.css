@@ -64,16 +64,23 @@
 .suspense {
   position: relative;
   z-index: 1;
-  font-family: 'IBM Plex Mono', var(--font-mono, monospace);
-  font-weight: 700;
-  font-size: clamp(30px, 5vw, 58px);
-  line-height: 1.12;
+  font-family: var(--font-display, 'Fredoka'), 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: clamp(32px, 5.4vw, 62px);
+  line-height: 1.1;
   text-align: center;
   color: #0a2c47;
-  letter-spacing: -1.5px;
+  letter-spacing: -0.5px;
   max-width: 800px;
   margin: 3rem auto;
   text-shadow: 0 4px 22px rgba(255, 255, 255, 0.5);
+}
+
+/* accent the punchy word in each section header */
+.suspense em {
+  font-style: normal;
+  color: var(--color-accent, #ff8f21);
+  text-shadow: 0 4px 22px rgba(255, 143, 33, 0.35);
 }
 
 /* ----------------------------------------------------- Feature rows */
@@ -154,13 +161,13 @@
 }
 
 .featureTitle {
-  font-family: 'IBM Plex Mono', var(--font-mono, monospace);
-  font-weight: 700;
-  font-size: clamp(26px, 3.2vw, 40px);
+  font-family: var(--font-display, 'Fredoka'), 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: clamp(27px, 3.3vw, 42px);
   color: #0a2c47;
-  line-height: 1.1;
+  line-height: 1.08;
   margin-top: 0.5rem;
-  letter-spacing: -1px;
+  letter-spacing: -0.3px;
 }
 
 .featureLine {

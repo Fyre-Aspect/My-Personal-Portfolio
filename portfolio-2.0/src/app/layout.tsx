@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Poppins, Libre_Baskerville, IBM_Plex_Mono } from 'next/font/google'
+import { Poppins, Libre_Baskerville, IBM_Plex_Mono, Fredoka } from 'next/font/google'
 import { Suspense } from 'react'
 import './globals.css'
 import { ThemeProvider } from '../components/ThemeProvider'
@@ -20,10 +20,19 @@ const libreBaskerville = Libre_Baskerville({
   display: 'swap',
 })
 
-const ibmPlexMono = IBM_Plex_Mono({ 
+const ibmPlexMono = IBM_Plex_Mono({
   subsets: ['latin'],
   weight: ['400', '500', '600'],
   variable: '--font-mono',
+  display: 'swap',
+})
+
+// Rounded, bubbly display face for the homepage headlines — matches the soft
+// sky + neon-dusk mood far better than the techy mono.
+const fredoka = Fredoka({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-display',
   display: 'swap',
 })
 //this is just to be able to meta data
@@ -47,7 +56,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" data-theme="light" className={`${poppins.variable} ${libreBaskerville.variable} ${ibmPlexMono.variable}`}>
+    <html lang="en" data-theme="light" className={`${poppins.variable} ${libreBaskerville.variable} ${ibmPlexMono.variable} ${fredoka.variable}`}>
       <head>
         {/* Ensure proper viewport handling */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />

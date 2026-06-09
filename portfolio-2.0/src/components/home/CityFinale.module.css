@@ -336,13 +336,19 @@
 }
 
 .title {
-  font-family: 'IBM Plex Mono', var(--font-mono, monospace);
-  font-weight: 700;
-  font-size: clamp(28px, 4vw, 50px);
+  font-family: var(--font-display, 'Fredoka'), 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: clamp(30px, 4.4vw, 54px);
   color: #fff;
-  line-height: 1.12;
-  letter-spacing: -1px;
+  line-height: 1.08;
+  letter-spacing: -0.3px;
   text-shadow: 0 6px 30px rgba(0, 0, 0, 0.55);
+}
+
+.title em {
+  font-style: normal;
+  color: var(--color-accent, #ff8f21);
+  text-shadow: 0 6px 30px rgba(255, 143, 33, 0.4);
 }
 
 .sub {
@@ -363,10 +369,10 @@
 
 .btnPrimary,
 .btnSecondary {
-  font-family: var(--font-mono, monospace);
-  font-weight: 700;
-  font-size: 0.95rem;
-  padding: 0.8rem 1.6rem;
+  font-family: var(--font-display, 'Fredoka'), 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1.02rem;
+  padding: 0.8rem 1.7rem;
   border-radius: 999px;
   text-decoration: none;
   transition: transform 0.18s ease;
