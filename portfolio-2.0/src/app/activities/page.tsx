@@ -1,6 +1,6 @@
 import Navigation from '../../components/Navigation'
 import Footer from '../../components/Footer'
-import SkyBackdropMount from '../../components/sky3d/SkyBackdropMount'
+import SkyScene from '../../components/sky/SkyScene'
 import ExperienceTimeline from '../../components/ExperienceTimeline'
 import chrome from '../../components/comic/ComicChrome.module.css'
 
@@ -8,7 +8,7 @@ export default function ActivitiesPage() {
   return (
     <>
       <Navigation />
-      <SkyBackdropMount />
+      <SkyScene />
       <div className={chrome.shell}>
         <main className={chrome.page}>
           <div className={chrome.head}>

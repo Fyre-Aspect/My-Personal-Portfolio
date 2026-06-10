@@ -378,19 +378,20 @@ function City({ progress }: { progress: ProgressRef }) {
     const m: THREE.Matrix4[] = [];
     const tmp = new THREE.Matrix4();
     const q = new THREE.Quaternion();
-    for (let gx = -780; gx <= 780; gx += 52) {
-      for (let gz = -600; gz <= 120; gz += 52) {
-        // A clear avenue runs the canyon straight to the waterfront, so the
-        // finale's view between the towers reaches the ocean. Thin the grid
-        // out randomly so it feels organic, not minecrafty.
+    // A tight, dense cluster of tall buildings hugging the two hero towers —
+    // a compact downtown rather than a sprawl. The canyon avenue (|x|<78) stays
+    // clear so the finale's view between the towers still reaches the ocean.
+    for (let gx = -520; gx <= 520; gx += 44) {
+      for (let gz = -540; gz <= 90; gz += 44) {
         if (Math.abs(gx) < 78) continue;
-        if (rnd() < 0.38) continue;
-        const x = gx + (rnd() - 0.5) * 22;
-        const z = gz + (rnd() - 0.5) * 22;
-        const near = 1 - clamp01((Math.abs(x) + Math.abs(z)) / 1500);
-        const h = 12 + rnd() * rnd() * (40 + near * 75);
-        const w = 14 + rnd() * 14;
-        const d = 14 + rnd() * 14;
+        if (rnd() < 0.24) continue;
+        const x = gx + (rnd() - 0.5) * 16;
+        const z = gz + (rnd() - 0.5) * 16;
+        const near = 1 - clamp01((Math.abs(x) + Math.abs(z)) / 1050);
+        // Taller, with the tallest towers packed near the canyon.
+        const h = 26 + rnd() * rnd() * (90 + near * 180);
+        const w = 16 + rnd() * 16;
+        const d = 16 + rnd() * 16;
         tmp.compose(new THREE.Vector3(x, 0, z), q, new THREE.Vector3(w, h, d));
         m.push(tmp.clone());
       }

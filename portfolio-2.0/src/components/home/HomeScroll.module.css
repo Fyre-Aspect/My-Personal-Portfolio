@@ -69,18 +69,19 @@
   font-size: clamp(32px, 5.4vw, 62px);
   line-height: 1.1;
   text-align: center;
-  color: #0a2c47;
+  /* Light face + dark halo so the headline reads over any part of the sky. */
+  color: #ffffff;
   letter-spacing: -0.5px;
   max-width: 800px;
   margin: 3rem auto;
-  text-shadow: 0 4px 22px rgba(255, 255, 255, 0.5);
+  text-shadow: 0 3px 20px rgba(8, 30, 60, 0.6), 0 1px 3px rgba(8, 30, 60, 0.5);
 }
 
 /* accent the punchy word in each section header */
 .suspense em {
   font-style: normal;
-  color: var(--color-accent, #ff8f21);
-  text-shadow: 0 4px 22px rgba(255, 143, 33, 0.35);
+  color: #ffc06a;
+  text-shadow: 0 2px 16px rgba(120, 60, 0, 0.55), 0 1px 3px rgba(80, 40, 0, 0.5);
 }
 
 /* ----------------------------------------------------- Feature rows */
@@ -172,13 +173,25 @@
   transform: scale(1.05);
 }
 
+/* Frosted panel behind the copy so the dark project text stays readable over
+   any part of the sky, mirroring the frosted media card beside it. */
+.featureText {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 20px;
+  padding: 1.7rem 1.9rem;
+  box-shadow: 0 20px 50px rgba(20, 60, 100, 0.22);
+}
+
 .kicker {
   font-family: var(--font-mono, monospace);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: #2a6fb0;
+  color: #1d5b97;
 }
 
 .featureTitle {

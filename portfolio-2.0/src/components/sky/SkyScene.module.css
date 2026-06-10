@@ -12,15 +12,16 @@
   will-change: opacity;
 }
 
-/* Bright daytime sky (top of the journey) */
+/* Bright, soft sky at the top of the journey. Kept light and warm so the dark
+   page headers that sit here stay easily readable. */
 .day {
   background: linear-gradient(
     180deg,
-    #3f86c4 0%,
-    #66a6d8 22%,
-    #93c4ea 48%,
-    #c2e0f6 72%,
-    #e8f5fe 100%
+    #7fb4e2 0%,
+    #aed3f0 24%,
+    #d8ecfb 50%,
+    #f3ead9 76%,
+    #ffe6c4 100%
   );
 }
 
@@ -28,11 +29,11 @@
 .gold {
   background: linear-gradient(
     180deg,
-    #4a78b8 0%,
-    #7c8fc4 28%,
-    #c98fa8 55%,
-    #f2b277 80%,
-    #ffd9a0 100%
+    #5f8cc6 0%,
+    #9a9fc8 28%,
+    #d49aa6 55%,
+    #f6b074 80%,
+    #ffd49a 100%
   );
 }
 
@@ -40,12 +41,12 @@
 .dusk {
   background: linear-gradient(
     180deg,
-    #0e1230 0%,
-    #23254e 26%,
-    #4a3a6e 46%,
-    #8a4a78 64%,
+    #11173a 0%,
+    #29274f 24%,
+    #4f3a6c 44%,
+    #8a4a72 62%,
     #d2674f 82%,
-    #f2a55a 100%
+    #ffac5e 100%
   );
 }
 
