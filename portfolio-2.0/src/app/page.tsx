@@ -1,5 +1,5 @@
 import Navigation from '../components/Navigation'
-import SkyScene from '../components/sky/SkyScene'
+import SkyWorldMount from '../components/sky3d/SkyWorldMount'
 import CloudHero from '../components/home/CloudHero'
 import HomeScroll from '../components/home/HomeScroll'
 import styles from './page.module.css'
@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
       <Navigation />
-      <SkyScene />
+      <SkyWorldMount />
       <main className={styles.dashboardWrapper}>
         <CloudHero />
         <div className={styles.contentWrapper}>

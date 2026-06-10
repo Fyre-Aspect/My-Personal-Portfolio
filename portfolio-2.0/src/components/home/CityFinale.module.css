@@ -312,6 +312,18 @@
   box-shadow: 0 -14px 60px 12px rgba(255, 150, 80, 0.22);
 }
 
+/* Soft radial vignette behind the closing message so the white text stays
+   legible over the bright 3D sunset rendered behind the page. */
+.legibility {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(68% 52% at 50% 56%, rgba(20, 14, 30, 0.42) 0%, rgba(20, 14, 30, 0) 72%),
+    linear-gradient(180deg, rgba(15, 10, 24, 0) 38%, rgba(15, 10, 24, 0.3) 100%);
+}
+
 /* ----------------------------------------------------- Closing message */
 
 .cta {
