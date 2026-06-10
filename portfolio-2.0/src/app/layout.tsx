@@ -56,7 +56,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" data-theme="light" className={`${poppins.variable} ${libreBaskerville.variable} ${ibmPlexMono.variable} ${fredoka.variable}`}>
+    // suppressHydrationWarning: the fonts-loaded script and theme toggling
+    // mutate <html> classes before React hydrates.
+    <html lang="en" data-theme="light" suppressHydrationWarning className={`${poppins.variable} ${libreBaskerville.variable} ${ibmPlexMono.variable} ${fredoka.variable}`}>
       <head>
         {/* Ensure proper viewport handling */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />

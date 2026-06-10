@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Navigation from '../../components/Navigation'
-import SkyScene from '../../components/sky/SkyScene'
+import SkyBackdropMount from '../../components/sky3d/SkyBackdropMount'
 import styles from './contact.module.css'
 
 export default function ContactPage() {
@@ -41,7 +41,7 @@ export default function ContactPage() {
   return (
     <>
       <Navigation />
-      <SkyScene />
+      <SkyBackdropMount />
       <div className={styles.shell}>
         <main className={styles.page}>
           {submitStatus === 'success' ? (

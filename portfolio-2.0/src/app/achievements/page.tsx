@@ -1,6 +1,6 @@
 import Navigation from '../../components/Navigation'
 import Footer from '../../components/Footer'
-import SkyScene from '../../components/sky/SkyScene'
+import SkyBackdropMount from '../../components/sky3d/SkyBackdropMount'
 import AchievementGrid from '../../components/achievements/AchievementGrid'
 import { achievements } from '../../data/achievements'
 import chrome from '../../components/comic/ComicChrome.module.css'
@@ -9,7 +9,7 @@ export default function Achievements() {
   return (
     <>
       <Navigation />
-      <SkyScene />
+      <SkyBackdropMount />
       <div className={chrome.shell}>
         <main className={chrome.page}>
           <div className={chrome.head}>

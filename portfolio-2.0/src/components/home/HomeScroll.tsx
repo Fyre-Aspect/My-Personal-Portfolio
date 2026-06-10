@@ -6,18 +6,6 @@ import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import styles from './HomeScroll.module.css';
 import CityFinale from './CityFinale';
 
-function CloudShape({ className, style }: { className?: string; style?: React.CSSProperties }) {
-  return (
-    <svg className={className} style={style} viewBox="0 0 220 120" fill="none" aria-hidden="true">
-      <path
-        d="M48 104c-24 0-34-28-12-37-3-26 33-37 47-16 8-20 44-19 49 3 26-7 41 22 21 33 8 14-4 34-20 34H48z"
-        fill="currentColor"
-      />
-      <ellipse cx="110" cy="84" rx="96" ry="34" fill="currentColor" opacity="0.85" />
-    </svg>
-  );
-}
-
 interface Feature {
   index: string;
   title: string;
@@ -151,30 +139,9 @@ function FeatureRow({ f, i }: { f: Feature; i: number }) {
 
 export default function HomeScroll() {
   const wrapRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: wrapRef,
-    offset: ['start end', 'end start'],
-  });
-  const p = useSpring(scrollYProgress, { stiffness: 80, damping: 30, mass: 0.4 });
-
-  const cloud1X = useTransform(p, [0, 1], ['-8%', '8%']);
-  const cloud2X = useTransform(p, [0, 1], ['6%', '-6%']);
-  const cloud3X = useTransform(p, [0, 1], ['-4%', '4%']);
-  const cloudY1 = useTransform(p, [0, 1], ['0%', '20%']);
-  const cloudY2 = useTransform(p, [0, 1], ['0%', '-15%']);
 
   return (
     <div ref={wrapRef} className={styles.wrap}>
-      <motion.div className={`${styles.cloudDeco} ${styles.cloudDeco1}`} style={{ x: cloud1X, y: cloudY1 }} aria-hidden="true">
-        <CloudShape />
-      </motion.div>
-      <motion.div className={`${styles.cloudDeco} ${styles.cloudDeco2}`} style={{ x: cloud2X, y: cloudY2 }} aria-hidden="true">
-        <CloudShape />
-      </motion.div>
-      <motion.div className={`${styles.cloudDeco} ${styles.cloudDeco3}`} style={{ x: cloud3X }} aria-hidden="true">
-        <CloudShape />
-      </motion.div>
-
       <Suspense>Stuff I&apos;ve actually <em>shipped</em>.</Suspense>
 
       {FEATURED_PROJECTS.map((f, i) => (

@@ -22,3 +22,13 @@
   pointer-events: none;
   background: linear-gradient(180deg, #aecdeb 0%, #cfe2f4 42%, #f1e0cb 100%);
 }
+
+/* Warm golden-hour fallback for the content-page SkyBackdrop, so there's no
+   cold-blue flash before the sunset scene loads. */
+.fallbackWarm {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, #6f7fb0 0%, #c98f86 45%, #ffb06a 78%, #ffd9a0 100%);
+}
