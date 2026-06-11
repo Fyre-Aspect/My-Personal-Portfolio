@@ -45,7 +45,7 @@ const DAWN = {
   hemiGround: new THREE.Color('#6b7280'),
   sun: new THREE.Color('#fff3d8'),
   skyTint: new THREE.Color('#fff4e4'),
-  ground: new THREE.Color('#5d6678'),
+  ground: new THREE.Color('#46414f'),
   ocean: new THREE.Color('#2a5c8a'),
 };
 const SUNSET = {
@@ -66,6 +66,9 @@ const DUSK = {
   ground: new THREE.Color('#10141f'),
   ocean: new THREE.Color('#13223e'),
 };
+
+/* Shared white used to lighten the mist toward soft cloud each frame. */
+const MIST_WHITE = new THREE.Color('#fff2e6');
 
 function mix3(out: THREE.Color, a: THREE.Color, b: THREE.Color, c: THREE.Color, w: number) {
   if (w < 0.5) out.copy(a).lerp(b, w * 2);
@@ -266,6 +269,15 @@ function makePuffTexture(size = 256, seed = 7) {
     ctx.fillStyle = g;
     ctx.fillRect(0, 0, size, size);
   }
+  // Erase the square corners with a circular falloff so the sprite can never
+  // show a hard box edge — guarantees soft, round mist/cloud puffs.
+  const vg = ctx.createRadialGradient(size / 2, size / 2, size * 0.18, size / 2, size / 2, size * 0.5);
+  vg.addColorStop(0, 'rgba(0,0,0,0)');
+  vg.addColorStop(1, 'rgba(0,0,0,1)');
+  ctx.globalCompositeOperation = 'destination-out';
+  ctx.fillStyle = vg;
+  ctx.fillRect(0, 0, size, size);
+  ctx.globalCompositeOperation = 'source-over';
   const t = new THREE.CanvasTexture(c);
   t.colorSpace = THREE.SRGBColorSpace;
   return t;
@@ -363,6 +375,41 @@ function makeFacadeTexture() {
   return t;
 }
 
+/* A realistic asphalt road: speckled tarmac, lighter curbs at the edges, solid
+   white lane lines and a dashed yellow centre line. Tiled down the avenue so the
+   street between the towers reads as a real road instead of a flat plane. */
+function makeRoadTexture() {
+  const c = document.createElement('canvas');
+  c.width = 128;
+  c.height = 512;
+  const ctx = c.getContext('2d')!;
+  const rnd = mulberry32(555);
+  ctx.fillStyle = '#191920';
+  ctx.fillRect(0, 0, 128, 512);
+  // tarmac speckle
+  for (let i = 0; i < 1600; i++) {
+    const v = 16 + rnd() * 18;
+    ctx.fillStyle = `rgba(${v},${v},${v + 4},0.35)`;
+    ctx.fillRect(rnd() * 128, rnd() * 512, 2, 2);
+  }
+  // curbs / sidewalks
+  ctx.fillStyle = '#33333c';
+  ctx.fillRect(0, 0, 16, 512);
+  ctx.fillRect(112, 0, 16, 512);
+  // solid white lane-edge lines
+  ctx.fillStyle = 'rgba(228,228,216,0.6)';
+  ctx.fillRect(22, 0, 3, 512);
+  ctx.fillRect(103, 0, 3, 512);
+  // dashed yellow centre line
+  ctx.fillStyle = 'rgba(247,206,92,0.92)';
+  for (let y = 0; y < 512; y += 54) ctx.fillRect(62, y, 5, 30);
+  const t = new THREE.CanvasTexture(c);
+  t.wrapS = t.wrapT = THREE.RepeatWrapping;
+  t.repeat.set(1, 10);
+  t.colorSpace = THREE.SRGBColorSpace;
+  return t;
+}
+
 /* The city below: one InstancedMesh of ~260 window-textured blocks scattered
    on a street grid around and behind the two hero towers (the canyon corridor
    and the camera's approach lane stay clear). Window emissive ramps up as the
@@ -432,16 +479,71 @@ function City({ progress }: { progress: ProgressRef }) {
   );
 }
 
+/* ---------------------------------------------------------------- mist sea */
+
+/* A low bank of soft mist the whole city rises out of, so there's no hard flat
+   ground or harsh horizon line — the towers and skyline emerge from cloud, in
+   keeping with the "floating above the clouds" mood. Always present; it warms
+   with the palette and drifts gently. Camera-facing sprites = no hard edges. */
+function MistSea({ progress }: { progress: ProgressRef }) {
+  const tex = useMemo(() => makePuffTexture(256, 99), []);
+  const group = useRef<THREE.Group>(null!);
+  const mats = useRef<THREE.SpriteMaterial[]>([]);
+
+  const puffs = useMemo(() => {
+    const rnd = mulberry32(77);
+    const arr: { pos: [number, number, number]; s: number; op: number }[] = [];
+    for (let i = 0; i < 34; i++) {
+      arr.push({
+        pos: [(rnd() - 0.5) * 1600, 1 + rnd() * 14, 170 - rnd() * 1100],
+        s: 190 + rnd() * 240,
+        op: 0.5 + rnd() * 0.4,
+      });
+    }
+    return arr;
+  }, []);
+
+  useFrame(({ clock }) => {
+    if (group.current) group.current.position.x = Math.sin(clock.elapsedTime * 0.03) * 10;
+    const w = smoothstep(0, 1, progress.current);
+    for (const m of mats.current) {
+      mix3(m.color, DAWN.fog, SUNSET.fog, DUSK.fog, w);
+      // Lighten toward white so it reads as soft cloud, not a coloured plane.
+      m.color.lerp(MIST_WHITE, 0.42);
+    }
+  });
+
+  return (
+    <group ref={group}>
+      {puffs.map((pf, i) => (
+        <sprite key={i} position={pf.pos} scale={[pf.s * 2.2, pf.s, 1]}>
+          <spriteMaterial
+            ref={(m) => {
+              if (m) mats.current.push(m);
+            }}
+            map={tex}
+            transparent
+            depthWrite={false}
+            opacity={pf.op}
+          />
+        </sprite>
+      ))}
+    </group>
+  );
+}
+
 /* ------------------------------------------------------------- ground & ocean */
 
-/* Dark city ground that ends where the water begins, then a reflective ocean
-   plane running to the foggy horizon — the finale's distant sunset seascape.
+/* A deep, dark base the city sits on (kept dim and matte so it never reads as a
+   flat coloured slab — the MistSea hides its near edge), then a reflective ocean
+   plane running to the foggy horizon for the finale's distant sunset seascape.
    A long additive glow strip lays the setting sun's glitter path on the water. */
 function GroundAndOcean({ progress }: { progress: ProgressRef }) {
   const groundMat = useRef<THREE.MeshStandardMaterial>(null!);
   const oceanMat = useRef<THREE.MeshStandardMaterial>(null!);
   const glintMat = useRef<THREE.MeshBasicMaterial>(null!);
   const glowTex = useMemo(() => makeGlowTexture(128), []);
+  const roadTex = useMemo(() => makeRoadTexture(), []);
 
   useFrame(() => {
     const w = smoothstep(0.1, 0.95, progress.current);
@@ -452,10 +554,24 @@ function GroundAndOcean({ progress }: { progress: ProgressRef }) {
 
   return (
     <group>
-      {/* city ground slab — the waterfront sits just past the city's back row */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.6, 40]}>
-        <planeGeometry args={[2400, 1400]} />
-        <meshStandardMaterial ref={groundMat} roughness={0.95} metalness={0} />
+      {/* dim ground the city sits on; its far edge runs deep enough to dissolve
+          into fog before the ocean, so there's no hard seam */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.6, -480]}>
+        <planeGeometry args={[2600, 3000]} />
+        <meshStandardMaterial ref={groundMat} roughness={1} metalness={0} />
+      </mesh>
+      {/* the road running down the avenue between the towers — its painted lines
+          glow faintly so the street feels alive at dusk */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.05, -420]}>
+        <planeGeometry args={[150, 2400]} />
+        <meshStandardMaterial
+          map={roadTex}
+          emissiveMap={roadTex}
+          emissive="#ffcaa0"
+          emissiveIntensity={0.5}
+          roughness={0.6}
+          metalness={0.1}
+        />
       </mesh>
       {/* ocean from the waterfront to the foggy horizon */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.4, -4700]}>
@@ -561,7 +677,10 @@ function CameraDirector({ progress }: { progress: ProgressRef }) {
           new THREE.Vector3(26, 268, 330),
           new THREE.Vector3(42, 196, 238),
           new THREE.Vector3(16, 96, 132),
-          new THREE.Vector3(0, 40, 56),
+          new THREE.Vector3(4, 34, 60),
+          // ...and keep sinking to street level so the towers rise up out of
+          // frame by the time you've scrolled all the way down.
+          new THREE.Vector3(0, 7, 26),
         ],
         false,
         'catmullrom',
@@ -577,7 +696,8 @@ function CameraDirector({ progress }: { progress: ProgressRef }) {
           new THREE.Vector3(0, 430, -480),   // tilting down through the cloud layer
           new THREE.Vector3(-14, 16, -300),  // angled top-down city reveal
           new THREE.Vector3(0, 58, -170),    // locking onto the canyon
-          new THREE.Vector3(0, 60, -420),    // between the towers, out to the ocean sunset
+          new THREE.Vector3(0, 40, -300),    // levelling down the road
+          new THREE.Vector3(0, 26, -520),    // street level, gazing down the road to the sunset
         ],
         false,
         'catmullrom',
@@ -675,6 +795,7 @@ export default function SkyWorld() {
           <CloudField progress={progress} />
           <City progress={progress} />
           <GroundAndOcean progress={progress} />
+          <MistSea progress={progress} />
           <Skyscrapers />
           <CameraDirector progress={progress} />
         </Suspense>
