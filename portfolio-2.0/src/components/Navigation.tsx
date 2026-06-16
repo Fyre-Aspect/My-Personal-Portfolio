@@ -125,10 +125,10 @@ export default function Navigation() {
       >
         <filter
           id="liquidGlassFilter"
-          x="-25%"
-          y="-25%"
-          width="150%"
-          height="150%"
+          x="-35%"
+          y="-35%"
+          width="170%"
+          height="170%"
           filterUnits="objectBoundingBox"
           primitiveUnits="userSpaceOnUse"
         >
@@ -151,24 +151,61 @@ export default function Navigation() {
               repeatCount="indefinite"
             />
           </feTurbulence>
-          <feGaussianBlur in="noise" stdDeviation="2" result="softMap" />
+          <feGaussianBlur in="noise" stdDeviation="2.2" result="softMap" />
           <feDisplacementMap
             in="SourceGraphic"
             in2="softMap"
-            scale="64"
+            scale="72"
             xChannelSelector="R"
             yChannelSelector="G"
+            result="warped"
           >
             {/* Gentle breathing on the displacement amount adds a second, slower
                 wave so the flow never looks like a single looping cycle. */}
             <animate
               attributeName="scale"
               dur="14s"
-              values="56; 76; 62; 56"
+              values="60; 84; 68; 60"
               keyTimes="0; 0.45; 0.75; 1"
               repeatCount="indefinite"
             />
           </feDisplacementMap>
+          {/* Wet, glossy sheen — a soft point light grazes the refracted glass
+              and slowly drifts across it. This is the highlight that sells the
+              "liquid glass" read on the 21st.dev reference; it's composited
+              lightly on top so it brightens edges without washing the panel. */}
+          <feSpecularLighting
+            in="softMap"
+            surfaceScale="2.4"
+            specularConstant="0.7"
+            specularExponent="85"
+            lightingColor="#d4ecff"
+            result="sheen"
+          >
+            <fePointLight x="20" y="-40" z="140">
+              <animate
+                attributeName="x"
+                dur="9s"
+                values="-60; 240; -60"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="y"
+                dur="13s"
+                values="-60; 70; -60"
+                repeatCount="indefinite"
+              />
+            </fePointLight>
+          </feSpecularLighting>
+          <feComposite
+            in="sheen"
+            in2="warped"
+            operator="arithmetic"
+            k1="0"
+            k2="1"
+            k3="0.4"
+            k4="0"
+          />
         </filter>
       </svg>
 

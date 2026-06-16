@@ -53,8 +53,10 @@
    the panel to a flat box. This layer guarantees the frosted-glass read. */
 .glassBlur {
   z-index: 0;
-  backdrop-filter: blur(9px) saturate(1.9);
-  -webkit-backdrop-filter: blur(9px) saturate(1.9);
+  /* Richer frost + a brightness lift so the live scene reads through the glass
+     as colour, the translucent-but-not-transparent look of the reference. */
+  backdrop-filter: blur(12px) saturate(2.1) brightness(1.06);
+  -webkit-backdrop-filter: blur(12px) saturate(2.1) brightness(1.06);
 }
 
 /* Layer 1 — liquid refraction. Re-samples the frosted backdrop and bends it
@@ -75,15 +77,12 @@
   z-index: 2;
   background: linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0.38),
-      rgba(255, 255, 255, 0.05) 26%,
-      rgba(255, 255, 255, 0) 52%
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.1) 28%,
+      rgba(255, 255, 255, 0) 58%
     ),
-    linear-gradient(
-      180deg,
-      rgba(18, 22, 42, 0.22),
-      rgba(11, 15, 30, 0.44)
-    );
+    /* faint cyber-cyan wash to marry the glass to the blue scene */
+    linear-gradient(165deg, rgba(120, 180, 255, 0.1), rgba(14, 20, 40, 0.28));
 }
 
 /* Layer 3 — specular bevel. Bright inset rim (top-left catch, bottom-right
@@ -118,9 +117,12 @@
   /* quiet by default */
   opacity: 0.34;
   transform: translateY(-2px) scale(0.92);
-  transition: opacity 0.45s ease,
-    transform 0.55s cubic-bezier(0.175, 0.885, 0.32, 2.2),
-    box-shadow 0.45s ease;
+  /* The long, overshooting spring (matched to the 21st.dev timing function) is
+     what gives the button its soft "pop" instead of a flat fade. */
+  transition: opacity 0.5s ease,
+    transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 2.2),
+    border-radius 0.7s cubic-bezier(0.175, 0.885, 0.32, 2.2),
+    box-shadow 0.5s ease;
 }
 
 .burger.revealed {
@@ -130,8 +132,10 @@
 
 .burger:hover,
 .burger.open {
-  transform: translateY(0) scale(1.05);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.42), 0 0 26px rgba(0, 0, 0, 0.18);
+  /* grow + round out on hover — the reference dock's signature expansion */
+  transform: translateY(0) scale(1.08);
+  border-radius: 22px;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.44), 0 0 30px rgba(76, 198, 255, 0.22);
 }
 
 .lines {
@@ -180,10 +184,13 @@
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), 0 0 30px rgba(0, 0, 0, 0.15);
   transform-origin: top right;
   opacity: 0;
-  transform: translateY(-8px) scale(0.95);
+  transform: translateY(-12px) scale(0.9);
   pointer-events: none;
-  transition: opacity 0.3s ease,
-    transform 0.42s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+  /* Pops open from the burger with the same overshooting spring; width is
+     animated too so growing into chat mode glides rather than jumps. */
+  transition: opacity 0.35s ease,
+    transform 0.62s cubic-bezier(0.175, 0.885, 0.32, 2.2),
+    width 0.5s cubic-bezier(0.175, 0.885, 0.32, 2.2);
 }
 
 .panel.open {
@@ -208,6 +215,30 @@
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
+}
+
+/* Stagger the links in as the panel pops — each one springs up just after the
+   last, so the menu assembles itself instead of appearing all at once. */
+.list li {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.panel.open .list li {
+  animation: linkIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 2.2) forwards;
+}
+
+.panel.open .list li:nth-child(1) { animation-delay: 0.05s; }
+.panel.open .list li:nth-child(2) { animation-delay: 0.1s; }
+.panel.open .list li:nth-child(3) { animation-delay: 0.15s; }
+.panel.open .list li:nth-child(4) { animation-delay: 0.2s; }
+.panel.open .list li:nth-child(5) { animation-delay: 0.25s; }
+
+@keyframes linkIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .link {
@@ -423,5 +454,13 @@
   .line {
     transition: opacity 0.2s ease;
     transform: none;
+  }
+
+  /* Skip the staggered spring — show the links immediately. */
+  .list li,
+  .panel.open .list li {
+    opacity: 1;
+    transform: none;
+    animation: none;
   }
 }
