@@ -1,21 +1,22 @@
 /* Fixed full-viewport WebGL backdrop for the Experiences page: a scroll-driven
-   climb up a glass skyscraper at golden hour. Sits behind page content
-   (z-index 0); the timeline lives at z-index 1. A warm sky gradient is painted
-   behind the canvas so there's no flash before the GLB loads. */
+   climb up a glass skyscraper, set in the same warm sunset sky as the rest of
+   the site. Sits behind page content (z-index 0); the timeline lives at
+   z-index 1. The gradient matches the content-page SkyBackdrop fallback so
+   there's no mismatched flash before the GLBs load. */
 .canvasWrap {
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background: linear-gradient(180deg, #243a6b 0%, #5d7bb4 40%, #aec2e0 66%, #ffd6a6 84%, #ff9e5a 100%);
+  background: linear-gradient(180deg, #6f7fb0 0%, #c98f86 45%, #ffb06a 78%, #ffd9a0 100%);
 }
 
 .canvasWrap canvas {
   display: block;
 }
 
-/* Readability + mood. A soft warm vignette frames the climb and a gentle bright
-   band at the very top lifts the header text off the cool upper sky. */
+/* Readability + mood: a soft bright band at the very top lifts the header text,
+   and a warm glow at the bottom anchors the lowest cards. */
 .scrim {
   position: absolute;
   inset: 0;
@@ -23,22 +24,22 @@
   background:
     radial-gradient(
       130% 70% at 50% 0%,
-      rgba(255, 255, 255, 0.28) 0%,
+      rgba(255, 255, 255, 0.22) 0%,
       rgba(255, 255, 255, 0) 46%
     ),
     radial-gradient(
-      140% 60% at 50% 100%,
-      rgba(255, 158, 90, 0.22) 0%,
-      rgba(255, 158, 90, 0) 52%
+      140% 55% at 50% 100%,
+      rgba(255, 150, 82, 0.2) 0%,
+      rgba(255, 150, 82, 0) 50%
     );
 }
 
-/* Warm fallback while the dynamic chunk + GLB load, and on devices where the
+/* Warm fallback while the dynamic chunk + GLBs load, and on devices where the
    3D climb is skipped. */
 .fallback {
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background: linear-gradient(180deg, #243a6b 0%, #5d7bb4 40%, #aec2e0 66%, #ffd6a6 84%, #ff9e5a 100%);
+  background: linear-gradient(180deg, #6f7fb0 0%, #c98f86 45%, #ffb06a 78%, #ffd9a0 100%);
 }

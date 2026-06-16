@@ -12,7 +12,7 @@ export default function Footer() {
           hear from you. Let&apos;s build something together.
         </p>
 
-        <Link href="/contact" className={styles.cta}>
+        <Link href="/contact" className="glassBtn accent">
           Get in touch →
         </Link>
 

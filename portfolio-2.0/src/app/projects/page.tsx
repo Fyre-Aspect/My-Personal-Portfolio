@@ -31,7 +31,7 @@ export default function ProjectsPage() {
           <div className={chrome.cta}>
             <h3>Want to see more?</h3>
             <p>Check out my GitHub for additional projects, experiments, and open-source contributions.</p>
-            <a href="https://github.com/Fyre-Aspect" target="_blank" rel="noopener noreferrer" className={chrome.ctaBtn}>
+            <a href="https://github.com/Fyre-Aspect" target="_blank" rel="noopener noreferrer" className="glassBtn accent">
               View More on GitHub →
             </a>
           </div>

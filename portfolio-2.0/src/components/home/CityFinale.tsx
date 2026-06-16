@@ -34,8 +34,8 @@ export default function CityFinale() {
           <h2 className={styles.title}>There&apos;s <em>plenty more</em> where that came from.</h2>
           <p className={styles.sub}>See everything I&apos;ve built, won, and done.</p>
           <div className={styles.buttons}>
-            <Link href="/projects" className={styles.btnPrimary}>All Projects</Link>
-            <Link href="/achievements" className={styles.btnSecondary}>All Achievements</Link>
+            <Link href="/projects" className="glassBtn accent">All Projects</Link>
+            <Link href="/achievements" className="glassBtn onDark">All Achievements</Link>
           </div>
         </motion.div>
       </div>

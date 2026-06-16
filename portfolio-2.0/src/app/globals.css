@@ -4632,3 +4632,133 @@ body {
   z-index: -1;
   pointer-events: none;
 }
+
+/* ============================================================================
+   Standardised liquid-glass button
+   One blocky, slightly-opaque frosted-glass button used across the whole site.
+   Apply the global class straight in JSX (e.g. className="glassBtn accent").
+   Compound modifier selectors (.glassBtn.accent) outrank single-class module
+   styles, so the look stays consistent wherever it's dropped in.
+   ========================================================================== */
+.glassBtn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono, monospace);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.3px;
+  line-height: 1;
+  padding: 0.8rem 1.6rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  color: #07223a;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.14) 42%, rgba(255, 255, 255, 0.04) 100%),
+    rgba(255, 255, 255, 0.46);
+  backdrop-filter: blur(12px) saturate(1.6);
+  -webkit-backdrop-filter: blur(12px) saturate(1.6);
+  box-shadow:
+    0 8px 22px rgba(10, 30, 60, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -10px 18px -12px rgba(120, 170, 255, 0.5);
+  cursor: pointer;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    filter 0.2s ease;
+}
+
+.glassBtn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.03);
+  box-shadow:
+    0 14px 30px rgba(10, 30, 60, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    inset 0 -10px 18px -12px rgba(120, 170, 255, 0.6);
+}
+
+/* The satisfying press: the button dips in and the shadow tucks under. */
+.glassBtn:active {
+  transform: translateY(1px) scale(0.985);
+  box-shadow:
+    0 4px 12px rgba(10, 30, 60, 0.26),
+    inset 0 2px 6px rgba(10, 30, 60, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.glassBtn:disabled,
+.glassBtn[aria-disabled='true'] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  filter: none;
+}
+
+/* Accent (primary) — branded orange glass with a bright sheen. */
+.glassBtn.accent {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.5);
+  text-shadow: 0 1px 2px rgba(120, 50, 0, 0.4);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0.06) 46%, rgba(255, 255, 255, 0) 100%),
+    linear-gradient(160deg, color-mix(in srgb, var(--color-accent) 94%, #fff), color-mix(in srgb, var(--color-accent) 74%, #b84500));
+  box-shadow:
+    0 8px 22px rgba(255, 143, 33, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -10px 16px -12px rgba(150, 60, 0, 0.5);
+}
+
+.glassBtn.accent:hover {
+  box-shadow:
+    0 14px 32px rgba(255, 143, 33, 0.44),
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    inset 0 -10px 16px -12px rgba(150, 60, 0, 0.5);
+}
+
+/* Gold — secondary highlight glass. */
+.glassBtn.gold {
+  color: #3a2a07;
+  border-color: rgba(255, 255, 255, 0.6);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.08) 46%, rgba(255, 255, 255, 0) 100%),
+    linear-gradient(160deg, color-mix(in srgb, var(--color-accent-gold) 96%, #fff), color-mix(in srgb, var(--color-accent-gold) 78%, #b88a14));
+  box-shadow:
+    0 8px 22px rgba(245, 194, 84, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+/* Ghost — translucent neutral glass with dark legible text (light backgrounds). */
+.glassBtn.ghost {
+  color: #07223a;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.12) 50%, rgba(255, 255, 255, 0.04) 100%),
+    rgba(255, 255, 255, 0.32);
+}
+
+/* On-dark — translucent glass with white text, for buttons over dark scenes. */
+.glassBtn.onDark {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.6);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.06) 50%, rgba(255, 255, 255, 0) 100%),
+    rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glassBtn,
+  .glassBtn:hover,
+  .glassBtn:active {
+    transform: none;
+    transition: box-shadow 0.2s ease, background 0.2s ease;
+  }
+}

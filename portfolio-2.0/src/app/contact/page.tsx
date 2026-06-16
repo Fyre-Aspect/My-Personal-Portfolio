@@ -134,11 +134,11 @@ export default function ContactPage() {
                   <button
                     type="button"
                     onClick={() => setSubmitStatus('idle')}
-                    className={styles.thanksSecondary}
+                    className="glassBtn ghost"
                   >
                     Send another
                   </button>
-                  <Link href="/" className={styles.thanksPrimary}>
+                  <Link href="/" className="glassBtn accent">
                     Back to home →
                   </Link>
                 </div>
@@ -255,7 +255,7 @@ export default function ContactPage() {
                   <textarea id="message" name="message" rows={5} value={formData.message} onChange={handleChange} required disabled={isSubmitting} maxLength={5000} placeholder="Tell me more…" />
                 </div>
 
-                <button type="submit" className={styles.submit} disabled={isSubmitting || cooldown > 0}>
+                <button type="submit" className={`${styles.submit} glassBtn accent`} disabled={isSubmitting || cooldown > 0}>
                   {isSubmitting ? 'Sending…' : cooldown > 0 ? `Please wait ${cooldown}s…` : 'Send message →'}
                 </button>
               </form>

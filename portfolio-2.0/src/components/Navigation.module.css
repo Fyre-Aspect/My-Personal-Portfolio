@@ -1,26 +1,20 @@
-/* Casual corner navigation.
-   A small burger pinned to the top-right that stays quiet until the cursor
-   drifts into its corner (or you're near the top of the page), then fades in.
-   On touch devices it's always visible. Tapping it opens a glass menu. */
+/* Right-edge navigation, Opera-GX style.
+   A slim glass rail sits pinned to the right edge; reaching it (or tapping it)
+   slides a full-height liquid-glass flyout in from the right, carrying the nav
+   links and the embedded AI assistant. */
 
 .root {
-  /* The nav floats over the cyberpunk-skyscraper scene, so it wears a cyber-blue
-     accent instead of the site's warm orange. Scoped here so the rest of the
-     site keeps --color-accent. */
+  /* The nav floats over the warm sunset scenes, but keeps a cyber-blue accent
+     for the interactive bits. Scoped here so the rest of the site keeps its
+     warm --color-accent. */
   --nav-accent: #4cc6ff;
   --nav-accent-strong: #2f7dff;
-  --nav-accent-soft: rgba(76, 198, 255, 0.16);
+  --nav-accent-soft: rgba(76, 198, 255, 0.18);
   position: fixed;
   top: 0;
   right: 0;
+  height: 100%;
   z-index: 1000;
-  /* respect notches / safe areas, never let the button leave the screen */
-  padding-top: max(0.9rem, env(safe-area-inset-top));
-  padding-right: max(0.9rem, env(safe-area-inset-right));
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.6rem;
   pointer-events: none;
 }
 
@@ -29,13 +23,13 @@
 }
 
 /* ----------------------------------------------------------- Liquid-glass layers
-   Shared primitives used by both the burger and the panel. Three absolutely
-   stacked layers recreate Apple-style "liquid glass":
-     • warp  — blurs the live background AND refracts it through an SVG
-               displacement map (#liquidGlassFilter) so edges bend like real glass
-     • tint  — a translucent smoked fill + top sheen that keeps white text legible
-     • edge  — inset specular highlights + a hair-line rim for the bevelled bezel
-   All layers ignore pointer events; the real content floats above at z-index 3. */
+   Shared primitives used by both the rail and the panel. Stacked absolute layers
+   recreate Apple-style "liquid glass":
+     • blur — always-on frosted base (kept separate so glass is ALWAYS visible)
+     • warp — refracts the live background through the SVG displacement map
+     • tint — translucent fill + top sheen that keeps text legible
+     • edge — inset specular highlights + a hair-line rim for the bevel
+   All layers ignore pointer events; content floats above at z-index 4. */
 
 .glassBlur,
 .glassWarp,
@@ -47,21 +41,12 @@
   pointer-events: none;
 }
 
-/* Layer 0 — always-on frosted base. Kept separate from the refraction layer
-   so the glass is ALWAYS visible: some engines drop backdrop-filter when an
-   SVG url() filter is set on the same element, which would otherwise collapse
-   the panel to a flat box. This layer guarantees the frosted-glass read. */
 .glassBlur {
   z-index: 0;
-  /* Richer frost + a brightness lift so the live scene reads through the glass
-     as colour, the translucent-but-not-transparent look of the reference. */
-  backdrop-filter: blur(12px) saturate(2.1) brightness(1.06);
-  -webkit-backdrop-filter: blur(12px) saturate(2.1) brightness(1.06);
+  backdrop-filter: blur(16px) saturate(2.1) brightness(1.05);
+  -webkit-backdrop-filter: blur(16px) saturate(2.1) brightness(1.05);
 }
 
-/* Layer 1 — liquid refraction. Re-samples the frosted backdrop and bends it
-   through the displacement map so edges ripple like real glass. Pure
-   enhancement: if the url() filter is ignored, layer 0 still shows glass. */
 .glassWarp {
   z-index: 1;
   backdrop-filter: blur(2px);
@@ -70,143 +55,180 @@
   isolation: isolate;
 }
 
-/* Layer 2 — glass tint. A bright glossy lightcatch sweeping across the top
-   (the hallmark of the 21st.dev look) over a restrained neutral base that
-   keeps the white menu text legible on light pages too. */
 .glassTint {
   z-index: 2;
   background: linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0.5),
-      rgba(255, 255, 255, 0.1) 28%,
-      rgba(255, 255, 255, 0) 58%
+      rgba(255, 255, 255, 0.42),
+      rgba(255, 255, 255, 0.08) 30%,
+      rgba(255, 255, 255, 0) 62%
     ),
-    /* faint cyber-cyan wash to marry the glass to the blue scene */
-    linear-gradient(165deg, rgba(120, 180, 255, 0.1), rgba(14, 20, 40, 0.28));
+    linear-gradient(150deg, rgba(120, 180, 255, 0.12), rgba(12, 18, 36, 0.34));
 }
 
-/* Layer 3 — specular bevel. Bright inset rim (top-left catch, bottom-right
-   glow) that makes the edge read as thick, polished glass. */
 .glassEdge {
   z-index: 3;
   box-shadow: inset 2px 2px 1px -1px rgba(255, 255, 255, 0.9),
-    inset -1.5px -1.5px 1px 0 rgba(255, 255, 255, 0.55),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.25),
-    inset 0 22px 30px -26px rgba(255, 255, 255, 0.7),
-    inset 0 -18px 28px -20px rgba(150, 200, 255, 0.45);
+    inset -1.5px -1.5px 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.22),
+    inset 0 26px 34px -28px rgba(255, 255, 255, 0.7),
+    inset 0 -22px 32px -22px rgba(120, 200, 255, 0.4);
 }
 
-/* ----------------------------------------------------------- Burger button */
+/* ----------------------------------------------------------- Rail handle */
 
-.burger {
-  position: relative;
+.rail {
+  position: fixed;
+  right: max(0.7rem, env(safe-area-inset-right));
+  top: 50%;
+  transform: translateY(-50%);
   width: 3rem;
-  height: 3rem;
+  height: 8.5rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 0.7rem;
   overflow: hidden;
   isolation: isolate;
   border: none;
-  border-radius: 17px;
-  /* faint fallback fill for engines without backdrop-filter support */
-  background: rgba(18, 24, 46, 0.12);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28), 0 0 22px rgba(0, 0, 0, 0.12);
+  border-radius: 18px;
+  background: rgba(16, 22, 42, 0.14);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.32), 0 0 22px rgba(0, 0, 0, 0.12);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  /* quiet by default */
-  opacity: 0.34;
-  transform: translateY(-2px) scale(0.92);
-  /* The long, overshooting spring (matched to the 21st.dev timing function) is
-     what gives the button its soft "pop" instead of a flat fade. */
-  transition: opacity 0.5s ease,
-    transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 2.2),
-    border-radius 0.7s cubic-bezier(0.175, 0.885, 0.32, 2.2),
-    box-shadow 0.5s ease;
+  opacity: 0.92;
+  transition: opacity 0.4s ease,
+    transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 2.2),
+    width 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2),
+    box-shadow 0.4s ease;
 }
 
-.burger.revealed {
-  opacity: 1;
-  transform: translateY(0) scale(1);
+.rail:hover {
+  width: 3.4rem;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.42), 0 0 30px rgba(76, 198, 255, 0.28);
 }
 
-.burger:hover,
-.burger.open {
-  /* grow + round out on hover — the reference dock's signature expansion */
-  transform: translateY(0) scale(1.08);
-  border-radius: 22px;
-  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.44), 0 0 30px rgba(76, 198, 255, 0.22);
+/* Once the flyout is open the rail steps aside — the panel carries its own
+   close button. */
+.rail.open {
+  opacity: 0;
+  transform: translateY(-50%) translateX(26px);
+  pointer-events: none;
 }
 
-.lines {
+.railIcon {
   position: relative;
   z-index: 4;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 5px;
+  gap: 4px;
 }
 
 .line {
-  width: 1.3rem;
+  width: 1.25rem;
   height: 2px;
   border-radius: 2px;
   background: #fff;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2),
-    opacity 0.25s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 2.2);
 }
 
-.burger.open .lines .line:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
-}
-.burger.open .lines .line:nth-child(2) {
-  opacity: 0;
-}
-.burger.open .lines .line:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
+.railLabel {
+  position: relative;
+  z-index: 4;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  /* vertical lettering down the rail */
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
 }
 
-/* ----------------------------------------------------------- Menu panel */
+/* ----------------------------------------------------------- Flyout panel */
 
 .panel {
-  position: relative;
-  width: 248px;
-  padding: 0.6rem;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(340px, 88vw);
+  padding: 1.1rem;
   overflow: hidden;
   isolation: isolate;
   border: none;
-  border-radius: 22px;
-  /* light fallback fill — the dedicated blur layer + tint do the frosting and
-     hold legibility, so the base stays glassy rather than a dark slab */
-  background: rgba(10, 14, 30, 0.2);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), 0 0 30px rgba(0, 0, 0, 0.15);
-  transform-origin: top right;
+  border-radius: 26px 0 0 26px;
+  background: rgba(10, 14, 30, 0.24);
+  box-shadow: -28px 0 70px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 0, 0, 0.18);
   opacity: 0;
-  transform: translateY(-12px) scale(0.9);
+  transform: translateX(100%);
   pointer-events: none;
-  /* Pops open from the burger with the same overshooting spring; width is
-     animated too so growing into chat mode glides rather than jumps. */
-  transition: opacity 0.35s ease,
-    transform 0.62s cubic-bezier(0.175, 0.885, 0.32, 2.2),
-    width 0.5s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+  transition: opacity 0.4s ease,
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .panel.open {
   opacity: 1;
-  transform: translateY(0) scale(1);
+  transform: translateX(0);
   pointer-events: auto;
 }
 
 .panel.chatting {
-  width: min(360px, 86vw);
+  width: min(400px, 92vw);
 }
 
 .panelInner {
   position: relative;
   z-index: 4;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
+
+.panelHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem 0.5rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  margin-bottom: 0.9rem;
+}
+
+.brand {
+  font-family: 'IBM Plex Mono', var(--font-mono, monospace);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+}
+
+.close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.92);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.close:hover {
+  background: rgba(255, 255, 255, 0.16);
+  transform: rotate(90deg);
+}
+
+/* ----------------------------------------------------------- Links */
 
 .list {
   list-style: none;
@@ -214,48 +236,61 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.15rem;
+  gap: 0.3rem;
 }
 
-/* Stagger the links in as the panel pops — each one springs up just after the
-   last, so the menu assembles itself instead of appearing all at once. */
+/* Stagger the links in as the panel slides open. */
 .list li {
   opacity: 0;
-  transform: translateY(6px);
+  transform: translateX(14px);
 }
 
 .panel.open .list li {
   animation: linkIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 2.2) forwards;
 }
 
-.panel.open .list li:nth-child(1) { animation-delay: 0.05s; }
-.panel.open .list li:nth-child(2) { animation-delay: 0.1s; }
-.panel.open .list li:nth-child(3) { animation-delay: 0.15s; }
-.panel.open .list li:nth-child(4) { animation-delay: 0.2s; }
-.panel.open .list li:nth-child(5) { animation-delay: 0.25s; }
+.panel.open .list li:nth-child(1) { animation-delay: 0.08s; }
+.panel.open .list li:nth-child(2) { animation-delay: 0.13s; }
+.panel.open .list li:nth-child(3) { animation-delay: 0.18s; }
+.panel.open .list li:nth-child(4) { animation-delay: 0.23s; }
+.panel.open .list li:nth-child(5) { animation-delay: 0.28s; }
 
 @keyframes linkIn {
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
   }
 }
 
 .link {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 0.7rem 0.9rem;
-  border-radius: 12px;
+  gap: 0.7rem;
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
+  overflow: hidden;
   text-decoration: none;
   font-family: var(--font-mono, monospace);
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 1.02rem;
   letter-spacing: 0.3px;
-  color: rgba(255, 255, 255, 0.92);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
-  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  transition: background 0.22s ease, color 0.22s ease, transform 0.22s ease;
+}
+
+.linkBar {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 0;
+  border-radius: 0 3px 3px 0;
+  background: var(--nav-accent);
+  box-shadow: 0 0 12px var(--nav-accent);
+  transition: height 0.25s ease;
 }
 
 .link:hover {
@@ -264,16 +299,22 @@
   transform: translateX(-3px);
 }
 
+.link:hover .linkBar { height: 42%; }
+
 .link.active {
-  color: var(--nav-accent);
+  color: #fff;
   background: var(--nav-accent-soft);
 }
 
+.link.active .linkBar { height: 64%; }
+
 .dot {
-  width: 6px;
-  height: 6px;
+  margin-left: auto;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background: currentColor;
+  background: var(--nav-accent);
+  box-shadow: 0 0 10px var(--nav-accent);
   opacity: 0;
   transition: opacity 0.2s ease;
 }
@@ -285,8 +326,8 @@
 /* ----------------------------------------------------------- Embedded chat */
 
 .chat {
-  margin-top: 0.5rem;
-  padding-top: 0.5rem;
+  margin-top: auto;
+  padding-top: 0.8rem;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
@@ -294,10 +335,10 @@
   display: flex;
   flex-direction: column;
   gap: 0.55rem;
-  max-height: 46vh;
+  max-height: 42vh;
   overflow-y: auto;
   padding: 0.3rem 0.15rem 0.6rem;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.3rem;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
 }
@@ -359,7 +400,6 @@
   border-radius: 10px;
 }
 
-/* typing indicator */
 .typing {
   display: inline-flex;
   gap: 4px;
@@ -383,7 +423,6 @@
   40% { opacity: 1; transform: translateY(-3px); }
 }
 
-/* input bar */
 .chatBar {
   display: flex;
   align-items: center;
@@ -445,18 +484,20 @@
   position: fixed;
   inset: 0;
   z-index: 999;
-  background: transparent;
+  background: rgba(4, 8, 18, 0.18);
+  backdrop-filter: blur(1px);
+}
+
+@media (max-width: 480px) {
+  .panel { width: min(340px, 92vw); border-radius: 22px 0 0 22px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .burger,
+  .rail,
   .panel,
-  .line {
-    transition: opacity 0.2s ease;
-    transform: none;
-  }
-
-  /* Skip the staggered spring — show the links immediately. */
+  .line { transition: opacity 0.2s ease; transform: none; }
+  .rail.open { transform: none; }
+  .panel.open { transform: none; }
   .list li,
   .panel.open .list li {
     opacity: 1;

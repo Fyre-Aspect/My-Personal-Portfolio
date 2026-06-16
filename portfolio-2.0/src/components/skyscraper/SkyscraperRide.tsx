@@ -1,33 +1,65 @@
 'use client';
 
-import { Suspense, useEffect, useMemo, useRef } from 'react';
+import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 import styles from './SkyscraperRide.module.css';
 
-// A ~985-unit-tall realistic glass/metal/concrete skyscraper (8 meshes, ~33k
-// tris). There's no baked camera or animation — instead we fly our OWN camera up
-// the tower as the page scrolls, so the Experiences timeline reads as a climb.
-// The tower's glass reflects a warm golden-hour sky environment so it sits in the
-// same world as the rest of the site rather than the old cyberpunk-night look.
-const MODEL_URL = '/skyscraper.glb';
+/**
+ * Experiences backdrop: a scroll-driven climb up a glass skyscraper, set in the
+ * SAME warm fantasy-sunset world as every other page — the same panorama sky
+ * dome, low golden sun, drifting clouds and warm fog used by the homepage and
+ * the content-page SkyBackdrop. The only difference is the camera: instead of
+ * floating above the clouds it spirals UP the tower as you scroll, and the
+ * tower's glass reflects the sunset sky.
+ */
+const SKY_URL = '/fantasy_sky_background.glb';
+const TOWER_URL = '/skyscraper.glb';
+
+useGLTF.preload(SKY_URL);
+useGLTF.preload(TOWER_URL);
 
 // Scroll smoothing: ease the live scroll toward the rendered ascent so the climb
 // feels weighty rather than snapping 1:1 with the wheel.
 const RIDE_EASE = 0.06;
 
-useGLTF.preload(MODEL_URL);
-
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-// Smoothstep-ish ease so the ascent starts and ends gently.
 const easeInOut = (t: number) =>
   t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+function smoothstep(edge0: number, edge1: number, x: number) {
+  const t = clamp01((x - edge0) / (edge1 - edge0));
+  return t * t * (3 - 2 * t);
+}
+function mulberry32(seed: number) {
+  let a = seed;
+  return () => {
+    a |= 0;
+    a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
 
-/* Page scroll 0..1 (top..bottom), written into a ref by a passive listener so
-   the render loop reads it without re-rendering React — same pattern the
-   homepage SkyWorld and the SkyBackdrop use. */
+/* A fixed golden-hour → dusk mood, identical to the content-page SkyBackdrop so
+   the Experiences sky reads as the same world. */
+const GOLD = {
+  fog: new THREE.Color('#ff8a44'),
+  hemiSky: new THREE.Color('#ffb070'),
+  hemiGround: new THREE.Color('#48304a'),
+  sun: new THREE.Color('#ff9230'),
+  skyTint: new THREE.Color('#aab0d8'),
+};
+const DUSK = {
+  fog: new THREE.Color('#9a4a52'),
+  hemiSky: new THREE.Color('#6a5f96'),
+  hemiGround: new THREE.Color('#241a30'),
+  sun: new THREE.Color('#ff5e28'),
+  skyTint: new THREE.Color('#6f6796'),
+};
+
 function useScrollProgress() {
   const ref = useRef(0);
   useEffect(() => {
@@ -48,17 +80,245 @@ function useScrollProgress() {
 
 type ProgressRef = React.MutableRefObject<number>;
 
-/* The tower + the camera that climbs it. We measure the model's world bounds
-   once so the flight adapts to its real scale/offset, then every frame place the
-   camera on a spiral around the building's vertical axis: as scroll goes 0->1 it
-   rises from the base to the crown, sweeps ~135 degrees around the facade, and
-   eases inward — always looking level into the glass so it reads as an ascent. */
+/* ----------------------------------------------------------------- sky dome */
+
+/* The fantasy panorama, pulled straight off the GLB's embedded texture, wrapped
+   on a huge BackSide sphere that re-centres on the camera each frame, plus a
+   PMREM environment so the tower's glass reflects the same sky. */
+function SkyDome({ progress }: { progress: ProgressRef }) {
+  const gltf = useGLTF(SKY_URL);
+  const { gl, scene: rootScene } = useThree();
+  const groupRef = useRef<THREE.Group>(null!);
+  const matRef = useRef<THREE.MeshBasicMaterial>(null!);
+  const [tex, setTex] = useState<THREE.Texture | null>(null);
+
+  useEffect(() => {
+    let alive = true;
+    const parser = (gltf as unknown as { parser: { getDependency: (t: string, i: number) => Promise<THREE.Texture> } }).parser;
+    parser.getDependency('texture', 0).then((t) => {
+      if (!alive) return;
+      t.colorSpace = THREE.SRGBColorSpace;
+      t.mapping = THREE.UVMapping;
+      t.needsUpdate = true;
+      setTex(t);
+    });
+    return () => {
+      alive = false;
+    };
+  }, [gltf]);
+
+  useEffect(() => {
+    if (!tex) return;
+    const eq = tex.clone();
+    eq.mapping = THREE.EquirectangularReflectionMapping;
+    eq.colorSpace = THREE.SRGBColorSpace;
+    eq.needsUpdate = true;
+    const pmrem = new THREE.PMREMGenerator(gl);
+    const env = pmrem.fromEquirectangular(eq).texture;
+    rootScene.environment = env;
+    pmrem.dispose();
+    eq.dispose();
+    return () => {
+      if (rootScene.environment === env) rootScene.environment = null;
+      env.dispose();
+    };
+  }, [tex, gl, rootScene]);
+
+  useFrame(({ camera }) => {
+    if (groupRef.current) groupRef.current.position.copy(camera.position);
+    if (matRef.current) {
+      matRef.current.color.copy(GOLD.skyTint).lerp(DUSK.skyTint, smoothstep(0, 1, progress.current));
+    }
+  });
+
+  if (!tex) return null;
+  return (
+    <group ref={groupRef} rotation={[0, 2.1, 0]}>
+      <mesh>
+        <sphereGeometry args={[4000, 60, 40]} />
+        <meshBasicMaterial
+          ref={matRef}
+          map={tex}
+          side={THREE.BackSide}
+          fog={false}
+          toneMapped={false}
+          depthWrite={false}
+        />
+      </mesh>
+    </group>
+  );
+}
+
+/* ----------------------------------------------------------------------- sun */
+
+function makeGlowTexture(size = 256) {
+  const c = document.createElement('canvas');
+  c.width = c.height = size;
+  const ctx = c.getContext('2d')!;
+  const g = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+  g.addColorStop(0, 'rgba(255,255,255,1)');
+  g.addColorStop(0.18, 'rgba(255,244,214,0.95)');
+  g.addColorStop(0.45, 'rgba(255,200,140,0.32)');
+  g.addColorStop(1, 'rgba(255,170,90,0)');
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, size, size);
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  return t;
+}
+
+/* Low sunset sun + a wide horizon band, riding a camera-following group so it
+   behaves like part of the sky. */
+function SunDisc({ progress }: { progress: ProgressRef }) {
+  const group = useRef<THREE.Group>(null!);
+  const sun = useRef<THREE.Sprite>(null!);
+  const band = useRef<THREE.Sprite>(null!);
+  const tex = useMemo(() => makeGlowTexture(), []);
+
+  useFrame(({ camera, clock }) => {
+    group.current.position.copy(camera.position);
+    const w = smoothstep(0, 1, progress.current);
+    const y = lerp(360, 150, w) + Math.sin(clock.elapsedTime * 0.05) * 4;
+    sun.current.position.set(-260, y, -3100);
+    const sMat = sun.current.material as THREE.SpriteMaterial;
+    sMat.color.copy(GOLD.sun).lerp(DUSK.sun, w);
+    band.current.position.set(-120, 150, -3100);
+    const bMat = band.current.material as THREE.SpriteMaterial;
+    bMat.color.copy(GOLD.sun).lerp(DUSK.sun, w);
+  });
+
+  return (
+    <group ref={group}>
+      <sprite ref={sun} scale={[1900, 1900, 1]}>
+        <spriteMaterial map={tex} blending={THREE.AdditiveBlending} depthWrite={false} depthTest={false} fog={false} toneMapped={false} />
+      </sprite>
+      <sprite ref={band} scale={[6400, 720, 1]}>
+        <spriteMaterial map={tex} blending={THREE.AdditiveBlending} depthWrite={false} depthTest={false} fog={false} toneMapped={false} opacity={0.85} />
+      </sprite>
+    </group>
+  );
+}
+
+/* -------------------------------------------------------------------- clouds */
+
+function makePuffTexture(size = 256, seed = 7) {
+  const c = document.createElement('canvas');
+  c.width = c.height = size;
+  const ctx = c.getContext('2d')!;
+  const rnd = mulberry32(seed);
+  for (let i = 0; i < 14; i++) {
+    const x = size * (0.25 + rnd() * 0.5);
+    const y = size * (0.3 + rnd() * 0.4);
+    const r = size * (0.12 + rnd() * 0.2);
+    const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+    g.addColorStop(0, 'rgba(255,255,255,0.55)');
+    g.addColorStop(0.6, 'rgba(255,255,255,0.18)');
+    g.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, size, size);
+  }
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  return t;
+}
+
+/* A ring of cumulus clouds spread around and below the tower so the climb reads
+   as rising up through the same cloud sea as the rest of the site. */
+function CloudField() {
+  const tex = useMemo(() => makePuffTexture(), []);
+  const group = useRef<THREE.Group>(null!);
+
+  const clouds = useMemo(() => {
+    const rnd = mulberry32(42);
+    const clusters: { pos: [number, number, number]; puffs: { o: [number, number, number]; s: number; op: number }[] }[] = [];
+    for (let i = 0; i < 18; i++) {
+      const ang = rnd() * Math.PI * 2;
+      const rad = 500 + rnd() * 1500;
+      const pos: [number, number, number] = [
+        Math.sin(ang) * rad,
+        -120 - rnd() * 260 + (rnd() < 0.4 ? 360 : 0),
+        Math.cos(ang) * rad,
+      ];
+      const puffs = [] as { o: [number, number, number]; s: number; op: number }[];
+      const n = 5 + Math.floor(rnd() * 3);
+      for (let j = 0; j < n; j++) {
+        puffs.push({
+          o: [(rnd() - 0.5) * 170, (rnd() - 0.5) * 44, (rnd() - 0.5) * 100],
+          s: 95 + rnd() * 130,
+          op: 0.4 + rnd() * 0.32,
+        });
+      }
+      clusters.push({ pos, puffs });
+    }
+    return clusters;
+  }, []);
+
+  useFrame(({ clock }) => {
+    if (group.current) group.current.position.x = Math.sin(clock.elapsedTime * 0.04) * 14;
+  });
+
+  return (
+    <group ref={group}>
+      {clouds.map((cl, ci) => (
+        <group key={ci} position={cl.pos}>
+          {cl.puffs.map((pf, pi) => (
+            <sprite key={pi} position={pf.o} scale={[pf.s * 1.7, pf.s, 1]}>
+              <spriteMaterial map={tex} transparent depthWrite={false} opacity={pf.op} color="#ffe6cf" />
+            </sprite>
+          ))}
+        </group>
+      ))}
+    </group>
+  );
+}
+
+/* --------------------------------------------------------------- atmosphere */
+
+function Atmosphere({ progress }: { progress: ProgressRef }) {
+  const { scene } = useThree();
+  const hemi = useRef<THREE.HemisphereLight>(null!);
+  const dir = useRef<THREE.DirectionalLight>(null!);
+  // Pushed far out so the tower stays crisp; only the distant sky/clouds haze.
+  const fog = useMemo(() => new THREE.Fog(GOLD.fog.getHex(), 1400, 5200), []);
+
+  useEffect(() => {
+    scene.fog = fog;
+    return () => {
+      if (scene.fog === fog) scene.fog = null;
+    };
+  }, [scene, fog]);
+
+  useFrame(() => {
+    const w = smoothstep(0, 1, progress.current);
+    fog.color.copy(GOLD.fog).lerp(DUSK.fog, w);
+    if (hemi.current) {
+      hemi.current.color.copy(GOLD.hemiSky).lerp(DUSK.hemiSky, w);
+      hemi.current.groundColor.copy(GOLD.hemiGround).lerp(DUSK.hemiGround, w);
+    }
+    if (dir.current) {
+      dir.current.color.copy(GOLD.sun).lerp(DUSK.sun, w);
+    }
+  });
+
+  return (
+    <>
+      <hemisphereLight ref={hemi} intensity={1.15} />
+      <directionalLight ref={dir} intensity={2.5} position={[-200, 160, -120]} />
+      <ambientLight intensity={0.4} />
+    </>
+  );
+}
+
+/* --------------------------------------------------------------- the tower */
+
+/* Measure the model's world bounds once so the climb adapts to its real
+   scale/offset, then every frame spiral the camera up around the building's
+   vertical axis: base → crown, sweeping ~135° around the facade and easing
+   inward, always looking level into the glass so it reads as an ascent. */
 function Tower({ progress }: { progress: ProgressRef }) {
-  const { scene } = useGLTF(MODEL_URL);
+  const { scene } = useGLTF(TOWER_URL);
   const { camera } = useThree();
 
-  // Let the glass/metal/windows catch the sky environment so the facade reads
-  // as reflective glass at golden hour rather than a flat grey slab.
   const bounds = useMemo(() => {
     scene.traverse((obj) => {
       const mesh = obj as THREE.Mesh;
@@ -68,8 +328,7 @@ function Tower({ progress }: { progress: ProgressRef }) {
       const mats = Array.isArray(mat) ? mat : [mat];
       for (const m of mats) {
         if (!m) continue;
-        if ('envMapIntensity' in m) m.envMapIntensity = 1.35;
-        // Keep the red roof beacon glowing; don't invent emissive elsewhere.
+        if ('envMapIntensity' in m) m.envMapIntensity = 1.4;
         if ('emissive' in m && (m.emissiveIntensity ?? 0) > 0) {
           m.emissiveIntensity = Math.max(m.emissiveIntensity ?? 1, 1) * 1.4;
         }
@@ -85,7 +344,6 @@ function Tower({ progress }: { progress: ProgressRef }) {
   const target = useRef(new THREE.Vector3());
 
   useFrame((_, delta) => {
-    // Normalize easing to 60fps and cap catch-up after the tab was backgrounded.
     const k = Math.min(delta * 60, 3);
     smoothed.current += (progress.current - smoothed.current) * RIDE_EASE * k;
     const t = clamp01(smoothed.current);
@@ -95,7 +353,6 @@ function Tower({ progress }: { progress: ProgressRef }) {
     const span = maxY - minY;
     const horiz = Math.max(size.x, size.z);
 
-    // Spiral around the tower's vertical axis.
     const angle = lerp(-0.7, 1.7, t); // ~135 degrees of sweep
     const radius = lerp(horiz * 3.2, horiz * 1.9, e); // pull inward near the top
     const camY = lerp(minY + span * 0.02, maxY - span * 0.05, e); // base -> crown
@@ -106,8 +363,6 @@ function Tower({ progress }: { progress: ProgressRef }) {
       center.z + Math.cos(angle) * radius,
     );
 
-    // Look just slightly up the building early, levelling off toward the crown,
-    // so the facade always fills the frame as we rise.
     const upOffset = lerp(span * 0.12, span * 0.02, e);
     target.current.set(center.x, camY + upOffset, center.z);
     camera.lookAt(target.current);
@@ -116,104 +371,24 @@ function Tower({ progress }: { progress: ProgressRef }) {
   return <primitive object={scene} />;
 }
 
-/* Warm golden-hour sky: a vertical gradient baked into a CanvasTexture is used
-   both as the scene background (so the climb is wrapped in sky) and, mapped
-   equirectangularly through PMREM, as the environment the tower's glass reflects.
-   Cool blue zenith → soft haze → warm peach → golden horizon, matched to the
-   rest of the site's sunset world. */
-function SkyEnvironment() {
-  const { scene, gl } = useThree();
-  useEffect(() => {
-    // Tall gradient strip for the sky dome / background.
-    const c = document.createElement('canvas');
-    c.width = 16;
-    c.height = 512;
-    const ctx = c.getContext('2d')!;
-    const g = ctx.createLinearGradient(0, 0, 0, 512);
-    g.addColorStop(0, '#243a6b'); // cool upper sky
-    g.addColorStop(0.4, '#5d7bb4');
-    g.addColorStop(0.66, '#aec2e0');
-    g.addColorStop(0.84, '#ffd6a6'); // warm band
-    g.addColorStop(1, '#ff9e5a'); // golden horizon
-    ctx.fillStyle = g;
-    ctx.fillRect(0, 0, 16, 512);
-    const bgTex = new THREE.CanvasTexture(c);
-    bgTex.colorSpace = THREE.SRGBColorSpace;
-
-    // A wider equirect version (same gradient, horizontally tiled) for a smooth
-    // environment reflection on the glass.
-    const eqCanvas = document.createElement('canvas');
-    eqCanvas.width = 512;
-    eqCanvas.height = 256;
-    const ectx = eqCanvas.getContext('2d')!;
-    const eg = ectx.createLinearGradient(0, 0, 0, 256);
-    eg.addColorStop(0, '#2a4070');
-    eg.addColorStop(0.45, '#6f8cc0');
-    eg.addColorStop(0.7, '#cdd9ec');
-    eg.addColorStop(0.86, '#ffd6a6');
-    eg.addColorStop(1, '#ff9852');
-    ectx.fillStyle = eg;
-    ectx.fillRect(0, 0, 512, 256);
-    // A soft sun bloom on the horizon for a believable hotspot in reflections.
-    const sun = ectx.createRadialGradient(360, 210, 0, 360, 210, 150);
-    sun.addColorStop(0, 'rgba(255,244,214,0.95)');
-    sun.addColorStop(0.4, 'rgba(255,205,140,0.35)');
-    sun.addColorStop(1, 'rgba(255,205,140,0)');
-    ectx.fillStyle = sun;
-    ectx.fillRect(0, 0, 512, 256);
-    const eqTex = new THREE.CanvasTexture(eqCanvas);
-    eqTex.mapping = THREE.EquirectangularReflectionMapping;
-    eqTex.colorSpace = THREE.SRGBColorSpace;
-
-    const pmrem = new THREE.PMREMGenerator(gl);
-    const env = pmrem.fromEquirectangular(eqTex).texture;
-
-    const prevBg = scene.background;
-    const prevEnv = scene.environment;
-    const prevFog = scene.fog;
-    scene.background = bgTex;
-    scene.environment = env;
-    scene.fog = new THREE.Fog(new THREE.Color('#cdb89a').getHex(), 600, 4200);
-    gl.toneMappingExposure = 1.04;
-
-    pmrem.dispose();
-    eqTex.dispose();
-
-    return () => {
-      scene.background = prevBg;
-      scene.environment = prevEnv;
-      scene.fog = prevFog;
-      bgTex.dispose();
-      env.dispose();
-    };
-  }, [scene, gl]);
-
-  return (
-    <>
-      {/* Warm sun key light raking up the facade from a low golden-hour angle. */}
-      <hemisphereLight args={['#bcd4ff', '#5a4636', 0.85]} />
-      <directionalLight position={[8, 9, 6]} intensity={2.2} color="#ffdcae" />
-      <directionalLight position={[-6, 4, -4]} intensity={0.7} color="#9fb8df" />
-      <ambientLight intensity={0.35} />
-    </>
-  );
-}
-
 export default function SkyscraperRide() {
   const progress = useScrollProgress();
   return (
     <div className={styles.canvasWrap} aria-hidden="true">
       <Canvas
-        dpr={[1, 1.75]}
+        dpr={[1, 1.8]}
         camera={{ fov: 60, near: 1, far: 9000 }}
         gl={{ antialias: true, powerPreference: 'high-performance' }}
         onCreated={({ gl }) => {
           gl.toneMapping = THREE.ACESFilmicToneMapping;
-          gl.toneMappingExposure = 1.04;
+          gl.toneMappingExposure = 1.05;
         }}
       >
         <Suspense fallback={null}>
-          <SkyEnvironment />
+          <Atmosphere progress={progress} />
+          <SkyDome progress={progress} />
+          <SunDisc progress={progress} />
+          <CloudField />
           <Tower progress={progress} />
         </Suspense>
       </Canvas>
