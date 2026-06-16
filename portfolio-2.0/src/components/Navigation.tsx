@@ -138,7 +138,19 @@ export default function Navigation() {
             numOctaves="2"
             seed="42"
             result="noise"
-          />
+          >
+            {/* Slowly drift the noise field so the refraction behind the glass
+                visibly flows like liquid instead of sitting frozen. */}
+            <animate
+              attributeName="baseFrequency"
+              dur="20s"
+              values="0.008 0.012; 0.013 0.018; 0.010 0.014; 0.008 0.012"
+              keyTimes="0; 0.4; 0.7; 1"
+              calcMode="spline"
+              keySplines="0.4 0 0.2 1; 0.4 0 0.2 1; 0.4 0 0.2 1"
+              repeatCount="indefinite"
+            />
+          </feTurbulence>
           <feGaussianBlur in="noise" stdDeviation="2" result="softMap" />
           <feDisplacementMap
             in="SourceGraphic"
@@ -146,7 +158,17 @@ export default function Navigation() {
             scale="64"
             xChannelSelector="R"
             yChannelSelector="G"
-          />
+          >
+            {/* Gentle breathing on the displacement amount adds a second, slower
+                wave so the flow never looks like a single looping cycle. */}
+            <animate
+              attributeName="scale"
+              dur="14s"
+              values="56; 76; 62; 56"
+              keyTimes="0; 0.45; 0.75; 1"
+              repeatCount="indefinite"
+            />
+          </feDisplacementMap>
         </filter>
       </svg>
 

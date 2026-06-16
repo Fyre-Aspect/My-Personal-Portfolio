@@ -1,0 +1,21 @@
+/* Experiences page lives over a dark cyberpunk-blue sky now, so the ComicChrome
+   header (built dark for a light sky) is re-skinned to luminous neon here. These
+   element selectors (class + element) outrank ComicChrome's single-class rules,
+   so they win without touching the shared module. */
+.cyberHead :global(h1) {
+  color: #e6f4ff;
+  text-shadow: 0 0 22px rgba(76, 198, 255, 0.65), 0 2px 12px rgba(0, 0, 0, 0.7);
+}
+
+.cyberHead :global(p) {
+  color: #b9d2ff;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);
+}
+
+/* The // tagline pill */
+.cyberHead > :global(span) {
+  color: #7fe3ff;
+  background: rgba(8, 16, 40, 0.55);
+  border-color: rgba(76, 198, 255, 0.55);
+  box-shadow: 0 0 18px rgba(76, 198, 255, 0.25);
+}

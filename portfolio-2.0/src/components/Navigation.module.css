@@ -4,6 +4,12 @@
    On touch devices it's always visible. Tapping it opens a glass menu. */
 
 .root {
+  /* The nav floats over the cyberpunk-skyscraper scene, so it wears a cyber-blue
+     accent instead of the site's warm orange. Scoped here so the rest of the
+     site keeps --color-accent. */
+  --nav-accent: #4cc6ff;
+  --nav-accent-strong: #2f7dff;
+  --nav-accent-soft: rgba(76, 198, 255, 0.16);
   position: fixed;
   top: 0;
   right: 0;
@@ -228,8 +234,8 @@
 }
 
 .link.active {
-  color: var(--color-accent, #ff8f21);
-  background: rgba(255, 143, 33, 0.14);
+  color: var(--nav-accent);
+  background: var(--nav-accent-soft);
 }
 
 .dot {
@@ -289,9 +295,9 @@
 .msgUser {
   align-self: flex-end;
   color: #fff;
-  background: linear-gradient(135deg, var(--color-accent, #ff8f21), #ff6f3c);
+  background: linear-gradient(135deg, var(--nav-accent), var(--nav-accent-strong));
   border-bottom-right-radius: 5px;
-  box-shadow: 0 4px 14px rgba(255, 120, 50, 0.3);
+  box-shadow: 0 4px 14px rgba(47, 125, 255, 0.32);
 }
 
 .msgAI {
@@ -303,7 +309,7 @@
 }
 
 .msgText :global(.highlight) {
-  color: var(--color-accent, #ff8f21);
+  color: var(--nav-accent);
   font-weight: 700;
 }
 
@@ -359,7 +365,7 @@
 }
 
 .chatBar:focus-within {
-  border-color: rgba(255, 143, 33, 0.6);
+  border-color: rgba(76, 198, 255, 0.6);
   background: rgba(255, 255, 255, 0.12);
 }
 
@@ -388,7 +394,7 @@
   border: none;
   border-radius: 10px;
   color: #fff;
-  background: linear-gradient(135deg, var(--color-accent, #ff8f21), #ff6f3c);
+  background: linear-gradient(135deg, var(--nav-accent), var(--nav-accent-strong));
   cursor: pointer;
   transition: transform 0.15s ease, opacity 0.2s ease;
 }

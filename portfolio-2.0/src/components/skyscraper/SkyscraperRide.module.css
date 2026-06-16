@@ -1,0 +1,45 @@
+/* Fixed full-viewport WebGL backdrop for the Experiences page: a scroll-driven
+   climb up a cyberpunk skyscraper. Sits behind page content (z-index 0); the
+   timeline lives at z-index 1. A deep-blue gradient is painted behind the canvas
+   so there's no flash before the GLB loads. */
+.canvasWrap {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, #05060f 0%, #0b1740 44%, #16306e 78%, #2a5cab 100%);
+}
+
+.canvasWrap canvas {
+  display: block;
+}
+
+/* Readability + mood. A faint cyan vignette frames the climb, and a soft floor
+   glow at the very bottom anchors the lowest cards. The dark sky already keeps
+   the (now light) header text legible, so no bright top band is needed. */
+.scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      120% 80% at 50% 0%,
+      rgba(57, 216, 255, 0.12) 0%,
+      rgba(57, 216, 255, 0) 42%
+    ),
+    radial-gradient(
+      140% 60% at 50% 100%,
+      rgba(122, 75, 255, 0.18) 0%,
+      rgba(122, 75, 255, 0) 50%
+    );
+}
+
+/* Plain blue fallback while the dynamic chunk + GLB load, and on devices where
+   the 3D climb is skipped. */
+.fallback {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, #05060f 0%, #0b1740 44%, #16306e 78%, #2a5cab 100%);
+}
