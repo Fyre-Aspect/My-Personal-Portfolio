@@ -1,22 +1,32 @@
 .timelineWrapper {
   position: relative;
-  max-width: 1200px;
+  max-width: 1180px;
   margin: 0 auto;
-  padding: 4rem 2rem;
+  padding: 3rem 2rem 5rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 2.4rem;
 }
 
+/* ----------------------------------------------------- Spine
+   A slim luminous rail down the centre with a soft glow, so the climb reads as
+   one continuous thread linking every stop. */
 .spine {
   position: absolute;
-  top: 4rem;
-  bottom: 4rem;
+  top: 3rem;
+  bottom: 5rem;
   left: 50%;
   transform: translateX(-50%);
-  width: 4px;
+  width: 3px;
   border-radius: 999px;
-  background: linear-gradient(to bottom, rgba(255, 143, 33, 0.55), rgba(245, 194, 84, 0.55));
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 175, 92, 0.9) 8%,
+    rgba(245, 194, 84, 0.9) 92%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  box-shadow: 0 0 16px rgba(255, 158, 90, 0.55);
   z-index: 0;
 }
 
@@ -28,30 +38,51 @@
   z-index: 1;
 }
 
-/* ----------------------------------------------------- Bubbly sky card */
-
-/* Frosted "liquid glass": a translucent blurred pane, a bright inset highlight
-   along the top edge, and a slow shimmer sweep (the ::before below). Kept light
-   enough that the dark card text stays crisp over the warm sunset sky. */
+/* ----------------------------------------------------- Liquid-glass card
+   A single frosted pane (one backdrop-filter, kept light so dark text stays
+   crisp over the live 3D climb), a moving diagonal sheen (::before) and a fixed
+   top-edge gloss (::after) that together sell the "liquid glass" read without
+   stacking GPU-heavy blur layers per card. */
 .card {
   width: 540px;
-  min-height: 132px;
-  border-radius: 26px;
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  max-width: 100%;
+  min-height: 124px;
+  border-radius: 24px;
+  background: linear-gradient(
+    155deg,
+    rgba(255, 255, 255, 0.82) 0%,
+    rgba(255, 255, 255, 0.62) 46%,
+    rgba(236, 244, 255, 0.58) 100%
+  );
+  backdrop-filter: blur(18px) saturate(1.7);
+  -webkit-backdrop-filter: blur(18px) saturate(1.7);
   padding: 1.5rem 1.75rem;
   position: relative;
-  /* visible so the dot/connector can sit outside the card edge; the shimmer
-     ::before clips its own gradient to its rounded box, so it stays contained. */
   overflow: visible;
-  box-shadow: 0 8px 32px rgba(13, 40, 71, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow:
+    0 18px 44px rgba(10, 30, 60, 0.32),
+    0 2px 8px rgba(10, 30, 60, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -16px 30px -22px rgba(120, 170, 255, 0.5);
+  transition:
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    translate 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.6s ease,
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
 }
 
-/* Moving diagonal sheen — the "liquid" shimmer. Clipped to the rounded pane and
-   held under the content (z-index 1) so it never washes out the text. */
+/* Scroll-reveal: slide each card in from its own side as it climbs into view.
+   Uses the independent `translate` property so it composes with the side-offset
+   and hover `transform` above instead of fighting it. */
+.card.hidden { opacity: 0; }
+.card.left.hidden { translate: -44px 0; }
+.card.right.hidden { translate: 44px 0; }
+.card.revealed { opacity: 1; translate: 0 0; }
+
+/* Moving diagonal sheen — the "liquid" highlight. Clipped to the rounded pane,
+   held under the content so it never washes out the text. */
 .card::before {
   content: '';
   position: absolute;
@@ -59,41 +90,67 @@
   z-index: 1;
   border-radius: inherit;
   pointer-events: none;
-  background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.55) 50%, transparent 80%);
-  background-size: 200% 100%;
-  opacity: 0.1;
-  animation: glassShimmer 7s linear infinite;
+  background: linear-gradient(
+    115deg,
+    transparent 25%,
+    rgba(255, 255, 255, 0.55) 48%,
+    rgba(255, 255, 255, 0.18) 56%,
+    transparent 78%
+  );
+  background-size: 250% 100%;
+  opacity: 0.5;
+  mix-blend-mode: screen;
+  animation: glassShimmer 8s ease-in-out infinite;
+}
+
+/* Fixed specular gloss hugging the top edge for a thick-glass bevel. */
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    120% 60% at 50% -10%,
+    rgba(255, 255, 255, 0.7) 0%,
+    rgba(255, 255, 255, 0) 55%
+  );
 }
 
 .card:hover {
-  transform: translateY(-6px) scale(1.015);
-  box-shadow: 0 18px 48px rgba(13, 40, 71, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.85);
-  border-color: rgba(255, 255, 255, 0.85);
+  transform: translateY(-7px) scale(1.018);
+  box-shadow:
+    0 30px 64px rgba(10, 30, 60, 0.42),
+    0 4px 12px rgba(10, 30, 60, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    inset 0 -16px 30px -20px rgba(120, 170, 255, 0.6);
+  border-color: rgba(255, 255, 255, 0.95);
   z-index: 10;
 }
 
 @keyframes glassShimmer {
   0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  60%, 100% { background-position: -120% 0; }
 }
 
 .card.left {
   margin-right: 50%;
   transform: translateX(-2rem);
 }
-.card.left:hover { transform: translateX(-2rem) translateY(-6px) scale(1.015); }
+.card.left:hover { transform: translateX(-2rem) translateY(-7px) scale(1.018); }
 
 .card.right {
   margin-left: 50%;
   transform: translateX(2rem);
 }
-.card.right:hover { transform: translateX(2rem) translateY(-6px) scale(1.015); }
+.card.right:hover { transform: translateX(2rem) translateY(-7px) scale(1.018); }
 
 /* Accent rail down the inner edge */
-.card.left.orange { border-right: 5px solid var(--color-accent); }
-.card.right.orange { border-left: 5px solid var(--color-accent); }
-.card.left.gold { border-right: 5px solid var(--color-accent-gold); }
-.card.right.gold { border-left: 5px solid var(--color-accent-gold); }
+.card.left.orange { border-right: 4px solid var(--color-accent); }
+.card.right.orange { border-left: 4px solid var(--color-accent); }
+.card.left.gold { border-right: 4px solid var(--color-accent-gold); }
+.card.right.gold { border-left: 4px solid var(--color-accent-gold); }
 
 /* ----------------------------------------------------- Dots + connectors */
 
@@ -101,36 +158,40 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  border: 4px solid #fff;
-  box-shadow: 0 4px 12px rgba(20, 60, 100, 0.3);
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.25), 0 4px 14px rgba(20, 60, 100, 0.4);
   z-index: 2;
 }
 .card.left .dot { right: -2rem; transform: translate(50%, -50%); }
 .card.right .dot { left: -2rem; transform: translate(-50%, -50%); }
 
-.dot.orange { background-color: var(--color-accent); }
-.dot.gold { background-color: var(--color-accent-gold); }
+.dot.orange { background-color: var(--color-accent); box-shadow: 0 0 0 4px rgba(255, 143, 33, 0.22), 0 0 16px rgba(255, 143, 33, 0.7); }
+.dot.gold { background-color: var(--color-accent-gold); box-shadow: 0 0 0 4px rgba(245, 194, 84, 0.22), 0 0 16px rgba(245, 194, 84, 0.7); }
+
+.card:hover .dot { transform: translate(50%, -50%) scale(1.2); }
+.card.right:hover .dot { transform: translate(-50%, -50%) scale(1.2); }
 
 .connector {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  height: 4px;
+  height: 3px;
   border-radius: 999px;
   width: 2rem;
   z-index: 1;
 }
 .card.left .connector { right: -2rem; }
 .card.right .connector { left: -2rem; }
-.connector.orange { background-color: rgba(255, 143, 33, 0.5); }
-.connector.gold { background-color: rgba(245, 194, 84, 0.5); }
+.connector.orange { background: linear-gradient(90deg, rgba(255, 143, 33, 0.1), rgba(255, 143, 33, 0.75)); }
+.connector.gold { background: linear-gradient(90deg, rgba(245, 194, 84, 0.1), rgba(245, 194, 84, 0.75)); }
+.card.right .connector.orange { background: linear-gradient(270deg, rgba(255, 143, 33, 0.1), rgba(255, 143, 33, 0.75)); }
+.card.right .connector.gold { background: linear-gradient(270deg, rgba(245, 194, 84, 0.1), rgba(245, 194, 84, 0.75)); }
 
 /* ----------------------------------------------------- Content */
 
-/* Keep all readable content above the shimmer ::before (z-index 1). */
 .cardHeader,
 .title,
 .org,
@@ -149,55 +210,58 @@
 
 .dateBadge {
   font-family: var(--font-mono, monospace);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-weight: 600;
-  padding: 5px 12px;
+  letter-spacing: 0.3px;
+  padding: 5px 13px;
   border-radius: 999px;
   background: #0a2c47;
   color: #fff;
+  box-shadow: 0 4px 12px rgba(10, 44, 71, 0.35);
 }
 
 .hoursPill {
   font-family: var(--font-mono, monospace);
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 0.74rem;
+  font-weight: 700;
   color: #fff;
   background: var(--color-accent);
-  padding: 4px 11px;
+  padding: 4px 12px;
   border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(255, 143, 33, 0.4);
 }
 
 .title {
   font-family: 'IBM Plex Mono', var(--font-mono, monospace);
-  font-size: 1.2rem;
+  font-size: 1.22rem;
   font-weight: 700;
-  color: #0a2c47;
+  color: #07223a;
   margin-bottom: 0.2rem;
-  line-height: 1.2;
+  line-height: 1.22;
 }
 
 .org {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #2a6fb0;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #1d5f9c;
   margin-bottom: 0.75rem;
 }
 
 .hoverDesc {
-  font-size: 0.9rem;
-  color: #11436a;
-  line-height: 1.6;
+  font-size: 0.92rem;
+  color: #163a57;
+  line-height: 1.65;
   opacity: 0;
   max-height: 0;
   overflow: hidden;
-  transition: opacity 0.3s ease-in-out, max-height 0.4s ease-in-out, margin-bottom 0.3s ease-in-out;
+  transition: opacity 0.35s ease-in-out, max-height 0.45s ease-in-out, margin-bottom 0.3s ease-in-out;
   margin-bottom: 0;
 }
 
 .card:hover .hoverDesc {
   opacity: 1;
   max-height: 500px;
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.9rem;
 }
 
 .tagsList {
@@ -209,40 +273,70 @@
 .tag {
   font-family: var(--font-mono, monospace);
   font-size: 0.7rem;
-  font-weight: 500;
+  font-weight: 600;
   padding: 4px 11px;
   border-radius: 999px;
-  background: rgba(42, 111, 176, 0.12);
-  border: 1px solid rgba(42, 111, 176, 0.25);
-  color: #11436a;
+  background: rgba(29, 95, 156, 0.14);
+  border: 1px solid rgba(29, 95, 156, 0.3);
+  color: #0f456e;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover .tag {
+  background: rgba(29, 95, 156, 0.2);
 }
 
 /* ----------------------------------------------------- Mobile */
 
 @media (max-width: 768px) {
+  .timelineWrapper {
+    padding: 2rem 1.1rem 3.5rem;
+    gap: 1.5rem;
+  }
   .spine {
-    left: 24px;
+    left: 22px;
     transform: none;
+    top: 2rem;
+    bottom: 3.5rem;
   }
   .card.left, .card.right {
-    margin: 0 0 0 52px;
+    margin: 0 0 0 48px;
     transform: none;
-    width: calc(100% - 52px);
+    width: calc(100% - 48px);
     border-right: none;
-    border-left: 5px solid var(--color-accent);
+    border-left: 4px solid var(--color-accent);
   }
   .card.left:hover, .card.right:hover {
-    transform: translateY(-6px) scale(1.015);
+    transform: translateY(-5px) scale(1.01);
   }
   .card.left.gold, .card.right.gold { border-left-color: var(--color-accent-gold); }
 
   .dot {
-    left: -28px !important;
+    left: -26px !important;
     right: auto !important;
     transform: translate(-50%, -50%) !important;
   }
   .connector {
-    left: -28px !important;
+    left: -26px !important;
     right: auto !important;
+    width: 1.6rem;
   }
+
+  /* No hover on touch: show each story up front so nothing is hidden. */
+  .hoverDesc {
+    opacity: 1;
+    max-height: 500px;
+    margin-bottom: 0.9rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .card.left,
+  .card.right { transition: none; }
+  .card::before { animation: none; }
+  /* Never leave a card hidden when motion is reduced. */
+  .card.hidden,
+  .card.left.hidden,
+  .card.right.hidden { opacity: 1; translate: 0 0; }
 }

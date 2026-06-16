@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer id="contact" className={styles.footer}>
       <div className={styles.card}>
-        <span className={styles.tag}>// say hello</span>
+        <span className={styles.tag}>Say hello</span>
         <h2 className={styles.title}>Let&apos;s Connect</h2>
         <p className={styles.text}>
           Got an idea, an opportunity, or just want to talk tech? I&apos;d love to

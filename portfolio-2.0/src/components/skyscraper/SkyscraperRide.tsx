@@ -6,10 +6,12 @@ import { useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 import styles from './SkyscraperRide.module.css';
 
-// A 6MB Sketchfab cyberpunk skyscraper (7 meshes, ~62k tris, emissive/neon
-// materials, no baked camera). Unlike the old coaster ride there's no animation
-// to scrub — instead we fly our OWN camera up the tower as the page scrolls.
-const MODEL_URL = '/cyberpunk_skyscraper.glb';
+// A ~985-unit-tall realistic glass/metal/concrete skyscraper (8 meshes, ~33k
+// tris). There's no baked camera or animation — instead we fly our OWN camera up
+// the tower as the page scrolls, so the Experiences timeline reads as a climb.
+// The tower's glass reflects a warm golden-hour sky environment so it sits in the
+// same world as the rest of the site rather than the old cyberpunk-night look.
+const MODEL_URL = '/skyscraper.glb';
 
 // Scroll smoothing: ease the live scroll toward the rendered ascent so the climb
 // feels weighty rather than snapping 1:1 with the wheel.
@@ -25,7 +27,7 @@ const easeInOut = (t: number) =>
 
 /* Page scroll 0..1 (top..bottom), written into a ref by a passive listener so
    the render loop reads it without re-rendering React — same pattern the
-   homepage SkyWorld and the old CoasterRide used. */
+   homepage SkyWorld and the SkyBackdrop use. */
 function useScrollProgress() {
   const ref = useRef(0);
   useEffect(() => {
@@ -49,14 +51,14 @@ type ProgressRef = React.MutableRefObject<number>;
 /* The tower + the camera that climbs it. We measure the model's world bounds
    once so the flight adapts to its real scale/offset, then every frame place the
    camera on a spiral around the building's vertical axis: as scroll goes 0->1 it
-   rises from the base to the crown, sweeps ~125 degrees around the facade, and
-   eases inward — always looking a little up the tower so it reads as an ascent. */
+   rises from the base to the crown, sweeps ~135 degrees around the facade, and
+   eases inward — always looking level into the glass so it reads as an ascent. */
 function Tower({ progress }: { progress: ProgressRef }) {
   const { scene } = useGLTF(MODEL_URL);
   const { camera } = useThree();
 
-  // Make the neon read on a dark sky: lift emissive a touch and keep textures
-  // crisp. (The export already carries emissive maps for the windows/signage.)
+  // Let the glass/metal/windows catch the sky environment so the facade reads
+  // as reflective glass at golden hour rather than a flat grey slab.
   const bounds = useMemo(() => {
     scene.traverse((obj) => {
       const mesh = obj as THREE.Mesh;
@@ -65,9 +67,11 @@ function Tower({ progress }: { progress: ProgressRef }) {
       const mat = mesh.material as THREE.MeshStandardMaterial | THREE.MeshStandardMaterial[];
       const mats = Array.isArray(mat) ? mat : [mat];
       for (const m of mats) {
-        if (m && 'emissive' in m) {
-          m.emissiveIntensity = Math.max(m.emissiveIntensity ?? 1, 1) * 1.6;
-          m.toneMapped = true;
+        if (!m) continue;
+        if ('envMapIntensity' in m) m.envMapIntensity = 1.35;
+        // Keep the red roof beacon glowing; don't invent emissive elsewhere.
+        if ('emissive' in m && (m.emissiveIntensity ?? 0) > 0) {
+          m.emissiveIntensity = Math.max(m.emissiveIntensity ?? 1, 1) * 1.4;
         }
       }
     });
@@ -92,9 +96,9 @@ function Tower({ progress }: { progress: ProgressRef }) {
     const horiz = Math.max(size.x, size.z);
 
     // Spiral around the tower's vertical axis.
-    const angle = lerp(-0.55, 1.65, t); // ~125 degrees of sweep
-    const radius = lerp(horiz * 2.7, horiz * 1.55, e); // pull inward near the top
-    const camY = lerp(minY + span * 0.04, maxY - span * 0.06, e); // base -> crown
+    const angle = lerp(-0.7, 1.7, t); // ~135 degrees of sweep
+    const radius = lerp(horiz * 3.2, horiz * 1.9, e); // pull inward near the top
+    const camY = lerp(minY + span * 0.02, maxY - span * 0.05, e); // base -> crown
 
     camera.position.set(
       center.x + Math.sin(angle) * radius,
@@ -102,9 +106,9 @@ function Tower({ progress }: { progress: ProgressRef }) {
       center.z + Math.cos(angle) * radius,
     );
 
-    // Aim a little above the camera so we're always looking up the building;
-    // level off as we reach the crown.
-    const upOffset = lerp(span * 0.3, span * 0.05, e);
+    // Look just slightly up the building early, levelling off toward the crown,
+    // so the facade always fills the frame as we rise.
+    const upOffset = lerp(span * 0.12, span * 0.02, e);
     target.current.set(center.x, camY + upOffset, center.z);
     camera.lookAt(target.current);
   });
@@ -112,47 +116,85 @@ function Tower({ progress }: { progress: ProgressRef }) {
   return <primitive object={scene} />;
 }
 
-/* Night-blue cyberpunk sky (vertical gradient baked into a CanvasTexture so it
-   renders in-engine and fog can blend the base of the tower into the horizon),
-   plus cool key/fill light and a cyan rim glow so the facade isn't flat. */
-function Environment() {
+/* Warm golden-hour sky: a vertical gradient baked into a CanvasTexture is used
+   both as the scene background (so the climb is wrapped in sky) and, mapped
+   equirectangularly through PMREM, as the environment the tower's glass reflects.
+   Cool blue zenith → soft haze → warm peach → golden horizon, matched to the
+   rest of the site's sunset world. */
+function SkyEnvironment() {
   const { scene, gl } = useThree();
   useEffect(() => {
+    // Tall gradient strip for the sky dome / background.
     const c = document.createElement('canvas');
-    c.width = 8;
-    c.height = 256;
+    c.width = 16;
+    c.height = 512;
     const ctx = c.getContext('2d')!;
-    const g = ctx.createLinearGradient(0, 0, 0, 256);
-    g.addColorStop(0, '#05060f'); // deep space at the top
-    g.addColorStop(0.42, '#0b1740');
-    g.addColorStop(0.74, '#16306e');
-    g.addColorStop(1, '#2a5cab'); // luminous blue horizon haze
+    const g = ctx.createLinearGradient(0, 0, 0, 512);
+    g.addColorStop(0, '#243a6b'); // cool upper sky
+    g.addColorStop(0.4, '#5d7bb4');
+    g.addColorStop(0.66, '#aec2e0');
+    g.addColorStop(0.84, '#ffd6a6'); // warm band
+    g.addColorStop(1, '#ff9e5a'); // golden horizon
     ctx.fillStyle = g;
-    ctx.fillRect(0, 0, 8, 256);
-    const tex = new THREE.CanvasTexture(c);
-    tex.colorSpace = THREE.SRGBColorSpace;
+    ctx.fillRect(0, 0, 16, 512);
+    const bgTex = new THREE.CanvasTexture(c);
+    bgTex.colorSpace = THREE.SRGBColorSpace;
+
+    // A wider equirect version (same gradient, horizontally tiled) for a smooth
+    // environment reflection on the glass.
+    const eqCanvas = document.createElement('canvas');
+    eqCanvas.width = 512;
+    eqCanvas.height = 256;
+    const ectx = eqCanvas.getContext('2d')!;
+    const eg = ectx.createLinearGradient(0, 0, 0, 256);
+    eg.addColorStop(0, '#2a4070');
+    eg.addColorStop(0.45, '#6f8cc0');
+    eg.addColorStop(0.7, '#cdd9ec');
+    eg.addColorStop(0.86, '#ffd6a6');
+    eg.addColorStop(1, '#ff9852');
+    ectx.fillStyle = eg;
+    ectx.fillRect(0, 0, 512, 256);
+    // A soft sun bloom on the horizon for a believable hotspot in reflections.
+    const sun = ectx.createRadialGradient(360, 210, 0, 360, 210, 150);
+    sun.addColorStop(0, 'rgba(255,244,214,0.95)');
+    sun.addColorStop(0.4, 'rgba(255,205,140,0.35)');
+    sun.addColorStop(1, 'rgba(255,205,140,0)');
+    ectx.fillStyle = sun;
+    ectx.fillRect(0, 0, 512, 256);
+    const eqTex = new THREE.CanvasTexture(eqCanvas);
+    eqTex.mapping = THREE.EquirectangularReflectionMapping;
+    eqTex.colorSpace = THREE.SRGBColorSpace;
+
+    const pmrem = new THREE.PMREMGenerator(gl);
+    const env = pmrem.fromEquirectangular(eqTex).texture;
 
     const prevBg = scene.background;
+    const prevEnv = scene.environment;
     const prevFog = scene.fog;
-    scene.background = tex;
-    scene.fog = new THREE.Fog(new THREE.Color('#16306e').getHex(), 6, 26);
-    gl.toneMappingExposure = 1.05;
+    scene.background = bgTex;
+    scene.environment = env;
+    scene.fog = new THREE.Fog(new THREE.Color('#cdb89a').getHex(), 600, 4200);
+    gl.toneMappingExposure = 1.04;
+
+    pmrem.dispose();
+    eqTex.dispose();
 
     return () => {
       scene.background = prevBg;
+      scene.environment = prevEnv;
       scene.fog = prevFog;
-      tex.dispose();
+      bgTex.dispose();
+      env.dispose();
     };
   }, [scene, gl]);
 
   return (
     <>
-      <hemisphereLight args={['#9ec7ff', '#0a1024', 0.9]} />
-      <directionalLight position={[6, 12, 4]} intensity={1.6} color="#cfe2ff" />
+      {/* Warm sun key light raking up the facade from a low golden-hour angle. */}
+      <hemisphereLight args={['#bcd4ff', '#5a4636', 0.85]} />
+      <directionalLight position={[8, 9, 6]} intensity={2.2} color="#ffdcae" />
+      <directionalLight position={[-6, 4, -4]} intensity={0.7} color="#9fb8df" />
       <ambientLight intensity={0.35} />
-      {/* Cyan rim from below-left for a neon city bounce. */}
-      <pointLight position={[-4, -1, 3]} intensity={6} distance={18} color="#39d8ff" />
-      <pointLight position={[3, 5, -3]} intensity={5} distance={18} color="#7a4bff" />
     </>
   );
 }
@@ -163,15 +205,15 @@ export default function SkyscraperRide() {
     <div className={styles.canvasWrap} aria-hidden="true">
       <Canvas
         dpr={[1, 1.75]}
-        camera={{ fov: 62, near: 0.05, far: 200 }}
+        camera={{ fov: 60, near: 1, far: 9000 }}
         gl={{ antialias: true, powerPreference: 'high-performance' }}
         onCreated={({ gl }) => {
           gl.toneMapping = THREE.ACESFilmicToneMapping;
-          gl.toneMappingExposure = 1.05;
+          gl.toneMappingExposure = 1.04;
         }}
       >
         <Suspense fallback={null}>
-          <Environment />
+          <SkyEnvironment />
           <Tower progress={progress} />
         </Suspense>
       </Canvas>

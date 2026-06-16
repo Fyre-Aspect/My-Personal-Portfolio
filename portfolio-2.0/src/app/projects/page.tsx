@@ -12,7 +12,7 @@ export default function ProjectsPage() {
       <div className={chrome.shell}>
         <main className={chrome.page}>
           <div className={chrome.head}>
-            <span className={chrome.tag}>// the lineup</span>
+            <span className={chrome.tag}>The lineup</span>
             <h1 className={chrome.title}>Projects</h1>
             <p className={chrome.subtitle}>
               Hover a panel or fly through with the arrow keys. Hit the shown

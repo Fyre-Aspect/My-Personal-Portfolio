@@ -3,11 +3,25 @@ import nodemailer from 'nodemailer';
 import { getClientIp, rateLimit } from '@/lib/rate-limit';
 
 // --- Tunables ---------------------------------------------------------------
-// Max contact submissions allowed per IP within the window.
-const RATE_LIMIT = 5;
+// Max contact submissions allowed per IP within the long window.
+const RATE_LIMIT = 3;
 const RATE_WINDOW_MS = 10 * 60 * 1000; // 10 minutes
+// Burst guard: a much tighter short window so a script can't fire several in a
+// row before the 10-minute counter even matters.
+const BURST_LIMIT = 2;
+const BURST_WINDOW_MS = 45 * 1000; // 45 seconds
 // Reject bodies larger than this many bytes outright (before parsing).
 const MAX_BODY_BYTES = 16 * 1024; // 16 KB
+// Timing trap: a real person can't read the page, fill four fields and submit
+// in under a couple of seconds. The client reports how long the form was open;
+// anything faster is treated as a bot. Client-controlled, so it's a filter that
+// raises the bar, not a guarantee — it sits alongside the honeypot + limits.
+const MIN_FILL_MS = 2500;
+// A genuine message rarely carries a pile of links; spam usually does.
+const MAX_LINKS = 4;
+const LINK_RE = /(https?:\/\/|www\.)/gi;
+// Crude markup/bbcode spam markers that never appear in a real plaintext note.
+const SPAM_MARKERS = [/\[url[=\]]/i, /\[\/url\]/i, /<a\s+href/i, /\[link[=\]]/i];
 
 // Per-field length bounds (trimmed). Keep generous for humans, tight for bots.
 const LIMITS = {
@@ -68,6 +82,22 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  // Burst guard: blocks rapid-fire submissions inside a short window even when
+  // the 10-minute budget still has room.
+  const burst = rateLimit(`contact-burst:${ip}`, {
+    limit: BURST_LIMIT,
+    windowMs: BURST_WINDOW_MS,
+  });
+  if (!burst.allowed) {
+    return NextResponse.json(
+      { error: 'You just sent a message. Please wait a moment before sending another.' },
+      {
+        status: 429,
+        headers: { ...rateHeaders, 'Retry-After': String(burst.retryAfterSeconds) },
+      }
+    );
+  }
+
   try {
     // 2) Only accept JSON.
     const contentType = request.headers.get('content-type') || '';
@@ -111,11 +141,21 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { name, email, subject, message, website } = body as Record<string, unknown>;
+    const { name, email, subject, message, website, elapsedMs } = body as Record<string, unknown>;
 
     // 5) Honeypot: real users never see/fill `website`. If it's filled, this is
     //    almost certainly a bot — pretend success so it doesn't probe further.
     if (isNonEmptyString(website) && website.trim() !== '') {
+      return NextResponse.json(
+        { success: true, message: 'Email sent successfully' },
+        { status: 200, headers: rateHeaders }
+      );
+    }
+
+    // 5b) Timing trap: the client reports how long the form was open. A submit
+    //     faster than a human possibly could is treated as a bot — silently
+    //     "succeed" so it doesn't learn why it was dropped.
+    if (typeof elapsedMs === 'number' && Number.isFinite(elapsedMs) && elapsedMs < MIN_FILL_MS) {
       return NextResponse.json(
         { success: true, message: 'Email sent successfully' },
         { status: 200, headers: rateHeaders }
@@ -170,6 +210,17 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { error: 'Please enter a valid email address.' },
         { status: 400, headers: rateHeaders }
+      );
+    }
+
+    // 9b) Content spam heuristics: link floods and markup/bbcode are the giveaway
+    //     of automated spam. Silently "succeed" so the bot doesn't adapt.
+    const linkCount = (`${cleanMessage} ${cleanSubject}`.match(LINK_RE) || []).length;
+    const hasSpamMarkup = SPAM_MARKERS.some((re) => re.test(cleanMessage) || re.test(cleanSubject));
+    if (linkCount > MAX_LINKS || hasSpamMarkup) {
+      return NextResponse.json(
+        { success: true, message: 'Email sent successfully' },
+        { status: 200, headers: rateHeaders }
       );
     }
 

@@ -1,10 +1,31 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Navigation from '../../components/Navigation'
 import SkyBackdropMount from '../../components/sky3d/SkyBackdropMount'
 import styles from './contact.module.css'
+
+// Client-side throttle so the form itself can't be used to flood the inbox: a
+// short cooldown between sends, and a hard cap per rolling hour. This mirrors
+// (and front-runs) the server limits, giving instant feedback instead of a 429.
+const COOLDOWN_MS = 45 * 1000
+const HOURLY_CAP = 4
+const HOUR_MS = 60 * 60 * 1000
+const SENDS_KEY = 'contactSendTimes'
+
+function readSendTimes(): number[] {
+  try {
+    const raw = localStorage.getItem(SENDS_KEY)
+    if (!raw) return []
+    const arr = JSON.parse(raw)
+    if (!Array.isArray(arr)) return []
+    const cutoff = Date.now() - HOUR_MS
+    return arr.filter((t) => typeof t === 'number' && t > cutoff)
+  } catch {
+    return []
+  }
+}
 
 export default function ContactPage() {
   // `website` is a honeypot — kept empty by real users, filled by bots.
@@ -12,6 +33,26 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('Something went wrong — email me directly instead.')
+  // Seconds left before another send is allowed (0 = ready).
+  const [cooldown, setCooldown] = useState(0)
+
+  // When the form was opened — fed to the server as a timing trap against bots.
+  const openedAt = useRef(Date.now())
+
+  // Restore any active cooldown on load (survives reloads) and tick it down.
+  useEffect(() => {
+    const recompute = () => {
+      const times = readSendTimes()
+      if (times.length === 0) return setCooldown(0)
+      const last = Math.max(...times)
+      const overCap = times.length >= HOURLY_CAP
+      const until = overCap ? last + HOUR_MS : last + COOLDOWN_MS
+      setCooldown(Math.max(0, Math.ceil((until - Date.now()) / 1000)))
+    }
+    recompute()
+    const id = setInterval(recompute, 1000)
+    return () => clearInterval(id)
+  }, [])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -19,17 +60,33 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (isSubmitting || cooldown > 0) return
+
+    // Hard local cap before we even hit the network.
+    const times = readSendTimes()
+    if (times.length >= HOURLY_CAP) {
+      setErrorMessage("You've reached the limit for now — please try again later or email me directly.")
+      setSubmitStatus('error')
+      return
+    }
+
     setIsSubmitting(true)
     setSubmitStatus('idle')
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, elapsedMs: Date.now() - openedAt.current }),
       })
       if (res.ok) {
         setSubmitStatus('success')
         setFormData({ name: '', email: '', subject: '', message: '', website: '' })
+        try {
+          localStorage.setItem(SENDS_KEY, JSON.stringify([...times, Date.now()]))
+        } catch {
+          /* localStorage unavailable — server limits still apply */
+        }
+        setCooldown(Math.ceil(COOLDOWN_MS / 1000))
       } else {
         if (res.status === 429) {
           setErrorMessage("You've sent a few messages already — please wait a few minutes and try again.")
@@ -67,7 +124,7 @@ export default function ContactPage() {
                     <path className={styles.checkPath} d="M4 12.5l5 5L20 6.5" />
                   </svg>
                 </span>
-                <span className={styles.tag}>// message received</span>
+                <span className={styles.tag}>Message received</span>
                 <h1 className={styles.title}>Thank you!</h1>
                 <p className={styles.subtitle}>
                   Your message just landed in my inbox. I read every one myself —
@@ -90,7 +147,7 @@ export default function ContactPage() {
           ) : (
           <>
           <div className={styles.head}>
-            <span className={styles.tag}>// say hello</span>
+            <span className={styles.tag}>Say hello</span>
             <h1 className={styles.title}>Let&apos;s Connect</h1>
             <p className={styles.subtitle}>
               Got an idea, an opportunity, or just want to talk tech?<br />
@@ -198,8 +255,8 @@ export default function ContactPage() {
                   <textarea id="message" name="message" rows={5} value={formData.message} onChange={handleChange} required disabled={isSubmitting} maxLength={5000} placeholder="Tell me more…" />
                 </div>
 
-                <button type="submit" className={styles.submit} disabled={isSubmitting}>
-                  {isSubmitting ? 'Sending…' : 'Send message →'}
+                <button type="submit" className={styles.submit} disabled={isSubmitting || cooldown > 0}>
+                  {isSubmitting ? 'Sending…' : cooldown > 0 ? `Please wait ${cooldown}s…` : 'Send message →'}
                 </button>
               </form>
             </div>

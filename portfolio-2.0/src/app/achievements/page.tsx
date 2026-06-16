@@ -13,7 +13,7 @@ export default function Achievements() {
       <div className={chrome.shell}>
         <main className={chrome.page}>
           <div className={chrome.head}>
-            <span className={chrome.tag}>// the trophy case</span>
+            <span className={chrome.tag}>The trophy case</span>
             <h1 className={chrome.title}>Achievements</h1>
             <p className={chrome.subtitle}>
               Milestones across tech, academics, community, and athletics. Hover or
