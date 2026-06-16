@@ -30,24 +30,51 @@
 
 /* ----------------------------------------------------- Bubbly sky card */
 
+/* Frosted "liquid glass": a translucent blurred pane, a bright inset highlight
+   along the top edge, and a slow shimmer sweep (the ::before below). Kept light
+   enough that the dark card text stays crisp over the warm sunset sky. */
 .card {
   width: 540px;
   min-height: 132px;
   border-radius: 26px;
-  background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   padding: 1.5rem 1.75rem;
   position: relative;
-  box-shadow: 0 16px 40px rgba(20, 60, 100, 0.18);
-  border: 2px solid rgba(255, 255, 255, 0.9);
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  /* visible so the dot/connector can sit outside the card edge; the shimmer
+     ::before clips its own gradient to its rounded box, so it stays contained. */
   overflow: visible;
+  box-shadow: 0 8px 32px rgba(13, 40, 71, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Moving diagonal sheen — the "liquid" shimmer. Clipped to the rounded pane and
+   held under the content (z-index 1) so it never washes out the text. */
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.55) 50%, transparent 80%);
+  background-size: 200% 100%;
+  opacity: 0.1;
+  animation: glassShimmer 7s linear infinite;
 }
 
 .card:hover {
   transform: translateY(-6px) scale(1.015);
-  box-shadow: 0 24px 50px rgba(20, 60, 100, 0.28);
+  box-shadow: 0 18px 48px rgba(13, 40, 71, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  border-color: rgba(255, 255, 255, 0.85);
   z-index: 10;
+}
+
+@keyframes glassShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
 .card.left {
@@ -102,6 +129,16 @@
 .connector.gold { background-color: rgba(245, 194, 84, 0.5); }
 
 /* ----------------------------------------------------- Content */
+
+/* Keep all readable content above the shimmer ::before (z-index 1). */
+.cardHeader,
+.title,
+.org,
+.hoverDesc,
+.tagsList {
+  position: relative;
+  z-index: 2;
+}
 
 .cardHeader {
   display: flex;

@@ -17,28 +17,50 @@
 .tall { grid-column: span 1; grid-row: span 2; }
 .small { grid-column: span 1; grid-row: span 1; }
 
-/* Comic tile */
+/* Glass-frame tile: the cover image stays opaque underneath, but the frame is a
+   translucent blurred edge with a bright inset highlight and a soft drop shadow,
+   plus a slow shimmer sweep (::after) so it matches the frosted timeline cards. */
 .tile {
   position: relative;
   border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
   outline: none;
-  background: #fff;
-  border: 3px solid #0a2c47;
-  box-shadow: 6px 6px 0 rgba(10, 44, 71, 0.9);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px rgba(7, 28, 46, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.18);
   transform: rotate(var(--tilt, 0deg));
-  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.28s ease;
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.28s ease, border-color 0.28s ease;
   will-change: transform;
+}
+
+/* Liquid shimmer riding over the image, kept under the labels/expand panel. */
+.tile::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.5) 50%, transparent 80%);
+  background-size: 200% 100%;
+  opacity: 0.08;
+  animation: glassShimmer 7s linear infinite;
 }
 
 .tile:hover,
 .tile.focused {
-  transform: rotate(0deg) translateY(-6px) scale(1.04);
-  box-shadow: 10px 12px 0 color-mix(in srgb, var(--color-accent) 80%, #0a2c47);
-  border-color: var(--color-accent);
+  transform: rotate(0deg) translateY(-4px) scale(1.04);
+  box-shadow: 0 16px 48px rgba(7, 28, 46, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.32);
+  border-color: rgba(255, 255, 255, 0.4);
   /* Lift the expanded panel cleanly above every neighbour. */
   z-index: 50;
+}
+
+@keyframes glassShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
 .panelInk {
