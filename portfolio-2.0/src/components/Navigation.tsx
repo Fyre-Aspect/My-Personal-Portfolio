@@ -126,6 +126,10 @@ export default function Navigation() {
           }`}
           onClick={() => setPinned((v) => !v)}
           onMouseEnter={() => {
+            // Touch devices fire a synthetic mouseenter on tap, which used to
+            // latch the menu open (and then it couldn't be tapped closed). On
+            // phones the burger is click-only — proximity/hover never opens it.
+            if (isTouch) return
             setRevealed(true)
             setHoverOpen(true)
           }}
@@ -142,7 +146,9 @@ export default function Navigation() {
             chatting ? styles.chatting : ''
           }`}
           aria-hidden={!open}
-          onMouseEnter={() => setHoverOpen(true)}
+          onMouseEnter={() => {
+            if (!isTouch) setHoverOpen(true)
+          }}
         >
           <ul className={styles.list}>
             {navLinks.map((link) => (

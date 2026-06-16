@@ -1,0 +1,47 @@
+/* Fixed full-viewport WebGL backdrop for the Experiences page: a first-person
+   roller-coaster ride that scrubs as you scroll through the experiences. Sits
+   behind page content (z-index 0); the timeline lives at z-index 1. A warm sky
+   gradient is painted behind the canvas so there's no flash before the GLB loads. */
+.canvasWrap {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, #bcd8f2 0%, #d8e6f2 44%, #f3e6cf 100%);
+}
+
+.canvasWrap canvas {
+  display: block;
+}
+
+/* Readability scrim. The page header text is dark navy and needs a light field
+   to read against, so we keep the top of the viewport softly bright and let it
+   fade away as you scroll into the ride. A faint floor-shadow at the very bottom
+   anchors the lowest cards. */
+.scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(247, 240, 226, 0.82) 0%,
+      rgba(247, 240, 226, 0.35) 16%,
+      rgba(247, 240, 226, 0) 34%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(20, 28, 46, 0.28) 0%,
+      rgba(20, 28, 46, 0) 14%
+    );
+}
+
+/* Plain warm fallback while the dynamic chunk + GLB load, and on devices where
+   the 3D ride is skipped. */
+.fallback {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, #bcd8f2 0%, #d8e6f2 44%, #f3e6cf 100%);
+}
