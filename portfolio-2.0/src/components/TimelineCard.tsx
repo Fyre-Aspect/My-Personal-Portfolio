@@ -13,7 +13,7 @@ export function TimelineCard({ entry, index }: { entry: TimelineEntry; index: nu
         
         <div className={styles.cardHeader}>
           <span className={styles.dateBadge}>{entry.date}</span>
-          <span className={styles.hoursPill}>{entry.hours}</span>
+          {entry.hours && <span className={styles.hoursPill}>{entry.hours}</span>}
         </div>
         
         <h3 className={styles.title}>{entry.title}</h3>

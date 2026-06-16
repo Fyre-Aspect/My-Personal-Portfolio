@@ -22,6 +22,53 @@
   pointer-events: auto;
 }
 
+/* ----------------------------------------------------------- Liquid-glass layers
+   Shared primitives used by both the burger and the panel. Three absolutely
+   stacked layers recreate Apple-style "liquid glass":
+     • warp  — blurs the live background AND refracts it through an SVG
+               displacement map (#liquidGlassFilter) so edges bend like real glass
+     • tint  — a translucent smoked fill + top sheen that keeps white text legible
+     • edge  — inset specular highlights + a hair-line rim for the bevelled bezel
+   All layers ignore pointer events; the real content floats above at z-index 3. */
+
+.glassWarp,
+.glassTint,
+.glassEdge {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.glassWarp {
+  z-index: 0;
+  backdrop-filter: blur(7px) saturate(1.8);
+  -webkit-backdrop-filter: blur(7px) saturate(1.8);
+  /* the displacement filter is what makes the glass look liquid rather than
+     just frosted — falls back to plain blur where url() filters aren't honoured */
+  filter: url(#liquidGlassFilter);
+  isolation: isolate;
+}
+
+.glassTint {
+  z-index: 1;
+  background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.22),
+      rgba(255, 255, 255, 0.05) 42%,
+      rgba(255, 255, 255, 0) 72%
+    ),
+    rgba(13, 17, 36, 0.28);
+}
+
+.glassEdge {
+  z-index: 2;
+  box-shadow: inset 1.6px 1.6px 1px -1px rgba(255, 255, 255, 0.72),
+    inset -1px -1px 1px 1px rgba(255, 255, 255, 0.32),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.14),
+    inset 0 -16px 26px -18px rgba(130, 190, 255, 0.45);
+}
+
 /* ----------------------------------------------------------- Burger button */
 
 .burger {
@@ -29,24 +76,23 @@
   width: 3rem;
   height: 3rem;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-  border: 1px solid rgba(255, 255, 255, 0.45);
-  border-radius: 16px;
-  background: rgba(18, 24, 46, 0.55);
-  backdrop-filter: blur(14px) saturate(1.3);
-  -webkit-backdrop-filter: blur(14px) saturate(1.3);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25),
-    inset 0 1px 1px rgba(255, 255, 255, 0.35);
+  overflow: hidden;
+  isolation: isolate;
+  border: none;
+  border-radius: 17px;
+  /* faint fallback fill for engines without backdrop-filter support */
+  background: rgba(18, 24, 46, 0.16);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28), 0 0 22px rgba(0, 0, 0, 0.12);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   /* quiet by default */
-  opacity: 0.32;
+  opacity: 0.34;
   transform: translateY(-2px) scale(0.92);
-  transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.45s ease, background 0.45s ease;
+  transition: opacity 0.45s ease,
+    transform 0.55s cubic-bezier(0.175, 0.885, 0.32, 2.2),
+    box-shadow 0.45s ease;
 }
 
 .burger.revealed {
@@ -56,9 +102,18 @@
 
 .burger:hover,
 .burger.open {
-  background: rgba(26, 33, 60, 0.72);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4),
-    inset 0 1px 1px rgba(255, 255, 255, 0.5);
+  transform: translateY(0) scale(1.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.42), 0 0 26px rgba(0, 0, 0, 0.18);
+}
+
+.lines {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 }
 
 .line {
@@ -66,36 +121,41 @@
   height: 2px;
   border-radius: 2px;
   background: #fff;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2),
+    opacity 0.25s ease;
 }
 
-.burger.open .line:nth-child(1) {
+.burger.open .lines .line:nth-child(1) {
   transform: translateY(7px) rotate(45deg);
 }
-.burger.open .line:nth-child(2) {
+.burger.open .lines .line:nth-child(2) {
   opacity: 0;
 }
-.burger.open .line:nth-child(3) {
+.burger.open .lines .line:nth-child(3) {
   transform: translateY(-7px) rotate(-45deg);
 }
 
 /* ----------------------------------------------------------- Menu panel */
 
 .panel {
+  position: relative;
   width: 248px;
   padding: 0.6rem;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 20px;
-  background: rgba(16, 21, 42, 0.82);
-  backdrop-filter: blur(20px) saturate(1.4);
-  -webkit-backdrop-filter: blur(20px) saturate(1.4);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4),
-    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  overflow: hidden;
+  isolation: isolate;
+  border: none;
+  border-radius: 22px;
+  /* deeper fallback fill — the panel carries text, so it stays legible even
+     before the warp layer's blur kicks in */
+  background: rgba(10, 14, 30, 0.42);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), 0 0 30px rgba(0, 0, 0, 0.15);
   transform-origin: top right;
   opacity: 0;
   transform: translateY(-8px) scale(0.95);
   pointer-events: none;
-  transition: opacity 0.28s ease, transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.3s ease,
+    transform 0.42s cubic-bezier(0.175, 0.885, 0.32, 2.2);
 }
 
 .panel.open {
@@ -106,6 +166,11 @@
 
 .panel.chatting {
   width: min(360px, 86vw);
+}
+
+.panelInner {
+  position: relative;
+  z-index: 3;
 }
 
 .list {

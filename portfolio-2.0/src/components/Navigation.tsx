@@ -114,6 +114,42 @@ export default function Navigation() {
 
   return (
     <>
+      {/* Liquid-glass refraction filter — bends the live background behind the
+          glass layers so they read as real glass, not a flat blur. Rendered
+          once; referenced by .glassWarp via filter: url(#liquidGlassFilter). */}
+      <svg
+        aria-hidden="true"
+        width="0"
+        height="0"
+        style={{ position: 'absolute', width: 0, height: 0, pointerEvents: 'none' }}
+      >
+        <filter
+          id="liquidGlassFilter"
+          x="-25%"
+          y="-25%"
+          width="150%"
+          height="150%"
+          filterUnits="objectBoundingBox"
+          primitiveUnits="userSpaceOnUse"
+        >
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.007 0.009"
+            numOctaves="2"
+            seed="42"
+            result="noise"
+          />
+          <feGaussianBlur in="noise" stdDeviation="2.2" result="softMap" />
+          <feDisplacementMap
+            in="SourceGraphic"
+            in2="softMap"
+            scale="42"
+            xChannelSelector="R"
+            yChannelSelector="G"
+          />
+        </filter>
+      </svg>
+
       {open && (pinned || isTouch) && (
         <div className={styles.backdrop} onClick={() => setPinned(false)} />
       )}
@@ -136,9 +172,14 @@ export default function Navigation() {
           aria-label="Toggle navigation menu"
           aria-expanded={open}
         >
-          <span className={styles.line} />
-          <span className={styles.line} />
-          <span className={styles.line} />
+          <span className={styles.glassWarp} aria-hidden="true" />
+          <span className={styles.glassTint} aria-hidden="true" />
+          <span className={styles.glassEdge} aria-hidden="true" />
+          <span className={styles.lines}>
+            <span className={styles.line} />
+            <span className={styles.line} />
+            <span className={styles.line} />
+          </span>
         </button>
 
         <nav
@@ -150,6 +191,10 @@ export default function Navigation() {
             if (!isTouch) setHoverOpen(true)
           }}
         >
+          <span className={styles.glassWarp} aria-hidden="true" />
+          <span className={styles.glassTint} aria-hidden="true" />
+          <span className={styles.glassEdge} aria-hidden="true" />
+          <div className={styles.panelInner}>
           <ul className={styles.list}>
             {navLinks.map((link) => (
               <li key={link.href}>
@@ -225,6 +270,7 @@ export default function Navigation() {
                 </svg>
               </button>
             </form>
+          </div>
           </div>
         </nav>
       </div>
