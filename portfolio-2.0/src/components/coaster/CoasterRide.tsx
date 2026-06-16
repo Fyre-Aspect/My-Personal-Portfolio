@@ -19,7 +19,7 @@ const SKY_BOTTOM = '#f3e6cf';
 // much of the ride can advance per frame so even a fast scroll flick stays slow
 // and steady (the whole ~90s ride takes at least ~12s of motion to traverse).
 const RIDE_EASE = 0.045;
-const RIDE_MAX_STEP = 0.0014;
+const RIDE_MAX_STEP = 0.00014;
 
 useGLTF.preload(COASTER_URL, true);
 
