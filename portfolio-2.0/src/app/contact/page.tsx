@@ -7,9 +7,11 @@ import SkyBackdropMount from '../../components/sky3d/SkyBackdropMount'
 import styles from './contact.module.css'
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' })
+  // `website` is a honeypot — kept empty by real users, filled by bots.
+  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '', website: '' })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [errorMessage, setErrorMessage] = useState('Something went wrong — email me directly instead.')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -27,11 +29,24 @@ export default function ContactPage() {
       })
       if (res.ok) {
         setSubmitStatus('success')
-        setFormData({ name: '', email: '', subject: '', message: '' })
+        setFormData({ name: '', email: '', subject: '', message: '', website: '' })
       } else {
+        if (res.status === 429) {
+          setErrorMessage("You've sent a few messages already — please wait a few minutes and try again.")
+        } else {
+          let msg = 'Something went wrong — email me directly instead.'
+          try {
+            const data = await res.json()
+            if (data?.error) msg = data.error
+          } catch {
+            /* keep default message */
+          }
+          setErrorMessage(msg)
+        }
         setSubmitStatus('error')
       }
     } catch {
+      setErrorMessage('Something went wrong — email me directly instead.')
       setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)
@@ -143,30 +158,44 @@ export default function ContactPage() {
 
               {submitStatus === 'error' && (
                 <div className={styles.statusError}>
-                  Something went wrong — email me directly instead.
+                  {errorMessage}
                 </div>
               )}
 
               <form onSubmit={handleSubmit} className={styles.form}>
+                {/* Honeypot: hidden from humans, bots fill it -> submission is dropped server-side */}
+                <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, overflow: 'hidden' }}>
+                  <label htmlFor="website">Leave this field empty</label>
+                  <input
+                    id="website"
+                    name="website"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={formData.website}
+                    onChange={handleChange}
+                  />
+                </div>
+
                 <div className={styles.row}>
                   <div className={styles.field}>
                     <label htmlFor="name">Name</label>
-                    <input id="name" name="name" type="text" value={formData.name} onChange={handleChange} required disabled={isSubmitting} placeholder="Your name" />
+                    <input id="name" name="name" type="text" value={formData.name} onChange={handleChange} required disabled={isSubmitting} maxLength={100} placeholder="Your name" />
                   </div>
                   <div className={styles.field}>
                     <label htmlFor="email">Email</label>
-                    <input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required disabled={isSubmitting} placeholder="you@example.com" />
+                    <input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required disabled={isSubmitting} maxLength={254} placeholder="you@example.com" />
                   </div>
                 </div>
 
                 <div className={styles.field}>
                   <label htmlFor="subject">Subject</label>
-                  <input id="subject" name="subject" type="text" value={formData.subject} onChange={handleChange} required disabled={isSubmitting} placeholder="What's this about?" />
+                  <input id="subject" name="subject" type="text" value={formData.subject} onChange={handleChange} required disabled={isSubmitting} maxLength={150} placeholder="What's this about?" />
                 </div>
 
                 <div className={styles.field}>
                   <label htmlFor="message">Message</label>
-                  <textarea id="message" name="message" rows={5} value={formData.message} onChange={handleChange} required disabled={isSubmitting} placeholder="Tell me more…" />
+                  <textarea id="message" name="message" rows={5} value={formData.message} onChange={handleChange} required disabled={isSubmitting} maxLength={5000} placeholder="Tell me more…" />
                 </div>
 
                 <button type="submit" className={styles.submit} disabled={isSubmitting}>
