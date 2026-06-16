@@ -31,6 +31,7 @@
      • edge  — inset specular highlights + a hair-line rim for the bevelled bezel
    All layers ignore pointer events; the real content floats above at z-index 3. */
 
+.glassBlur,
 .glassWarp,
 .glassTint,
 .glassEdge {
@@ -40,33 +41,54 @@
   pointer-events: none;
 }
 
-.glassWarp {
+/* Layer 0 — always-on frosted base. Kept separate from the refraction layer
+   so the glass is ALWAYS visible: some engines drop backdrop-filter when an
+   SVG url() filter is set on the same element, which would otherwise collapse
+   the panel to a flat box. This layer guarantees the frosted-glass read. */
+.glassBlur {
   z-index: 0;
-  backdrop-filter: blur(7px) saturate(1.8);
-  -webkit-backdrop-filter: blur(7px) saturate(1.8);
-  /* the displacement filter is what makes the glass look liquid rather than
-     just frosted — falls back to plain blur where url() filters aren't honoured */
+  backdrop-filter: blur(9px) saturate(1.9);
+  -webkit-backdrop-filter: blur(9px) saturate(1.9);
+}
+
+/* Layer 1 — liquid refraction. Re-samples the frosted backdrop and bends it
+   through the displacement map so edges ripple like real glass. Pure
+   enhancement: if the url() filter is ignored, layer 0 still shows glass. */
+.glassWarp {
+  z-index: 1;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   filter: url(#liquidGlassFilter);
   isolation: isolate;
 }
 
+/* Layer 2 — glass tint. A bright glossy lightcatch sweeping across the top
+   (the hallmark of the 21st.dev look) over a restrained neutral base that
+   keeps the white menu text legible on light pages too. */
 .glassTint {
-  z-index: 1;
+  z-index: 2;
   background: linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0.22),
-      rgba(255, 255, 255, 0.05) 42%,
-      rgba(255, 255, 255, 0) 72%
+      rgba(255, 255, 255, 0.38),
+      rgba(255, 255, 255, 0.05) 26%,
+      rgba(255, 255, 255, 0) 52%
     ),
-    rgba(13, 17, 36, 0.28);
+    linear-gradient(
+      180deg,
+      rgba(18, 22, 42, 0.22),
+      rgba(11, 15, 30, 0.44)
+    );
 }
 
+/* Layer 3 — specular bevel. Bright inset rim (top-left catch, bottom-right
+   glow) that makes the edge read as thick, polished glass. */
 .glassEdge {
-  z-index: 2;
-  box-shadow: inset 1.6px 1.6px 1px -1px rgba(255, 255, 255, 0.72),
-    inset -1px -1px 1px 1px rgba(255, 255, 255, 0.32),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.14),
-    inset 0 -16px 26px -18px rgba(130, 190, 255, 0.45);
+  z-index: 3;
+  box-shadow: inset 2px 2px 1px -1px rgba(255, 255, 255, 0.9),
+    inset -1.5px -1.5px 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.25),
+    inset 0 22px 30px -26px rgba(255, 255, 255, 0.7),
+    inset 0 -18px 28px -20px rgba(150, 200, 255, 0.45);
 }
 
 /* ----------------------------------------------------------- Burger button */
@@ -83,7 +105,7 @@
   border: none;
   border-radius: 17px;
   /* faint fallback fill for engines without backdrop-filter support */
-  background: rgba(18, 24, 46, 0.16);
+  background: rgba(18, 24, 46, 0.12);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28), 0 0 22px rgba(0, 0, 0, 0.12);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
@@ -108,7 +130,7 @@
 
 .lines {
   position: relative;
-  z-index: 3;
+  z-index: 4;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -146,9 +168,9 @@
   isolation: isolate;
   border: none;
   border-radius: 22px;
-  /* deeper fallback fill — the panel carries text, so it stays legible even
-     before the warp layer's blur kicks in */
-  background: rgba(10, 14, 30, 0.42);
+  /* light fallback fill — the dedicated blur layer + tint do the frosting and
+     hold legibility, so the base stays glassy rather than a dark slab */
+  background: rgba(10, 14, 30, 0.2);
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45), 0 0 30px rgba(0, 0, 0, 0.15);
   transform-origin: top right;
   opacity: 0;
@@ -170,7 +192,7 @@
 
 .panelInner {
   position: relative;
-  z-index: 3;
+  z-index: 4;
 }
 
 .list {
@@ -194,7 +216,8 @@
   font-weight: 600;
   font-size: 0.95rem;
   letter-spacing: 0.3px;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
   transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 

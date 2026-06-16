@@ -134,16 +134,16 @@ export default function Navigation() {
         >
           <feTurbulence
             type="fractalNoise"
-            baseFrequency="0.007 0.009"
+            baseFrequency="0.009 0.013"
             numOctaves="2"
             seed="42"
             result="noise"
           />
-          <feGaussianBlur in="noise" stdDeviation="2.2" result="softMap" />
+          <feGaussianBlur in="noise" stdDeviation="2" result="softMap" />
           <feDisplacementMap
             in="SourceGraphic"
             in2="softMap"
-            scale="42"
+            scale="64"
             xChannelSelector="R"
             yChannelSelector="G"
           />
@@ -172,6 +172,7 @@ export default function Navigation() {
           aria-label="Toggle navigation menu"
           aria-expanded={open}
         >
+          <span className={styles.glassBlur} aria-hidden="true" />
           <span className={styles.glassWarp} aria-hidden="true" />
           <span className={styles.glassTint} aria-hidden="true" />
           <span className={styles.glassEdge} aria-hidden="true" />
@@ -191,6 +192,7 @@ export default function Navigation() {
             if (!isTouch) setHoverOpen(true)
           }}
         >
+          <span className={styles.glassBlur} aria-hidden="true" />
           <span className={styles.glassWarp} aria-hidden="true" />
           <span className={styles.glassTint} aria-hidden="true" />
           <span className={styles.glassEdge} aria-hidden="true" />
