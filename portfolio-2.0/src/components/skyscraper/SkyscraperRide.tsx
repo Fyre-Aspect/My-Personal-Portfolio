@@ -355,7 +355,10 @@ function Tower({ progress }: { progress: ProgressRef }) {
 
     const angle = lerp(-0.7, 1.7, t); // ~135 degrees of sweep
     const radius = lerp(horiz * 3.2, horiz * 1.9, e); // pull inward near the top
-    const camY = lerp(minY + span * 0.02, maxY - span * 0.05, e); // base -> crown
+    // Start well above the base (in line with the cloud bank below) and finish
+    // at the crown, so the bottom of the tower is never in frame — it just rises
+    // out of the clouds.
+    const camY = lerp(minY + span * 0.2, maxY - span * 0.05, e);
 
     camera.position.set(
       center.x + Math.sin(angle) * radius,
@@ -363,12 +366,63 @@ function Tower({ progress }: { progress: ProgressRef }) {
       center.z + Math.cos(angle) * radius,
     );
 
-    const upOffset = lerp(span * 0.12, span * 0.02, e);
+    const upOffset = lerp(span * 0.09, span * 0.02, e);
     target.current.set(center.x, camY + upOffset, center.z);
     camera.lookAt(target.current);
   });
 
   return <primitive object={scene} />;
+}
+
+/* A dense cloud bank wrapping the foot of the tower, so the building is lost in
+   the cloud sea and you never see where it ends — the same "no floor" read as
+   the homepage. Sized and placed from the model's own bounds. */
+function BaseMist() {
+  const { scene } = useGLTF(TOWER_URL);
+  const tex = useMemo(() => makePuffTexture(256, 211), []);
+  const group = useRef<THREE.Group>(null!);
+
+  const puffs = useMemo(() => {
+    const box = new THREE.Box3().setFromObject(scene);
+    const c = box.getCenter(new THREE.Vector3());
+    const size = box.getSize(new THREE.Vector3());
+    const minY = box.min.y;
+    const horiz = Math.max(size.x, size.z);
+    const rnd = mulberry32(211);
+    const arr: { pos: [number, number, number]; s: number; op: number }[] = [];
+    for (let i = 0; i < 150; i++) {
+      const ang = rnd() * Math.PI * 2;
+      // A wide cloud sea: dense and low around the base, thinning to a distant
+      // deck on the horizon — the tower rises out of it so its bottom is never
+      // visible. Far puffs are large (the horizon sea); near puffs stay short so
+      // they sit below the camera instead of fogging the climb.
+      const rad = (0.1 + rnd() * rnd() * 16) * horiz;
+      arr.push({
+        pos: [
+          c.x + Math.sin(ang) * rad,
+          minY + (rnd() * 0.6 - 0.25) * horiz,
+          c.z + Math.cos(ang) * rad,
+        ],
+        s: horiz * 1.0 + rad * 0.55,
+        op: 0.5 + rnd() * 0.42,
+      });
+    }
+    return arr;
+  }, [scene]);
+
+  useFrame(({ clock }) => {
+    if (group.current) group.current.position.x = Math.sin(clock.elapsedTime * 0.025) * 5;
+  });
+
+  return (
+    <group ref={group}>
+      {puffs.map((p, i) => (
+        <sprite key={i} position={p.pos} scale={[p.s * 2.2, p.s * 0.55, 1]}>
+          <spriteMaterial map={tex} transparent depthWrite={false} opacity={p.op} color="#ffe7cf" />
+        </sprite>
+      ))}
+    </group>
+  );
 }
 
 export default function SkyscraperRide() {
@@ -390,6 +444,7 @@ export default function SkyscraperRide() {
           <SunDisc progress={progress} />
           <CloudField />
           <Tower progress={progress} />
+          <BaseMist />
         </Suspense>
       </Canvas>
       <div className={styles.scrim} />
