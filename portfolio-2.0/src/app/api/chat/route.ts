@@ -38,22 +38,26 @@ You are an AI assistant embedded in Aamir Tinwala's personal portfolio website.
 - Built at: Hack the Valley IX (36-hour hackathon)
 - Description: AI Discord bot for group study sessions with voice Q&A, focus tracking, and quiz generation
 
-### 4. CatBot
-- Role: 
-- Tech: AI, Chatbot, Gemini API, Next.js
-- URL: https://catgpt-nine.vercel.app
-- Description: Personalized easy tutor chatbot to teach hard concepts in simple terms linking videos with similar concepts.
+### 4. Kindred (Featured)
+- Role: Full-Stack Developer
+- Tech: Next.js, TypeScript, Gemini 2.5 Flash, Firebase, Three.js, PWA, Framer Motion
+- URL: https://mykindred.vercel.app
+- Description: Gamified, Duolingo-style plant and pet companion PWA. Point your camera at a plant or pet and Gemini 2.5 Flash identifies the species, scores its health 0-100, and returns personalised care tips. Daily care tracking, weekly photo health checks, streaks, and global leaderboards, and it works fully offline. Rebuilt solo from a scratched hackathon idea.
 
-### 5. Personal Portfolio
+### 5. Tankzers
+- Role: Game Developer
+- Tech: JavaScript, Socket.IO, Express, Node.js, HTML/CSS
+- URL: https://github.com/Fyre-Aspect/Tankzers
+- Description: Turn-based 2D artillery game with real-time multiplayer, inspired by ShellShock Live. Players take turns aiming and firing across a shared battlefield, with state synced live between clients over WebSockets on an authoritative Node server.
+
+### 6. Personal Portfolio
 - Role: developer.
 - Tech: Next.js, TypeScript, CSS, Vercel, Git
 - URL: https://aamirtinwalapersonal-portfolio.vercel.app
 
-### 6. Arduino Projects
+### 7. Arduino Projects
 - Arduino Calculator: Embedded Systems with C++, LCD Display, Matrix Keypad
-- Arduino Tetris Game: LED Matrix gaming with JavaScript visualization (https://arduino-tetris-game.vercel.app)
 - Gumball Machine: Team Lead project with 3D Printing and motor control
-- Temperature Humidity Logger: IoT with DHT sensors
 - Simon Says Game: LED-based memory game
 // More projects available on GitHub: github.com/Fyre-Aspect
 ## Achievements

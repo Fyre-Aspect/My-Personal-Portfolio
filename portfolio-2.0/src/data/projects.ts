@@ -65,6 +65,18 @@ export const projects: Project[] = [
     size: "tall",
   },
   {
+    title: "Kindred",
+    description:
+      "Gamified, Duolingo-style plant and pet companion PWA. Point your camera at a plant or pet and Gemini 2.5 Flash identifies the species, scores its health 0-100, and returns personalised care tips. Daily care tracking, weekly photo health checks, streaks, and global leaderboards keep you coming back - and it works fully offline. Rebuilt solo from a scratched hackathon idea.",
+    role: "Full-Stack Developer",
+    technologies: ["Next.js", "TypeScript", "Gemini 2.5 Flash", "Firebase", "Three.js", "PWA", "Framer Motion"],
+    liveUrl: "https://mykindred.vercel.app",
+    githubUrl: "https://github.com/Fyre-Aspect/Kindred",
+    image: "/Kindred.png",
+    status: null,
+    size: "wide",
+  },
+  {
     title: "Waypoint",
     description:
       "AI case memory platform for social workers built at HackCanada. Voice ingestion turns field memos into structured notes, thread-scoped RAG isolates each client's data, and audio recaps brief workers between visits.",
@@ -116,38 +128,14 @@ export const projects: Project[] = [
     size: "small",
   },
   {
-    title: "CatBot",
+    title: "Tankzers",
     description:
-      "AI tutor chatbot that explains hard concepts in plain language and surfaces relevant video links. Powered by Gemini API with a Next.js + Firebase backend.",
-    role: "Full-Stack Developer",
-    technologies: ["Gemini API", "Next.js", "Firebase", "TypeScript"],
-    liveUrl: "https://catgpt-nine.vercel.app",
-    githubUrl: "https://github.com/Fyre-Aspect/CatBot",
-    image: "/CatBot.png",
-    status: null,
-    size: "small",
-  },
-  {
-    title: "Arduino Tetris",
-    description:
-      "Classic Tetris on Arduino controlled by joystick, with real-time score tracking and LED matrix display.",
-    role: "Embedded Developer",
-    technologies: ["Arduino", "C++", "LED Matrix"],
-    liveUrl: "https://arduino-tetris-game.vercel.app",
-    githubUrl: "https://github.com/Fyre-Aspect/Arduino-Tetris-Game",
-    image: "/Tetris_logo.png",
-    status: null,
-    size: "small",
-  },
-  {
-    title: "Temperature Humidity Logger",
-    description:
-      "Arduino environmental monitor that tracks temperature and humidity in real time via DHT sensor with serial data output.",
-    role: "IoT Developer",
-    technologies: ["Arduino", "C++", "DHT Sensor", "Data Logging"],
+      "Turn-based 2D artillery game with real-time multiplayer, inspired by ShellShock Live. Players take turns aiming and firing across a shared battlefield, with game state synced live between clients over WebSockets on an authoritative Node server.",
+    role: "Game Developer",
+    technologies: ["JavaScript", "Socket.IO", "Express", "Node.js", "HTML/CSS"],
     liveUrl: null,
-    githubUrl: "https://github.com/Fyre-Aspect/Temperature-Humidity-Sensor",
-    image: "/tempsensor.png",
+    githubUrl: "https://github.com/Fyre-Aspect/Tankzers",
+    image: null,
     status: null,
     size: "small",
   },
