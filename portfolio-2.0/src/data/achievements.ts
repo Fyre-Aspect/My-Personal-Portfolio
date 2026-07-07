@@ -163,8 +163,8 @@ export const achievements: AchievementCategory[] = [
         growthAspect: 'Tennis',
       },
       {
-        title: 'Swimming Certification',
-        description: 'Completed all swimming certification levels including lifeguard training.',
+        title: 'Swimming Levels + Lifeguard Training',
+        description: 'Finished my swim levels and have started lifeguard training. CPR and full lifeguard certification are still in progress.',
         date: '2024',
         image: '/Swimming.jpg',
         growthAspect: 'Swimming',

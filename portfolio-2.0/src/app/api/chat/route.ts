@@ -44,18 +44,12 @@ You are an AI assistant embedded in Aamir Tinwala's personal portfolio website.
 - URL: https://mykindred.vercel.app
 - Description: Gamified, Duolingo-style plant and pet companion PWA. Point your camera at a plant or pet and Gemini 2.5 Flash identifies the species, scores its health 0-100, and returns personalised care tips. Daily care tracking, weekly photo health checks, streaks, and global leaderboards, and it works fully offline. Rebuilt solo from a scratched hackathon idea.
 
-### 5. Tankzers
-- Role: Game Developer
-- Tech: JavaScript, Socket.IO, Express, Node.js, HTML/CSS
-- URL: https://github.com/Fyre-Aspect/Tankzers
-- Description: Turn-based 2D artillery game with real-time multiplayer, inspired by ShellShock Live. Players take turns aiming and firing across a shared battlefield, with state synced live between clients over WebSockets on an authoritative Node server.
-
-### 6. Personal Portfolio
+### 5. Personal Portfolio
 - Role: developer.
 - Tech: Next.js, TypeScript, CSS, Vercel, Git
 - URL: https://aamirtinwalapersonal-portfolio.vercel.app
 
-### 7. Arduino Projects
+### 6. Arduino Projects
 - Arduino Calculator: Embedded Systems with C++, LCD Display, Matrix Keypad
 - Gumball Machine: Team Lead project with 3D Printing and motor control
 - Simon Says Game: LED-based memory game
@@ -84,7 +78,7 @@ You are an AI assistant embedded in Aamir Tinwala's personal portfolio website.
 - 7th place Tennis WCSAA boys Singles senior tennis (2025) - 2 for 2 in matches
 - Badminton Falcon Tournament - 4th Place (2024)
 - WCCSAA Badminton - 5th Place (2025)
-- Swimming Certification (2024)
+- Swimming Levels + Lifeguard Training (2024)
 - TDESSAA Cross Country (2022-2023)
 
 ## Activities & Experience (500+ Total Hours)
@@ -116,8 +110,8 @@ You are an AI assistant embedded in Aamir Tinwala's personal portfolio website.
 8. Badminton Team (150+ hours)
    - Quick decision-making, team strategy
 
-9. Swimming Lifeguard Lessons (80+ hours)
-   - Emergency response, water safety
+9. Swimming Levels / Lifeguard Training (80+ hours)
+  - Swim levels completed, lifeguard training in progress
 `;
 
 // System prompt for tour mode - guides visitors through the portfolio

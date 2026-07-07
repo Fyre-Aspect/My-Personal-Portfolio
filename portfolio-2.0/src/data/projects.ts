@@ -112,7 +112,7 @@ export const projects: Project[] = [
     githubUrl: null,
     image: "/Tidal Tasks.png",
     status: null,
-    size: "small",
+    size: "wide",
   },
   {
     title: "Lyra Tutor AI",
@@ -125,18 +125,6 @@ export const projects: Project[] = [
     image: "/Tutor Bot.png",
     status: null,
     demoLabel: "Watch Demo",
-    size: "small",
-  },
-  {
-    title: "Tankzers",
-    description:
-      "Turn-based 2D artillery game with real-time multiplayer, inspired by ShellShock Live. Players take turns aiming and firing across a shared battlefield, with game state synced live between clients over WebSockets on an authoritative Node server.",
-    role: "Game Developer",
-    technologies: ["JavaScript", "Socket.IO", "Express", "Node.js", "HTML/CSS"],
-    liveUrl: null,
-    githubUrl: "https://github.com/Fyre-Aspect/Tankzers",
-    image: null,
-    status: null,
-    size: "small",
+    size: "tall",
   },
 ];
