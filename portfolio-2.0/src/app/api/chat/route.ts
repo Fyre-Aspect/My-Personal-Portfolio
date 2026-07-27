@@ -83,6 +83,9 @@ You are an AI assistant embedded in Aamir Tinwala's personal portfolio website.
 
 ## Activities & Experience (500+ Total Hours)
 
+1. Social Media & Communications Coordinator - Eastern Synod, ELCIC (Jul 1 - Aug 29 2026, 250 hours)
+   - Full-time summer contract; social media content, communications, youth engagement
+
 1. NeoDev League Hackathon (2025)
    - 3rd Place Winner, built Shurplus
 
