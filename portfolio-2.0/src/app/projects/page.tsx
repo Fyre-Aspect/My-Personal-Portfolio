@@ -15,8 +15,14 @@ export default function ProjectsPage() {
             <span className={chrome.tag}>The lineup</span>
             <h1 className={chrome.title}>Projects</h1>
             <p className={chrome.subtitle}>
-              Hover a panel or fly through with the arrow keys. Hit the shown
-              keys to open it up.
+              <span className={chrome.desktopOnly}>
+                Hover a panel or fly through with the arrow keys. Hit the shown
+                keys to open it up.
+              </span>
+              <span className={chrome.mobileOnly}>
+                Swipe through the deck — every project up close, one card at a
+                time.
+              </span>
             </p>
             <div className={chrome.hint}>
               <span><kbd>←</kbd><kbd>→</kbd><kbd>↑</kbd><kbd>↓</kbd> navigate</span>

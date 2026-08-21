@@ -181,7 +181,8 @@ export default function ProjectCarousel() {
       </div>
 
       <p className={styles.hint}>
-        <kbd>←</kbd> <kbd>→</kbd> arrow keys, drag, or swipe to explore
+        <span className={styles.hintKeys}><kbd>←</kbd> <kbd>→</kbd> arrow keys, drag, or </span>
+        <span>swipe to explore</span>
       </p>
     </div>
   );

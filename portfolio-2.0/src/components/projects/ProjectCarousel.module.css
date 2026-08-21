@@ -283,13 +283,14 @@
 @media (max-width: 760px) {
   .card {
     grid-template-columns: 1fr;
-    grid-template-rows: 200px 1fr;
+    grid-template-rows: 190px 1fr;
   }
   .cardViewport {
-    height: 600px;
+    /* Short phones get a shorter card; the body scrolls internally if needed. */
+    height: clamp(460px, 68dvh, 600px);
   }
   .cardBody {
-    padding: 1.5rem;
+    padding: 1.35rem 1.5rem;
   }
   .title {
     font-size: 1.25rem;
@@ -300,5 +301,28 @@
   }
   .stage {
     gap: 0.5rem;
+  }
+  .counter {
+    margin-bottom: 1rem;
+  }
+  .counterActive {
+    font-size: 1.9rem;
+  }
+  .dots {
+    margin-top: 1.4rem;
+  }
+  .hintKeys {
+    display: none;
+  }
+}
+
+/* On true phone widths the side arrows steal ~100px from the card — swipe,
+   drag, and the dots already cover navigation, so give the card the full row. */
+@media (max-width: 560px) {
+  .navBtn {
+    display: none;
+  }
+  .stage {
+    gap: 0;
   }
 }

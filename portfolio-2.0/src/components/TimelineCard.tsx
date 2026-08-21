@@ -35,7 +35,7 @@ export function TimelineCard({ entry, index }: { entry: TimelineEntry; index: nu
   }, []);
 
   return (
-    <div className={styles.cardContainer} ref={ref}>
+    <div className={styles.cardContainer} ref={ref} data-card={index}>
       <div
         className={`${styles.card} ${sideClass} ${colorClass} ${revealed ? styles.revealed : styles.hidden}`}
         style={{ transitionDelay: revealed ? `${Math.min(index, 4) * 40}ms` : '0ms' }}

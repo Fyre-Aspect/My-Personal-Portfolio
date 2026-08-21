@@ -15,8 +15,15 @@ export default function ActivitiesPage() {
             <span className={chrome.tag}>Beyond the classroom</span>
             <h1 className={chrome.title}>Experiences</h1>
             <p className={chrome.subtitle}>
-              A scroll up the tower through everything I&apos;ve done beyond the
-              classroom — newest first. Hover any card to read the full story.
+              <span className={chrome.desktopOnly}>
+                A scroll up the tower through everything I&apos;ve done beyond
+                the classroom — newest first. Hover any card to read the full
+                story.
+              </span>
+              <span className={chrome.mobileOnly}>
+                Everything I&apos;ve done beyond the classroom — newest first.
+                Swipe sideways to ride the timeline.
+              </span>
             </p>
           </div>
 
