@@ -2,7 +2,11 @@
 
 import { useSyncExternalStore } from 'react';
 
-const QUERY = '(max-width: 768px)';
+// Narrow viewports, plus touch devices held sideways (a phone in landscape is
+// ~850px wide — wider than the breakpoint — but its short height + coarse
+// pointer give it away). Keeps phones on the mobile experience in both
+// orientations instead of falling back to the desktop layout when rotated.
+const QUERY = '(max-width: 768px), (pointer: coarse) and (max-height: 500px)';
 
 function subscribe(onChange: () => void) {
   const mql = window.matchMedia(QUERY);

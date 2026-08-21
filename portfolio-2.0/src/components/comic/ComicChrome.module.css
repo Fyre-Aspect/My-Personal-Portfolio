@@ -90,10 +90,11 @@
   padding: 1px 6px;
 }
 
-/* Copy that only makes sense with a mouse/keyboard vs. only with touch. */
+/* Copy that only makes sense with a mouse/keyboard vs. only with touch.
+   Second query arm: phones held sideways (wide but short, coarse pointer). */
 .mobileOnly { display: none; }
 
-@media (max-width: 768px) {
+@media (max-width: 768px), (pointer: coarse) and (max-height: 500px) {
   .desktopOnly { display: none; }
   .mobileOnly { display: inline; }
 

@@ -326,3 +326,32 @@
     gap: 0;
   }
 }
+
+/* Phones held sideways: the two-column card is the right shape, but the
+   viewport is short — cap the card to what fits and let the body scroll.
+   Declared last so it wins over the width-based blocks on narrow phones. */
+@media (pointer: coarse) and (max-height: 500px) {
+  .card {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+  }
+  .cardViewport {
+    height: min(460px, calc(100dvh - 180px));
+    min-height: 240px;
+  }
+  .counter {
+    margin-bottom: 0.75rem;
+  }
+  .counterActive {
+    font-size: 1.6rem;
+  }
+  .dots {
+    margin-top: 1rem;
+  }
+  .hint {
+    margin-top: 0.75rem;
+  }
+  .hintKeys {
+    display: none;
+  }
+}

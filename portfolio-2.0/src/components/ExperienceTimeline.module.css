@@ -302,9 +302,11 @@
 /* ----------------------------------------------------- Mobile
    The climb turns landscape: the track becomes a horizontal snap carousel,
    the spine becomes a glowing top rail, and each card hangs off the rail
-   from its station dot. Swipe sideways to travel newest -> oldest. */
+   from its station dot. Swipe sideways to travel newest -> oldest.
+   The second query arm keeps phones held sideways (wide but short, coarse
+   pointer) on this layout instead of falling back to the desktop climb. */
 
-@media (max-width: 768px) {
+@media (max-width: 768px), (pointer: coarse) and (max-height: 500px) {
   .timelineWrapper {
     padding: 1.25rem 0 3rem;
   }
@@ -451,6 +453,19 @@
     margin-top: auto;
     padding-top: 0.35rem;
     align-content: flex-end;
+  }
+}
+
+/* Phones held sideways: same landscape carousel, but the viewport is short —
+   widen the cards and let long descriptions scroll inside the card so a full
+   card still fits on screen. */
+@media (pointer: coarse) and (max-height: 500px) {
+  .cardContainer {
+    flex-basis: min(62vw, 480px);
+  }
+  .hoverDesc {
+    max-height: 34dvh;
+    overflow-y: auto;
   }
 }
 
